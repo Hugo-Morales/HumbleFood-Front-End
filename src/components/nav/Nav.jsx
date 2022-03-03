@@ -1,15 +1,19 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import logo from "../../img/logo.png";
+import SearchBar from "../serchbar/SearchBar";
 
 const Nav = () => {
   return (
     <div className="font-poppins w-full h-24 bg-ochre flex justify-between">
-      <div className="w-1/4 flex justify-between items-center p-1">
+      <div className="w-1/2 flex justify-between items-center p-1">
         <Link to="/" className="ml-4">
-          <img src={logo} height={50} width={50} alt="logo" />
+          <img src={logo} height={70} width={80} alt="logo" />
         </Link>
-        <div className="ml-4 w-1/4 text-isabelline font-bold flex justify-around items-center">
+        <div className='ml-4'>
+          <SearchBar />
+        </div>
+        <div className="ml-4 w-full text-isabelline font-bold flex justify-around items-center">
           <Link to="/products" className="p-2 h-10 hover:bg-princetonOrange">
             Productos
           </Link>

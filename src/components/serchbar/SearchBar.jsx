@@ -40,7 +40,7 @@ const SearchBar = () => {
       <input
         type="search"
         onChange={(e) => HandleInputChange(e)}
-        className="py-2 text-sm text-white bg-gray-900 rounded-md pl-10 focus:outline-none focus:bg-white focus:text-gray-900"
+        className="py-2 text-sm text-white bg-isabelle rounded-md pl-10 focus:outline-none focus:bg-white focus:text-gray-900"
         placeholder="Search..."
         autocomplete="off"
       />
