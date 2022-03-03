@@ -2,14 +2,14 @@ import Card from "../../components/card_producto/Card";
 
 export const data = [{
   nombre: 'Hola',
-  precio: 2,
-  descuento: 10,
+  precio: '$2',
+  descuento: '10%',
   image: 'asdas'
 },
 {
   nombre: 'Chau',
-  precio: 5,
-  descuento: 123,
+  precio: '$5',
+  descuento: '123%',
   image: 'asdas'
 },
 ];

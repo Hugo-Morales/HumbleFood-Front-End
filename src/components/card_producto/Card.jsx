@@ -5,7 +5,13 @@ const Card = ({ prop }) => {
 
     return (
         <div>
-            Hola soy App
+            <div>MeLlamo={nombre}</div>
+            <div>ElDescuento={descuento}</div>
+            <div >SoyImagen={image}</div>
+            <div>precio={precio}</div>
+
+            <div><button>Comprar</button></div>
+            <div><button>✰</button></div>
         </div>
     );
 };
