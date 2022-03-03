@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "../views/Home";
-import Productos from "../views/productos/Productos";
+
 
 function App() {
   return (
@@ -8,7 +8,6 @@ function App() {
       <div className="App">
         <Routes>
           <Route exact path="/" element={<Home />}></Route>
-          <Route exact path="/products/:id" element={<Productos/>} />
         </Routes>
       </div>
     </BrowserRouter>
