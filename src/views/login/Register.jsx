@@ -4,7 +4,6 @@ import InputForm from "../../components/inputForm/InputForm";
 
 function Register() {
   const { type } = useParams();
-  console.log(type);
 
   return (
     <div className="h-screen bg-gradient-to-tl from-princetonOrange to-isabelline w-full px-4">
