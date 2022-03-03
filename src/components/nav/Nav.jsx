@@ -60,7 +60,7 @@ const Nav = () => {
           </svg>
         </Link>
         <Link
-          to="/login"
+          to="/register"
           className="flex items-center justify-center w-64 px-4 py-2 mr-1 space-x-3 text-sm text-center bg-darkGreen text-isabelline transition-colors duration-200 transform dark:text-gray-300 dark:border-gray-300 hover:bg-gray-600 dark:hover:bg-gray-700"
         >
           <svg
