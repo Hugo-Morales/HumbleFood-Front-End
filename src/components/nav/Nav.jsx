@@ -8,7 +8,7 @@ const Nav = () => {
     <div className="font-poppins w-full h-24 bg-ochre flex justify-between">
       <div className="w-1/2 flex justify-between items-center p-1">
         <Link to="/" className="ml-4">
-          <img src={logo} height={70} width={80} alt="logo" />
+          <img src={logo} className='w-20' alt="logo" />
         </Link>
         <div className='ml-4'>
           <SearchBar />
@@ -42,15 +42,15 @@ const Nav = () => {
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            class="icon icon-tabler icon-tabler-shopping-cart"
+            className="icon icon-tabler icon-tabler-shopping-cart"
             width="28"
             height="28"
             viewBox="0 0 24 24"
-            stroke-width="1.5"
+            strokeWidth="1.5"
             stroke="#ffffff"
             fill="none"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           >
             <path stroke="none" d="M0 0h24v24H0z" fill="none" />
             <circle cx="6" cy="19" r="2" />
@@ -60,20 +60,20 @@ const Nav = () => {
           </svg>
         </Link>
         <Link
-          to="/login"
+          to="/register"
           className="flex items-center justify-center w-64 px-4 py-2 mr-1 space-x-3 text-sm text-center bg-darkGreen text-isabelline transition-colors duration-200 transform dark:text-gray-300 dark:border-gray-300 hover:bg-gray-600 dark:hover:bg-gray-700"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            class="icon icon-tabler icon-tabler-user-circle"
+            className="icon icon-tabler icon-tabler-user-circle"
             width="28"
             height="28"
             viewBox="0 0 24 24"
-            stroke-width="1.5"
+            strokeWidth="1.5"
             stroke="#ffffff"
             fill="none"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           >
             <path stroke="none" d="M0 0h24v24H0z" fill="none" />
             <circle cx="12" cy="12" r="9" />
@@ -90,15 +90,15 @@ const Nav = () => {
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            class="icon icon-tabler icon-tabler-user-circle"
+            className="icon icon-tabler icon-tabler-user-circle"
             width="28"
             height="28"
             viewBox="0 0 24 24"
-            stroke-width="1.5"
+            strokeWidth="1.5"
             stroke="#ffffff"
             fill="none"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           >
             <path stroke="none" d="M0 0h24v24H0z" fill="none" />
             <circle cx="12" cy="12" r="9" />
