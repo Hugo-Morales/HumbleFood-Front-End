@@ -24,7 +24,7 @@ function Login() {
           >
             ¿No tienes cuenta?
             <Link
-              to="/"
+              to="/register"
               className="hover:text-gray-500 focus:text-gray-500 focus:outline-none focus:underline hover:underline text-sm font-medium leading-none  text-princetonOrange cursor-pointer"
             >
               Registrate aquí
@@ -59,7 +59,7 @@ function Login() {
               />
             </svg>
             <p className="text-base font-bold ml-4 text-gray-700">
-              Continue with Google
+              Continuar con Google
             </p>
           </button>
 
@@ -88,7 +88,7 @@ function Login() {
               htmlFor="pass"
               className="text-sm font-medium leading-none text-gray-800"
             >
-              Password
+              Contraseña
             </label>
             <div className="relative flex items-center justify-center">
               <input
