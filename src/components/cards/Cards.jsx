@@ -1,5 +1,4 @@
 import Card from "./Card";
-import Detalles from "./Card_Details";
 
 export const data = [
   {
