@@ -62,7 +62,7 @@ function Login() {
               />
             </svg>
             <p className="text-base font-bold ml-4 text-gray-700">
-              Continue with Google
+              Continuar con Google
             </p>
           </button>
 
@@ -91,7 +91,7 @@ function Login() {
               htmlFor="pass"
               className="text-sm font-medium leading-none text-gray-800"
             >
-              Password
+              Contraseña
             </label>
             <div className="relative flex items-center justify-center">
               <input
