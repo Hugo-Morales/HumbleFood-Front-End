@@ -1,4 +1,4 @@
-const Card = ({ prop }) => {
+const Card = ({ prop, handleAddToCart }) => {
     const { nombre, precio, descuento, restaurante, image } = prop;
 
     return (
@@ -31,7 +31,7 @@ const Card = ({ prop }) => {
                         </div>
                         <div className="w-full flex justify-between items-center">
                             <h1 className="font-bold text-gray-500">${precio}</h1>
-                            <button className="bg-gray-700 mr-5 text-white px-3 py-1 rounded-sm shadow-md">Comprar</button>
+                            <button onClick={() => handleAddToCart(prop)} className="bg-gray-700 mr-5 text-white px-3 py-1 rounded-sm shadow-md">Add to Cart</button>
                         </div>
                     </div>
                 </div>
