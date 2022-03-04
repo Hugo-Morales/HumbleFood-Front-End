@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import CardDetail from "../views/Card_Details";
+import CardDetail from "../views/CardDetails";
 import Home from "../views/Home";
 import Login from "../views/login/Login";
 import Register from "../views/login/Register";

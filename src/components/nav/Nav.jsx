@@ -7,6 +7,7 @@ import styled from "styled-components";
 import logo from "../../img/logo.png";
 import Cart from "../cart/Cart";
 import SearchBar from "../serchbar/SearchBar";
+import { useAuth0 } from "@auth0/auth0-react";
 
 const StyledButton = styled(IconButton)`
   position: fixed;
@@ -21,6 +22,7 @@ const Nav = ({
   handleRemoveFromCart,
   cartItems,
 }) => {
+  const { loginWithRedirect } = useAuth0();
   const [open, setOpen] = useState(false);
 
   return (
@@ -48,34 +50,9 @@ const Nav = ({
           </Link>
         </div>
       </div>
-      <div className="w-1/4 flex justify-between items-center mr-8">
-        <Link
-          to="/register"
-          className="flex items-center justify-center w-38 px-4 py-2 mr-1 space-x-3 text-sm text-center bg-darkGreen text-isabelline transition-colors duration-200 transform dark:text-gray-300 dark:border-gray-300 hover:bg-gray-600 dark:hover:bg-gray-700 rounded-md"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="icon icon-tabler icon-tabler-user-circle"
-            width="28"
-            height="28"
-            viewBox="0 0 24 24"
-            strokeWidth="1.5"
-            stroke="#ffffff"
-            fill="none"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-            <circle cx="12" cy="12" r="9" />
-            <circle cx="12" cy="10" r="3" />
-            <path d="M6.168 18.849a4 4 0 0 1 3.832 -2.849h4a4 4 0 0 1 3.834 2.855" />
-          </svg>
-          <span className="text-sm text-white dark:text-gray-200">
-            Crear cuenta
-          </span>
-        </Link>
-        <Link
-          to="/login"
+      <div className="w-1/6 flex justify-between items-center mr-8">
+        <button
+          onClick={() => loginWithRedirect()}
           className="flex items-center justify-center w-38 px-4 py-2 space-x-3 text-sm text-center bg-darkGreen text-isabelline transition-colors duration-200 transform dark:text-gray-300 dark:border-gray-300 hover:bg-gray-600 dark:hover:bg-gray-700 rounded-md"
         >
           <svg
@@ -96,9 +73,9 @@ const Nav = ({
             <path d="M6.168 18.849a4 4 0 0 1 3.832 -2.849h4a4 4 0 0 1 3.834 2.855" />
           </svg>
           <span className="text-sm text-white dark:text-gray-200">
-            Iniciar sesión
+            Iniciar/Crear Cuenta 
           </span>
-        </Link>
+        </button>
         <div className={open ? "opacity-0" : "bg-emerald-400 rounded-full"}>
           <StyledButton onClick={() => setOpen(true)}>
             <Badge badgeContent={getTotalItems(cartItems)} color="error">

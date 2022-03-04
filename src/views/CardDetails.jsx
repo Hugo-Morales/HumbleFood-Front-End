@@ -1,10 +1,10 @@
 import { useParams } from "react-router-dom";
 import React from "react";
 // import { useState } from "react";
-import { data } from "./Cards";
+import { data } from "../components/cards/Cards";
 import { Link } from "react-router-dom";
 
-const Card_Detail = () => {
+const CardDetail = () => {
   // const [myProduct, setMyProduct] = useState([])
   const { id } = useParams();
   return (
@@ -231,4 +231,4 @@ const Card_Detail = () => {
     </div>
   );
 };
-export default Card_Detail;
+export default CardDetail;
