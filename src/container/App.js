@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Card_Detail from "../components/cards/Card_Details";
 import Home from "../views/Home";
 import Login from "../views/login/Login";
 import Register from "../views/login/Register";
@@ -8,7 +9,7 @@ import UserType from "../views/login/UserType";
 function App() {
   const [cartItems, setCartItems] = useState([
     {
-      id: 1,
+      id: 0,
       nombre: "Hola",
       restaurante: "MC Donals",
       precio: "2",
@@ -19,7 +20,7 @@ function App() {
       amount: 1,
     },
     {
-      id: 2,
+      id: 1,
       nombre: "Hamburguesa",
       restaurante: "Coto",
       precio: "5",
@@ -30,7 +31,7 @@ function App() {
       amount: 1,
     },
     {
-      id: 3,
+      id: 2,
       nombre: "Hamburguesa",
       restaurante: "Dia",
       precio: "5",
@@ -92,6 +93,7 @@ function App() {
           <Route exact path="/login" element={<Login />}></Route>
           <Route exact path="/register" element={<UserType />}></Route>
           <Route exact path="/register/:type" element={<Register />}></Route>
+          <Route exact path="/productos/:id" element={<Card_Detail />}></Route>
         </Routes>
       </div>
     </BrowserRouter>

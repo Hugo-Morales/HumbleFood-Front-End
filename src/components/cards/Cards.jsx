@@ -1,8 +1,9 @@
 import Card from "./Card";
+import Detalles from "./Card_Details";
 
 export const data = [
   {
-    id: 1,
+    id: 0,
     nombre: "Hola",
     restaurante: "MC Donals",
     precio: "2",
@@ -12,7 +13,7 @@ export const data = [
     stock: 10,
   },
   {
-    id: 2,
+    id: 1,
     nombre: "Hamburguesa",
     restaurante: "Coto",
     precio: "5",
@@ -22,7 +23,7 @@ export const data = [
     stock: 7,
   },
   {
-    id: 3,
+    id: 2,
     nombre: "Hamburguesa",
     restaurante: "Dia",
     precio: "5",

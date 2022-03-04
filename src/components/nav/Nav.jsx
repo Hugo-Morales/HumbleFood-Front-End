@@ -99,15 +99,13 @@ const Nav = ({
             Iniciar sesión
           </span>
         </Link>
-        {!open ? (
-          <div className="bg-emerald-400 rounded-full">
-            <StyledButton onClick={() => setOpen(true)}>
-              <Badge badgeContent={getTotalItems(cartItems)} color="error">
-                <AddShoppingCartIcon />
-              </Badge>
-            </StyledButton>
-          </div>
-        ) : null}
+        <div className={open ? "opacity-0" : "bg-emerald-400 rounded-full"}>
+          <StyledButton onClick={() => setOpen(true)}>
+            <Badge badgeContent={getTotalItems(cartItems)} color="error">
+              <AddShoppingCartIcon />
+            </Badge>
+          </StyledButton>
+        </div>
       </div>
       <Cart
         open={open}
