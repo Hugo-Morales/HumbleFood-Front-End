@@ -5,13 +5,27 @@ import "./index.css";
 import App from "./container/App";
 import store from "./redux/store";
 import reportWebVitals from "./reportWebVitals";
+import { Auth0Provider } from "@auth0/auth0-react";
+
+var options = {
+  theme: {
+    primaryColor: '#31324F'
+  }
+};
 
 ReactDOM.render(
-  <Provider store={store}>
     <React.StrictMode>
-      <App />
-    </React.StrictMode>
-  </Provider>,
+      <Auth0Provider
+        domain="heredero.us.auth0.com"
+        clientId="LL9DAV9QgGBR4z8ltQcsgE6hShfSrNts"
+        redirectUri={window.location.origin}
+        advancedOptions={options}
+      >
+        <Provider store={store}>
+            <App />
+        </Provider>
+      </Auth0Provider>
+    </React.StrictMode>,
   document.getElementById("root")
 );
 

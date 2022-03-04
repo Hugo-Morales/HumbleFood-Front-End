@@ -2,8 +2,10 @@ import React from "react";
 import { Link } from "react-router-dom";
 import logo from "../../img/logo.png";
 import SearchBar from "../serchbar/SearchBar";
+import { useAuth0 } from "@auth0/auth0-react";
 
 const Nav = () => {
+  const { loginWithRedirect } = useAuth0();
   return (
     <div className="font-poppins w-full h-24 bg-ochre flex justify-between">
       <div className="w-1/2 flex justify-between items-center p-1">
@@ -109,6 +111,7 @@ const Nav = () => {
             Iniciar sesión
           </span>
         </Link>
+        <button onClick={() => loginWithRedirect()}>Iniciar sesión</button>
       </div>
     </div>
   );
