@@ -5,7 +5,7 @@ import Home from "../views/Home";
 import Login from "../views/login/Login";
 import Register from "../views/login/Register";
 import UserType from "../views/login/UserType";
-
+import LandingPage from "../views/landingpage/landing";
 function App() {
   const [cartItems, setCartItems] = useState([
     {
@@ -78,9 +78,10 @@ function App() {
     <BrowserRouter>
       <div className="App">
         <Routes>
+          <Route exact path="/" element={<LandingPage />} />
           <Route
             exact
-            path="/"
+            path="/home"
             element={
               <Home
                 getTotalItems={getTotalItems}
