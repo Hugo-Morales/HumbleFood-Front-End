@@ -1,7 +1,5 @@
-import { GET_DETAIL_PRODUCT } from "../actions";
-
+import { GET_DETAIL_PRODUCT, SEARCH_BY_NAME } from "../actions";
 const initialStore = {
-  products: [],
   productsloaded: [],
   detailProduct: [],
 };
@@ -12,6 +10,12 @@ export default function reducer(state = initialStore, { type, payload }) {
       return {
         ...state,
         detailProduct: payload,
+      };
+
+    case SEARCH_BY_NAME:
+      return {
+        ...state,
+        productsloaded: payload,
       };
     default:
       return state;
