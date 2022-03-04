@@ -4,6 +4,22 @@
   box-sizing: border-box;
 }
 
+img {
+  max-width: none !important;
+}
+
+.fondo_rest {
+  background-image: url(https://i0.wp.com/foodandpleasure.com/wp-content/uploads/2018/06/piantao-3.jpg?fit=2800%2C1867&ssl=1);
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.fondo_user {
+  background-image: url(https://www.eluniversal.com.mx/sites/default/files/2021/06/17/spots_dia_del_padre_portada.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
