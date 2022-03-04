@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 
 const Detalles = () => {
     // const [myProduct, setMyProduct] = useState([])
-    const { id } = useParams()
+    const { id } = useParams([0])
     return (
         <div>
             <div className="fixed z-10 inset-0 overflow-y-auto" role="dialog" aria-modal="true">
