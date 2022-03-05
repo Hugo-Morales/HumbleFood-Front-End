@@ -17,10 +17,11 @@ const StyledButton = styled(IconButton)`
 `;
 
 const Nav = ({
+  cartItems,
   getTotalItems,
   handleAddToCart,
   handleRemoveFromCart,
-  cartItems,
+  handleDeleteFromCart,
 }) => {
   const { loginWithRedirect } = useAuth0();
   const [open, setOpen] = useState(false);
@@ -73,7 +74,7 @@ const Nav = ({
             <path d="M6.168 18.849a4 4 0 0 1 3.832 -2.849h4a4 4 0 0 1 3.834 2.855" />
           </svg>
           <span className="text-sm text-white dark:text-gray-200">
-            Iniciar/Crear Cuenta 
+            Iniciar/Crear Cuenta
           </span>
         </button>
         <div className={open ? "opacity-0" : "bg-emerald-400 rounded-full"}>
@@ -87,9 +88,10 @@ const Nav = ({
       <Cart
         open={open}
         setOpen={setOpen}
+        cartItems={cartItems}
         handleAddToCart={handleAddToCart}
         handleRemoveFromCart={handleRemoveFromCart}
-        cartItems={cartItems}
+        handleDeleteFromCart={handleDeleteFromCart}
       />
     </div>
   );

@@ -2,46 +2,42 @@ import { useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import CardDetail from "../views/CardDetails";
 import Home from "../views/Home";
-import Login from "../views/login/Login";
-import Register from "../views/login/Register";
-import UserType from "../views/login/UserType";
+
+export const data = [
+  {
+    id: 0,
+    nombre: "Hola",
+    restaurante: "MC Donals",
+    precio: "2",
+    descuento: "10",
+    image:
+      "http://c.files.bbci.co.uk/DBBF/production/_105055265_bandejapaisa.jpg",
+    stock: 10,
+  },
+  {
+    id: 1,
+    nombre: "Hamburguesa",
+    restaurante: "Coto",
+    precio: "5",
+    descuento: "123",
+    image:
+      "https://static-sevilla.abc.es/media/gurmesevilla/2012/01/comida-rapida-casera.jpg",
+    stock: 7,
+  },
+  {
+    id: 2,
+    nombre: "Hamburguesa",
+    restaurante: "Dia",
+    precio: "5",
+    descuento: "50",
+    image:
+      "https://static-sevilla.abc.es/media/gurmesevilla/2012/01/comida-rapida-casera.jpg",
+    stock: 12,
+  },
+];
 
 function App() {
-  const [cartItems, setCartItems] = useState([
-    {
-      id: 0,
-      nombre: "Hola",
-      restaurante: "MC Donals",
-      precio: "2",
-      descuento: "10",
-      image:
-        "http://c.files.bbci.co.uk/DBBF/production/_105055265_bandejapaisa.jpg",
-      stock: 10,
-      amount: 1,
-    },
-    {
-      id: 1,
-      nombre: "Hamburguesa",
-      restaurante: "Coto",
-      precio: "5",
-      descuento: "123",
-      image:
-        "https://static-sevilla.abc.es/media/gurmesevilla/2012/01/comida-rapida-casera.jpg",
-      stock: 7,
-      amount: 1,
-    },
-    {
-      id: 2,
-      nombre: "Hamburguesa",
-      restaurante: "Dia",
-      precio: "5",
-      descuento: "50",
-      image:
-        "https://static-sevilla.abc.es/media/gurmesevilla/2012/01/comida-rapida-casera.jpg",
-      stock: 12,
-      amount: 1,
-    },
-  ]);
+  const [cartItems, setCartItems] = useState([]);
 
   const getTotalItems = (items) => {
     return items.reduce((acc, item) => acc + item.amount, 0);
@@ -58,6 +54,7 @@ function App() {
             : item
         );
       }
+      return [...prev, { ...clickedItem, amount: 1 }];
     });
   };
 
@@ -74,6 +71,10 @@ function App() {
     );
   };
 
+  const handleDeleteFromCart = (id) => {
+    setCartItems((prev) => prev.filter((item) => item.id !== id));
+  };
+
   return (
     <BrowserRouter>
       <div className="App">
@@ -83,16 +84,15 @@ function App() {
             path="/"
             element={
               <Home
+                data={data}
+                cartItems={cartItems}
                 getTotalItems={getTotalItems}
                 handleAddToCart={handleAddToCart}
                 handleRemoveFromCart={handleRemoveFromCart}
-                cartItems={cartItems}
+                handleDeleteFromCart={handleDeleteFromCart}
               />
             }
           ></Route>
-          <Route exact path="/login" element={<Login />}></Route>
-          <Route exact path="/register" element={<UserType />}></Route>
-          <Route exact path="/register/:type" element={<Register />}></Route>
           <Route exact path="/productos/:id" element={<CardDetail />}></Route>
         </Routes>
       </div>

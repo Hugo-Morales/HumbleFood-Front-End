@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom";
 import React from "react";
 // import { useState } from "react";
-import { data } from "../components/cards/Cards";
+import { data } from "../container/App";
 import { Link } from "react-router-dom";
 
 const CardDetail = () => {
