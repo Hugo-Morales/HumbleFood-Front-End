@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import CardDetail from "../views/CardDetails";
 import Home from "../views/Home";
+import CardDetail from "../views/CardDetails";
+import LandingPage from "../views/landingpage/landing";
 
 export const data = [
   {
@@ -35,6 +36,7 @@ export const data = [
     stock: 12,
   },
 ];
+
 
 function App() {
   const [cartItems, setCartItems] = useState([]);
@@ -79,9 +81,10 @@ function App() {
     <BrowserRouter>
       <div className="App">
         <Routes>
+          <Route exact path="/" element={<LandingPage />} />
           <Route
             exact
-            path="/"
+            path="/home"
             element={
               <Home
                 data={data}
