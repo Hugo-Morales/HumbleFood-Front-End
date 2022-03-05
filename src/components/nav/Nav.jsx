@@ -23,8 +23,11 @@ const Nav = ({
   handleRemoveFromCart,
   handleDeleteFromCart,
 }) => {
-  const { loginWithRedirect } = useAuth0();
+  const { isAuthenticated, user, loginWithRedirect, logout } = useAuth0();
+
   const [open, setOpen] = useState(false);
+
+  console.log(user);
 
   return (
     <div className="font-poppins w-full h-24 bg-ochre flex justify-between">
@@ -51,32 +54,57 @@ const Nav = ({
           </Link>
         </div>
       </div>
-      <div className="w-1/6 flex justify-between items-center mr-8">
-        <button
-          onClick={() => loginWithRedirect()}
-          className="flex items-center justify-center w-38 px-4 py-2 space-x-3 text-sm text-center bg-darkGreen text-isabelline transition-colors duration-200 transform dark:text-gray-300 dark:border-gray-300 hover:bg-gray-600 dark:hover:bg-gray-700 rounded-md"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="icon icon-tabler icon-tabler-user-circle"
-            width="28"
-            height="28"
-            viewBox="0 0 24 24"
-            strokeWidth="1.5"
-            stroke="#ffffff"
-            fill="none"
-            strokeLinecap="round"
-            strokeLinejoin="round"
+      <div
+        className={
+          isAuthenticated
+            ? "w-1/4 flex justify-around items-center mr-8"
+            : "w-1/6 flex justify-beetwen items-center mr-8"
+        }
+      >
+        {isAuthenticated ? (
+          <div className="flex items-center">
+            <h3 className="mr-3">
+              Bienvenido {user.given_name ? user.given_name : user.nickname}{" "}
+            </h3>
+            <img
+              src={user.picture}
+              alt="logo"
+              className="w-10 rounded-full mr-3"
+            />
+            <button
+              onClick={() => logout({ returnTo: window.location.origin })}
+              className="flex items-center justify-center w-38 mr-3 px-4 py-2 space-x-3 text-sm text-center bg-darkGreen text-isabelline transition-colors duration-200 transform dark:text-gray-300 dark:border-gray-300 hover:bg-gray-600 dark:hover:bg-gray-700 rounded-md"
+            >
+              Cerrar Sesión
+            </button>
+          </div>
+        ) : (
+          <button
+            onClick={() => loginWithRedirect()}
+            className="flex items-center justify-center w-38 mr-3 px-4 py-2 space-x-3 text-sm text-center bg-darkGreen text-isabelline transition-colors duration-200 transform dark:text-gray-300 dark:border-gray-300 hover:bg-gray-600 dark:hover:bg-gray-700 rounded-md"
           >
-            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-            <circle cx="12" cy="12" r="9" />
-            <circle cx="12" cy="10" r="3" />
-            <path d="M6.168 18.849a4 4 0 0 1 3.832 -2.849h4a4 4 0 0 1 3.834 2.855" />
-          </svg>
-          <span className="text-sm text-white dark:text-gray-200">
-            Iniciar/Crear Cuenta
-          </span>
-        </button>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="icon icon-tabler icon-tabler-user-circle"
+              width="28"
+              height="28"
+              viewBox="0 0 24 24"
+              strokeWidth="1.5"
+              stroke="#ffffff"
+              fill="none"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+              <circle cx="12" cy="12" r="9" />
+              <circle cx="12" cy="10" r="3" />
+              <path d="M6.168 18.849a4 4 0 0 1 3.832 -2.849h4a4 4 0 0 1 3.834 2.855" />
+            </svg>
+            <span className="text-sm text-white dark:text-gray-200">
+              Iniciar / Crear Cuenta
+            </span>
+          </button>
+        )}
         <div className={open ? "opacity-0" : "bg-emerald-400 rounded-full"}>
           <StyledButton onClick={() => setOpen(true)}>
             <Badge badgeContent={getTotalItems(cartItems)} color="error">

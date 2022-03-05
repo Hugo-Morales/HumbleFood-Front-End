@@ -1,6 +1,8 @@
 import React from "react";
 import Nav from "../components/nav/Nav";
 import Cards from "../components/cards/Cards";
+import { useAuth0 } from '@auth0/auth0-react';
+
 
 const Home = ({
   data,
@@ -10,6 +12,9 @@ const Home = ({
   handleRemoveFromCart,
   handleDeleteFromCart,
 }) => {
+  const { isLoading } = useAuth0();
+
+  if (isLoading) return <div>Loading...</div>;
   return (
     <div>
       <Nav

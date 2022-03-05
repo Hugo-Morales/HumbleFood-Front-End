@@ -55,6 +55,7 @@ export const data = [
   },
 ];
 
+
 function App() {
   const [cartItems, setCartItems] = useState([]);
 
@@ -113,9 +114,6 @@ function App() {
               />
             }
           ></Route>
-
-          {/* <Route exact path="/productos/:id" element={<CardDetail />}></Route> */}
-
           <Route exact path="/products/:id" element={<CardDetail />}></Route>
         </Routes>
       </div>
