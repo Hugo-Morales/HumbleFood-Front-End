@@ -7,25 +7,18 @@ import store from "./redux/store";
 import reportWebVitals from "./reportWebVitals";
 import { Auth0Provider } from "@auth0/auth0-react";
 
-const options = {
-  theme: {
-    primaryColor: '#31324F'
-  }
-};
-
 const domain = process.env.REACT_APP_DOMAIN;
 const clientId = process.env.REACT_APP_CLIENT_ID;
 
 ReactDOM.render(
   <Provider store={store}>
-    <Auth0Provider domain={domain}
-    clientId={clientId}
-    redirectUri={window.location.origin}
-    advancedOptions={options}>
     <React.StrictMode>
-      <App />
+      <Auth0Provider domain={domain}
+      clientId={clientId}
+      redirectUri={window.location.origin}>
+        <App />
+      </Auth0Provider>
     </React.StrictMode>
-    </Auth0Provider>
   </Provider>,
   document.getElementById("root")
 );

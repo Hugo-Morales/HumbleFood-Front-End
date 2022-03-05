@@ -2,9 +2,6 @@ import { useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import CardDetail from "../views/CardDetails";
 import Home from "../views/Home";
-import Login from "../views/login/Login";
-import Register from "../views/login/Register";
-import UserType from "../views/login/UserType";
 
 function App() {
   const [cartItems, setCartItems] = useState([
@@ -90,9 +87,6 @@ function App() {
               />
             }
           ></Route>
-          <Route exact path="/login" element={<Login />}></Route>
-          <Route exact path="/register" element={<UserType />}></Route>
-          <Route exact path="/register/:type" element={<Register />}></Route>
           <Route exact path="/productos/:id" element={<CardDetail />}></Route>
         </Routes>
       </div>
