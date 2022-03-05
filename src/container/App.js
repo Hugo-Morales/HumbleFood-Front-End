@@ -94,7 +94,7 @@ function App() {
           <Route exact path="/login" element={<Login />}></Route>
           <Route exact path="/register" element={<UserType />}></Route>
           <Route exact path="/register/:type" element={<Register />}></Route>
-          <Route exact path="/productos/:id" element={<CardDetail />}></Route>
+          <Route exact path="/products/:id" element={<CardDetail />}></Route>
         </Routes>
       </div>
     </BrowserRouter>
