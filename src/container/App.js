@@ -2,6 +2,7 @@ import { useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import CardDetail from "../views/CardDetails";
 import Home from "../views/Home";
+import LandingPage from "../views/landingpage/landing";
 
 function App() {
   const [cartItems, setCartItems] = useState([
@@ -75,9 +76,10 @@ function App() {
     <BrowserRouter>
       <div className="App">
         <Routes>
+          <Route exact path="/" element={<LandingPage />} />
           <Route
             exact
-            path="/"
+            path="/home"
             element={
               <Home
                 getTotalItems={getTotalItems}
