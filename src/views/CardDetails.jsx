@@ -12,7 +12,7 @@ const CardDetail = () => {
     <div className="bg-white">
       <div className="pt-6">
         <nav aria-label="Breadcrumb">
-          <ol role="list" className="max-w-2xl mx-auto px-4 flex items-center space-x-2 sm:px-6 lg:max-w-7xl lg:px-8">
+          <ol className="max-w-2xl mx-auto px-4 flex items-center space-x-2 sm:px-6 lg:max-w-7xl lg:px-8">
 
             <li>
               <div className="flex items-center">
@@ -63,7 +63,7 @@ const CardDetail = () => {
           </div>
 
           <div className="mt-4 lg:mt-0 lg:row-span-3">
-            <h2 className="sr-only"></h2>
+            {/* <h2 className="sr-only"></h2> */}
             <p className="text-3xl text-gray-900">${data[id].precio}</p>
 
             <div className="mt-6">
@@ -96,7 +96,7 @@ const CardDetail = () => {
             </div>
 
             <form className="mt-10">
-              <h2 className="sr-only"></h2>
+              {/* <h2 className="sr-only"></h2> */}
               <p className="text-3xl text-gray-900">{data[id].descuento} %Off</p>
 
               <button type="submit" className="mt-10 w-full bg-indigo-600 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 rorate:45">Add to bag</button>
@@ -116,7 +116,7 @@ const CardDetail = () => {
               <h3 className="text-sm font-medium text-gray-900">Highlights</h3>
 
               <div className="mt-4">
-                <ul role="list" className="pl-4 list-disc text-sm space-y-2">
+                <ul className="pl-4 list-disc text-sm space-y-2">
                   <li className="text-gray-400"><span className="text-gray-600">Hand cut and sewn locally</span></li>
 
                   <li className="text-gray-400"><span className="text-gray-600">Dyed with our proprietary colors</span></li>
