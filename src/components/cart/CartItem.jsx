@@ -14,7 +14,7 @@ export const Wrapper = styled.div`
   }
 `;
 
-function CartItem({ product, handleAddToCart, handleRemoveFromCart }) {
+function CartItem({ product, handleAddToCart, handleRemoveFromCart, handleDeleteFromCart }) {
   return (
     <div>
       <Wrapper key={product.id} className="flex py-6">
@@ -50,6 +50,15 @@ function CartItem({ product, handleAddToCart, handleRemoveFromCart }) {
                 onClick={() => handleAddToCart(product)}
               >
                 +
+              </button>
+            </div>
+            <div className="flex">
+              <button
+                onClick={() => handleDeleteFromCart(product.id)}
+                type="button"
+                className="px-2 py-1 font-medium text-lg text-red-600 border-solid border-2 border-red-600 rounded-md ease-in-out duration-300 hover:text-isabelline hover:bg-red-600"
+              >
+                Remove
               </button>
             </div>
           </div>
