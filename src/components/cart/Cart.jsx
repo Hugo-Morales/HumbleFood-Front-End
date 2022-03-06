@@ -4,15 +4,14 @@ import { XIcon } from "@heroicons/react/outline";
 import { Link } from "react-router-dom";
 import CartItem from "./CartItem";
 
-
 export default function Cart({
   open,
   setOpen,
+  cartItems,
   handleAddToCart,
   handleRemoveFromCart,
-  cartItems,
+  handleDeleteFromCart,
 }) {
-
   function calculateTotal(items) {
     return items.reduce((acc, item) => acc + item.amount * item.precio, 0);
   }
@@ -79,6 +78,7 @@ export default function Cart({
                               product={product}
                               handleAddToCart={handleAddToCart}
                               handleRemoveFromCart={handleRemoveFromCart}
+                              handleDeleteFromCart={handleDeleteFromCart}
                             />
                           ))}
                         </ul>
@@ -88,7 +88,9 @@ export default function Cart({
 
                   <div className="border-t border-gray-200 py-6 px-4 sm:px-6">
                     <div className="flex justify-end text-base font-medium text-gray-900">
-                      <h2 className="text-2xl">Total: ${calculateTotal(cartItems)}</h2>
+                      <h2 className="text-2xl">
+                        Total: ${calculateTotal(cartItems)}
+                      </h2>
                     </div>
                     <p className="mt-0.5 text-sm text-gray-500">
                       Shipping and taxes calculated at checkout.
