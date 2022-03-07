@@ -29,7 +29,7 @@ export const getDetailProduct = (id) => {
       );
       dispatch({
         type: GET_DETAIL_PRODUCT,
-        payload: detailProduct.data[0],
+        payload: detailProduct.data,
       });
     } catch (error) {
       console.log(error);

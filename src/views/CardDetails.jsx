@@ -1,7 +1,6 @@
 import { useParams } from "react-router-dom";
 import React from "react";
 import { useEffect } from "react";
-import { data } from "../container/App";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { getDetailProduct } from "../redux/actions";
@@ -52,7 +51,7 @@ const CardDetail = () => {
               <div className="flex items-center">
                 <a href="#" className="mr-2 text-sm font-medium text-gray-900">
                   {" "}
-                  {detailProduct.description}{" "}
+                  {detailProduct?.description}{" "}
                 </a>
                 <svg
                   width="16"
@@ -75,7 +74,7 @@ const CardDetail = () => {
                 className="font-medium text-gray-500 hover:text-gray-600"
               >
                 {" "}
-                {detailProduct.name}{" "}
+                {detailProduct?.name}{" "}
               </a>
             </li>
           </ol>
@@ -84,7 +83,7 @@ const CardDetail = () => {
         <div className="mt-6 max-w-2xl mx-auto sm:px-6 lg:max-w-7xl lg:px-8 lg:grid lg:grid-cols-3 lg:gap-x-8">
           <div className="hidden aspect-w-3 aspect-h-4 rounded-lg overflow-hidden lg:block">
             <img
-              src={detailProduct.image}
+              src={detailProduct?.image}
               alt="Two each of gray, white, and black shirts laying flat."
               className="w-full h-full object-center object-cover"
             />
@@ -117,13 +116,13 @@ const CardDetail = () => {
         <div className="max-w-2xl mx-auto pt-10 pb-16 px-4 sm:px-6 lg:max-w-7xl lg:pt-16 lg:pb-24 lg:px-8 lg:grid lg:grid-cols-3 lg:grid-rows-[auto,auto,1fr] lg:gap-x-8">
           <div className="lg:col-span-2 lg:border-r lg:border-gray-200 lg:pr-8">
             <h1 className="text-2xl font-extrabold tracking-tight text-gray-900 sm:text-3xl">
-              {detailProduct.name}
+              {detailProduct?.name}
             </h1>
           </div>
 
           <div className="mt-4 lg:mt-0 lg:row-span-3">
             {/* <h2 className="sr-only"></h2> */}
-            <p className="text-3xl text-gray-900">${detailProduct.price}</p>
+            <p className="text-3xl text-gray-900">${detailProduct?.price}</p>
 
             <div className="mt-6">
               <h3 className="sr-only">Reviews</h3>
@@ -192,7 +191,7 @@ const CardDetail = () => {
             <form className="mt-10">
               {/* <h2 className="sr-only"></h2> */}
               <p className="text-3xl text-gray-900">
-                {detailProduct.discount} %Off
+                {detailProduct?.discount} %Off
               </p>
 
               <button
@@ -210,7 +209,7 @@ const CardDetail = () => {
 
               <div className="space-y-6">
                 <p className="text-base text-gray-900">
-                  {detailProduct.description}
+                  {detailProduct?.description}
                 </p>
               </div>
             </div>
