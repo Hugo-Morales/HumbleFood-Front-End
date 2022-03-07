@@ -28,11 +28,11 @@ function CartItem({ product, handleAddToCart, handleRemoveFromCart, handleDelete
 
         <div className="ml-4 flex flex-1 flex-col">
           <div className="flex justify-between text-base font-medium text-gray-900">
-            <h3>{product.nombre}</h3>
+            <h3>{product.name}</h3>
             <div>
-              <p className="ml-4">Precio: ${product.precio}</p>
+              <p className="ml-4">Precio: ${product.price}</p>
               <p className="ml-4">
-                Total: ${(product.precio * product.amount).toFixed(2)}
+                Total: ${(product.price * product.amount).toFixed(2)}
               </p>
             </div>
           </div>
