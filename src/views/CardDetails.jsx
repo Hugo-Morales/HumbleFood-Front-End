@@ -24,14 +24,11 @@ const CardDetail = () => {
           <ol className="max-w-2xl mx-auto px-4 flex items-center space-x-2 sm:px-6 lg:max-w-7xl lg:px-8">
             <li>
               <div className="flex items-center">
-                <Link to="/home">
-                  <a
-                    href="#"
-                    className="mr-2 text-sm font-medium text-gray-900"
-                  >
-                    {" "}
-                    Restaurant{" "}
-                  </a>
+                <Link
+                  to="/home"
+                  className="mr-2 text-sm font-medium text-gray-900"
+                >
+                  Restaurant
                 </Link>
                 <svg
                   width="16"
