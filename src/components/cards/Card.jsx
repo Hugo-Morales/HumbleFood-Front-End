@@ -11,8 +11,8 @@ const Card = ({ prop, handleAddToCart }) => {
                     src={image}
                     alt="comida"
                 />
-                <button className="absolute bg-gray-700 mr-5 text-white px-3 py-1 rounded-sm shadow-md top-0 left-0">
-                    ✰
+                <button className="absolute bg-gray-700 mr-5 text-white px-3 py-1 rounded-sm shadow-md top-0 left-0 ">
+                    &#128152;
                 </button>
                 <div className=" flex-1 w-full flex flex-col items-baseline justify-around h-1/2 pl-6 sm:h-full sm:items-baseline sm:w-1/2">
                     <div className="flex flex-col justify-start items-baseline">

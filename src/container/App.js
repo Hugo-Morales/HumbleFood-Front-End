@@ -1,11 +1,10 @@
 import { useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import CardDetail from "../views/CardDetails";
+import Error404 from "../views/Error 404/error";
 import Home from "../views/Home";
-import Login from "../views/login/Login";
-import Register from "../views/login/Register";
-import UserType from "../views/login/UserType";
 import LandingPage from "../views/landingpage/landing";
+import { Helmet } from "react-helmet";
 function App() {
   const [cartItems, setCartItems] = useState([
     {
@@ -74,8 +73,16 @@ function App() {
     );
   };
 
+
   return (
+
     <BrowserRouter>
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>Humblefood</title>
+        <link rel="canonical" href="http://mysite.com/example" />
+        <meta name="description" content="Helmet application" />
+      </Helmet>
       <div className="App">
         <Routes>
           <Route exact path="/" element={<LandingPage />} />
@@ -91,10 +98,8 @@ function App() {
               />
             }
           ></Route>
-          <Route exact path="/login" element={<Login />}></Route>
-          <Route exact path="/register" element={<UserType />}></Route>
-          <Route exact path="/register/:type" element={<Register />}></Route>
           <Route exact path="/products/:id" element={<CardDetail />}></Route>
+          <Route path='*' element={<Error404 />}></Route>
         </Routes>
       </div>
     </BrowserRouter>

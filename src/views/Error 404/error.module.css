@@ -1,0 +1,14 @@
+.container {
+    background-image: url(https://cdn.dribbble.com/users/3474264/screenshots/14875714/media/344416ee58d46220c2f131207bc5c5c6.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    flex-direction: column;
+    align-items: center;
+    flex:auto;
+    align-items:center
+    /* justify-content: space-between; */
+  }
