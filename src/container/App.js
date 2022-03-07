@@ -68,7 +68,7 @@ function App() {
               />
             }
           ></Route>
-          <Route exact path="/products/:id" element={<CardDetail />}></Route>
+          <Route exact path="/products/:id" element={<CardDetail  handleAddToCart={handleAddToCart} />}></Route>
 
           <Route path="*" element={<Error404 />}></Route>
         </Routes>
