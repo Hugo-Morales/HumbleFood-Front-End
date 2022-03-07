@@ -13,9 +13,9 @@ const LandingPage = () => {
       <div>
         <Link to="/home">
           <button className={Styles.button}>
-            <span class={Styles.shadow}></span>
-            <span class={Styles.edge}></span>
-            <span class={`${Styles.front} ${Styles.text}`}>
+            <span className={Styles.shadow}></span>
+            <span className={Styles.edge}></span>
+            <span className={`${Styles.front} ${Styles.text}`}>
               Empieza a descubrir!
             </span>
           </button>

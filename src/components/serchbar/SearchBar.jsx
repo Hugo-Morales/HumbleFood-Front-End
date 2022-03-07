@@ -1,26 +1,28 @@
 import React from "react";
 import { useState } from "react";
-// import { useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
+import { searchByName } from "../../redux/actions";
 
 const SearchBar = () => {
   const [input, setInput] = useState("");
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
   const HandleInputChange = (e) => {
     e.preventDefault();
     setInput(e.target.value);
   };
 
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   dispatch(Search_Items(input));
-  //   setInput("");
-  // };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(searchByName(input));
+    setInput("");
+  };
 
   return (
     <div className="relative text-gray-600 focus-within:text-gray-400">
       <span className="absolute inset-y-0 left-0 flex items-center pl-2">
         <button
+          onClick={(e) => handleSubmit(e)}
           type="submit"
           className="p-1 focus:outline-none focus:shadow-outline"
         >
