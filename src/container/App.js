@@ -1,12 +1,8 @@
 import { useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import LandingPage from "../views/landingpage/landing";
 import Home from "../views/Home";
-<<<<<<< HEAD
-import LandingPage from "../views/landingpage/landing";
-
-=======
 import CardDetail from "../views/CardDetails";
-import LandingPage from "../views/landingpage/landing";
 
 export const data = [
   {
@@ -60,7 +56,6 @@ export const data = [
 ];
 
 
->>>>>>> ccf7dc722998e38e9e65693aed26a3822085debb
 function App() {
   const [cartItems, setCartItems] = useState([]);
 
