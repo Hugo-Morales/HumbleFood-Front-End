@@ -15,14 +15,14 @@ const Home = ({
 }) => {
   const dispatch = useDispatch();
   const productsloaded = useSelector((state) => state.productsloaded);
+  const { isLoading } = useAuth0();
 
   useEffect(() => {
     dispatch(getallproducts());
   }, [dispatch]);
 
   console.log(productsloaded);
-
-  const { isLoading } = useAuth0();
+  console.log(isLoading);
   if (isLoading) return <div>Loading...</div>;
   return (
     <div>
