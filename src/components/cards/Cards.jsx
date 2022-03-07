@@ -1,11 +1,13 @@
 import Card from "./Card";
 
-const Cards = ({ handleAddToCart, data }) => {
+const Cards = ({ handleAddToCart, products }) => {
+  console.log(products);
+
   return (
     <div className="flex flex-wrap mt-5">
-      {data.map((m, index) => (
+      {products && products?.map((product, index) => (
         <div key={index} className="mb-5 mr-5">
-          <Card handleAddToCart={handleAddToCart} prop={m} />
+          <Card handleAddToCart={handleAddToCart} product={product} />
         </div>
       ))}
     </div>
