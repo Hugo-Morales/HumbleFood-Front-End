@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Nav from "../components/nav/Nav";
 import Cards from "../components/cards/Cards";
+import Loading from '../components/loading/Loading';
 import { useAuth0 } from "@auth0/auth0-react";
 import { useSelector, useDispatch } from "react-redux";
 import { getallproducts } from "../redux/actions";
@@ -14,7 +15,8 @@ const Home = ({
   handleDeleteFromCart,
 }) => {
   const dispatch = useDispatch();
-  const { products, next, prev, pagesTotal } = useSelector((state) => state.productsloaded);
+  const { products, next, prev, pagesTotal } = useSelector(state => state.productsloaded);
+  const loading = useSelector(state => state.isLoading)
   const { isLoading } = useAuth0();
   const [currentPage, setCurrentPage] = useState(0);
 
@@ -42,12 +44,16 @@ const Home = ({
         handleRemoveFromCart={handleRemoveFromCart}
         handleDeleteFromCart={handleDeleteFromCart}
       />
-      <Cards
-        products={products}
-        handleAddToCart={handleAddToCart}
-        cartItems={cartItems}
-      />
-      <Paginado paging={paging} currentPage={currentPage} pagesTotal={pagesTotal} prev={prev} next={next} />
+      {
+        loading ? <Loading /> : <>
+          <Cards
+            products={products}
+            handleAddToCart={handleAddToCart}
+            cartItems={cartItems}
+          />
+          <Paginado paging={paging} currentPage={currentPage} pagesTotal={pagesTotal} prev={prev} next={next} />
+        </>
+      }
     </div>
   );
 };
