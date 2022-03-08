@@ -2,6 +2,7 @@ import {
   GET_DETAIL_PRODUCT,
   SEARCH_BY_NAME,
   GET_ALL_PRODUCTS,
+  GET_CATEGORIES,
   RESET,
   LOADING,
 } from "../actions";
@@ -9,6 +10,7 @@ import {
 const initialStore = {
   productsloaded: [],
   detailProduct: [],
+  categories: [],
   isLoading: true,
 };
 
@@ -28,6 +30,10 @@ export default function reducer(state = initialStore, { type, payload }) {
       ...state,
       productsloaded: payload,
     };
+    case GET_CATEGORIES: return {
+      ...state,
+      categories: payload,
+    }
     case RESET: return {
       ...state,
       detailProduct: [],

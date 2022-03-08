@@ -64,12 +64,12 @@ function App() {
 
   return (
     <BrowserRouter>
-      <Helmet>
+      {/* <Helmet>
         <meta charSet="utf-8" />
         <title>Humblefood</title>
         <link rel="canonical" href="http://mysite.com/example" />
         <meta name="description" content="Helmet application" />
-      </Helmet>
+      </Helmet> */}
       <div className="App">
         <Routes>
           <Route exact path="/" element={<LandingPage />} />
