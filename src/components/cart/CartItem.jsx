@@ -37,20 +37,20 @@ function CartItem({ product, handleAddToCart, handleRemoveFromCart, handleDelete
             </div>
           </div>
           <div className="flex flex-1 items-end justify-between text-sm">
-            <div className="buttons w-32 flex items-center ">
+            <div className="buttons w-32 flex items-center space-between">
               <button
-                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                className="bg-blue-500 hover:bg-blue-700 text-white font-extrabold py-2 px-4 rounded"
                 onClick={() => handleRemoveFromCart(product.id)}
               >
                 -
               </button>
-              <p>{product.amount}</p>
-              <button
-                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+              <p className="py-2 px-4 font-bold text-lg border-inherit border-solid border-2 border-slate-300 rounded">{product.amount}</p>
+             {product.stock >= product.amount ? <button
+                className="bg-blue-500 hover:bg-blue-700 text-white font-extrabold py-2 px-4 rounded"
                 onClick={() => handleAddToCart(product)}
               >
                 +
-              </button>
+              </button> : <p className="text-red-600">Max.</p>}
             </div>
             <div className="flex">
               <button
