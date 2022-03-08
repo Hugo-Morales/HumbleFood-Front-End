@@ -2,20 +2,7 @@ import { Link } from "react-router-dom";
 import Styles from "../landingpage/landingpage.module.css";
 const Error404 = () => {
     return (
-        <div
-            className="
-        flex
-        items-center
-        justify-center
-        w-screen
-        h-screen
-        bg-gradient-to-r
-        
-        "
-            className={Styles.container}
-
-
-        >
+        <div className={Styles.container}>
             <div className="px-40 py-20 bg-white rounded-md shadow-xl">
                 <div className="flex flex-col items-center">
 
