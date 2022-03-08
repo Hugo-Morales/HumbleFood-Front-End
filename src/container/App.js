@@ -1,13 +1,24 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import CardDetail from "../views/user/CardDetails";
 import Error404 from "../views/Error 404/error";
 import Home from "../views/user/Home";
 import LandingPage from "../views/landingpage/landing";
 import { Helmet } from "react-helmet";
+
 function App() {
   const [cartItems, setCartItems] = useState([]);
 
+  useEffect(() => {
+    if (cartItems.length !== 0) localStorage.setItem('carrito', JSON.stringify(cartItems));
+  }, [cartItems]);
+
+  useEffect(() => {
+    const items = JSON.parse(localStorage.getItem('carrito'));
+
+    if (items) setCartItems(items);
+  }, []);
+  
   const getTotalItems = (items) => {
     return items.reduce((acc, item) => acc + item.amount, 0);
   };
@@ -23,11 +34,18 @@ function App() {
             : item
         );
       }
+
       return [...prev, { ...clickedItem, amount: 1 }];
     });
   };
 
   const handleRemoveFromCart = (id) => {
+    const items = JSON.parse(localStorage.getItem('carrito'));
+
+    if (items.length === 1) {
+      localStorage.removeItem('carrito')
+    }
+
     setCartItems((prev) =>
       prev.reduce((acc, item) => {
         if (item.id === id) {
