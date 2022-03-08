@@ -61,6 +61,12 @@ function App() {
 
   const handleDeleteFromCart = (id) => {
     setCartItems((prev) => prev.filter((item) => item.id !== id));
+  
+    const items = JSON.parse(localStorage.getItem('carrito'));
+
+    if (items.length === 1) {
+      localStorage.removeItem('carrito')
+    }
   };
 
   return (
