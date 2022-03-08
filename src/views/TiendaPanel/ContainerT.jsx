@@ -10,7 +10,7 @@ export default function ContainerT(){
 
     return (
         <div className={Styles.container}>
-            <div className = {StylesContainer.container}>
+            <div className ={StylesContainer.container}>
                 <button className={Styles.button}>
                     <span className={Styles.shadow}></span>
                     <span className={Styles.edge}></span>
