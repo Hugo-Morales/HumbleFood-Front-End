@@ -89,7 +89,7 @@ export default function Cart({
                   <div className="border-t border-gray-200 py-6 px-4 sm:px-6">
                     <div className="flex justify-end text-base font-medium text-gray-900">
                       <h2 className="text-2xl">
-                        Total: ${calculateTotal(cartItems)}
+                        Total: <span className="font-extrabold">${calculateTotal(cartItems)}</span> 
                       </h2>
                     </div>
                     <p className="mt-0.5 text-sm text-gray-500">

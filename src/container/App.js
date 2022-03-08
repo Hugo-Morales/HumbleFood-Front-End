@@ -1,10 +1,11 @@
 import { useState, useEffect } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import CardDetail from "../views/CardDetails";
+import CardDetail from "../views/user/CardDetails";
 import Error404 from "../views/Error 404/error";
-import Home from "../views/Home";
+import Home from "../views/user/Home";
 import LandingPage from "../views/landingpage/landing";
 import CreateShop from "../views/seller/createNewShop/createShop";
+import ContainerT from "../views/TiendaPanel/ContainerT";
 import { Helmet } from "react-helmet";
 
 function App() {
@@ -62,16 +63,22 @@ function App() {
 
   const handleDeleteFromCart = (id) => {
     setCartItems((prev) => prev.filter((item) => item.id !== id));
+
+    const items = JSON.parse(localStorage.getItem("carrito"));
+
+    if (items.length === 1) {
+      localStorage.removeItem("carrito");
+    }
   };
 
   return (
     <BrowserRouter>
-      <Helmet>
+      {/* <Helmet>
         <meta charSet="utf-8" />
         <title>Humblefood</title>
         <link rel="canonical" href="http://mysite.com/example" />
         <meta name="description" content="Helmet application" />
-      </Helmet>
+      </Helmet> */}
       <div className="App">
         <Routes>
           <Route exact path="/" element={<LandingPage />} />
@@ -94,6 +101,9 @@ function App() {
             path="/products/:id"
             element={<CardDetail handleAddToCart={handleAddToCart} />}
           ></Route>
+          <Route exact path="/tienda/:idTienda" element={<ContainerT />}>
+            {" "}
+          </Route>
 
           <Route path="*" element={<Error404 />}></Route>
         </Routes>

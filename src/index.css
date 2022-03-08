@@ -35,6 +35,29 @@ div {
   font-family: "Raleway", sans-serif;
 }
 
+.container_000 {
+  background-image: url(https://cdn.dribbble.com/users/3474264/screenshots/14875714/media/344416ee58d46220c2f131207bc5c5c6.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+  align-items: center
+    /* justify-content: space-between; */
+}
+
+.fade-anim img {
+  animation: fadeAnim 0.5s ease-out;
+}
+
+@keyframes fadeAnim {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
