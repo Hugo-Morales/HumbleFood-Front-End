@@ -1,7 +1,18 @@
-import React from "react";
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { loading } from "../../redux/actions";
 import Styles from "../landingpage/landingpage.module.css";
+
 const LandingPage = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    return () => {
+      dispatch(loading())
+    }
+  }, [])
+
   return (
     <div className={Styles.container}>
       <div className={Styles.title}>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import AddShoppingCartIcon from "@material-ui/icons/AddShoppingCart";
 import Badge from "@material-ui/core/Badge";
@@ -8,6 +8,8 @@ import logo from "../../img/logo.png";
 import Cart from "../cart/Cart";
 import SearchBar from "../serchbar/SearchBar";
 import { useAuth0 } from "@auth0/auth0-react";
+import { useDispatch, useSelector } from "react-redux";
+import { getCategories } from "../../redux/actions";
 
 const StyledButton = styled(IconButton)`
   position: fixed;
@@ -23,11 +25,31 @@ const Nav = ({
   handleRemoveFromCart,
   handleDeleteFromCart,
 }) => {
-  const { isAuthenticated, user, loginWithRedirect, logout } = useAuth0();
-
+  const { isAuthenticated, user, loginWithRedirect, logout, getAccessTokenSilently } = useAuth0();
+  const categories = useSelector(state => state.categories);
+  const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
 
-  console.log(user);
+  // console.log(user);
+
+  useEffect(() => {
+    const getToken = async () => {
+      try {
+        const token = await getAccessTokenSilently();
+
+        localStorage.setItem('hora', JSON.stringify(token));
+      } catch (error) {
+        console.log(error);
+      }
+    }
+
+    getToken();
+  }, []);
+
+  useEffect(() => {
+    dispatch(getCategories())
+  }, [dispatch])
+
 
   return (
     <div className="font-poppins w-full h-24 bg-ochre flex justify-between">
@@ -39,15 +61,13 @@ const Nav = ({
           <SearchBar />
         </div>
         <div className="ml-4 w-full text-isabelline font-bold flex justify-around items-center">
-          <select
-            name="category"
-            className="p-2 h-10 focus:outline-none bg-ochre hover:bg-princetonOrange font-bold border-none"
-          >
-            <option value="DEFAULT">Categorías</option>
-            <option value="Ensaladas">Ensaladas</option>
-            <option value="Carnes">Carnes</option>
-            <option value="Postres">Postres</option>
-            <option value="Mariscos">Mariscos</option>
+          <select name="category" className="p-2 h-10 focus:outline-none bg-ochre hover:bg-princetonOrange font-bold border-none text-center">
+            <option value="">Categorías</option>
+            {
+              categories?.map((c, index) => (
+                <option key={index}>{c.name}</option>
+              ))
+            }
           </select>
           <Link to="/offers" className="ml-4 p-2 h-10 hover:bg-princetonOrange">
             Ofertas

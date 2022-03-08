@@ -7,7 +7,7 @@ export const Paginado = ({ paging, currentPage, pagesTotal, prev, next }) => {
   }
 
   return (
-    <div className="w-full flex justify-center">
+    <div className="w-full mb-2 flex justify-center">
       {next && (
         <div className="inline-flex">
           <button
@@ -21,6 +21,7 @@ export const Paginado = ({ paging, currentPage, pagesTotal, prev, next }) => {
       {pages.map((p) => (
         <button
           type="button"
+          key={p}
           className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-I"
           onClick={() => paging((currentPage = p))}
         >
