@@ -4,6 +4,7 @@ import CardDetail from "../views/user/CardDetails";
 import Error404 from "../views/Error 404/error";
 import Home from "../views/user/Home";
 import LandingPage from "../views/landingpage/landing";
+import ContainerT from "../views/TiendaPanel/ContainerT";
 import { Helmet } from "react-helmet";
 
 function App() {
@@ -87,6 +88,7 @@ function App() {
             }
           ></Route>
           <Route exact path="/products/:id" element={<CardDetail  handleAddToCart={handleAddToCart} />}></Route>
+          <Route exact path="/tienda/:idTienda" element={<ContainerT/>}> </Route>
 
           <Route path="*" element={<Error404 />}></Route>
         </Routes>
