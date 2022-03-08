@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
-import Nav from "../components/nav/Nav";
-import Cards from "../components/cards/Cards";
-import Loading from '../components/loading/Loading';
+import Nav from "../../components/nav/Nav";
+import Cards from "../../components/cards/Cards";
+import Loading from '../../components/loading/Loading';
 import { useAuth0 } from "@auth0/auth0-react";
 import { useSelector, useDispatch } from "react-redux";
-import { getallproducts } from "../redux/actions";
-import { Paginado } from "../components/paginado/Paginado";
+import { getallproducts } from "../../redux/actions";
+import { Paginado } from "../../components/paginado/Paginado";
+import Carousell from "../../components/carousell/Carousell";
 
 const Home = ({
   cartItems,
@@ -41,6 +42,7 @@ const Home = ({
         handleRemoveFromCart={handleRemoveFromCart}
         handleDeleteFromCart={handleDeleteFromCart}
       />
+      <Carousell />
       {
         loading ? <Loading /> : <>
           <Cards
