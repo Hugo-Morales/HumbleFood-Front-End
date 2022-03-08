@@ -3,11 +3,11 @@ export const GET_DETAIL_PRODUCT = "GET_DETAIL_PRODUCT";
 export const SEARCH_BY_NAME = "SEARCH_BY_NAME";
 export const GET_ALL_PRODUCTS = "GET_ALL_PRODUCTS";
 
-export const getallproducts = () => {
+export const getallproducts = (page) => {
   return async (dispatch) => {
     try {
       const allproducts = await axios.get(
-        "https://back-end-prueba.herokuapp.com/products"
+        `https://back-end-prueba.herokuapp.com/products?page=${page}`
       );
       // console.log(allproducts);
 
@@ -47,6 +47,7 @@ export const searchByName = (nameoffood) => {
         type: SEARCH_BY_NAME,
         payload: found_product.data,
       });
+      // console.log(found_product.data);
     } catch (error) {
       console.log(error);
     }
