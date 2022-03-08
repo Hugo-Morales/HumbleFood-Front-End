@@ -1,7 +1,7 @@
 import Card from "./Card";
 
 const Cards = ({ handleAddToCart, products }) => {
-  console.log(products);
+  // console.log(products);
 
   return (
     <div className="flex flex-wrap mt-5">

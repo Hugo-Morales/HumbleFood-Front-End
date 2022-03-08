@@ -27,7 +27,7 @@ const Nav = ({
 
   const [open, setOpen] = useState(false);
 
-  console.log(user);
+  // console.log(user);
 
   return (
     <div className="font-poppins w-full h-24 bg-ochre flex justify-between">
