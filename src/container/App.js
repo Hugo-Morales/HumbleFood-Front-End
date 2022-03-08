@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import CardDetail from "../views/CardDetails";
+import CardDetail from "../views/user/CardDetails";
 import Error404 from "../views/Error 404/error";
-import Home from "../views/Home";
+import Home from "../views/user/Home";
 import LandingPage from "../views/landingpage/landing";
 import { Helmet } from "react-helmet";
 function App() {

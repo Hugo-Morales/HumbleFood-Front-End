@@ -3,7 +3,7 @@ import React from "react";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { getDetailProduct } from "../redux/actions";
+import { getDetailProduct } from "../../redux/actions";
 
 const CardDetail = ({ handleAddToCart }) => {
   const dispatch = useDispatch();
