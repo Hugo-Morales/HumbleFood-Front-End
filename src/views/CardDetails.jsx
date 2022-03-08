@@ -8,9 +8,8 @@ import { getDetailProduct } from "../redux/actions";
 const CardDetail = ({ handleAddToCart }) => {
   const dispatch = useDispatch();
   const detailProduct = useSelector((state) => state.detailProduct);
- 
   const { id } = useParams([0]);
-  
+
   useEffect(() => {
     dispatch(getDetailProduct(id));
   }, [dispatch, id]);
