@@ -9,7 +9,7 @@ const CardDetail = ({ handleAddToCart }) => {
   const dispatch = useDispatch();
   const detailProduct = useSelector((state) => state.detailProduct);
   const { id } = useParams([0]);
-  // console.log(id);
+
   useEffect(() => {
     dispatch(getDetailProduct(id));
   }, [dispatch, id]);

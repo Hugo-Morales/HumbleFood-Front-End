@@ -7,7 +7,7 @@ export const Paginado = ({ paging, currentPage, pagesTotal, prev, next }) => {
   }
 
   return (
-    <div className="w-full flex justify-center">
+    <div className="w-full mb-2 flex justify-center">
       {next && (
         <div className="inline-flex">
           <button
