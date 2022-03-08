@@ -20,6 +20,7 @@ const Home = ({
   const loading = useSelector(state => state.isLoading)
   const { isLoading } = useAuth0();
   const [currentPage, setCurrentPage] = useState(0);
+  console.log(products);
 
   const paging = (num) => {
     if (num >= 0 && num <= pagesTotal) {
