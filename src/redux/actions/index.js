@@ -53,3 +53,18 @@ export const searchByName = (nameoffood) => {
     }
   };
 };
+
+export const postNewShop = (newShop) => {
+  return async () => {
+    try {
+      const response = await axios.post(
+        "https://back-end-prueba.herokuapp.com/shop",
+        newShop
+      );
+      console.log(response);
+      return response;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};

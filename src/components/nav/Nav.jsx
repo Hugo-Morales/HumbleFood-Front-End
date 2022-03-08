@@ -52,6 +52,7 @@ const Nav = ({
           <Link to="/offers" className="ml-4 p-2 h-10 hover:bg-princetonOrange">
             Ofertas
           </Link>
+          <Link to="/createShop">Quieres vender?</Link>
         </div>
       </div>
       <div
