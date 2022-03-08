@@ -30,9 +30,6 @@ const Home = ({
     dispatch(getallproducts(currentPage));
   }, [dispatch, currentPage]);
 
-  // console.log(currentPage);
-  // console.log(productsloaded);
-  // console.log(isLoading);
   if (isLoading) return <div>Loading...</div>;
 
   return (
