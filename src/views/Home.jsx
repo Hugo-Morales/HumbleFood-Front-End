@@ -23,12 +23,13 @@ const Home = ({
       setCurrentPage(num);
     }
   };
+
   useEffect(() => {
     dispatch(getallproducts(currentPage));
   }, [dispatch, currentPage]);
 
- 
   if (isLoading) return <div>Loading...</div>;
+
   return (
     <div>
       <Nav
