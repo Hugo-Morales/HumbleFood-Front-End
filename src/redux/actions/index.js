@@ -2,6 +2,7 @@ import axios from "axios";
 export const GET_DETAIL_PRODUCT = "GET_DETAIL_PRODUCT";
 export const SEARCH_BY_NAME = "SEARCH_BY_NAME";
 export const GET_ALL_PRODUCTS = "GET_ALL_PRODUCTS";
+export const POST_PRODUCTS = "POST_PRODUCTS";
 
 export const getallproducts = (page) => {
   return async (dispatch) => {
@@ -47,7 +48,18 @@ export const searchByName = (nameoffood) => {
         type: SEARCH_BY_NAME,
         payload: found_product.data,
       });
-      // console.log(found_product.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+export const postproducts = (input) => {
+  return async () => {
+    try {
+      await axios.post(
+        `https://back-end-prueba.herokuapp.com/product`, input
+      );
+      console.log('holaa')
     } catch (error) {
       console.log(error);
     }

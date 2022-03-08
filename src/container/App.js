@@ -4,6 +4,7 @@ import CardDetail from "../views/CardDetails";
 import Error404 from "../views/Error 404/error";
 import Home from "../views/Home";
 import LandingPage from "../views/landingpage/landing";
+import CreateProduct from "../views/createProducts";
 import { Helmet } from "react-helmet";
 function App() {
   const [cartItems, setCartItems] = useState([]);
@@ -68,8 +69,8 @@ function App() {
               />
             }
           ></Route>
-          <Route exact path="/products/:id" element={<CardDetail  handleAddToCart={handleAddToCart} />}></Route>
-
+          <Route exact path="/products/:id" element={<CardDetail handleAddToCart={handleAddToCart} />}></Route>
+          <Route exact path='/tienda/:idTienda/create' element={<CreateProduct />}></Route>
           <Route path="*" element={<Error404 />}></Route>
         </Routes>
       </div>
