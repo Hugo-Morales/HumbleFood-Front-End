@@ -61,16 +61,22 @@ function App() {
 
   const handleDeleteFromCart = (id) => {
     setCartItems((prev) => prev.filter((item) => item.id !== id));
+  
+    const items = JSON.parse(localStorage.getItem('carrito'));
+
+    if (items.length === 1) {
+      localStorage.removeItem('carrito')
+    }
   };
 
   return (
     <BrowserRouter>
-      <Helmet>
+      {/* <Helmet>
         <meta charSet="utf-8" />
         <title>Humblefood</title>
         <link rel="canonical" href="http://mysite.com/example" />
         <meta name="description" content="Helmet application" />
-      </Helmet>
+      </Helmet> */}
       <div className="App">
         <Routes>
           <Route exact path="/" element={<LandingPage />} />

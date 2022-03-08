@@ -2,6 +2,7 @@ import axios from "axios";
 export const GET_DETAIL_PRODUCT = "GET_DETAIL_PRODUCT";
 export const SEARCH_BY_NAME = "SEARCH_BY_NAME";
 export const GET_ALL_PRODUCTS = "GET_ALL_PRODUCTS";
+export const GET_CATEGORIES = 'GET_CATEGORIES'
 export const RESET = 'RESET';
 export const LOADING = 'LOADING'
 
@@ -48,6 +49,20 @@ export const searchByName = (nameoffood) => async (dispatch) => {
     } catch (error) {
       console.log(error);
     }
+};
+
+export const getCategories = () => async (dispatch) => {
+  try {
+    const categories = await axios.get(
+      'https://back-end-prueba.herokuapp.com/categories'
+    );
+    dispatch({
+      type: GET_CATEGORIES,
+      payload: categories.data,
+    });
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 export const reset = () => dispatch => {
