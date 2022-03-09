@@ -45,7 +45,7 @@ function CartItem({ product, handleAddToCart, handleRemoveFromCart, handleDelete
                 -
               </button>
               <p className="py-2 px-4 font-bold text-lg border-inherit border-solid border-2 border-slate-300 rounded">{product.amount}</p>
-             {product.stock >= product.amount ? <button
+             {product.stock > product.amount ? <button
                 className="bg-blue-500 hover:bg-blue-700 text-white font-extrabold py-2 px-4 rounded"
                 onClick={() => handleAddToCart(product)}
               >
