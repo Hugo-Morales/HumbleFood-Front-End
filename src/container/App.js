@@ -5,8 +5,8 @@ import Error404 from "../views/Error 404/error";
 import Home from "../views/user/Home";
 import LandingPage from "../views/landingpage/landing";
 import CreateShop from "../views/seller/createNewShop/createShop";
-import ContainerT from "../views/TiendaPanel/ContainerT";
 import SendReview from "../views/user/SendReview";
+import PrivateRoute from "../routes/PrivateRoute";
 // import { Helmet } from "react-helmet";
 
 function App() {
@@ -44,8 +44,8 @@ function App() {
   };
 
   const handleRemoveFromCart = (id) => {
-    const items = JSON.parse(localStorage.getItem('carrito'));
-    if (items.length === 1) localStorage.removeItem('carrito')
+    const items = JSON.parse(localStorage.getItem("carrito"));
+    if (items.length === 1) localStorage.removeItem("carrito");
 
     setCartItems((prev) =>
       prev.reduce((acc, item) => {
@@ -62,8 +62,8 @@ function App() {
   const handleDeleteFromCart = (id) => {
     setCartItems((prev) => prev.filter((item) => item.id !== id));
 
-    const items = JSON.parse(localStorage.getItem('carrito'));
-    if (items.length === 1) localStorage.removeItem('carrito');
+    const items = JSON.parse(localStorage.getItem("carrito"));
+    if (items.length === 1) localStorage.removeItem("carrito");
   };
 
   return (
@@ -91,7 +91,17 @@ function App() {
             }
           />
           <Route exact path="/createShop" element={<CreateShop />} />
-          <Route exact path="/send-review/:productId" element={<SendReview />} />
+          <Route
+            exact
+            path="/products/:id"
+            element={<CardDetail handleAddToCart={handleAddToCart} />}
+          />
+          <Route
+            exact
+            path="/send-review/:productId"
+            element={<SendReview />}
+          />
+          <Route exact path="/settings/:idTienda" element={<PrivateRoute />} />
           <Route path="*" element={<Error404 />} />
         </Routes>
       </div>

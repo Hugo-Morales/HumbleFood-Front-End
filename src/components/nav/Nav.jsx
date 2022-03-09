@@ -181,7 +181,7 @@ const Nav = ({
         handleRemoveFromCart={handleRemoveFromCart}
         handleDeleteFromCart={handleDeleteFromCart}
       />
-    </div >
+    </div>
   );
 };
 
