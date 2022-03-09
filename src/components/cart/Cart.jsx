@@ -112,9 +112,9 @@ export default function Cart({
                     <p className="mt-0.5 text-sm text-gray-500">
                       Envío e impuestos calculados al finalizar la compra.
                     </p>
-                    <div className="mt-6">
+                    <div className="mt-6 w-full">
                       {checkout ? (
-                        <Paypal className={"w-full"} cartItems={cartItems} />
+                        <Paypal className={cartItems.length ? "w-full" : "hidden"} cartItems={cartItems} />
                       ) : (
                         <button
                           onClick={() => {
