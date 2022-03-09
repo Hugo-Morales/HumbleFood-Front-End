@@ -8,7 +8,7 @@ export const RESET = "RESET";
 export const LOADING = "LOADING";
 export const POST_REVIEW = "POST_REVIEW";
 export const POST_PRODUCTS = "POST_PRODUCTS";
-
+export const POST_NEW_SHOP = "POST_NEW_SHOP";
 
 export const getallproducts = (page) => async (dispatch) => {
   try {
@@ -67,6 +67,21 @@ export const postproducts = (input) => {
     }
   };
 }
+
+export const postNewShop = (newShop) => async (dispatch) => {
+  try {
+    const response = await axios.post(
+      "https://back-end-prueba.herokuapp.com/shop",
+      newShop
+    );
+    dispatch({
+      type: POST_NEW_SHOP,
+      payload: response.data,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 export const getCategories = () => async (dispatch) => {
   try {

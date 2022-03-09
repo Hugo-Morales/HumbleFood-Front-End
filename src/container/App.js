@@ -5,6 +5,7 @@ import Error404 from "../views/Error 404/error";
 import Home from "../views/user/Home";
 import LandingPage from "../views/landingpage/landing";
 import CreateProduct from "../views/createProducts";
+import CreateShop from "../views/seller/createNewShop/createShop";
 import ContainerT from "../views/TiendaPanel/ContainerT";
 import SendReview from "../views/user/SendReview";
 // import { Helmet } from "react-helmet";
@@ -95,20 +96,20 @@ function App() {
                 handleDeleteFromCart={handleDeleteFromCart}
               />
             }
-          ></Route>
+          />
+          <Route exact path="/createShop" element={<CreateShop />} />
           <Route
             exact
             path="/products/:id"
-            element={<CardDetail handleAddToCart={handleAddToCart} />}
-          ></Route>
-          <Route exact path="/send-review/:productId" element={<SendReview />}></Route>
-          <Route exact path="/tienda/:idTienda" element={<ContainerT />}>
-            {" "}
-          </Route>
-          <Route exact path='/create' element={<CreateProduct />}></Route>
+            element={<CardDetail handleAddToCart={handleAddToCart} />} />
+          <Route exact path="/send-review/:productId" element={<SendReview />} />
+          <Route exact path="/tienda/:idTienda" element={<ContainerT />} />
+            
+          <Route exact path='/create' element={<CreateProduct />} />
           {/* <Route exact path="/tienda/:idTienda" element={<ContainerT/>}> </Route> */}
+          
 
-          <Route path="*" element={<Error404 />}></Route>
+          <Route path="*" element={<Error404 />} />
         </Routes>
       </div>
     </BrowserRouter>

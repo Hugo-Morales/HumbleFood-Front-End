@@ -9,7 +9,7 @@ import Stack from "@mui/material/Stack";
 function SendReview() {
   const {
     isAuthenticated,
-    // loginWithRedirect,
+    loginWithRedirect,
     getAccessTokenSilently,
   } = useAuth0();
   const dispatch = useDispatch();
@@ -95,8 +95,33 @@ function SendReview() {
           </form>
         </div>
       ) : (
-        <div className="w-full mx-auto my-24 p-12 rounded-lg bg-red-700">
-          <h3 className="text-isabelline text-center text-2xl">Debes registrarte primero antes de calificar un producto</h3>
+        <div className="w-full flex flex-col items-center mx-auto my-24 p-12 rounded-md bg-red-700">
+          <h3 className="text-isabelline text-center text-2xl mb-8">Debes registrarte primero antes de calificar un producto</h3>
+          <button
+            onClick={() => loginWithRedirect()}
+            className="flex items-center justify-center max-w-max mr-3 px-4 py-2 space-x-3 text-sm text-center bg-darkGreen text-isabelline transition-colors duration-200 transform dark:text-gray-300 dark:border-gray-300 hover:bg-gray-600 dark:hover:bg-gray-700 rounded-md"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="icon icon-tabler icon-tabler-user-circle"
+              width="28"
+              height="28"
+              viewBox="0 0 24 24"
+              strokeWidth="1.5"
+              stroke="#ffffff"
+              fill="none"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+              <circle cx="12" cy="12" r="9" />
+              <circle cx="12" cy="10" r="3" />
+              <path d="M6.168 18.849a4 4 0 0 1 3.832 -2.849h4a4 4 0 0 1 3.834 2.855" />
+            </svg>
+            <span className="text-sm text-white dark:text-gray-200">
+              Iniciar / Crear Cuenta
+            </span>
+          </button>
         </div>
       )}
     </div>
