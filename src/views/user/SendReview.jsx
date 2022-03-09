@@ -10,44 +10,36 @@ function SendReview() {
   const {
     isAuthenticated,
     loginWithRedirect,
-    getAccessTokenSilently,
+    // getAccessTokenSilently,
+    user,
   } = useAuth0();
   const dispatch = useDispatch();
   const id = useParams();
-  const [token, setToken] = useState("");
   const [productId, setProductId] = useState("");
   const [value, setValue] = useState(0);
   const [review, setReview] = useState("");
-  // console.log(id);
-  // console.log("user", user);
-  // console.log("isAuth", isAuthenticated);
-  // console.log(value);
 
   useEffect(() => {
-    const getToken = async () => {
+    const getProductId = async () => {
       try {
-        const token = await getAccessTokenSilently();
-        localStorage.setItem("hora", JSON.stringify(token));
-        setToken(token);
         setProductId(id.productId);
       } catch (error) {
         console.log(error);
       }
     };
-    getToken();
+    getProductId();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  // console.log(id.productId);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const userReview = {
-      userId: token,
+      userId: user?.sub.split("|")[1],
       productId: productId,
       contentReview: review,
       pointProduct: value,
     };
+    console.log(userReview);
     dispatch(postReview(userReview));
     alert("Calificación enviada");
   };
@@ -96,7 +88,9 @@ function SendReview() {
         </div>
       ) : (
         <div className="w-full flex flex-col items-center mx-auto my-24 p-12 rounded-md bg-red-700">
-          <h3 className="text-isabelline text-center text-2xl mb-8">Debes registrarte primero antes de calificar un producto</h3>
+          <h3 className="text-isabelline text-center text-2xl mb-8">
+            Debes registrarte primero antes de calificar un producto
+          </h3>
           <button
             onClick={() => loginWithRedirect()}
             className="flex items-center justify-center max-w-max mr-3 px-4 py-2 space-x-3 text-sm text-center bg-darkGreen text-isabelline transition-colors duration-200 transform dark:text-gray-300 dark:border-gray-300 hover:bg-gray-600 dark:hover:bg-gray-700 rounded-md"
