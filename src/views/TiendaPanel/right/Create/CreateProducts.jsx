@@ -1,7 +1,7 @@
 import React from 'react'
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { postproducts, getCategories } from '../../../../redux/actions';
+import { postproducts, getCategories, NewCategory } from '../../../../redux/actions';
 import Input from './Input';
 
 export function validate(input) {
@@ -64,6 +64,22 @@ const CreateProduct = ({ user }) => {
         }
         reader.readAsDataURL(file); //transforma la imagen a b64 (string), y asi lo puede leer
     }
+    const handleCategory = (e) => {
+        e.preventDefault()
+        const category = {
+            categories: input.categories
+        }
+        if (input.categories) {
+            return (
+                dispatch(NewCategory(category))
+            )
+        } else if (!input.categories) {
+            return (
+
+                alert('no hay nada')
+            )
+        }
+    }
 
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -104,6 +120,7 @@ const CreateProduct = ({ user }) => {
             categories: input.categories.filter(t => t === el)
         })
     }
+
 
     useEffect(() => {
         dispatch(getCategories())
@@ -191,8 +208,15 @@ const CreateProduct = ({ user }) => {
                                 </div>
                             </div>
                         </div>
-                        <div className="px-4 py-3 bg-gray-50 text-right sm:px-6">
+                        <div className="px-4 py-3e bg-gray-50 text-right sm:px-6">
+                            <input type="submit" className="inline-flex justify-center py-2 px-4  border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-orange-600 hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" value='Crear Categoria'
+                                onClick={handleCategory} ediv='text-rose-800' err={errors.categories}
+
+
+                            />
+
                             <input type="submit" className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" value='Crear Producto' />
+
                         </div>
                     </form>
                 </div>

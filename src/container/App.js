@@ -5,7 +5,7 @@ import Error404 from "../views/Error 404/error";
 import Home from "../views/user/Home";
 import LandingPage from "../views/landingpage/landing";
 import ContainerT from "../views/TiendaPanel/ContainerT";
-import { Helmet } from "react-helmet";
+// import { Helmet } from "react-helmet";
 import NewCategory from "../components/category/NewCategory";
 import CreateProduct from "../views/TiendaPanel/right/Create/CreateProducts";
 

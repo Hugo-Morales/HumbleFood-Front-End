@@ -59,11 +59,17 @@ export const postproducts = (input) => {
       await axios.post(
         `https://back-end-prueba.herokuapp.com/product`, input
       );
-      console.log('holaa')
     } catch (error) {
       console.log(error);
     }
   };
+}
+export const NewCategory = () => {
+  return async () => {
+    const name = prompt('save New Category ')
+    await axios.post('https://back-end-prueba.herokuapp.com/category', { name })
+  }
+
 }
 
 export const getCategories = () => async (dispatch) => {
@@ -92,6 +98,7 @@ export const getProductShop = (id) => async (dispatch) => {
     console.log(error)
   }
 }
+
 
 export const reset = () => dispatch => {
   dispatch({
