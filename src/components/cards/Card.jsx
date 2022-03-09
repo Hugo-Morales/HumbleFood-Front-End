@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import Nav from "../nav/Nav";
 
 const Card = ({ product, handleAddToCart }) => {
   const { id, name, image, description, price, discount, stock, categories } =
