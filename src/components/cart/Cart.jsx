@@ -13,7 +13,7 @@ export default function Cart({
   handleDeleteFromCart,
 }) {
   function calculateTotal(items) {
-    return items.reduce((acc, item) => ((acc + item.amount * item.price.toFixed(2))), 0);
+    return items.reduce((acc, item) => (acc + item.amount * item.price), 0).toFixed(2);
   }
 
   return (

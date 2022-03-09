@@ -2,10 +2,11 @@ import axios from "axios";
 export const GET_DETAIL_PRODUCT = "GET_DETAIL_PRODUCT";
 export const SEARCH_BY_NAME = "SEARCH_BY_NAME";
 export const GET_ALL_PRODUCTS = "GET_ALL_PRODUCTS";
-export const GET_CATEGORIES = 'GET_CATEGORIES';
-export const GET_PRODUCTS_SHOP = 'GET_PRODUCTS_SHOP';
-export const RESET = 'RESET';
-export const LOADING = 'LOADING';
+export const GET_CATEGORIES = "GET_CATEGORIES";
+export const GET_PRODUCTS_SHOP = "GET_PRODUCTS_SHOP";
+export const RESET = "RESET";
+export const LOADING = "LOADING";
+export const POST_REVIEW = "POST_REVIEW";
 
 export const getallproducts = (page) => async (dispatch) => {
   try {
@@ -24,38 +25,38 @@ export const getallproducts = (page) => async (dispatch) => {
 };
 
 export const getDetailProduct = (id) => async (dispatch) => {
-    try {
-      const detailProduct = await axios.get(
-        `https://back-end-prueba.herokuapp.com/products?id=${id}`
-      );
-      dispatch({
-        type: GET_DETAIL_PRODUCT,
-        payload: detailProduct.data,
-      });
-    } catch (error) {
-      console.log(error);
-    }
+  try {
+    const detailProduct = await axios.get(
+      `https://back-end-prueba.herokuapp.com/products?id=${id}`
+    );
+    dispatch({
+      type: GET_DETAIL_PRODUCT,
+      payload: detailProduct.data,
+    });
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 export const searchByName = (nameoffood) => async (dispatch) => {
-    try {
-      const found_product = await axios.get(
-        `https://back-end-prueba.herokuapp.com/products?name=${nameoffood}`
-      );
-      dispatch({
-        type: SEARCH_BY_NAME,
-        payload: found_product.data,
-      });
-      // console.log(found_product.data);
-    } catch (error) {
-      console.log(error);
-    }
+  try {
+    const found_product = await axios.get(
+      `https://back-end-prueba.herokuapp.com/products?name=${nameoffood}`
+    );
+    dispatch({
+      type: SEARCH_BY_NAME,
+      payload: found_product.data,
+    });
+    // console.log(found_product.data);
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 export const getCategories = () => async (dispatch) => {
   try {
     const categories = await axios.get(
-      'https://back-end-prueba.herokuapp.com/categories'
+      "https://back-end-prueba.herokuapp.com/categories"
     );
     dispatch({
       type: GET_CATEGORIES,
@@ -68,25 +69,43 @@ export const getCategories = () => async (dispatch) => {
 
 export const getProductShop = (id) => async (dispatch) => {
   try {
-    const products = await axios.get(`https://back-end-prueba.herokuapp.com/productShop/${id}`);
+    const products = await axios.get(
+      `https://back-end-prueba.herokuapp.com/productShop/${id}`
+    );
 
     dispatch({
       type: GET_PRODUCTS_SHOP,
-      payload: products.data
-    })
+      payload: products.data,
+    });
   } catch (error) {
-    console.log(error)
+    console.log(error);
   }
-}
+};
 
-export const reset = () => dispatch => {
+export const reset = () => (dispatch) => {
   dispatch({
-      type: RESET,
-  })
-}
+    type: RESET,
+  });
+};
 
-export const loading = () => dispatch => {
+export const loading = () => (dispatch) => {
   dispatch({
-      type: LOADING,
-  })
-}
+    type: LOADING,
+  });
+};
+
+//  - - - - POST/REVIEWS - - - -
+export const postReview = (review) => async (dispatch) => {
+  try {
+    const response = await axios.post(
+      "https://back-end-prueba.herokuapp.com/review",
+      review
+    );
+    dispatch({
+      type: POST_REVIEW,
+      payload: response.data,
+    });
+  } catch (error) {
+    console.error(error);
+  }
+};

@@ -100,7 +100,7 @@ function App() {
             path="/products/:id"
             element={<CardDetail handleAddToCart={handleAddToCart} />}
           ></Route>
-          <Route exact path="/send-review" element={<SendReview />}></Route>
+          <Route exact path="/send-review/:productId" element={<SendReview />}></Route>
           <Route exact path="/tienda/:idTienda" element={<ContainerT />}>
             {" "}
           </Route>
