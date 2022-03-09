@@ -4,6 +4,7 @@ import CardDetail from "../views/user/CardDetails";
 import Error404 from "../views/Error 404/error";
 import Home from "../views/user/Home";
 import LandingPage from "../views/landingpage/landing";
+import CreateProduct from "../views/createProducts";
 import ContainerT from "../views/TiendaPanel/ContainerT";
 import { Helmet } from "react-helmet";
 
@@ -19,7 +20,7 @@ function App() {
 
     if (items) setCartItems(items);
   }, []);
-  
+
   const getTotalItems = (items) => {
     return items.reduce((acc, item) => acc + item.amount, 0);
   };
@@ -61,7 +62,7 @@ function App() {
 
   const handleDeleteFromCart = (id) => {
     setCartItems((prev) => prev.filter((item) => item.id !== id));
-  
+
     const items = JSON.parse(localStorage.getItem('carrito'));
 
     if (items.length === 1) {
@@ -93,8 +94,9 @@ function App() {
               />
             }
           ></Route>
-          <Route exact path="/products/:id" element={<CardDetail  handleAddToCart={handleAddToCart} />}></Route>
-          <Route exact path="/tienda/:idTienda" element={<ContainerT/>}> </Route>
+          <Route exact path="/products/:id" element={<CardDetail handleAddToCart={handleAddToCart} />}></Route>
+          <Route exact path='/create' element={<CreateProduct />}></Route>
+          {/* <Route exact path="/tienda/:idTienda" element={<ContainerT/>}> </Route> */}
 
           <Route path="*" element={<Error404 />}></Route>
         </Routes>

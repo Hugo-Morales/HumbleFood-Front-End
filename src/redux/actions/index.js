@@ -2,6 +2,7 @@ import axios from "axios";
 export const GET_DETAIL_PRODUCT = "GET_DETAIL_PRODUCT";
 export const SEARCH_BY_NAME = "SEARCH_BY_NAME";
 export const GET_ALL_PRODUCTS = "GET_ALL_PRODUCTS";
+export const POST_PRODUCTS = "POST_PRODUCTS";
 export const GET_CATEGORIES = 'GET_CATEGORIES';
 export const GET_PRODUCTS_SHOP = 'GET_PRODUCTS_SHOP';
 export const RESET = 'RESET';
@@ -24,33 +25,45 @@ export const getallproducts = (page) => async (dispatch) => {
 };
 
 export const getDetailProduct = (id) => async (dispatch) => {
-    try {
-      const detailProduct = await axios.get(
-        `https://back-end-prueba.herokuapp.com/products?id=${id}`
-      );
-      dispatch({
-        type: GET_DETAIL_PRODUCT,
-        payload: detailProduct.data,
-      });
-    } catch (error) {
-      console.log(error);
-    }
+  try {
+    const detailProduct = await axios.get(
+      `https://back-end-prueba.herokuapp.com/products?id=${id}`
+    );
+    dispatch({
+      type: GET_DETAIL_PRODUCT,
+      payload: detailProduct.data,
+    });
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 export const searchByName = (nameoffood) => async (dispatch) => {
+  try {
+    const found_product = await axios.get(
+      `https://back-end-prueba.herokuapp.com/products?name=${nameoffood}`
+    );
+    dispatch({
+      type: SEARCH_BY_NAME,
+      payload: found_product.data,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const postproducts = (input) => {
+  return async () => {
     try {
-      const found_product = await axios.get(
-        `https://back-end-prueba.herokuapp.com/products?name=${nameoffood}`
+      await axios.post(
+        `https://back-end-prueba.herokuapp.com/product`, input
       );
-      dispatch({
-        type: SEARCH_BY_NAME,
-        payload: found_product.data,
-      });
-      // console.log(found_product.data);
+      console.log('holaa')
     } catch (error) {
       console.log(error);
     }
-};
+  };
+}
 
 export const getCategories = () => async (dispatch) => {
   try {
@@ -81,12 +94,14 @@ export const getProductShop = (id) => async (dispatch) => {
 
 export const reset = () => dispatch => {
   dispatch({
-      type: RESET,
+    type: RESET,
   })
 }
 
 export const loading = () => dispatch => {
   dispatch({
-      type: LOADING,
+    type: LOADING,
   })
 }
+
+
