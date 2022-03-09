@@ -10,6 +10,7 @@ const SearchBar = () => {
   const HandleInputChange = (e) => {
     e.preventDefault();
     setInput(e.target.value);
+    dispatch(searchByName(input));
   };
 
   const handleSubmit = (e) => {

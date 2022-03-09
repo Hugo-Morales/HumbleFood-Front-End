@@ -30,8 +30,11 @@ const Nav = ({
   const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
 
-  // console.log(user);
-
+  // getIdTokenClaims().then(res => {console.log(res)})
+  // getIdTokenClaims().then(res => {
+  //   console.log(res.aud);
+  // })
+  console.log(user.email);
   useEffect(() => {
     const getToken = async () => {
       try {
@@ -85,6 +88,7 @@ const Nav = ({
           <div className="flex items-center">
             <h3 className="mr-3">
               Bienvenido {user.given_name ? user.given_name : user.nickname}{" "}
+              
             </h3>
             <img
               src={user.picture}
