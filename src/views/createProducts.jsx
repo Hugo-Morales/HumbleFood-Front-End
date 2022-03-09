@@ -1,10 +1,9 @@
 import React from 'react'
-import { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { getallproducts, postproducts } from '../redux/actions';
+import { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { getallproducts, postproducts, getCategories } from '../redux/actions';
 import logo from "../../src/img/logo.png";
 import { Link, useNavigate, useParams } from 'react-router-dom';
-import axios from 'axios';
 
 export function validate(input) {
     let errors = {};
@@ -34,6 +33,8 @@ const CreateProduct = () => {
     const [errors, setErrors] = useState({})
     const dispatch = useDispatch()
     const navigate = useNavigate()
+    const categories = useSelector((state) => state.categories)
+    console.log(categories)
     // const {shopId} = useParams()
     const [input, setInput] = useState({
 
@@ -43,7 +44,7 @@ const CreateProduct = () => {
         price: 0,
         discount: 0,
         stock: 0,
-        categoriesId: [],
+        categories: [],
         image: "",
     })
     function handleChange(e) {
@@ -81,8 +82,28 @@ const CreateProduct = () => {
         console.log(produc)
         dispatch(postproducts(produc))
         dispatch(getallproducts())
-        navigate('/home') // me redirige al home cuando termino de crear el personaje 
+        navigate('/home')
     }
+    function handleSelect(e) {
+        console.log(e.target.selectedIndex)
+        const index = e.target.selectedIndex;
+        const el = e.target.childNodes[index]
+        const id = el.getAttribute('id');
+        setInput({
+            ...input,
+            categories: [...input.categories, id]
+        })
+
+    }
+    function handleDelete(el) {
+        setInput({
+            ...input,
+            categories: input.categories.filter(t => t === el)
+        })
+    }
+    useEffect(() => {
+        dispatch(getCategories())
+    }, []);
     return (
         <div>
             <div className="font-poppins w-full h-24 bg-ochre flex justify-between">
@@ -198,12 +219,17 @@ const CreateProduct = () => {
 
 
 
-                                            <div className="col-span-6 sm:col-span-3">
-                                                <label for="country" className="block text-sm font-medium text-gray-700">Country</label>
-                                                <select id="country" name="country" autocomplete="country-name" className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-                                                    <option>United States</option>
-                                                    <option>Canada</option>
-                                                    <option>Mexico</option>
+                                            <div className="col-span-6 sm:col-span-3" >
+                                                <label for="categories" className="block text-sm font-medium text-gray-700">categories</label>
+                                                <select id="categories" name="categories" onChange={handleSelect} autocomplete="categories" className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+
+                                                    <option>categories</option>
+                                                    {
+                                                        categories?.map((c, index) => (
+                                                            <option id={c.id} key={index}>{c.name}</option>
+                                                        ))
+                                                    }
+
                                                 </select>
                                             </div>
 
@@ -255,8 +281,15 @@ const CreateProduct = () => {
                                 </div>
                                 <div className="px-4 py-3 bg-gray-50 text-right sm:px-6">
                                     <input onClick={handleSubmit} type="submit" className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" value='send' />
-
+                                    {input.categories?.map((id, index) =>
+                                        <div key={index}>
+                                            <p>{categories.find((e) => e.id === id).name}</p>
+                                        </div>
+                                    )}
+                                    <button onClick={(el) => handleDelete(el)}>Reset </button>
                                 </div>
+
+
                             </form>
                         </div>
                     </div>
