@@ -5,6 +5,7 @@ export const GET_ALL_PRODUCTS = "GET_ALL_PRODUCTS";
 export const GET_CATEGORIES = "GET_CATEGORIES";
 export const RESET = "RESET";
 export const LOADING = "LOADING";
+export const POST_NEW_SHOP = "POST_NEW_SHOP";
 
 export const getallproducts = (page) => async (dispatch) => {
   try {
@@ -51,20 +52,21 @@ export const searchByName = (nameoffood) => async (dispatch) => {
   }
 };
 
-export const postNewShop = (newShop) => {
-  return async () => {
-    try {
-      const response = await axios.post(
-        "https://back-end-prueba.herokuapp.com/shop",
-        newShop
-      );
-      console.log(response);
-      return response;
-    } catch (error) {
-      console.log(error);
-    }
-  };
+export const postNewShop = (newShop) => async (dispatch) => {
+  try {
+    const response = await axios.post(
+      "https://back-end-prueba.herokuapp.com/shop",
+      newShop
+    );
+    dispatch({
+      type: POST_NEW_SHOP,
+      payload: response.data,
+    });
+  } catch (error) {
+    console.log(error);
+  }
 };
+
 export const getCategories = () => async (dispatch) => {
   try {
     const categories = await axios.get(

@@ -1,13 +1,31 @@
 import React from "react";
 import ButtonExit from "../../../components/buttonExit/buttonexit";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
-// import { useAuth0 } from "@auth0/auth0-react";
+import { useAuth0 } from "@auth0/auth0-react";
 import { postNewShop } from "../../../redux/actions";
-// import Styles from "../../../img/bg-createShop.jpg";
+import Styles from "./createShop.module.css";
 const CreateShop = () => {
-  // const { user } = useAuth0();
-  // console.log(user);
+  const { getAccessTokenSilently, isAuthenticated } = useAuth0();
+
+  let token;
+  useEffect(() => {
+    const getToken = async () => {
+      try {
+        token = await getAccessTokenSilently();
+        console.log(token);
+        setNewShop({
+          ...newShop,
+          userId: token,
+        });
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    getToken();
+  }, []);
+
   const dispatch = useDispatch();
   const [newShop, setNewShop] = useState({
     name: "",
@@ -33,9 +51,9 @@ const CreateShop = () => {
     reader.readAsDataURL(file); //transforma la imagen a b64 (string), y asi lo puede leer
   };
 
-  const handleformSubmit = (e) => {
-    e.preventDefault();
+  const handleformSubmit = () => {
     dispatch(postNewShop(newShop));
+
     alert("Tienda registrada con exito!");
     setNewShop({
       name: "",
@@ -46,27 +64,27 @@ const CreateShop = () => {
   };
 
   return (
-    <div>
-      <div className="md:grid md:grid-cols-3 md:gap-6 bg-create-shop">
-        <div className="md:col-span-1">
+    <div className={`${"h-screen"} ${Styles.bg}`}>
+      <div className={` ${"md:grid md:grid-cols-3 md:gap-6"}`}>
+        <div className="h-fit  pt-3 pr-1 rounded-md pb-3 pl-3 mt-4 bg-orange-300 md:col-span-1">
           <div className="px-4 sm:px-0">
-            <h3 className="text-lg font-medium leading-6 text-gray-900">
+            <h3 className="text-lg  leading-6 text-gray-900 font-bold">
               Conviertete en Vendedor!
             </h3>
-            <p className="mt-1 text-sm text-gray-600">
+            <p className="mt-1 text-sm text-white-700 font-bold">
               Registra tu tienda y se parte la comunidad de vendedores de
               Humblefood.
             </p>
           </div>
         </div>
-        <div className="mt-5 md:mt-0 md:col-span-2">
+        <div className="my-5 md:mt-4 md:col-span2">
           <form onSubmit={(e) => handleformSubmit(e)}>
             <div className="shadow sm:rounded-md sm:overflow-hidden">
-              <div className="px-4 py-5 bg-white space-y-6 sm:p-6">
+              <div className="px-4 py-5 bg-gray-200 space-y-6 sm:p-6">
                 {/* Nombre de la tienda */}
                 <div className="grid grid-cols-3 gap-6">
                   <div className="col-span-3 sm:col-span-2">
-                    <label className="block text-sm font-medium text-gray-700">
+                    <label className="font-bold block text-sm  text-gray-700">
                       {" "}
                       Nombre de la tienda:{" "}
                     </label>
@@ -83,7 +101,7 @@ const CreateShop = () => {
                 </div>
                 {/* Direccion */}
                 <div>
-                  <label className="block text-sm font-medium text-gray-700">
+                  <label className="font-bold block text-sm  text-gray-700">
                     Direccion de la tienda:{" "}
                   </label>
                   <div className="mt-1">
@@ -99,7 +117,7 @@ const CreateShop = () => {
 
                 {/* Descripcion */}
                 <div>
-                  <label className="block text-sm font-medium text-gray-700">
+                  <label className="font-bold block text-sm  text-gray-700">
                     Descripcion de la tienda:{" "}
                   </label>
                   <div className="mt-1">
@@ -114,7 +132,7 @@ const CreateShop = () => {
                 </div>
                 {/* Foto */}
                 <div>
-                  <label className="block text-sm font-medium text-gray-700">
+                  <label className="font-bold block text-sm  text-gray-700">
                     {" "}
                     Foto de la tienda:{" "}
                   </label>
@@ -157,10 +175,11 @@ const CreateShop = () => {
                   </div>
                 </div>
               </div>
-              <div className="px-4 py-3 bg-gray-50 text-right sm:px-6">
+              <div className="flex justify-between px-4 py-1.5 bg-gray-200 text-right sm:px-6">
+                <ButtonExit />
                 <button
                   type="submit"
-                  className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                  className="  px-2 border border-transparent shadow-sm text-sm rounded-md text-white font-bold bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                 >
                   Registrar
                 </button>
@@ -168,7 +187,6 @@ const CreateShop = () => {
             </div>
           </form>
         </div>
-        <ButtonExit className />
       </div>
     </div>
   );
