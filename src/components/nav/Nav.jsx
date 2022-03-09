@@ -54,7 +54,7 @@ const Nav = ({
   return (
     <div className="font-poppins w-full h-24 bg-ochre flex justify-between">
       <div className="w-1/3 flex justify-between items-center p-1">
-        <Link to="/" className="ml-4">
+        <Link to="/home" className="ml-4">
           <img src={logo} className="w-20" alt="logo" />
         </Link>
         <div className="ml-4">

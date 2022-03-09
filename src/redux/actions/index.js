@@ -2,9 +2,10 @@ import axios from "axios";
 export const GET_DETAIL_PRODUCT = "GET_DETAIL_PRODUCT";
 export const SEARCH_BY_NAME = "SEARCH_BY_NAME";
 export const GET_ALL_PRODUCTS = "GET_ALL_PRODUCTS";
-export const GET_CATEGORIES = 'GET_CATEGORIES'
+export const GET_CATEGORIES = 'GET_CATEGORIES';
+export const GET_PRODUCTS_SHOP = 'GET_PRODUCTS_SHOP';
 export const RESET = 'RESET';
-export const LOADING = 'LOADING'
+export const LOADING = 'LOADING';
 
 export const getallproducts = (page) => async (dispatch) => {
   try {
@@ -64,6 +65,19 @@ export const getCategories = () => async (dispatch) => {
     console.log(error);
   }
 };
+
+export const getProductShop = (id) => async (dispatch) => {
+  try {
+    const products = await axios.get(`https://back-end-prueba.herokuapp.com/productShop/${id}`);
+
+    dispatch({
+      type: GET_PRODUCTS_SHOP,
+      payload: products.data
+    })
+  } catch (error) {
+    console.log(error)
+  }
+}
 
 export const reset = () => dispatch => {
   dispatch({
