@@ -7,6 +7,8 @@ export const GET_PRODUCTS_SHOP = "GET_PRODUCTS_SHOP";
 export const RESET = "RESET";
 export const LOADING = "LOADING";
 export const POST_REVIEW = "POST_REVIEW";
+export const POST_PRODUCTS = "POST_PRODUCTS";
+
 
 export const getallproducts = (page) => async (dispatch) => {
   try {
@@ -52,6 +54,19 @@ export const searchByName = (nameoffood) => async (dispatch) => {
     console.log(error);
   }
 };
+
+export const postproducts = (input) => {
+  return async () => {
+    try {
+      await axios.post(
+        `https://back-end-prueba.herokuapp.com/product`, input
+      );
+      console.log('holaa')
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
 
 export const getCategories = () => async (dispatch) => {
   try {
@@ -109,3 +124,6 @@ export const postReview = (review) => async (dispatch) => {
     console.error(error);
   }
 };
+
+
+
