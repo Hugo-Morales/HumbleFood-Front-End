@@ -103,6 +103,7 @@ export default function Cart({
                       }
                     >
                       <h2 className="text-2xl">
+                        {" "}
                         Total:{" "}
                         <span className="font-extrabold">
                           ${calculateTotal(cartItems)}
@@ -114,7 +115,10 @@ export default function Cart({
                     </p>
                     <div className="mt-6 w-full">
                       {checkout ? (
-                        <Paypal className={cartItems.length ? "w-full" : "hidden"} cartItems={cartItems} />
+                        <Paypal
+                          className={cartItems.length ? "w-full" : "hidden"}
+                          cartItems={cartItems}
+                        />
                       ) : (
                         <button
                           onClick={() => {
