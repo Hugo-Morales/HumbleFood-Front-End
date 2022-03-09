@@ -45,6 +45,7 @@ export default function Cart({
               leave="transform transition ease-in-out duration-500 sm:duration-700"
               leaveFrom="translate-x-0"
               leaveTo="translate-x-full"
+              className='z-40'
             >
               <div className="pointer-events-auto w-screen max-w-md">
                 <div className="flex h-full flex-col overflow-y-scroll bg-white shadow-xl">
@@ -89,7 +90,7 @@ export default function Cart({
                   <div className="border-t border-gray-200 py-6 px-4 sm:px-6">
                     <div className="flex justify-end text-base font-medium text-gray-900">
                       <h2 className="text-2xl">
-                        Total: <span className="font-extrabold">${calculateTotal(cartItems)}</span> 
+                        Total: <span className="font-extrabold">${calculateTotal(cartItems)}</span>
                       </h2>
                     </div>
                     <p className="mt-0.5 text-sm text-gray-500">

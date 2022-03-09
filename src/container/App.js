@@ -4,10 +4,10 @@ import CardDetail from "../views/user/CardDetails";
 import Error404 from "../views/Error 404/error";
 import Home from "../views/user/Home";
 import LandingPage from "../views/landingpage/landing";
-import CreateProduct from "../views/createProducts";
 import ContainerT from "../views/TiendaPanel/ContainerT";
 import { Helmet } from "react-helmet";
 import NewCategory from "../components/category/NewCategory";
+import CreateProduct from "../views/TiendaPanel/right/Create/CreateProducts";
 
 function App() {
   const [cartItems, setCartItems] = useState([]);
@@ -44,10 +44,7 @@ function App() {
 
   const handleRemoveFromCart = (id) => {
     const items = JSON.parse(localStorage.getItem('carrito'));
-
-    if (items.length === 1) {
-      localStorage.removeItem('carrito')
-    }
+    if (items.length === 1) localStorage.removeItem('carrito')
 
     setCartItems((prev) =>
       prev.reduce((acc, item) => {
@@ -65,10 +62,7 @@ function App() {
     setCartItems((prev) => prev.filter((item) => item.id !== id));
 
     const items = JSON.parse(localStorage.getItem('carrito'));
-
-    if (items.length === 1) {
-      localStorage.removeItem('carrito')
-    }
+    if (items.length === 1) localStorage.removeItem('carrito');
   };
 
   return (
@@ -101,6 +95,7 @@ function App() {
           {/* <Route exact path="/tienda/:idTienda" element={<ContainerT/>}> </Route> */}
 
           <Route path="*" element={<Error404 />}></Route>
+          <Route exact path="/tienda/:idTienda" element={<ContainerT />} />
         </Routes>
       </div>
     </BrowserRouter>

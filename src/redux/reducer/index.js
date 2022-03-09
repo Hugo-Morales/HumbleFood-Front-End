@@ -3,6 +3,7 @@ import {
   SEARCH_BY_NAME,
   GET_ALL_PRODUCTS,
   GET_CATEGORIES,
+  GET_PRODUCTS_SHOP,
   RESET,
   LOADING,
   FILTER_BY_CATEGORIES,
@@ -13,6 +14,7 @@ const initialStore = {
   allproducts: [],
   detailProduct: [],
   categories: [],
+  productShop: [],
   isLoading: true,
 };
 
@@ -36,6 +38,11 @@ export default function reducer(state = initialStore, { type, payload }) {
     case GET_CATEGORIES: return {
       ...state,
       categories: payload,
+    }
+    case GET_PRODUCTS_SHOP: return {
+      ...state,
+      productShop: payload,
+      isLoading: false,
     }
     case RESET: return {
       ...state,
