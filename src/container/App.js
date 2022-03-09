@@ -7,6 +7,7 @@ import LandingPage from "../views/landingpage/landing";
 import CreateProduct from "../views/createProducts";
 import ContainerT from "../views/TiendaPanel/ContainerT";
 import { Helmet } from "react-helmet";
+import NewCategory from "../components/category/NewCategory";
 
 function App() {
   const [cartItems, setCartItems] = useState([]);
@@ -96,6 +97,7 @@ function App() {
           ></Route>
           <Route exact path="/products/:id" element={<CardDetail handleAddToCart={handleAddToCart} />}></Route>
           <Route exact path='/create' element={<CreateProduct />}></Route>
+          <Route exact path='/category' element={<NewCategory />}></Route>
           {/* <Route exact path="/tienda/:idTienda" element={<ContainerT/>}> </Route> */}
 
           <Route path="*" element={<Error404 />}></Route>

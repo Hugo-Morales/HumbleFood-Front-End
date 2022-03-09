@@ -6,6 +6,7 @@ export const POST_PRODUCTS = "POST_PRODUCTS";
 export const GET_CATEGORIES = 'GET_CATEGORIES'
 export const RESET = 'RESET';
 export const LOADING = 'LOADING'
+export const FILTER_BY_CATEGORIES = 'FILTER_BY_CATEGORIES'
 
 export const getallproducts = (page) => async (dispatch) => {
   try {
@@ -88,6 +89,12 @@ export const loading = () => dispatch => {
   dispatch({
     type: LOADING,
   })
+}
+export function filterProductsByCategories(payload) {
+  return {
+    type: FILTER_BY_CATEGORIES,
+    payload
+  }
 }
 
 

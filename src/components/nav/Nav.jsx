@@ -9,7 +9,7 @@ import Cart from "../cart/Cart";
 import SearchBar from "../serchbar/SearchBar";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useDispatch, useSelector } from "react-redux";
-import { getCategories } from "../../redux/actions";
+import { filterProductsByCategories, getCategories } from "../../redux/actions";
 
 const StyledButton = styled(IconButton)`
   position: fixed;
@@ -49,7 +49,10 @@ const Nav = ({
   useEffect(() => {
     dispatch(getCategories())
   }, [dispatch])
-
+  function handleFilterCategories(e) {
+    dispatch(filterProductsByCategories(e.target.value))
+    console.log(e.target.value)
+  }
 
   return (
     <div className="font-poppins w-full h-24 bg-ochre flex justify-between">
@@ -61,12 +64,15 @@ const Nav = ({
           <SearchBar />
         </div>
         <div className="ml-4 w-full text-isabelline font-bold flex justify-around items-center">
-          <select name="category" className="p-2 h-10 focus:outline-none bg-ochre hover:bg-princetonOrange font-bold border-none text-center">
-            <option value="">Categorías</option>
+          <select onChange={e => handleFilterCategories(e)} name="category" className="p-2 h-10 focus:outline-none bg-ochre hover:bg-princetonOrange font-bold border-none text-center">
+            <option value="All">Categorías</option>
             {
-              categories?.map((c, index) => (
-                <option key={index}>{c.name}</option>
-              ))
+              categories?.map((c, index) => {
+                return (
+                  <option key={index} value={c.name}>{c.name}</option>
+
+                )
+              })
             }
           </select>
           <Link to="/offers" className="ml-4 p-2 h-10 hover:bg-princetonOrange">
