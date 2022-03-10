@@ -50,7 +50,7 @@ const Nav = ({
     };
 
     getToken();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -58,7 +58,7 @@ const Nav = ({
   }, [dispatch]);
 
   return (
-    <div className="font-poppins w-full h-24 bg-ochre flex justify-between">
+    <div className="sticky top-0 font-poppins w-full h-24 bg-ochre flex justify-between">
       <div className="w-1/3 flex justify-between items-center p-1">
         <Link to="/" className="ml-4">
           <img src={logo} className="w-20" alt="logo" />
@@ -181,7 +181,7 @@ const Nav = ({
         handleRemoveFromCart={handleRemoveFromCart}
         handleDeleteFromCart={handleDeleteFromCart}
       />
-    </div >
+    </div>
   );
 };
 

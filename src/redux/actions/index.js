@@ -9,6 +9,40 @@ export const LOADING = "LOADING";
 export const POST_REVIEW = "POST_REVIEW";
 export const POST_PRODUCTS = "POST_PRODUCTS";
 export const POST_NEW_SHOP = "POST_NEW_SHOP";
+export const POST_NEW_USER = "POST_NEW_USER";
+export const GET_DATA_USER = "GET_DATA_USER";
+
+export const postnewUser = (newUser) => {
+  return async () => {
+    try {
+      const response = await axios.get(
+        `https://back-end-prueba.herokuapp.com/user/${newUser.userId}`
+      );
+      console.log(response.data.hasOwnProperty("user"));
+      if (!response.data.hasOwnProperty("user")) {
+        await axios.post("https://back-end-prueba.herokuapp.com/user", newUser);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+export const getdataUser = (id) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.get(
+        `https://back-end-prueba.herokuapp.com/user/${id}`
+      );
+      dispatch({
+        type: GET_DATA_USER,
+        payload: response.data,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
 
 export const getallproducts = (page) => async (dispatch) => {
   try {
@@ -58,15 +92,13 @@ export const searchByName = (nameoffood) => async (dispatch) => {
 export const postproducts = (input) => {
   return async () => {
     try {
-      await axios.post(
-        `https://back-end-prueba.herokuapp.com/product`, input
-      );
-      console.log('holaa')
+      await axios.post(`https://back-end-prueba.herokuapp.com/product`, input);
+      console.log("holaa");
     } catch (error) {
       console.log(error);
     }
   };
-}
+};
 
 export const postNewShop = (newShop) => async (dispatch) => {
   try {
@@ -74,6 +106,7 @@ export const postNewShop = (newShop) => async (dispatch) => {
       "https://back-end-prueba.herokuapp.com/shop",
       newShop
     );
+    console.log(response);
     dispatch({
       type: POST_NEW_SHOP,
       payload: response.data,
@@ -139,6 +172,3 @@ export const postReview = (review) => async (dispatch) => {
     console.error(error);
   }
 };
-
-
-

@@ -1,38 +1,29 @@
 import React from "react";
 import ButtonExit from "../../../components/buttonExit/buttonexit";
 import { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useAuth0 } from "@auth0/auth0-react";
 import { postNewShop } from "../../../redux/actions";
 import Styles from "./createShop.module.css";
+import { getdataUser } from "../../../redux/actions";
+
 const CreateShop = () => {
-  const { getAccessTokenSilently, isAuthenticated } = useAuth0();
+  const dispatch = useDispatch();
+  const { user } = useAuth0();
 
-  let token;
   useEffect(() => {
-    const getToken = async () => {
-      try {
-        token = await getAccessTokenSilently();
-        console.log(token);
-        setNewShop({
-          ...newShop,
-          userId: token,
-        });
-      } catch (error) {
-        console.log(error);
-      }
-    };
-
-    getToken();
+    dispatch(getdataUser(user?.sub.split("|")[1]));
   }, []);
 
-  const dispatch = useDispatch();
+  const dataUser = useSelector((state) => state.dataUser);
+  console.log(dataUser);
+
   const [newShop, setNewShop] = useState({
     name: "",
     direction: "",
     description: "",
     image: "",
-    userId: "",
+    userId: dataUser?.id,
   });
 
   const handleInputChange = (e) => {
@@ -51,15 +42,17 @@ const CreateShop = () => {
     reader.readAsDataURL(file); //transforma la imagen a b64 (string), y asi lo puede leer
   };
 
-  const handleformSubmit = () => {
+  console.log(newShop);
+  const handleformSubmit = (e) => {
+    e.preventDefault();
     dispatch(postNewShop(newShop));
-
     alert("Tienda registrada con exito!");
     setNewShop({
       name: "",
       direction: "",
       description: "",
       image: "",
+      userId: "",
     });
   };
 
