@@ -4,19 +4,14 @@ import CardDetail from "../views/user/CardDetails";
 import Error404 from "../views/Error 404/error";
 import Home from "../views/user/Home";
 import LandingPage from "../views/landingpage/landing";
-<<<<<<< HEAD
 import CreateShop from "../views/seller/createNewShop/createShop";
 import SendReview from "../views/user/SendReview";
 import PrivateRoute from "../routes/PrivateRoute";
 import ShoppingList from "../components/cart/Cart";
-// import { Helmet } from "react-helmet";
-
-=======
 import ContainerT from "../views/TiendaPanel/ContainerT";
-// import { Helmet } from "react-helmet";
 import NewCategory from "../components/category/NewCategory";
 import CreateProduct from "../views/TiendaPanel/right/Create/CreateProducts";
->>>>>>> b7c329643d9fefe867a7604bc429c8cee0ee69e3
+// import { Helmet } from "react-helmet";
 
 function App() {
   const [cartItems, setCartItems] = useState([]);
@@ -98,7 +93,6 @@ function App() {
                 handleDeleteFromCart={handleDeleteFromCart}
               />
             }
-<<<<<<< HEAD
           />
           <Route exact path="/createShop" element={<CreateShop />} />
           <Route
@@ -106,7 +100,11 @@ function App() {
             path="/products/:id"
             element={<CardDetail handleAddToCart={handleAddToCart} />}
           />
-          <Route exact path="/shopping-list" element={<ShoppingList cartItems={cartItems} />} />
+          <Route
+            exact
+            path="/shopping-list"
+            element={<ShoppingList cartItems={cartItems} />}
+          />
           <Route
             exact
             path="/send-review/:productId"
@@ -114,16 +112,18 @@ function App() {
           />
           <Route exact path="/settings/:idTienda" element={<PrivateRoute />} />
           <Route path="*" element={<Error404 />} />
-=======
+
+          <Route
+            exact
+            path="/products/:id"
+            element={<CardDetail handleAddToCart={handleAddToCart} />}
           ></Route>
-          <Route exact path="/products/:id" element={<CardDetail handleAddToCart={handleAddToCart} />}></Route>
-          <Route exact path='/create' element={<CreateProduct />}></Route>
-          <Route exact path='/category' element={<NewCategory />}></Route>
+          <Route exact path="/create" element={<CreateProduct />}></Route>
+          <Route exact path="/category" element={<NewCategory />}></Route>
           {/* <Route exact path="/tienda/:idTienda" element={<ContainerT/>}> </Route> */}
 
           <Route path="*" element={<Error404 />}></Route>
           <Route exact path="/tienda/:idTienda" element={<ContainerT />} />
->>>>>>> b7c329643d9fefe867a7604bc429c8cee0ee69e3
         </Routes>
       </div>
     </BrowserRouter>

@@ -9,8 +9,7 @@ export const LOADING = "LOADING";
 export const POST_REVIEW = "POST_REVIEW";
 export const POST_PRODUCTS = "POST_PRODUCTS";
 export const POST_NEW_SHOP = "POST_NEW_SHOP";
-export const FILTER_BY_CATEGORIES = 'FILTER_BY_CATEGORIES'
-
+export const FILTER_BY_CATEGORIES = "FILTER_BY_CATEGORIES";
 
 export const getallproducts = (page) => async (dispatch) => {
   try {
@@ -60,21 +59,20 @@ export const searchByName = (nameoffood) => async (dispatch) => {
 export const postproducts = (input) => {
   return async () => {
     try {
-      await axios.post(
-        `https://back-end-prueba.herokuapp.com/product`, input
-      );
+      await axios.post(`https://back-end-prueba.herokuapp.com/product`, input);
     } catch (error) {
       console.log(error);
     }
   };
-}
+};
 export const NewCategory = () => {
   return async () => {
-    const name = prompt('save New Category ')
-    await axios.post('https://back-end-prueba.herokuapp.com/category', { name })
-  }
-
-}
+    const name = prompt("save New Category ");
+    await axios.post("https://back-end-prueba.herokuapp.com/category", {
+      name,
+    });
+  };
+};
 
 export const postNewShop = (newShop) => async (dispatch) => {
   try {
@@ -110,7 +108,6 @@ export const getProductShop = (id) => async (dispatch) => {
     const products = await axios.get(
       `https://back-end-prueba.herokuapp.com/productShop/${id}`
     );
-
     dispatch({
       type: GET_PRODUCTS_SHOP,
       payload: products.data,
@@ -120,7 +117,7 @@ export const getProductShop = (id) => async (dispatch) => {
   }
 };
 
-export const reset = () => dispatch => {
+export const reset = () => (dispatch) => {
   dispatch({
     type: RESET,
   });
@@ -151,9 +148,16 @@ export const postReview = (review) => async (dispatch) => {
 export function filterProductsByCategories(payload) {
   return {
     type: FILTER_BY_CATEGORIES,
-    payload
-  }
+    payload,
+  };
 }
 
-
-
+export const deleteProduct = (id) => async () => {
+  try {
+    await axios.delete(
+      `https://back-end-prueba.herokuapp.com/product/delete/${id}`
+    );
+  } catch (error) {
+    console.error(error);
+  }
+};

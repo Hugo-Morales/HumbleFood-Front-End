@@ -14,7 +14,7 @@ export default function SideLeft({ id, setId }) {
       <div className="p-2 mb-5 text-white uppercase">
         <h1>Bienvenido {id}</h1>
       </div>
-      <div className="text-center bg-white p-2 rounded-lg mb-10">
+      <div className="text-center bg-white p-2 rounded-lg mb-10 cursor-pointer" onClick={() => setId("home")}>
         <h1>Panel de Control</h1>
       </div>
       {/* <div>
@@ -61,6 +61,7 @@ export default function SideLeft({ id, setId }) {
           text="Modificar Producto"
           buttonClass="flex items-center font-bold"
           icon={<BiEdit className="mr-2" />}
+          f={() => setId("editar")}
         />
 
         {/* Borrar Producto */}
@@ -69,6 +70,7 @@ export default function SideLeft({ id, setId }) {
           text="Borrar Producto"
           buttonClass="flex items-center font-bold"
           icon={<MdDelete className="mr-2" />}
+          f={() => setId("delete")}
         />
 
         {/* Mensajes */}
@@ -97,7 +99,7 @@ export default function SideLeft({ id, setId }) {
           text="Cerrar Sesión"
           buttonClass="flex items-center font-bold"
           icon={<AiOutlineLogout className="mr-2" />}
-          f={() => logout({ returnTo: "http://localhost:3000/home" })}
+          f={() => logout({ returnTo: window.location.origin })}
         />
       </div>
     </div>

@@ -30,41 +30,22 @@ const Nav = ({
     user,
     loginWithRedirect,
     logout,
-    getAccessTokenSilently,
   } = useAuth0();
   const categories = useSelector((state) => state.categories);
   const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
 
-  // console.log(user);
+  console.log(user);
 
   useEffect(() => {
-    const getToken = async () => {
-      try {
-        const token = await getAccessTokenSilently();
-
-        localStorage.setItem("hora", JSON.stringify(token));
-      } catch (error) {
-        console.log(error);
-      }
-    };
-
-    getToken();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  useEffect(() => {
-<<<<<<< HEAD
     dispatch(getCategories());
   }, [dispatch]);
-=======
-    dispatch(getCategories())
-  }, [dispatch])
+
+
   function handleFilterCategories(e) {
     dispatch(filterProductsByCategories(e.target.value))
     console.log(e.target.value)
   }
->>>>>>> b7c329643d9fefe867a7604bc429c8cee0ee69e3
 
   return (
     <div className="font-poppins w-full h-24 bg-ochre flex justify-between">
@@ -76,16 +57,7 @@ const Nav = ({
           <SearchBar />
         </div>
         <div className="ml-4 w-full text-isabelline font-bold flex justify-around items-center">
-<<<<<<< HEAD
-          <select
-            name="category"
-            className="p-2 h-10 focus:outline-none bg-ochre hover:bg-princetonOrange font-bold border-none text-center"
-          >
-            <option value="">Categorías</option>
-            {categories?.map((c, index) => (
-              <option key={index}>{c.name}</option>
-            ))}
-=======
+
           <select onChange={e => handleFilterCategories(e)} name="category" className="p-2 h-10 focus:outline-none bg-ochre hover:bg-princetonOrange font-bold border-none text-center">
             <option value="All">Categorías</option>
             {
@@ -96,7 +68,6 @@ const Nav = ({
                 )
               })
             }
->>>>>>> b7c329643d9fefe867a7604bc429c8cee0ee69e3
           </select>
           <Link to="/offers" className="ml-4 p-2 h-10 hover:bg-princetonOrange">
             Ofertas
