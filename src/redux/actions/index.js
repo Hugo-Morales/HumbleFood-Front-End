@@ -8,6 +8,7 @@ export const GET_PRODUCTS_SHOP = 'GET_PRODUCTS_SHOP';
 export const RESET = 'RESET';
 export const FILTER_BY_CATEGORIES = 'FILTER_BY_CATEGORIES'
 export const LOADING = 'LOADING';
+export const FILTER_BY_DISCOUNT = 'FILTER_BY_DISCOUNT'
 
 export const getallproducts = (page) => async (dispatch) => {
   try {
@@ -114,6 +115,12 @@ export const loading = () => dispatch => {
 export function filterProductsByCategories(payload) {
   return {
     type: FILTER_BY_CATEGORIES,
+    payload
+  }
+}
+export function filterByDiscount(payload) {
+  return {
+    type: FILTER_BY_DISCOUNT,
     payload
   }
 }
