@@ -6,6 +6,7 @@ import {
   GET_PRODUCTS_SHOP,
   RESET,
   LOADING,
+  POST_NEW_SHOP,
   FILTER_BY_CATEGORIES,
   FILTER_BY_DISCOUNT,
 } from "../actions";
@@ -16,44 +17,56 @@ const initialStore = {
   detailProduct: [],
   categories: [],
   productShop: [],
+  postnewShop: [],
   isLoading: true,
 };
 
 export default function reducer(state = initialStore, { type, payload }) {
   switch (type) {
-    case GET_ALL_PRODUCTS: return {
-      ...state,
-      productsloaded: payload,
-      allproducts: payload,
-      isLoading: false,
-    };
-    case GET_DETAIL_PRODUCT: return {
-      ...state,
-      detailProduct: payload,
-      isLoading: false,
-    };
-    case SEARCH_BY_NAME: return {
-      ...state,
-      productsloaded: payload,
-    };
-    case GET_CATEGORIES: return {
-      ...state,
-      categories: payload,
-    }
-    case GET_PRODUCTS_SHOP: return {
-      ...state,
-      productShop: payload,
-      isLoading: false,
-    }
-    case RESET: return {
-      ...state,
-      detailProduct: [],
-      isLoading: true,
-    }
-    case LOADING: return {
-      ...state,
-      isLoading: true,
-    }
+    case GET_ALL_PRODUCTS:
+      return {
+        ...state,
+        productsloaded: payload,
+        isLoading: false,
+      };
+    case GET_DETAIL_PRODUCT:
+      return {
+        ...state,
+        detailProduct: payload,
+        isLoading: false,
+      };
+    case SEARCH_BY_NAME:
+      return {
+        ...state,
+        productsloaded: payload,
+      };
+    case POST_NEW_SHOP:
+      return {
+        ...state,
+        postnewShop: payload,
+      };
+    case GET_CATEGORIES:
+      return {
+        ...state,
+        categories: payload,
+      };
+    case GET_PRODUCTS_SHOP:
+      return {
+        ...state,
+        productShop: payload,
+        isLoading: false,
+      };
+    case RESET:
+      return {
+        ...state,
+        detailProduct: [],
+        isLoading: true,
+      };
+    case LOADING:
+      return {
+        ...state,
+        isLoading: true,
+      };
     case FILTER_BY_CATEGORIES:
       const productsloaded = state.productsloaded
       // console.log(state.allproducts)
@@ -75,6 +88,8 @@ export default function reducer(state = initialStore, { type, payload }) {
           productsloaded: probando
         }
       }
-    default: return state;
+
+    default:
+      return state;
   }
 }

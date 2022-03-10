@@ -1,9 +1,18 @@
-import { Fragment } from "react";
+import { Fragment, useState } from "react";
+import { useAuth0 } from "@auth0/auth0-react";
 import { Dialog, Transition } from "@headlessui/react";
 import { XIcon } from "@heroicons/react/outline";
-import { Link } from "react-router-dom";
+import { MdShoppingCart } from "react-icons/md";
+import { AiOutlineDollarCircle } from "react-icons/ai";
 import CartItem from "./CartItem";
+import Paypal from "../Paypal/Paypal";
+// import { Link, useParams } from "react-router-dom";
 
+export function calculateTotal(items) {
+  return items
+    .reduce((acc, item) => acc + item.amount * item.price, 0)
+    .toFixed(2);
+}
 export default function Cart({
   open,
   setOpen,
@@ -12,16 +21,37 @@ export default function Cart({
   handleRemoveFromCart,
   handleDeleteFromCart,
 }) {
-  function calculateTotal(items) {
-    return items.reduce((acc, item) => ((acc + item.amount * item.price.toFixed(2))), 0);
-  }
+  const [checkout, setCheckout] = useState(false);
+  const { user } = useAuth0();
+
+  // model Orders {
+  //   state       Int
+  //   shopId      String
+  //   productsId  String[]
+  //   cartId      String //@db.ObjectId Cuidado con este
+  //   total       Float
+  //   userId      String
+  // }
+
+  const productsId = cartItems.map((item) => item.id);
+
+  let order = {
+    state: 0,
+    productsId: productsId,
+    total: calculateTotal(cartItems),
+    userId: user?.sub.split("|")[1],
+  };
+  console.log("order", order);
 
   return (
     <Transition.Root show={open} as={Fragment}>
       <Dialog
         as="div"
         className="fixed inset-0 overflow-hidden"
-        onClose={setOpen}
+        onClose={() => {
+          setOpen(false);
+          setCheckout(false);
+        }}
       >
         <div className="absolute inset-0 overflow-hidden">
           <Transition.Child
@@ -45,21 +75,23 @@ export default function Cart({
               leave="transform transition ease-in-out duration-500 sm:duration-700"
               leaveFrom="translate-x-0"
               leaveTo="translate-x-full"
-              className='z-40'
             >
               <div className="pointer-events-auto w-screen max-w-md">
                 <div className="flex h-full flex-col overflow-y-scroll bg-white shadow-xl">
                   <div className="flex-1 overflow-y-auto py-6 px-4 sm:px-6">
                     <div className="flex items-start justify-between">
-                      <Dialog.Title className="text-lg font-medium text-gray-900">
-                        {" "}
-                        Shopping cart{" "}
+                      <Dialog.Title className="text-lg font-medium text-gray-900 flex items-center">
+                        Carrito de Compras
+                        <MdShoppingCart className="w-6 h-6 ml-2" />
                       </Dialog.Title>
                       <div className="ml-3 flex h-7 items-center">
                         <button
                           type="button"
                           className="button-cart -m-2 p-2 text-gray-400 hover:text-gray-500"
-                          onClick={() => setOpen(false)}
+                          onClick={() => {
+                            setOpen(false);
+                            setCheckout(false);
+                          }}
                         >
                           <span className="sr-only">Close panel</span>
                           <XIcon className="h-6 w-6" aria-hidden="true" />
@@ -80,6 +112,7 @@ export default function Cart({
                               handleAddToCart={handleAddToCart}
                               handleRemoveFromCart={handleRemoveFromCart}
                               handleDeleteFromCart={handleDeleteFromCart}
+                              checkout={checkout}
                             />
                           ))}
                         </ul>
@@ -88,31 +121,69 @@ export default function Cart({
                   </div>
 
                   <div className="border-t border-gray-200 py-6 px-4 sm:px-6">
-                    <div className="flex justify-end text-base font-medium text-gray-900">
+                    <div
+                      className={
+                        cartItems.length
+                          ? "flex justify-end text-base font-medium text-gray-900"
+                          : "opacity-0"
+                      }
+                    >
                       <h2 className="text-2xl">
-                        Total: <span className="font-extrabold">${calculateTotal(cartItems)}</span>
+                        {" "}
+                        Total del Carrito:{" "}
+                        <span className="font-extrabold">
+                          ${calculateTotal(cartItems)}
+                        </span>
                       </h2>
                     </div>
                     <p className="mt-0.5 text-sm text-gray-500">
-                      Shipping and taxes calculated at checkout.
+                      Envío e impuestos calculados al finalizar la compra.
                     </p>
-                    <div className="mt-6">
-                      <Link
-                        to="#"
-                        className="flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700"
+                    <div className="mt-6 w-full">
+                      <button
+                        type="button"
+                        onClick={() => setCheckout(false)}
+                        className={
+                          checkout
+                            ? "w-full mb-4 p-2 font-medium text-indigo-600 border-solid border-2 border-indigo-600 rounded hover:text-isabelline hover:bg-indigo-500"
+                            : "hidden"
+                        }
                       >
-                        Checkout
-                      </Link>
+                        Modificar Carrito
+                      </button>
+                      {checkout ? (
+                        <Paypal
+                          className={cartItems.length ? "w-full" : "hidden"}
+                          cartItems={cartItems}
+                        />
+                      ) : (
+                        <button
+                          type="button"
+                          onClick={() => {
+                            setCheckout(true);
+                          }}
+                          className={
+                            cartItems.length
+                              ? "w-full flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700"
+                              : "hidden"
+                          }
+                        >
+                          Checkout
+                          <AiOutlineDollarCircle className="ml-2 w-6 h-6" />
+                        </button>
+                      )}
                     </div>
                     <div className="mt-6 flex justify-center text-center text-sm text-gray-500">
                       <p>
-                        or{" "}
                         <button
                           type="button"
                           className="font-medium text-indigo-600 hover:text-indigo-500"
-                          onClick={() => setOpen(false)}
+                          onClick={() => {
+                            setOpen(false);
+                            setCheckout(false);
+                          }}
                         >
-                          Continue Shopping
+                          Continuar Comprando
                           <span aria-hidden="true"> &rarr;</span>
                         </button>
                       </p>
