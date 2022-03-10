@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import { AiOutlineLogout } from "react-icons/ai";
 import { GrAddCircle } from "react-icons/gr";
 import { BiEdit, BiMessageRoundedDetail } from "react-icons/bi";
@@ -6,13 +7,13 @@ import { FiSettings } from "react-icons/fi";
 import { useAuth0 } from "@auth0/auth0-react";
 import Button from "./Button";
 
-export default function SideLeft({ id, setId }) {
+export default function SideLeft({ name, setId }) {
   const { logout } = useAuth0();
 
   return (
-    <div className="bg-gray-700 overflow-y-auto h-full p-6">
+    <div className="bg-gray-700 overflow-y-auto h-screen p-6">
       <div className="p-2 mb-5 text-white uppercase">
-        <h1>Bienvenido {id}</h1>
+        <h1>Bienvenido {name}</h1>
       </div>
       <div className="text-center bg-white p-2 rounded-lg mb-10 cursor-pointer" onClick={() => setId("home")}>
         <h1>Panel de Control</h1>
@@ -38,13 +39,14 @@ export default function SideLeft({ id, setId }) {
         <hr></hr>
 
         {/* Agregar otra Tienda */}
-        <Button
-          div="flex bg-green-200 justify-center p-2 rounded-lg mb-10 mt-3 hover:bg-sky-700 cursor-pointer"
-          text="Registrar Tienda"
-          buttonClass="flex items-center font-bold"
-          icon={<GrAddCircle className="mr-2" />}
-          f={() => alert("Coming Soon")}
-        />
+        <Link to='/createShop'>
+          <Button
+            div="flex bg-green-200 justify-center p-2 rounded-lg mb-10 mt-3 hover:bg-sky-700 cursor-pointer"
+            text="Registrar Tienda"
+            buttonClass="flex items-center font-bold"
+            icon={<GrAddCircle className="mr-2" />}
+          />
+        </Link>
 
         {/* Crear Producto */}
         <Button

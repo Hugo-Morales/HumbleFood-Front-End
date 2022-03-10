@@ -4,7 +4,7 @@ import Cards from "../../components/cards/Cards";
 import Loading from '../../components/loading/Loading';
 import { useSelector, useDispatch } from "react-redux";
 import { getallproducts } from "../../redux/actions";
-import { Paginado } from "../../components/paginado/Paginado";
+import Paginado from "../../components/paginado/Paginado";
 import Carousell from "../../components/carousell/Carousell";
 
 const Home = ({

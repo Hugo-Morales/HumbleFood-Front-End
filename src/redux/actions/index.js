@@ -97,10 +97,10 @@ export const getCategories = () => async (dispatch) => {
   }
 };
 
-export const getProductShop = (id) => async (dispatch) => {
+export const getProductShop = (id, page) => async (dispatch) => {
   try {
     const products = await axios.get(
-      `https://back-end-prueba.herokuapp.com/productShop/${id}`
+      `https://back-end-prueba.herokuapp.com/productShop/${id}?page=${page}`
     );
 
     dispatch({
