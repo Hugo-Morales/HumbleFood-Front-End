@@ -9,7 +9,7 @@ import Cart from "../cart/Cart";
 import SearchBar from "../serchbar/SearchBar";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useDispatch, useSelector } from "react-redux";
-import { getCategories } from "../../redux/actions";
+import { filterProductsByCategories, getCategories } from "../../redux/actions";
 
 const StyledButton = styled(IconButton)`
   position: fixed;
@@ -25,31 +25,27 @@ const Nav = ({
   handleRemoveFromCart,
   handleDeleteFromCart,
 }) => {
-  const { isAuthenticated, user, loginWithRedirect, logout, getAccessTokenSilently } = useAuth0();
-  const categories = useSelector(state => state.categories);
+  const {
+    isAuthenticated,
+    user,
+    loginWithRedirect,
+    logout,
+  } = useAuth0();
+  const categories = useSelector((state) => state.categories);
   const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
 
-  // console.log(user);
+  console.log(user);
 
   useEffect(() => {
-    const getToken = async () => {
-      try {
-        const token = await getAccessTokenSilently();
+    dispatch(getCategories());
+  }, [dispatch]);
 
-        localStorage.setItem('hora', JSON.stringify(token));
-      } catch (error) {
-        console.log(error);
-      }
-    }
 
-    getToken();
-  }, []);
-
-  useEffect(() => {
-    dispatch(getCategories())
-  }, [dispatch])
-
+  function handleFilterCategories(e) {
+    dispatch(filterProductsByCategories(e.target.value))
+    console.log(e.target.value)
+  }
 
   return (
     <div className="font-poppins w-full h-24 bg-ochre flex justify-between">
@@ -61,18 +57,55 @@ const Nav = ({
           <SearchBar />
         </div>
         <div className="ml-4 w-full text-isabelline font-bold flex justify-around items-center">
-          <select name="category" className="p-2 h-10 focus:outline-none bg-ochre hover:bg-princetonOrange font-bold border-none text-center">
-            <option value="">Categorías</option>
+
+          <select onChange={e => handleFilterCategories(e)} name="category" className="p-2 h-10 focus:outline-none bg-ochre hover:bg-princetonOrange font-bold border-none text-center">
+            <option value="All">Categorías</option>
             {
-              categories?.map((c, index) => (
-                <option key={index}>{c.name}</option>
-              ))
+              categories?.map((c, index) => {
+                return (
+                  <option key={index} value={c.name}>{c.name}</option>
+
+                )
+              })
             }
           </select>
           <Link to="/offers" className="ml-4 p-2 h-10 hover:bg-princetonOrange">
             Ofertas
           </Link>
+          {isAuthenticated ? (
+            <Link to="/createShop">
+              <button className="flex items-center justify-center w-20 mr-3 px-4 py-2 space-x-3 text-sm text-center bg-lime-700 text-isabelline transition-colors duration-200 transfor hover:bg-lime-600 active:bg-lime-700 focus:outline-none focus:ring focus:ring-lime-300 rounded-md">
+                {" "}
+                Registra tu tienda!
+              </button>
+            </Link>
+          ) : (
+            <button
+              onClick={() => loginWithRedirect()}
+              className=" flex items-center justify-center w-20 mr-3 px-4 py-2 space-x-3 text-sm text-center bg-lime-700 text-isabelline transition-colors duration-200 transform hover:bg-lime-600 active:bg-lime-700 focus:outline-none focus:ring focus:ring-lime-300 rounded-md"
+            >
+              {" "}
+              Quieres vender?
+            </button>
+          )}
         </div>
+        {/* 
+        <button id="dropdownNavbarLink" data-dropdown-toggle="dropdownNavbar" className="flex justify-between items-center py-2 pr-4 pl-3 w-full font-medium text-gray-700 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:w-auto dark:text-gray-400 dark:hover:text-white dark:focus:text-white dark:border-gray-700 dark:hover:bg-gray-700 md:dark:hover:bg-transparent">Dropdown <svg className="ml-1 w-4 h-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd"></path></svg></button>
+
+        <div id="dropdownNavbar" className="hidden z-10 w-44 text-base list-none bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600">
+          <ul className="py-1" aria-labelledby="dropdownLargeButton" />
+          <li>
+            <a href="#" className="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-400 dark:hover:text-white">{
+              categories?.map((c, index) => (
+                <option key={index}>{c.name}</option>
+              ))
+            }</a>
+          </li>
+          <li>
+            <a href="#" className="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-400 dark:hover:text-white">Settings</a>
+          </li>
+        </div>
+      </div> */}
       </div>
       <div
         className={

@@ -18,7 +18,7 @@ const Home = ({
   const { products, next, prev, pagesTotal } = useSelector(state => state.productsloaded);
   const loading = useSelector(state => state.isLoading)
   const [currentPage, setCurrentPage] = useState(0);
-  console.log(products);
+  // console.log(products);
 
   const paging = (num) => {
     if (num >= 0 && num <= pagesTotal) {
