@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Nav from "../../components/nav/Nav";
 import Cards from "../../components/cards/Cards";
-import Loading from '../../components/loading/Loading';
+import Loading from "../../components/loading/Loading";
 import { useSelector, useDispatch } from "react-redux";
 import { getallproducts } from "../../redux/actions";
 import { Paginado } from "../../components/paginado/Paginado";
@@ -15,8 +15,10 @@ const Home = ({
   handleDeleteFromCart,
 }) => {
   const dispatch = useDispatch();
-  const { products, next, prev, pagesTotal } = useSelector(state => state.productsloaded);
-  const loading = useSelector(state => state.isLoading)
+  const { products, next, prev, pagesTotal } = useSelector(
+    (state) => state.productsloaded
+  );
+  const loading = useSelector((state) => state.isLoading);
   const [currentPage, setCurrentPage] = useState(0);
   // console.log(products);
 
@@ -32,8 +34,10 @@ const Home = ({
 
   return (
     <div>
-      {
-        loading ? <Loading /> : <>
+      {loading ? (
+        <Loading />
+      ) : (
+        <>
           <Nav
             cartItems={cartItems}
             getTotalItems={getTotalItems}
@@ -47,9 +51,15 @@ const Home = ({
             handleAddToCart={handleAddToCart}
             cartItems={cartItems}
           />
-          <Paginado paging={paging} currentPage={currentPage} pagesTotal={pagesTotal} prev={prev} next={next} />
+          <Paginado
+            paging={paging}
+            currentPage={currentPage}
+            pagesTotal={pagesTotal}
+            prev={prev}
+            next={next}
+          />
         </>
-      }
+      )}
     </div>
   );
 };

@@ -1,4 +1,5 @@
 import {
+  GET_SHOPS,
   GET_DETAIL_PRODUCT,
   SEARCH_BY_NAME,
   GET_ALL_PRODUCTS,
@@ -11,6 +12,7 @@ import {
 } from "../actions";
 
 const initialStore = {
+  shops: [],
   productsloaded: [],
   allproducts: [],
   detailProduct: [],
@@ -22,6 +24,12 @@ const initialStore = {
 
 export default function reducer(state = initialStore, { type, payload }) {
   switch (type) {
+    case GET_SHOPS:
+      return {
+        ...state,
+        shops: payload,
+        isLoading: false,
+      };
     case GET_ALL_PRODUCTS:
       return {
         ...state,

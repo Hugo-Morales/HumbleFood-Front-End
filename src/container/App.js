@@ -11,6 +11,7 @@ import ShoppingList from "../components/cart/Cart";
 import ContainerT from "../views/TiendaPanel/ContainerT";
 import NewCategory from "../components/category/NewCategory";
 import CreateProduct from "../views/TiendaPanel/right/Create/CreateProducts";
+import HomeShops from "../views/user/HomeShops";
 // import { Helmet } from "react-helmet";
 
 function App() {
@@ -85,7 +86,7 @@ function App() {
             exact
             path="/home"
             element={
-              <Home
+              <HomeShops
                 cartItems={cartItems}
                 getTotalItems={getTotalItems}
                 handleAddToCart={handleAddToCart}
