@@ -1,4 +1,5 @@
 import axios from "axios";
+export const GET_SHOPS = "GET_SHOPS";
 export const GET_DETAIL_PRODUCT = "GET_DETAIL_PRODUCT";
 export const SEARCH_BY_NAME = "SEARCH_BY_NAME";
 export const GET_ALL_PRODUCTS = "GET_ALL_PRODUCTS";
@@ -11,6 +12,19 @@ export const POST_PRODUCTS = "POST_PRODUCTS";
 export const FILTER_BY_CATEGORIES = 'FILTER_BY_CATEGORIES'
 export const FILTER_BY_DISCOUNT = 'FILTER_BY_DISCOUNT'
 export const POST_NEW_SHOP = "POST_NEW_SHOP";
+
+
+export const getShops = () => async (dispatch) => {
+  try {
+    const allShops = await axios.get("https://back-end-prueba.herokuapp.com/shops");
+    dispatch({
+      type: GET_SHOPS,
+      payload: allShops.data,
+    })
+  } catch (error) {
+    console.log(error)
+  }
+}
 
 export const getallproducts = (page) => async (dispatch) => {
   try {
