@@ -29,13 +29,14 @@ const Nav = ({
     isAuthenticated,
     user,
     loginWithRedirect,
-    logout,
   } = useAuth0();
   const categories = useSelector((state) => state.categories);
   const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
+  const user_id = '789456123';
+  console.log(user_id)
 
-  console.log(user);
+  // console.log(user?.sub.split('|')[1]);
 
   useEffect(() => {
     dispatch(getCategories());
@@ -99,7 +100,7 @@ const Nav = ({
               alt="logo"
               className="w-10 rounded-full mr-3"
             />
-            <Link to='/settings/6220bea30ca126df2addb329'>
+            <Link to={`/settings/${user_id}`}>
               <button
                 className="flex items-center justify-center w-38 mr-3 px-4 py-2 space-x-3 text-sm text-center bg-darkGreen text-isabelline transition-colors duration-200 transform dark:text-gray-300 dark:border-gray-300 hover:bg-gray-600 dark:hover:bg-gray-700 rounded-md"
               >

@@ -9,6 +9,7 @@ export const LOADING = "LOADING";
 export const POST_REVIEW = "POST_REVIEW";
 export const POST_PRODUCTS = "POST_PRODUCTS";
 export const POST_NEW_SHOP = "POST_NEW_SHOP";
+export const GET_USER = 'GET_USER'
 
 export const getallproducts = (page) => async (dispatch) => {
   try {
@@ -147,3 +148,19 @@ export const deleteProduct = (id) => async () => {
     console.error(error)
   }
 }
+
+//  - - - - GET USERS - - - -
+export const getUser = (id) => async (dispatch) => {
+  try {
+    const u = await axios.get(
+      `https://back-end-prueba.herokuapp.com/user/${id}`
+    );
+
+    dispatch({
+      type: GET_USER,
+      payload: u.data.user,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};

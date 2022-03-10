@@ -7,6 +7,7 @@ import {
   RESET,
   LOADING,
   POST_NEW_SHOP,
+  GET_USER,
 } from "../actions";
 
 const initialStore = {
@@ -15,6 +16,7 @@ const initialStore = {
   categories: [],
   productShop: [],
   postnewShop: [],
+  user:[],
   isLoading: true,
 };
 
@@ -53,6 +55,11 @@ export default function reducer(state = initialStore, { type, payload }) {
         productShop: payload,
         isLoading: false,
       };
+    case GET_USER: 
+      return {
+        ...state,
+        user: payload,
+      }
     case RESET:
       return {
         ...state,

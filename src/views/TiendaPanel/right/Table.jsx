@@ -4,7 +4,7 @@ import { deleteProduct } from '../../../redux/actions';
 import Paginado from '../../../components/paginado/Paginado'
 
 export default function Table({ p, d, next, prev, pagesTotal, paging, currentPage }) {
-    console.log(p?.length)
+    // console.log(p?.length)
     const dispatch = useDispatch();
     const [showModal, setShowModal] = useState(false);
     const [dele, setDele] = useState([]);
