@@ -7,6 +7,7 @@ import LandingPage from "../views/landingpage/landing";
 import CreateShop from "../views/seller/createNewShop/createShop";
 import SendReview from "../views/user/SendReview";
 import PrivateRoute from "../routes/PrivateRoute";
+import ShoppingList from "../components/cart/Cart";
 // import { Helmet } from "react-helmet";
 
 
@@ -97,6 +98,7 @@ function App() {
             path="/products/:id"
             element={<CardDetail handleAddToCart={handleAddToCart} />}
           />
+          <Route exact path="/shopping-list" element={<ShoppingList cartItems={cartItems} />} />
           <Route
             exact
             path="/send-review/:productId"

@@ -30,9 +30,8 @@ function Paypal({ cartItems }) {
         },
       })
       .render(paypal.current);
-      // console.log(paypal.current)
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [cartItems]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <div>

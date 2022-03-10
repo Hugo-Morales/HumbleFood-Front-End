@@ -10,7 +10,6 @@ function SendReview() {
   const {
     isAuthenticated,
     loginWithRedirect,
-    // getAccessTokenSilently,
     user,
   } = useAuth0();
   const dispatch = useDispatch();
