@@ -2,30 +2,10 @@ import React from "react";
 import ButtonExit from "../../../components/buttonExit/buttonexit";
 import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { useAuth0 } from "@auth0/auth0-react";
 import { postNewShop } from "../../../redux/actions";
 import Styles from "./createShop.module.css";
+
 const CreateShop = () => {
-  const { getAccessTokenSilently, isAuthenticated } = useAuth0();
-
-  let token;
-  useEffect(() => {
-    const getToken = async () => {
-      try {
-        token = await getAccessTokenSilently();
-        console.log(token);
-        setNewShop({
-          ...newShop,
-          userId: token,
-        });
-      } catch (error) {
-        console.log(error);
-      }
-    };
-
-    getToken();
-  }, []);
-
   const dispatch = useDispatch();
   const [newShop, setNewShop] = useState({
     name: "",

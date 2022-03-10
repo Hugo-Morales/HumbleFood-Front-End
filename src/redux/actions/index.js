@@ -140,5 +140,10 @@ export const postReview = (review) => async (dispatch) => {
   }
 };
 
-
-
+export const deleteProduct = (id) => async () => {
+  try {
+    await axios.delete(`https://back-end-prueba.herokuapp.com/product/delete/${id}`);
+  } catch (error) {
+    console.error(error)
+  }
+}

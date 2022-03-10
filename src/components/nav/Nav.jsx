@@ -30,28 +30,12 @@ const Nav = ({
     user,
     loginWithRedirect,
     logout,
-    getAccessTokenSilently,
   } = useAuth0();
   const categories = useSelector((state) => state.categories);
   const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
 
-  // console.log(user);
-
-  useEffect(() => {
-    const getToken = async () => {
-      try {
-        const token = await getAccessTokenSilently();
-
-        localStorage.setItem("hora", JSON.stringify(token));
-      } catch (error) {
-        console.log(error);
-      }
-    };
-
-    getToken();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  console.log(user);
 
   useEffect(() => {
     dispatch(getCategories());
