@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 
 const Card = ({ product, handleAddToCart }) => {
-  const { id, name, image, description, price, discount, stock, categories } =
+  const { id, name, image, description, price, discount, userId, categories } =
     product;
 
   return (
