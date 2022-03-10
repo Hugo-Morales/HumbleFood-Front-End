@@ -9,6 +9,7 @@ export const LOADING = "LOADING";
 export const POST_REVIEW = "POST_REVIEW";
 export const POST_PRODUCTS = "POST_PRODUCTS";
 export const POST_NEW_SHOP = "POST_NEW_SHOP";
+export const FILTER_BY_CATEGORIES = 'FILTER_BY_CATEGORIES'
 
 
 export const getallproducts = (page) => async (dispatch) => {
@@ -62,11 +63,17 @@ export const postproducts = (input) => {
       await axios.post(
         `https://back-end-prueba.herokuapp.com/product`, input
       );
-      console.log('holaa')
     } catch (error) {
       console.log(error);
     }
   };
+}
+export const NewCategory = () => {
+  return async () => {
+    const name = prompt('save New Category ')
+    await axios.post('https://back-end-prueba.herokuapp.com/category', { name })
+  }
+
 }
 
 export const postNewShop = (newShop) => async (dispatch) => {
@@ -113,7 +120,7 @@ export const getProductShop = (id) => async (dispatch) => {
   }
 };
 
-export const reset = () => (dispatch) => {
+export const reset = () => dispatch => {
   dispatch({
     type: RESET,
   });
@@ -140,6 +147,13 @@ export const postReview = (review) => async (dispatch) => {
     console.error(error);
   }
 };
+
+export function filterProductsByCategories(payload) {
+  return {
+    type: FILTER_BY_CATEGORIES,
+    payload
+  }
+}
 
 
 
