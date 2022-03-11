@@ -11,7 +11,7 @@ export const POST_PRODUCTS = "POST_PRODUCTS";
 export const POST_NEW_SHOP = "POST_NEW_SHOP";
 export const POST_NEW_USER = "POST_NEW_USER";
 export const GET_DATA_USER = "GET_DATA_USER";
-
+export const GET_NAME_OF_SHOP = "GET_NAME_OF_SHOP";
 export const postnewUser = (newUser) => {
   return async () => {
     try {
@@ -21,7 +21,7 @@ export const postnewUser = (newUser) => {
       // console.log(response.data.hasOwnProperty("user"));
       if (!response.data.hasOwnProperty("user")) {
         await axios.post("https://back-end-prueba.herokuapp.com/user", newUser);
-        console.log('registrado')
+        console.log("registrado");
       }
     } catch (error) {
       console.log(error);
@@ -175,8 +175,27 @@ export const postReview = (review) => async (dispatch) => {
 
 export const deleteProduct = (id) => async () => {
   try {
-    await axios.delete(`https://back-end-prueba.herokuapp.com/product/delete/${id}`);
+    await axios.delete(
+      `https://back-end-prueba.herokuapp.com/product/delete/${id}`
+    );
   } catch (error) {
-    console.error(error)
+    console.error(error);
   }
-}
+};
+
+export const getnameOfShop = (id) => {
+  return async (dispatch) => {
+    try {
+      const nameShop = await axios.get(
+        `https://back-end-prueba.herokuapp.com/shop/${id}`
+      );
+      console.log(nameShop.data.shop.name);
+      dispatch({
+        type: GET_NAME_OF_SHOP,
+        payload: nameShop.data.shop.name,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};

@@ -8,6 +8,7 @@ import {
   LOADING,
   POST_NEW_SHOP,
   GET_DATA_USER,
+  GET_NAME_OF_SHOP,
 } from "../actions";
 
 const initialStore = {
@@ -17,6 +18,7 @@ const initialStore = {
   productShop: [],
   postnewShop: [],
   dataUser: {},
+  nameOfShop: "",
   isLoading: true,
 };
 
@@ -32,6 +34,11 @@ export default function reducer(state = initialStore, { type, payload }) {
       return {
         ...state,
         dataUser: payload.user,
+      };
+    case GET_NAME_OF_SHOP:
+      return {
+        ...state,
+        nameOfShop: payload,
       };
     case GET_DETAIL_PRODUCT:
       return {
