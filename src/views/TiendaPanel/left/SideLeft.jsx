@@ -10,7 +10,7 @@ import Button from "./Button";
 
 export default function SideLeft({ name, setId, rol, shopsId }) {
   const { logout } = useAuth0();
-  console.log(rol, shopsId)
+  // console.log(rol, shopsId)
 
   return (
     <div className="bg-gray-700 overflow-y-auto h-screen p-6">

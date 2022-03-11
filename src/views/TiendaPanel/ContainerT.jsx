@@ -14,8 +14,8 @@ export default function ContainerT({ user }) {
     const usuario = useSelector(state => state.dataUser);
     const dispatch = useDispatch();
     const { idTienda } = useParams();
-    // console.log(user);
-    console.log(usuario)
+    console.log(user, 'user');
+    console.log(usuario, 'usuario')
 
     const paging = (num) => {
         if (num >= 0 && num <= productos.pagesTotal) {

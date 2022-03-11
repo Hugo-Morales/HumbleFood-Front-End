@@ -18,9 +18,10 @@ export const postnewUser = (newUser) => {
       const response = await axios.get(
         `https://back-end-prueba.herokuapp.com/user/${newUser.userId}`
       );
-      console.log(response.data.hasOwnProperty("user"));
+      // console.log(response.data.hasOwnProperty("user"));
       if (!response.data.hasOwnProperty("user")) {
         await axios.post("https://back-end-prueba.herokuapp.com/user", newUser);
+        console.log('registrado')
       }
     } catch (error) {
       console.log(error);
@@ -156,7 +157,6 @@ export const loading = () => (dispatch) => {
     type: LOADING,
   });
 };
-
 //  - - - - POST/REVIEWS - - - -
 export const postReview = (review) => async (dispatch) => {
   try {
