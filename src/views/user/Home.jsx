@@ -4,7 +4,7 @@ import Cards from "../../components/cards/Cards";
 import Loading from "../../components/loading/Loading";
 import { useSelector, useDispatch } from "react-redux";
 import { getallproducts, getProductShop, getShopsId, postnewUser } from "../../redux/actions";
-import { Paginado } from "../../components/paginado/Paginado";
+import Paginado from '../../components/paginado/Paginado'
 import Carousell from "../../components/carousell/Carousell";
 import { useParams } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
