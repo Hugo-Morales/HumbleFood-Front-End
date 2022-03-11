@@ -123,7 +123,7 @@ const CreateProduct = ({ user }) => {
 
 
     useEffect(() => {
-        dispatch(getCategories())
+        dispatch(getCategories());
     }, [dispatch]);
 
     return (

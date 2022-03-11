@@ -4,20 +4,34 @@ import { useDispatch, useSelector } from "react-redux";
 import SideLeft from "./left/SideLeft";
 import SideRight from './right/SideRight';
 import Loading from '../../components/loading/Loading'
-import { getProductShop, loading } from "../../redux/actions";
+import { getProductShop, loading, getdataUser } from "../../redux/actions";
 
-export default function ContainerT() {
+export default function ContainerT({ user }) {
     const [id, setId] = useState('');
+    const [currentPage, setCurrentPage] = useState(0);
     const productos = useSelector(state => state.productShop);
     const cargando = useSelector(state => state.isLoading);
+    const usuario = useSelector(state => state.dataUser);
     const dispatch = useDispatch();
     const { idTienda } = useParams();
+    console.log(user, 'user');
+    console.log(usuario, 'usuario')
 
-    // 6220243e7afb1f1e0718fe06
+    const paging = (num) => {
+        if (num >= 0 && num <= productos.pagesTotal) {
+            setCurrentPage(num);
+        }
+    };
+
     useEffect(() => {
-        dispatch(loading())
-        dispatch(getProductShop('6220243e7afb1f1e0718fe06'));
-    }, [dispatch, idTienda])
+        dispatch(loading());
+        dispatch(getdataUser(idTienda));
+        dispatch(getProductShop(idTienda, currentPage));
+
+        return () => {
+            setCurrentPage(0);
+        }
+    }, [dispatch, idTienda, currentPage]);
 
     return (
         <>
@@ -26,11 +40,11 @@ export default function ContainerT() {
                     <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-4 lg:grid-cols-4">
                         {/* Lado Izquierdo */}
                         <div className="col-span-1">
-                            <SideLeft id={idTienda} setId={setId} />
+                            <SideLeft name={user.name} setId={setId} rol={usuario.rol} shopsId={usuario.shopsId} />
                         </div>
                         {/* Lado Derecho */}
                         <div className="col-span-3">
-                            <SideRight product={productos} idS={id} user='6220243e7afb1f1e0718fe06' />
+                            <SideRight product={productos} idS={id} rol={usuario.rol} user={idTienda} paging={paging} currentPage={currentPage} next={productos.next} prev={productos.prev} pagesTotal={productos.pagesTotal} />
                         </div>
                     </div>
                 )

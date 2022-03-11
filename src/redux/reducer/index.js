@@ -7,7 +7,11 @@ import {
   RESET,
   LOADING,
   POST_NEW_SHOP,
+<<<<<<< HEAD
   FILTER_BY_CATEGORIES,
+=======
+  GET_DATA_USER,
+>>>>>>> d10c0428ea42a70b2c4671fd82020d3e0c833265
 } from "../actions";
 
 const initialStore = {
@@ -17,6 +21,7 @@ const initialStore = {
   categories: [],
   productShop: [],
   postnewShop: [],
+  dataUser: {},
   isLoading: true,
 };
 
@@ -27,6 +32,11 @@ export default function reducer(state = initialStore, { type, payload }) {
         ...state,
         productsloaded: payload,
         isLoading: false,
+      };
+    case GET_DATA_USER:
+      return {
+        ...state,
+        dataUser: payload.user,
       };
     case GET_DETAIL_PRODUCT:
       return {
