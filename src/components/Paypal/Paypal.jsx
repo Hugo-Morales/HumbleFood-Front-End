@@ -8,6 +8,7 @@ function Paypal({ cartItems }) {
     window.paypal
       .Buttons({
         createOrder: (data, actions, error) => {
+          console.log(actions);
           return actions.order.create({
             intent: "CAPTURE",
             purchase_units: [

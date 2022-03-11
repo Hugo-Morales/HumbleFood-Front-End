@@ -1,5 +1,6 @@
 import Table from "./Table";
 import CreateProducts from "./Create/CreateProducts";
+import HacerAdmin from "./make/HacerAdmin";
 
 export default function SideRight({
   rol,
@@ -10,7 +11,7 @@ export default function SideRight({
   currentPage,
 }) {
   const { products, next, prev, pagesTotal } = product;
-  console.log(shopsId);
+  // console.log(next, prev, pagesTotal)
 
   const renderSwitch = (x) => {
     switch (x) {
@@ -27,7 +28,7 @@ export default function SideRight({
           />
         );
       case "crear":
-        return <CreateProducts user={shopsId} />;
+        return <CreateProducts shopId={shopsId} />;
       case "delete":
         return (
           <Table
@@ -40,21 +41,26 @@ export default function SideRight({
             currentPage={currentPage}
           />
         );
+      case "makeAdmin":
+        return <HacerAdmin />;
       default:
-        return (
-          <Table
-            p={products}
-            d={false}
-            next={next}
-            prev={prev}
-            pagesTotal={pagesTotal}
-            paging={paging}
-            currentPage={currentPage}
-          />
-        );
+        if (rol === 2) {
+          return <HacerAdmin />;
+        } else {
+          return (
+            <Table
+              p={products}
+              d={false}
+              next={next}
+              prev={prev}
+              pagesTotal={pagesTotal}
+              paging={paging}
+              currentPage={currentPage}
+            />
+          );
+        }
     }
   };
-
   return (
     <div className="bg-white-500 h-full p-6">
       <div className="bg-gray-500 h-full p-6 sm:rounded-lg">

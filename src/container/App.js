@@ -107,7 +107,7 @@ function App() {
             path="/send-review/:productId"
             element={<SendReview />}
           />
-          <Route exact path="/settings/:idTienda" element={<PrivateRoute />} />
+          <Route exact path="/settings/:userId" element={<PrivateRoute />} />
           <Route path="*" element={<Error404 />} />
 
           <Route

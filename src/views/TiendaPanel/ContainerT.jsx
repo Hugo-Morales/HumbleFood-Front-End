@@ -13,10 +13,9 @@ export default function ContainerT({ user }) {
   const productos = useSelector((state) => state.productShop);
   const cargando = useSelector((state) => state.isLoading);
   const usuario = useSelector((state) => state.dataUser);
-  const { idTienda } = useParams();
-  //   console.log(user, "user");
-  //   console.log(usuario, "usuario");
-  console.log("idTienda", usuario?.shopsId);
+  const { userId } = useParams();
+  // console.log(user, 'user');
+  // console.log(usuario, 'usuario')
 
   const paging = (num) => {
     if (num >= 0 && num <= productos.pagesTotal) {
@@ -26,14 +25,14 @@ export default function ContainerT({ user }) {
 
   useEffect(() => {
     dispatch(loading());
-    dispatch(getdataUser(idTienda));
+    dispatch(getdataUser(userId));
     dispatch(getProductShop(usuario?.shopsId, currentPage));
 
     return () => {
       setCurrentPage(0);
     };
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dispatch, idTienda, currentPage]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [dispatch, userId, currentPage]);
 
   return (
     <>
