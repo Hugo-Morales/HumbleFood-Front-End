@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
+import Home from "../../views/user/Home";
 
 const CardShop = ({ shop }) => {
+
   const { id, name, image, description, direction, userId } = shop;
 
   return (
@@ -17,7 +19,7 @@ const CardShop = ({ shop }) => {
           </button>
           <div className=" flex-1 w-full flex flex-col items-baseline justify-around h-1/2 pl-6 sm:h-full sm:items-baseline sm:w-1/2">
             <div className="flex flex-col justify-start items-baseline">
-              <Link to={`/products`}>
+              <Link to={`/productShop/${id}`}>
                 <h1 className="text-lg font-normal mb-0 text-gray-600 font-sans">
                   {name}
                 </h1>

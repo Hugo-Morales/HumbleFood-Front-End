@@ -1,8 +1,13 @@
 import { Link } from "react-router-dom";
 
-const Card = ({ product, handleAddToCart }) => {
-  const { id, name, image, description, price, discount, userId, categories } =
+const Card = ({ product, handleAddToCart, shop }) => {
+  const { id, name, image, description, price, discount, userId, shopId, categories, stock, amount } =
     product;
+  // const { id } = shop
+  console.log(amount)
+  console.log(stock)
+
+  console.log(product)
 
   return (
     <>
@@ -32,9 +37,13 @@ const Card = ({ product, handleAddToCart }) => {
               </div>
               <div className="w-full flex justify-between items-center">
                 <h1 className="font-bold text-gray-500">${price}</h1>
+
+
+
                 <button
                   onClick={() => handleAddToCart(product)}
-                  className="bg-gray-700 mr-5 text-white px-3 py-1 rounded-sm shadow-md"
+                  className=
+                  "bg-gray-700 mr-5 text-white px-3 py-1 rounded-sm shadow-md"
                 >
                   Add to Cart
                 </button>
@@ -45,6 +54,6 @@ const Card = ({ product, handleAddToCart }) => {
       </div>
     </>
   );
-};
+}
 
 export default Card;

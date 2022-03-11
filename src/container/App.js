@@ -38,6 +38,7 @@ function App() {
             ? { ...item, amount: item.amount + 1 }
             : item
         );
+
       }
 
       return [...prev, { ...clickedItem, amount: 1 }];
@@ -80,7 +81,15 @@ function App() {
           <Route exact path="/" element={<LandingPage />} />
           <Route
             exact
-            path="/products"
+            path="/home"
+            element={
+              <HomeShops
+              />
+            }
+          ></Route>
+          <Route
+            exact
+            path="/productShop/:shopId"
             element={
               <Home
                 cartItems={cartItems}
@@ -91,7 +100,6 @@ function App() {
               />
             }
           ></Route>
-          {/* <Route exact path='/products' element={<Card />}></Route> */}
           <Route exact path="/products/:id" element={<CardDetail handleAddToCart={handleAddToCart} />}></Route>
           <Route exact path='/create' element={<CreateProduct />}></Route>
           <Route exact path='/category' element={<NewCategory />}></Route>
@@ -99,7 +107,6 @@ function App() {
 
           <Route path="*" element={<Error404 />}></Route>
           <Route exact path="/tienda/:idTienda" element={<ContainerT />} />
-          <Route exact path="/home" element={<HomeShops />}></Route>
         </Routes>
       </div>
     </BrowserRouter>
