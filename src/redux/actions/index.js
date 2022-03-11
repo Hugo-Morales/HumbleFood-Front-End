@@ -14,6 +14,20 @@ export const FILTER_BY_DISCOUNT = 'FILTER_BY_DISCOUNT'
 export const POST_NEW_SHOP = "POST_NEW_SHOP";
 export const POST_NEW_USER = "POST_NEW_USER";
 export const GET_DATA_USER = "GET_DATA_USER";
+export const GET_SHOPS_ID = "GET_SHOPS_ID";
+
+
+export const getShopsId = (id) => async (dispatch) => {
+  try {
+    const allShopsId = await axios.get(`https://back-end-prueba.herokuapp.com/shop/${id}`);
+    dispatch({
+      type: GET_SHOPS_ID,
+      payload: allShopsId.data,
+    })
+  } catch (error) {
+    console.log(error)
+  }
+}
 
 
 export const getShops = () => async (dispatch) => {

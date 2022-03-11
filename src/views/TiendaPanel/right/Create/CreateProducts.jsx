@@ -41,7 +41,7 @@ const CreateProduct = ({ user }) => {
         categories: [],
         image: "",
     })
-
+console.log("useeeerr", user[0])
     const handleChange = (e) => {
         const { name, value } = e.target;
 
@@ -86,7 +86,7 @@ const CreateProduct = ({ user }) => {
         alert("Menu Creado!")
 
         const produc = {
-            shopId: user,
+            shopId: user[0],
             name: input.name,
             description: input.description,
             price: Number(input.price),

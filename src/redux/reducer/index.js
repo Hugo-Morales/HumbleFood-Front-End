@@ -11,9 +11,11 @@ import {
   FILTER_BY_CATEGORIES,
   GET_DATA_USER,
   FILTER_BY_DISCOUNT,
+  GET_SHOPS_ID,
 } from "../actions";
 
 const initialStore = {
+  shop: [],
   shops: [],
   productsloaded: [],
   allproducts: [],
@@ -31,6 +33,12 @@ export default function reducer(state = initialStore, { type, payload }) {
       return {
         ...state,
         shops: payload,
+        isLoading: false,
+      };
+    case GET_SHOPS_ID:
+      return {
+        ...state,
+        shop: payload,
         isLoading: false,
       };
     case GET_ALL_PRODUCTS:

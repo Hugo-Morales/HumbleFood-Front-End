@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getShops } from "../../redux/actions";
-import Nav from "../../components/nav/Nav";
+import NavShop from "../../components/shops/NavShops";
 import Carousell from "../../components/carousell/Carousell";
 import CardsShops from "../../components/shops/CardsShops";
 
@@ -22,7 +22,7 @@ function HomeShops({
   console.log(shops);
   return (
     <div>
-      <Nav
+      <NavShop
         cartItems={cartItems}
         getTotalItems={getTotalItems}
         handleAddToCart={handleAddToCart}

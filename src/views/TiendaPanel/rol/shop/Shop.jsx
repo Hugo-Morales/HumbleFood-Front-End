@@ -9,7 +9,7 @@ export default function Shop({ setId }) {
             <Button
                 div="flex bg-green-200 justify-center p-2 rounded-lg mt-3 hover:bg-sky-700 cursor-pointer"
                 text="Crear Producto"
-                buttonClass="flex items-center font-bold"
+                buttonclassName="flex items-center font-bold"
                 icon={<MdCreate className="mr-2" />}
                 f={() => setId("crear")}
             />
@@ -18,7 +18,7 @@ export default function Shop({ setId }) {
             <Button
                 div="flex bg-green-200 justify-center p-2 rounded-lg mt-3 hover:bg-sky-700 cursor-pointer"
                 text="Modificar Producto"
-                buttonClass="flex items-center font-bold"
+                buttonclassName="flex items-center font-bold"
                 icon={<BiEdit className="mr-2" />}
                 f={() => setId("editar")}
             />
@@ -27,7 +27,7 @@ export default function Shop({ setId }) {
             <Button
                 div="flex bg-green-200 justify-center p-2 rounded-lg mt-3 mb-8 hover:bg-sky-700 cursor-pointer"
                 text="Borrar Producto"
-                buttonClass="flex items-center font-bold"
+                buttonclassName="flex items-center font-bold"
                 icon={<MdDelete className="mr-2" />}
                 f={() => setId("delete")}
             />

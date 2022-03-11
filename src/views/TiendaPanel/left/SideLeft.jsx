@@ -47,7 +47,7 @@ export default function SideLeft({ name, setId, rol, shopsId }) {
                 <Button
                   div="flex bg-green-200 justify-center p-2 rounded-lg mb-10 mt-3 hover:bg-sky-700 cursor-pointer"
                   text="Registrar Tienda"
-                  buttonClass="flex items-center font-bold"
+                  buttonclassName="flex items-center font-bold"
                   icon={<GrAddCircle className="mr-2" />}
                 />
               </Link>
@@ -71,7 +71,7 @@ export default function SideLeft({ name, setId, rol, shopsId }) {
         <Button
           div="flex bg-green-300 justify-center p-2 rounded-lg items-center hover:bg-sky-700 cursor-pointer"
           text="Mensajes"
-          buttonClass="flex items-center justify-center font-bold"
+          buttonclassName="flex items-center justify-center font-bold"
           icon={<BiMessageRoundedDetail className="mr-2" />}
           f={() => alert("Perfil")}
           m={3}
@@ -82,7 +82,7 @@ export default function SideLeft({ name, setId, rol, shopsId }) {
         <Button
           div="flex bg-green-300 justify-center p-2 rounded-lg mt-8 items-center hover:bg-sky-700 cursor-pointer"
           text="Configurar Perfil"
-          buttonClass="flex items-center font-bold"
+          buttonclassName="flex items-center font-bold"
           icon={<FiSettings className="mr-2" />}
           f={() => alert("Perfil")}
         />
@@ -91,7 +91,7 @@ export default function SideLeft({ name, setId, rol, shopsId }) {
         <Button
           div="flex bg-red-600 justify-center p-2 rounded-lg mt-9 items-center cursor-pointer"
           text="Cerrar Sesión"
-          buttonClass="flex items-center font-bold"
+          buttonclassName="flex items-center font-bold"
           icon={<AiOutlineLogout className="mr-2" />}
           f={() => logout({ returnTo: window.location.origin })}
         />

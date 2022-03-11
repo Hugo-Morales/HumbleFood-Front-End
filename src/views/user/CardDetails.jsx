@@ -39,7 +39,7 @@ const CardDetail = ({ handleAddToCart }) => {
                       to="/home"
                       className="mr-2 text-sm font-medium text-gray-900"
                     >
-                     Home
+                      Home
                     </Link>
                     <svg
                       width="16"

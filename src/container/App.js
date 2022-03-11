@@ -77,22 +77,10 @@ function App() {
       <div className="App">
         <Routes>
           <Route exact path="/" element={<LandingPage />} />
+          <Route exact path="/home" element={<HomeShops />}></Route>
           <Route
             exact
-            path="/home"
-            element={
-              <HomeShops
-                cartItems={cartItems}
-                getTotalItems={getTotalItems}
-                handleAddToCart={handleAddToCart}
-                handleRemoveFromCart={handleRemoveFromCart}
-                handleDeleteFromCart={handleDeleteFromCart}
-              />
-            }
-          />
-          <Route
-            exact
-            path="/homeProducts"
+            path="/productShop/:shopId"
             element={
               <Home
                 cartItems={cartItems}
@@ -127,7 +115,6 @@ function App() {
             path="/products/:id"
             element={<CardDetail handleAddToCart={handleAddToCart} />}
           ></Route>
-          {/* <Route exact path='/products' element={<Card />}></Route> */}
           <Route
             exact
             path="/products/:id"
@@ -139,7 +126,6 @@ function App() {
 
           <Route path="*" element={<Error404 />}></Route>
           <Route exact path="/tienda/:idTienda" element={<ContainerT />} />
-          <Route exact path="/home" element={<HomeShops />}></Route>
         </Routes>
       </div>
     </BrowserRouter>
