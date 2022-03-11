@@ -13,9 +13,9 @@ export default function ContainerT({ user }) {
     const cargando = useSelector(state => state.isLoading);
     const usuario = useSelector(state => state.dataUser);
     const dispatch = useDispatch();
-    const { idTienda } = useParams();
-    console.log(user, 'user');
-    console.log(usuario, 'usuario')
+    const { userId } = useParams();
+    // console.log(user, 'user');
+    // console.log(usuario, 'usuario')
 
     const paging = (num) => {
         if (num >= 0 && num <= productos.pagesTotal) {
@@ -25,13 +25,14 @@ export default function ContainerT({ user }) {
 
     useEffect(() => {
         dispatch(loading());
-        dispatch(getdataUser(idTienda));
-        dispatch(getProductShop(idTienda, currentPage));
+        dispatch(getdataUser(userId));
+        dispatch(getProductShop(usuario?.shopsId, currentPage));
 
         return () => {
             setCurrentPage(0);
         }
-    }, [dispatch, idTienda, currentPage]);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [dispatch, userId, currentPage]);
 
     return (
         <>
@@ -44,7 +45,7 @@ export default function ContainerT({ user }) {
                         </div>
                         {/* Lado Derecho */}
                         <div className="col-span-3">
-                            <SideRight product={productos} idS={id} rol={usuario.rol} user={idTienda} paging={paging} currentPage={currentPage} next={productos.next} prev={productos.prev} pagesTotal={productos.pagesTotal} />
+                            <SideRight product={productos} idS={id} rol={usuario.rol} shopsId={usuario?.shopsId} paging={paging} currentPage={currentPage} next={productos.next} prev={productos.prev} pagesTotal={productos.pagesTotal} />
                         </div>
                     </div>
                 )

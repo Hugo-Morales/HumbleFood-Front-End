@@ -1,7 +1,8 @@
 import Table from "./Table";
 import CreateProducts from './Create/CreateProducts';
+import HacerAdmin from "./make/HacerAdmin";
 
-export default function SideRight({ rol, product, idS, user, paging, currentPage }) {
+export default function SideRight({ rol, product, idS, shopsId, paging, currentPage }) {
     const { products, next, prev, pagesTotal } = product;
     // console.log(next, prev, pagesTotal)
 
@@ -10,11 +11,17 @@ export default function SideRight({ rol, product, idS, user, paging, currentPage
             case 'home':
                 return <Table p={products} d={false} next={next} prev={prev} pagesTotal={pagesTotal} paging={paging} currentPage={currentPage} />;
             case 'crear':
-                return <CreateProducts user={user} />;
+                return <CreateProducts shopId={shopsId} />;
             case 'delete':
                 return <Table p={products} d={true} next={next} prev={prev} pagesTotal={pagesTotal} paging={paging} currentPage={currentPage} />;
+            case 'makeAdmin':
+                return <HacerAdmin />
             default:
-                return <Table p={products} d={false} next={next} prev={prev} pagesTotal={pagesTotal} paging={paging} currentPage={currentPage} />;
+                if (rol === 2) {
+                    return <HacerAdmin />
+                } else {
+                    return <Table p={products} d={false} next={next} prev={prev} pagesTotal={pagesTotal} paging={paging} currentPage={currentPage} />;
+                }
         }
     }
 
