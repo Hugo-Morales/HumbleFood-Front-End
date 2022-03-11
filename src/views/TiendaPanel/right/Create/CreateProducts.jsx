@@ -27,7 +27,7 @@ export function validate(input) {
     return errors
 }
 
-const CreateProduct = ({ user }) => {
+const CreateProduct = ({ shopId }) => {
     const [errors, setErrors] = useState({});
     const dispatch = useDispatch();
     const categories = useSelector((state) => state.categories);
@@ -44,7 +44,6 @@ const CreateProduct = ({ user }) => {
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-
         setInput({
             ...input,
             [name]: value
@@ -86,7 +85,7 @@ const CreateProduct = ({ user }) => {
         alert("Menu Creado!")
 
         const produc = {
-            shopId: user,
+            shopId: shopId[0],
             name: input.name,
             description: input.description,
             price: Number(input.price),

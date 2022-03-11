@@ -1,8 +1,7 @@
 import { Link } from "react-router-dom";
-import Home from "../../views/user/Home";
+
 
 const CardShop = ({ shop }) => {
-
   const { id, name, image, description, direction, userId } = shop;
 
   return (

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import AddShoppingCartIcon from "@material-ui/icons/AddShoppingCart";
 import Badge from "@material-ui/core/Badge";
 import IconButton from "@material-ui/core/IconButton";
@@ -9,7 +9,11 @@ import Cart from "../cart/Cart";
 import SearchBar from "../serchbar/SearchBar";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useDispatch, useSelector } from "react-redux";
-import { filterByDiscount, filterProductsByCategories, getCategories } from "../../redux/actions";
+import {
+  filterByDiscount,
+  filterProductsByCategories,
+  getCategories,
+} from "../../redux/actions";
 
 const StyledButton = styled(IconButton)`
   position: fixed;
@@ -25,30 +29,26 @@ const Nav = ({
   handleRemoveFromCart,
   handleDeleteFromCart,
 }) => {
-  const {
-    isAuthenticated,
-    user,
-    loginWithRedirect,
-  } = useAuth0();
+  const { isAuthenticated, user, loginWithRedirect } = useAuth0();
   const categories = useSelector((state) => state.categories);
+  const { shopId } = useParams();
   const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
-  const user_id = user?.sub.split('|')[1];
+  const user_id = user?.sub.split("|")[1];
   // console.log(user_id)
   // console.log(user?.sub.split('|')[1]);
-
+  console.log(shopId);
   useEffect(() => {
     dispatch(getCategories());
   }, [dispatch]);
 
-
   function handleFilterCategories(e) {
-    dispatch(filterProductsByCategories(e.target.value))
-    console.log(e.target.value)
+    dispatch(filterProductsByCategories(e.target.value));
+    console.log(e.target.value);
   }
   function handleSort(e) {
     e.preventDefault();
-    dispatch(filterByDiscount(e.target.value))
+    dispatch(filterByDiscount(e.target.value));
   }
 
   return (
@@ -61,26 +61,24 @@ const Nav = ({
           <SearchBar />
         </div>
         <div className="ml-4 w-full text-isabelline font-bold flex justify-around items-center">
-
-          <select onChange={e => handleFilterCategories(e)} name="category" className="p-2 h-10 focus:outline-none bg-ochre hover:bg-princetonOrange font-bold border-none text-center">
+          <select
+            onChange={(e) => handleFilterCategories(e)}
+            name="category"
+            className="p-2 h-10 focus:outline-none bg-ochre hover:bg-princetonOrange font-bold border-none text-center"
+          >
             <option value="All">Categorías</option>
-            {
-              categories?.map((c, index) => {
-                return (
-                  <option key={index} value={c.name}>{c.name}</option>
-
-                )
-              })
-            }
+            {categories?.map((c, index) => {
+              return (
+                <option key={index} value={c.name}>
+                  {c.name}
+                </option>
+              );
+            })}
           </select>
           {/* <Link to="/offers" className="ml-4 p-2 h-10 hover:bg-princetonOrange"> */}
           <select onClick={handleSort}>
-            <option value=''>hola</option>
-            <option value='ofertas'>
-
-              Ofertas
-            </option>
-
+            <option value="">hola</option>
+            <option value="ofertas">Ofertas</option>
           </select>
           {/* </Link> */}
           <Link to="/offers" className="ml-4 p-2 h-10 hover:bg-princetonOrange">
@@ -123,9 +121,7 @@ const Nav = ({
               className="w-10 rounded-full mr-3"
             />
             <Link to={`/settings/${user_id}`}>
-              <button
-                className="flex items-center justify-center w-38 mr-3 px-4 py-2 space-x-3 text-sm text-center bg-darkGreen text-isabelline transition-colors duration-200 transform dark:text-gray-300 dark:border-gray-300 hover:bg-gray-600 dark:hover:bg-gray-700 rounded-md"
-              >
+              <button className="flex items-center justify-center w-38 mr-3 px-4 py-2 space-x-3 text-sm text-center bg-darkGreen text-isabelline transition-colors duration-200 transform dark:text-gray-300 dark:border-gray-300 hover:bg-gray-600 dark:hover:bg-gray-700 rounded-md">
                 Panel de Usuario
               </button>
             </Link>

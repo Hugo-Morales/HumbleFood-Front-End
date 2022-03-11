@@ -65,6 +65,7 @@ export default function Table({ p, d, next, prev, pagesTotal, paging, currentPag
         )
     }
 
+    
     return (
         <>
             <div className="flex flex-col">
