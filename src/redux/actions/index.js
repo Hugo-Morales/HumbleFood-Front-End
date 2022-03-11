@@ -9,9 +9,8 @@ export const LOADING = "LOADING";
 export const POST_REVIEW = "POST_REVIEW";
 export const POST_PRODUCTS = "POST_PRODUCTS";
 export const POST_NEW_SHOP = "POST_NEW_SHOP";
-<<<<<<< HEAD
 export const FILTER_BY_CATEGORIES = "FILTER_BY_CATEGORIES";
-=======
+export const FILTER_BY_CATEGORIES = "FILTER_BY_CATEGORIES";
 export const POST_NEW_USER = "POST_NEW_USER";
 export const GET_DATA_USER = "GET_DATA_USER";
 
@@ -24,7 +23,7 @@ export const postnewUser = (newUser) => {
       // console.log(response.data.hasOwnProperty("user"));
       if (!response.data.hasOwnProperty("user")) {
         await axios.post("https://back-end-prueba.herokuapp.com/user", newUser);
-        console.log('registrado')
+        console.log("registrado");
       }
     } catch (error) {
       console.log(error);
@@ -47,7 +46,6 @@ export const getdataUser = (id) => {
     }
   };
 };
->>>>>>> d10c0428ea42a70b2c4671fd82020d3e0c833265
 
 export const getallproducts = (page) => async (dispatch) => {
   try {
@@ -98,16 +96,12 @@ export const postproducts = (input) => {
   return async () => {
     try {
       await axios.post(`https://back-end-prueba.herokuapp.com/product`, input);
-<<<<<<< HEAD
-=======
       console.log("holaa");
->>>>>>> d10c0428ea42a70b2c4671fd82020d3e0c833265
     } catch (error) {
       console.log(error);
     }
   };
 };
-<<<<<<< HEAD
 export const NewCategory = () => {
   return async () => {
     const name = prompt("save New Category ");
@@ -116,8 +110,6 @@ export const NewCategory = () => {
     });
   };
 };
-=======
->>>>>>> d10c0428ea42a70b2c4671fd82020d3e0c833265
 
 export const postNewShop = (newShop) => async (dispatch) => {
   try {

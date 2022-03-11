@@ -7,11 +7,10 @@ import {
   RESET,
   LOADING,
   POST_NEW_SHOP,
-<<<<<<< HEAD
   FILTER_BY_CATEGORIES,
-=======
   GET_DATA_USER,
->>>>>>> d10c0428ea42a70b2c4671fd82020d3e0c833265
+  FILTER_BY_CATEGORIES,
+  GET_DATA_USER,
 } from "../actions";
 
 const initialStore = {

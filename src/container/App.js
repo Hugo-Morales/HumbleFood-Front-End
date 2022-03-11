@@ -7,14 +7,11 @@ import LandingPage from "../views/landingpage/landing";
 import SendReview from "../views/user/SendReview";
 import PrivateShop from "../routes/PrivateShop";
 import PrivateRoute from "../routes/PrivateRoute";
-<<<<<<< HEAD
 import ShoppingList from "../components/cart/Cart";
 import ContainerT from "../views/TiendaPanel/ContainerT";
 import NewCategory from "../components/category/NewCategory";
 import CreateProduct from "../views/TiendaPanel/right/Create/CreateProducts";
 // import { Helmet } from "react-helmet";
-=======
->>>>>>> d10c0428ea42a70b2c4671fd82020d3e0c833265
 
 function App() {
   const [cartItems, setCartItems] = useState([]);
