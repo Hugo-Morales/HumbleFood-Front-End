@@ -10,6 +10,9 @@ import NewCategory from "../components/category/NewCategory";
 import CreateProduct from "../views/TiendaPanel/right/Create/CreateProducts";
 import Card from "../components/cards/Card";
 import HomeShops from "../views/user/HomeShops";
+import SendReview from "../views/user/SendReview";
+import PrivateShop from "../routes/PrivateShop";
+import PrivateRoute from "../routes/PrivateRoute";
 
 function App() {
   const [cartItems, setCartItems] = useState([]);
@@ -70,12 +73,6 @@ function App() {
 
   return (
     <BrowserRouter>
-      {/* <Helmet>
-        <meta charSet="utf-8" />
-        <title>Humblefood</title>
-        <link rel="canonical" href="http://mysite.com/example" />
-        <meta name="description" content="Helmet application" />
-      </Helmet> */}
       <div className="App">
         <Routes>
           <Route exact path="/" element={<LandingPage />} />
@@ -107,6 +104,12 @@ function App() {
 
           <Route path="*" element={<Error404 />}></Route>
           <Route exact path="/tienda/:idTienda" element={<ContainerT />} />
+          <Route exact path="/createShop" element={<PrivateShop />} />
+          <Route
+            exact
+            path="/send-review/:productId"
+            element={<SendReview />}
+          />
         </Routes>
       </div>
     </BrowserRouter>

@@ -3,10 +3,11 @@ import Nav from "../../components/nav/Nav";
 import Cards from "../../components/cards/Cards";
 import Loading from "../../components/loading/Loading";
 import { useSelector, useDispatch } from "react-redux";
-import { getallproducts, getProductShop, getShopsId } from "../../redux/actions";
+import { getallproducts, getProductShop, getShopsId, postnewUser } from "../../redux/actions";
 import { Paginado } from "../../components/paginado/Paginado";
 import Carousell from "../../components/carousell/Carousell";
 import { useParams } from "react-router-dom";
+import { useAuth0 } from "@auth0/auth0-react";
 
 const Home = ({
   cartItems,
@@ -27,7 +28,10 @@ const Home = ({
 
   console.log(shopId)
   const loading = useSelector((state) => state.isLoading);
+  // const { products, next, prev, pagesTotal } = useSelector(state => state.productsloaded);
+  const cargando = useSelector(state => state.isLoading)
   const [currentPage, setCurrentPage] = useState(0);
+  const { isAuthenticated, user } = useAuth0();
   // console.log(products);
 
   const paging = (num) => {
@@ -36,6 +40,19 @@ const Home = ({
     }
   };
 
+  const newUser = {
+    userId: user?.sub.split("|")[1],
+    name: user?.name,
+    name_user: user?.nickname,
+    email: user?.email,
+    direction: "",
+  };
+
+  useEffect(() => {
+    if (isAuthenticated && user) {
+      dispatch(postnewUser(newUser));
+    }
+  });
 
   useEffect(() => {
     dispatch(getProductShop(shopId));
@@ -102,6 +119,23 @@ const Home = ({
             />
           </>
         )
+        // {
+        // cargando ? <Loading /> : <>
+        //   <Nav
+        //     cartItems={cartItems}
+        //     getTotalItems={getTotalItems}
+        //     handleAddToCart={handleAddToCart}
+        //     handleRemoveFromCart={handleRemoveFromCart}
+        //     handleDeleteFromCart={handleDeleteFromCart}
+        //   />
+        //   <Carousell />
+        //   <Cards
+        //     products={products}
+        //     handleAddToCart={handleAddToCart}
+        //     cartItems={cartItems}
+        //   />
+        //   <Paginado paging={paging} currentPage={currentPage} pagesTotal={pagesTotal} prev={prev} next={next} />
+        // </>
       }
     </div >
   );

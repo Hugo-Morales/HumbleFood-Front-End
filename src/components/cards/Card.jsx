@@ -28,7 +28,7 @@ const Card = ({ product, handleAddToCart, shop }) => {
                   {name}
                 </h1>
               </Link>
-              <span className="text-xs text-indigo-300 mt-0">{categories}</span>
+              <span className="text-xs text-indigo-300 mt-0">{categories.join(' ')}</span>
             </div>
             <p className="text-xs text-gray-500 w-4/5">{description}</p>
             <div className="w-full flex flex-col">
