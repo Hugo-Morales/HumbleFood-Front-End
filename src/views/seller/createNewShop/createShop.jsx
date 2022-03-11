@@ -1,18 +1,26 @@
 import React from "react";
 import ButtonExit from "../../../components/buttonExit/buttonexit";
 import { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { postNewShop } from "../../../redux/actions";
+import { useDispatch, useSelector } from "react-redux";
+import { postNewShop, getdataUser } from "../../../redux/actions";
 import Styles from "./createShop.module.css";
 
-const CreateShop = () => {
+const CreateShop = ({ user }) => {
   const dispatch = useDispatch();
+  const dataUser = useSelector((state) => state.dataUser);
+
+  useEffect(() => {
+    dispatch(getdataUser(user?.sub.split("|")[1]));
+  }, [dispatch, user]);
+
+  console.log(dataUser);
+
   const [newShop, setNewShop] = useState({
     name: "",
     direction: "",
     description: "",
     image: "",
-    userId: "",
+    userId: dataUser?.id,
   });
 
   const handleInputChange = (e) => {
@@ -31,15 +39,17 @@ const CreateShop = () => {
     reader.readAsDataURL(file); //transforma la imagen a b64 (string), y asi lo puede leer
   };
 
-  const handleformSubmit = () => {
+  console.log(newShop);
+  const handleformSubmit = (e) => {
+    e.preventDefault();
     dispatch(postNewShop(newShop));
-
     alert("Tienda registrada con exito!");
     setNewShop({
       name: "",
       direction: "",
       description: "",
       image: "",
+      userId: "",
     });
   };
 

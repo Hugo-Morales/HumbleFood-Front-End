@@ -33,9 +33,8 @@ const Nav = ({
   const categories = useSelector((state) => state.categories);
   const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
-  const user_id = '789456123';
-  console.log(user_id)
-
+  const user_id = user?.sub.split('|')[1];
+  // console.log(user_id)
   // console.log(user?.sub.split('|')[1]);
 
   useEffect(() => {
@@ -43,7 +42,7 @@ const Nav = ({
   }, [dispatch]);
 
   return (
-    <div className="font-poppins w-full h-24 bg-ochre flex justify-between">
+    <div className="sticky top-0 font-poppins w-full h-24 bg-ochre flex justify-between">
       <div className="w-1/3 flex justify-between items-center p-1">
         <Link to="/" className="ml-4">
           <img src={logo} className="w-20" alt="logo" />

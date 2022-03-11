@@ -4,18 +4,18 @@ import { useDispatch, useSelector } from "react-redux";
 import SideLeft from "./left/SideLeft";
 import SideRight from './right/SideRight';
 import Loading from '../../components/loading/Loading'
-import { getProductShop, loading, getUser } from "../../redux/actions";
+import { getProductShop, loading, getdataUser } from "../../redux/actions";
 
 export default function ContainerT({ user }) {
     const [id, setId] = useState('');
     const [currentPage, setCurrentPage] = useState(0);
     const productos = useSelector(state => state.productShop);
     const cargando = useSelector(state => state.isLoading);
-    const usuario = useSelector(state => state.user);
+    const usuario = useSelector(state => state.dataUser);
     const dispatch = useDispatch();
     const { idTienda } = useParams();
     // console.log(user);
-    // console.log(usuario)
+    console.log(usuario)
 
     const paging = (num) => {
         if (num >= 0 && num <= productos.pagesTotal) {
@@ -25,7 +25,7 @@ export default function ContainerT({ user }) {
 
     useEffect(() => {
         dispatch(loading());
-        dispatch(getUser(idTienda));
+        dispatch(getdataUser(idTienda));
         dispatch(getProductShop(idTienda, currentPage));
 
         return () => {
