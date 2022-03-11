@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getShops } from "../../redux/actions";
 import Nav from "../../components/nav/Nav";
 import Carousell from "../../components/carousell/Carousell";
-import Cards from "../../components/shops/CardsShops";
+import CardsShops from "../../components/shops/CardsShops";
 
 function HomeShops({
   cartItems,
@@ -30,7 +30,7 @@ function HomeShops({
         handleDeleteFromCart={handleDeleteFromCart}
       />
       <Carousell />
-      <Cards
+      <CardsShops
             shops={shops}
             handleAddToCart={handleAddToCart}
             cartItems={cartItems}

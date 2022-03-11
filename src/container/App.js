@@ -4,8 +4,8 @@ import CardDetail from "../views/user/CardDetails";
 import Error404 from "../views/Error 404/error";
 import Home from "../views/user/Home";
 import LandingPage from "../views/landingpage/landing";
-import CreateShop from "../views/seller/createNewShop/createShop";
 import SendReview from "../views/user/SendReview";
+import PrivateShop from "../routes/PrivateShop";
 import PrivateRoute from "../routes/PrivateRoute";
 import ShoppingList from "../components/cart/Cart";
 import ContainerT from "../views/TiendaPanel/ContainerT";
@@ -73,12 +73,6 @@ function App() {
 
   return (
     <BrowserRouter>
-      {/* <Helmet>
-        <meta charSet="utf-8" />
-        <title>Humblefood</title>
-        <link rel="canonical" href="http://mysite.com/example" />
-        <meta name="description" content="Helmet application" />
-      </Helmet> */}
       <div className="App">
         <Routes>
           <Route exact path="/" element={<LandingPage />} />
@@ -95,7 +89,20 @@ function App() {
               />
             }
           />
-          <Route exact path="/createShop" element={<CreateShop />} />
+          <Route
+            exact
+            path="/homeProducts"
+            element={
+              <Home
+                cartItems={cartItems}
+                getTotalItems={getTotalItems}
+                handleAddToCart={handleAddToCart}
+                handleRemoveFromCart={handleRemoveFromCart}
+                handleDeleteFromCart={handleDeleteFromCart}
+              />
+            }
+          />
+          <Route exact path="/createShop" element={<PrivateShop />} />
           <Route
             exact
             path="/products/:id"
