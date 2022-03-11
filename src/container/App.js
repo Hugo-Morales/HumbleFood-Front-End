@@ -9,10 +9,11 @@ import PrivateShop from "../routes/PrivateShop";
 import PrivateRoute from "../routes/PrivateRoute";
 import ShoppingList from "../components/cart/Cart";
 import ContainerT from "../views/TiendaPanel/ContainerT";
+// import { Helmet } from "react-helmet";
 import NewCategory from "../components/category/NewCategory";
 import CreateProduct from "../views/TiendaPanel/right/Create/CreateProducts";
+// import Card from "../components/cards/Card";
 import HomeShops from "../views/user/HomeShops";
-// import { Helmet } from "react-helmet";
 
 function App() {
   const [cartItems, setCartItems] = useState([]);
@@ -126,12 +127,19 @@ function App() {
             path="/products/:id"
             element={<CardDetail handleAddToCart={handleAddToCart} />}
           ></Route>
+          {/* <Route exact path='/products' element={<Card />}></Route> */}
+          <Route
+            exact
+            path="/products/:id"
+            element={<CardDetail handleAddToCart={handleAddToCart} />}
+          ></Route>
           <Route exact path="/create" element={<CreateProduct />}></Route>
           <Route exact path="/category" element={<NewCategory />}></Route>
           {/* <Route exact path="/tienda/:idTienda" element={<ContainerT/>}> </Route> */}
 
           <Route path="*" element={<Error404 />}></Route>
           <Route exact path="/tienda/:idTienda" element={<ContainerT />} />
+          <Route exact path="/home" element={<HomeShops />}></Route>
         </Routes>
       </div>
     </BrowserRouter>

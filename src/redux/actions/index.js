@@ -9,10 +9,12 @@ export const RESET = "RESET";
 export const LOADING = "LOADING";
 export const POST_REVIEW = "POST_REVIEW";
 export const POST_PRODUCTS = "POST_PRODUCTS";
+export const FILTER_BY_CATEGORIES = 'FILTER_BY_CATEGORIES'
+export const FILTER_BY_DISCOUNT = 'FILTER_BY_DISCOUNT'
 export const POST_NEW_SHOP = "POST_NEW_SHOP";
-export const FILTER_BY_CATEGORIES = "FILTER_BY_CATEGORIES";
 export const POST_NEW_USER = "POST_NEW_USER";
 export const GET_DATA_USER = "GET_DATA_USER";
+
 
 export const getShops = () => async (dispatch) => {
   try {
@@ -200,6 +202,12 @@ export function filterProductsByCategories(payload) {
     type: FILTER_BY_CATEGORIES,
     payload,
   };
+}
+export function filterByDiscount(payload) {
+  return {
+    type: FILTER_BY_DISCOUNT,
+    payload
+  }
 }
 
 export const deleteProduct = (id) => async () => {
