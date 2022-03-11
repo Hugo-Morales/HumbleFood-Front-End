@@ -9,9 +9,9 @@ const LandingPage = () => {
 
   useEffect(() => {
     return () => {
-      dispatch(loading())
-    }
-  }, [])
+      dispatch(loading());
+    };
+  });
 
   return (
     <div className={Styles.container}>

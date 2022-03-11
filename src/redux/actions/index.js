@@ -10,6 +10,41 @@ export const POST_REVIEW = "POST_REVIEW";
 export const POST_PRODUCTS = "POST_PRODUCTS";
 export const POST_NEW_SHOP = "POST_NEW_SHOP";
 export const FILTER_BY_CATEGORIES = "FILTER_BY_CATEGORIES";
+export const POST_NEW_USER = "POST_NEW_USER";
+export const GET_DATA_USER = "GET_DATA_USER";
+
+export const postnewUser = (newUser) => {
+  return async () => {
+    try {
+      const response = await axios.get(
+        `https://back-end-prueba.herokuapp.com/user/${newUser.userId}`
+      );
+      // console.log(response.data.hasOwnProperty("user"));
+      if (!response.data.hasOwnProperty("user")) {
+        await axios.post("https://back-end-prueba.herokuapp.com/user", newUser);
+        console.log("registrado");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+export const getdataUser = (id) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.get(
+        `https://back-end-prueba.herokuapp.com/user/${id}`
+      );
+      dispatch({
+        type: GET_DATA_USER,
+        payload: response.data,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
 
 export const getallproducts = (page) => async (dispatch) => {
   try {
@@ -80,6 +115,7 @@ export const postNewShop = (newShop) => async (dispatch) => {
       "https://back-end-prueba.herokuapp.com/shop",
       newShop
     );
+    console.log(response);
     dispatch({
       type: POST_NEW_SHOP,
       payload: response.data,
@@ -103,10 +139,10 @@ export const getCategories = () => async (dispatch) => {
   }
 };
 
-export const getProductShop = (id) => async (dispatch) => {
+export const getProductShop = (id, page) => async (dispatch) => {
   try {
     const products = await axios.get(
-      `https://back-end-prueba.herokuapp.com/productShop/${id}`
+      `https://back-end-prueba.herokuapp.com/productShop/${id}?page=${page}`
     );
     dispatch({
       type: GET_PRODUCTS_SHOP,
@@ -128,7 +164,6 @@ export const loading = () => (dispatch) => {
     type: LOADING,
   });
 };
-
 //  - - - - POST/REVIEWS - - - -
 export const postReview = (review) => async (dispatch) => {
   try {

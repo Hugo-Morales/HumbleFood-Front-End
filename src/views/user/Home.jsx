@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import Nav from "../../components/nav/Nav";
 import Cards from "../../components/cards/Cards";
 import Loading from '../../components/loading/Loading';
-import { useSelector, useDispatch } from "react-redux";
-import { getallproducts } from "../../redux/actions";
-import { Paginado } from "../../components/paginado/Paginado";
+import Paginado from "../../components/paginado/Paginado";
 import Carousell from "../../components/carousell/Carousell";
+import { useAuth0 } from "@auth0/auth0-react";
+import { getallproducts, postnewUser } from "../../redux/actions";
 
 const Home = ({
   cartItems,
@@ -16,8 +17,9 @@ const Home = ({
 }) => {
   const dispatch = useDispatch();
   const { products, next, prev, pagesTotal } = useSelector(state => state.productsloaded);
-  const loading = useSelector(state => state.isLoading)
+  const cargando = useSelector(state => state.isLoading)
   const [currentPage, setCurrentPage] = useState(0);
+  const { isAuthenticated, user } = useAuth0();
   // console.log(products);
 
   const paging = (num) => {
@@ -26,6 +28,20 @@ const Home = ({
     }
   };
 
+  const newUser = {
+    userId: user?.sub.split("|")[1],
+    name: user?.name,
+    name_user: user?.nickname,
+    email: user?.email,
+    direction: "",
+  };
+
+  useEffect(() => {
+    if (isAuthenticated && user) {
+      dispatch(postnewUser(newUser));
+    }
+  });
+
   useEffect(() => {
     dispatch(getallproducts(currentPage));
   }, [dispatch, currentPage]);
@@ -33,7 +49,7 @@ const Home = ({
   return (
     <div>
       {
-        loading ? <Loading /> : <>
+        cargando ? <Loading /> : <>
           <Nav
             cartItems={cartItems}
             getTotalItems={getTotalItems}
