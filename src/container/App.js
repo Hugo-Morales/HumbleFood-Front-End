@@ -121,7 +121,7 @@ function App() {
             element={<CardDetail handleAddToCart={handleAddToCart} />}
           ></Route>
           <Route exact path="/create" element={<CreateProduct />}></Route>
-          <Route exact path="/category" element={<NewCategory />}></Route>
+          {/* <Route exact path="/category" element={<NewCategory />}></Route> */}
           {/* <Route exact path="/tienda/:idTienda" element={<ContainerT/>}> </Route> */}
 
           <Route path="*" element={<Error404 />}></Route>

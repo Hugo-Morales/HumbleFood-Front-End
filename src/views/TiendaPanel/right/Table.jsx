@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { deleteProduct } from '../../../redux/actions';
 import Paginado from '../../../components/paginado/Paginado'
@@ -77,25 +77,25 @@ export default function Table({ p, d, next, prev, pagesTotal, paging, currentPag
                                     <tr>
                                         <th
                                             scope="col"
-                                            className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider text-center"
+                                            className="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider text-center"
                                         >
                                             Nombre del Producto
                                         </th>
                                         <th
                                             scope="col"
-                                            className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider text-center"
+                                            className="px-6 py-3  text-xs font-medium text-gray-500 uppercase tracking-wider text-center"
                                         >
                                             Stock
                                         </th>
                                         <th
                                             scope="col"
-                                            className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider text-center"
+                                            className="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider text-center"
                                         >
                                             Estado
                                         </th>
                                         <th
                                             scope="col"
-                                            className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider text-center"
+                                            className="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider text-center"
                                         >
                                             Precio Total
                                         </th>

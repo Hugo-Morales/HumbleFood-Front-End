@@ -5,7 +5,8 @@ import { XIcon } from "@heroicons/react/outline";
 import { MdShoppingCart } from "react-icons/md";
 import { AiOutlineDollarCircle } from "react-icons/ai";
 import CartItem from "./CartItem";
-import Paypal from "../Paypal/Paypal";
+// import Paypal from "../Paypal/Paypal";
+import PaypalCheckoutButton from "../Paypal/PaypalCheckoutButton";
 // import { Link, useParams } from "react-router-dom";
 
 export function calculateTotal(items) {
@@ -13,6 +14,7 @@ export function calculateTotal(items) {
     .reduce((acc, item) => acc + item.amount * item.price, 0)
     .toFixed(2);
 }
+
 export default function Cart({
   open,
   setOpen,
@@ -23,6 +25,10 @@ export default function Cart({
 }) {
   const [checkout, setCheckout] = useState(false);
   const { user } = useAuth0();
+  // const product = {
+  //   description: "Design Code",
+  //   price: 4,
+  // };
 
   // model Orders {
   //   state       Int
@@ -152,10 +158,11 @@ export default function Cart({
                         Modificar Carrito
                       </button>
                       {checkout ? (
-                        <Paypal
-                          className={cartItems.length ? "w-full" : "hidden"}
-                          cartItems={cartItems}
-                        />
+                        <div className="paypal-button-container">
+                          <PaypalCheckoutButton
+                            cartItems={cartItems}
+                          />
+                        </div>
                       ) : (
                         <button
                           type="button"
@@ -195,6 +202,10 @@ export default function Cart({
           </div>
         </div>
       </Dialog>
+      {/* <Paypal
+        className={cartItems.length ? "w-full" : "hidden"}
+        cartItems={cartItems}
+      /> */}
     </Transition.Root>
   );
 }

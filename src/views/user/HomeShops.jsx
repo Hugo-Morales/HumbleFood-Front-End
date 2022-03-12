@@ -19,7 +19,7 @@ function HomeShops({
     dispatch(getShops());
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  console.log(shops);
+  // console.log(shops);
   return (
     <div>
       <NavShop

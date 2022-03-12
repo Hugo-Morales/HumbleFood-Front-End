@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import AddShoppingCartIcon from "@material-ui/icons/AddShoppingCart";
 import Badge from "@material-ui/core/Badge";
 import IconButton from "@material-ui/core/IconButton";
@@ -24,6 +24,7 @@ const StyledButton = styled(IconButton)`
 
 const Nav = ({
   cartItems,
+  shopEmail,
   getTotalItems,
   handleAddToCart,
   handleRemoveFromCart,
@@ -31,13 +32,11 @@ const Nav = ({
 }) => {
   const { isAuthenticated, user, loginWithRedirect } = useAuth0();
   const categories = useSelector((state) => state.categories);
-  const { shopId } = useParams();
+  // const { shopId } = useParams();
   const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
   const user_id = user?.sub.split("|")[1];
-  // console.log(user_id)
-  // console.log(user?.sub.split('|')[1]);
-  console.log(shopId);
+  
   useEffect(() => {
     dispatch(getCategories());
   }, [dispatch]);
@@ -165,6 +164,7 @@ const Nav = ({
         open={open}
         setOpen={setOpen}
         cartItems={cartItems}
+        shopEmail={shopEmail}
         handleAddToCart={handleAddToCart}
         handleRemoveFromCart={handleRemoveFromCart}
         handleDeleteFromCart={handleDeleteFromCart}

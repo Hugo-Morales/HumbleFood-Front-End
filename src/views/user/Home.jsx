@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useAuth0 } from "@auth0/auth0-react";
-import { getProductShop, postnewUser } from "../../redux/actions";
+import { getProductShop, getShopsId, postnewUser } from "../../redux/actions";
 import Nav from "../../components/nav/Nav";
 import Cards from "../../components/cards/Cards";
 import Loading from "../../components/loading/Loading";
@@ -16,14 +16,12 @@ const Home = ({
   handleRemoveFromCart,
   handleDeleteFromCart,
 }) => {
+  const { shopId } = useParams();
   const dispatch = useDispatch();
   const { products, next, prev, pagesTotal } = useSelector(
     (state) => state.productShop
   );
-
-  const { shopId } = useParams();
-
-  console.log("shopId", shopId);
+  const shop = useSelector((state) => state.shop);
   const loading = useSelector((state) => state.isLoading);
   const [currentPage, setCurrentPage] = useState(0);
   const { isAuthenticated, user } = useAuth0();
@@ -49,9 +47,12 @@ const Home = ({
   });
 
   useEffect(() => {
+    dispatch(getShopsId(shopId));
     dispatch(getProductShop(shopId));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch, shopId]);
-  console.log("shop", shopId);
+
+  console.log("shopshop", shop);
   return (
     <div>
       {loading ? (
