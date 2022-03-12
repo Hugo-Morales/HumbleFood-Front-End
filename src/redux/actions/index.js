@@ -12,6 +12,7 @@ export const POST_NEW_SHOP = "POST_NEW_SHOP";
 export const POST_NEW_USER = "POST_NEW_USER";
 export const GET_DATA_USER = "GET_DATA_USER";
 export const GET_ALL_USERS = 'GET_ALL_USERS';
+export const LOADING_PANEL = 'LOADING_PANEL';
 const URL = process.env.REACT_APP_URL;
 
 export const postnewUser = (newUser) => {
@@ -159,6 +160,13 @@ export const loading = () => (dispatch) => {
     type: LOADING,
   });
 };
+
+export const loading_panel = () => (dispatch) => {
+  dispatch({
+    type: LOADING_PANEL,
+  });
+};
+
 //  - - - - POST/REVIEWS - - - -
 export const postReview = (review) => async (dispatch) => {
   try {
@@ -193,6 +201,22 @@ export const getAllUser = (page) => async (dispatch) => {
       type: GET_ALL_USERS,
       payload: products.data,
     });
+  } catch (error) {
+    console.error(error)
+  }
+}
+
+export const ban = (id) => async () => {
+  try {
+    axios.put(`${URL}user/${id}`)
+  } catch (error) {
+    console.error(error)
+  }
+}
+
+export const admin = (email) => async () => {
+  try {
+    axios.put(`${URL}user/${email}`)
   } catch (error) {
     console.error(error)
   }

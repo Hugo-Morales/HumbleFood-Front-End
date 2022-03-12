@@ -9,6 +9,7 @@ import {
   POST_NEW_SHOP,
   GET_DATA_USER,
   GET_ALL_USERS,
+  LOADING_PANEL,
 } from "../actions";
 
 const initialStore = {
@@ -20,6 +21,7 @@ const initialStore = {
   dataUser: {},
   allUser: [],
   isLoading: true,
+  loadingPanel: true,
 };
 
 export default function reducer(state = initialStore, { type, payload }) {
@@ -34,6 +36,7 @@ export default function reducer(state = initialStore, { type, payload }) {
       return {
         ...state,
         dataUser: payload.user,
+        loadingPanel: false,
       };
     case GET_DETAIL_PRODUCT:
       return {
@@ -67,6 +70,7 @@ export default function reducer(state = initialStore, { type, payload }) {
         ...state,
         allUser: payload,
         isLoading: false,
+        loadingPanel: false,
       }
     case RESET:
       return {
@@ -79,6 +83,11 @@ export default function reducer(state = initialStore, { type, payload }) {
         ...state,
         isLoading: true,
       };
+    case LOADING_PANEL:
+      return {
+        ...state,
+        loadingPanel: true,
+      }
     default:
       return state;
   }
