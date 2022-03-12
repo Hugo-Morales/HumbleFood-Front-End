@@ -1,42 +1,48 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getShops } from "../../redux/actions";
+import { useAuth0 } from "@auth0/auth0-react";
 import NavShop from "../../components/shops/NavShops";
 import Carousell from "../../components/carousell/Carousell";
 import CardsShops from "../../components/shops/CardsShops";
+import Loading from "../../components/loading/Loading";
+import { getShops, loading, postnewUser } from "../../redux/actions";
 
-function HomeShops({
-  cartItems,
-  getTotalItems,
-  handleAddToCart,
-  handleRemoveFromCart,
-  handleDeleteFromCart,
-}) {
-  const dispatch = useDispatch();
-  const shops = useSelector((state) => state.shops);
+export default function HomeShops() {
+	const dispatch = useDispatch();
+	const { isAuthenticated, user, isLoading } = useAuth0();
+	const shops = useSelector((state) => state.shops);
+	const cargando = useSelector((state) => state.isLoading);
 
-  useEffect(() => {
-    dispatch(getShops());
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-  console.log(shops);
-  return (
-    <div>
-      <NavShop
-        cartItems={cartItems}
-        getTotalItems={getTotalItems}
-        handleAddToCart={handleAddToCart}
-        handleRemoveFromCart={handleRemoveFromCart}
-        handleDeleteFromCart={handleDeleteFromCart}
-      />
-      <Carousell />
-      <CardsShops
-            shops={shops}
-            handleAddToCart={handleAddToCart}
-            cartItems={cartItems}
-          />
-    </div>
-  );
+	const newUser = {
+		userId: user?.sub.split("|")[1],
+		name: user?.name,
+		name_user: user?.nickname,
+		email: user?.email,
+		direction: "",
+	};
+
+	useEffect(() => {
+		if (isAuthenticated && user) dispatch(postnewUser(newUser));
+	});
+
+	useEffect(() => {
+		dispatch(loading());
+		dispatch(getShops());
+	}, [dispatch]);
+
+	if (isLoading) return <Loading />;
+
+	return (
+		<>
+			{cargando ? (
+				<Loading />
+			) : (
+				<>
+					<NavShop />
+					<Carousell />
+					<CardsShops shops={shops} />
+				</>
+			)}
+		</>
+	);
 }
-
-export default HomeShops;

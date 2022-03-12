@@ -1,5 +1,4 @@
 import CardShop from "./CardShop";
-import Banner from './Banner'
 
 const Cards = ({ shops }) => {
   // console.log(shops);
@@ -14,6 +13,7 @@ const Cards = ({ shops }) => {
         ))}
     </div>
   );
+
 };
 
 export default Cards;

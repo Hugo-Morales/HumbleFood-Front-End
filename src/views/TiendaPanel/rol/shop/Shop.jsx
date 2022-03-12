@@ -32,6 +32,10 @@ export default function Shop({ setId }) {
         f={() => setId("delete")}
       />
     </>
+<<<<<<< HEAD
   )
 
+=======
+  );
+>>>>>>> 4fda090dcde395ab44ad3c62a3d10a0b490da2c6
 }

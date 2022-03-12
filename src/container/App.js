@@ -8,11 +8,7 @@ import SendReview from "../views/user/SendReview";
 import PrivateShop from "../routes/PrivateShop";
 import PrivateRoute from "../routes/PrivateRoute";
 import ShoppingList from "../components/cart/Cart";
-import ContainerT from "../views/TiendaPanel/ContainerT";
-// import { Helmet } from "react-helmet";
 import NewCategory from "../components/category/NewCategory";
-import CreateProduct from "../views/TiendaPanel/right/Create/CreateProducts";
-// import Card from "../components/cards/Card";
 import HomeShops from "../views/user/HomeShops";
 import Banner from "../components/shops/Banner";
 
@@ -78,13 +74,14 @@ function App() {
       <div className="App">
         <Routes>
           <Route exact path="/" element={<LandingPage />} />
-          <Route exact path="/home" element={<HomeShops />}></Route>
+          <Route exact path="/home" element={<HomeShops />} />
           <Route
             exact
             path="/productShop/:shopId"
             element={
               <Home
                 cartItems={cartItems}
+                setCartItems={setCartItems}
                 getTotalItems={getTotalItems}
                 handleAddToCart={handleAddToCart}
                 handleRemoveFromCart={handleRemoveFromCart}
@@ -94,7 +91,7 @@ function App() {
           />
           <Route
             exact
-            path="/products/:id"
+            path="/products/:shopId/:productId"
             element={<CardDetail handleAddToCart={handleAddToCart} />}
           />
           <Route
@@ -103,19 +100,15 @@ function App() {
             element={<ShoppingList cartItems={cartItems} />}
           />
           <Route exact path="/settings/:userId" element={<PrivateRoute />} />
-          <Route path="*" element={<Error404 />} />
-
-
-          {/* <Route exact path="/tienda/:idTienda" element={<ContainerT/>}> </Route> */}
-
-          <Route exact path="/tienda/:idTienda" element={<ContainerT />} />
+          <Route exact path="/category" element={<NewCategory />} />
           <Route exact path="/createShop" element={<PrivateShop />} />
           <Route
             exact
             path="/send-review/:productId"
             element={<SendReview />}
           />
-          <Route exact path ='/Banner' element={<Banner/>}></Route>
+          <Route exact path='/Banner' element={<Banner />}></Route>
+          <Route path="*" element={<Error404 />} />
         </Routes>
       </div>
     </BrowserRouter>

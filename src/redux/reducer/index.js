@@ -8,9 +8,7 @@ import {
   RESET,
   LOADING,
   POST_NEW_SHOP,
-  FILTER_BY_CATEGORIES,
   GET_DATA_USER,
-  FILTER_BY_DISCOUNT,
   GET_SHOPS_ID,
   GET_ALL_USERS,
   LOADING_PANEL,
@@ -45,7 +43,6 @@ export default function reducer(state = initialStore, { type, payload }) {
       return {
         ...state,
         shop: payload,
-        isLoading: false,
       };
     case GET_ALL_PRODUCTS:
       return {

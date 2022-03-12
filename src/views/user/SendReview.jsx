@@ -7,11 +7,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import Stack from "@mui/material/Stack";
 
 function SendReview() {
-  const {
-    isAuthenticated,
-    loginWithRedirect,
-    user,
-  } = useAuth0();
+  const { isAuthenticated, loginWithRedirect, user } = useAuth0();
   const dispatch = useDispatch();
   const id = useParams();
   const [productId, setProductId] = useState("");
@@ -38,7 +34,6 @@ function SendReview() {
       contentReview: review,
       pointProduct: value,
     };
-    console.log(userReview);
     dispatch(postReview(userReview));
     alert("Calificación enviada");
   };
