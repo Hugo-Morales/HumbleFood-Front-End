@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
-import Nav from "../nav/Nav";
 
-const Card = ({ product, handleAddToCart }) => {
-  const { id, name, image, description, price, discount, stock, categories } =
+const Card = ({ product, handleAddToCart, shop }) => {
+  const { id, name, image, description, price, discount, userId, shopId, categories } =
     product;
+  // const { id } = shop
 
   return (
     <>
@@ -24,18 +24,22 @@ const Card = ({ product, handleAddToCart }) => {
                   {name}
                 </h1>
               </Link>
-              <span className="text-xs text-indigo-300 mt-0">{categories}</span>
+              <span className="text-xs text-indigo-300 mt-0">{categories.join(' ')}</span>
             </div>
-            <p className="text-xs text-gray-500 w-4/5">{description}</p>
+            {/* <p className="text-xs text-gray-500 w-4/5">{description}</p> */}
             <div className="w-full flex flex-col">
               <div className="w-full flex justify-end items-center pr-5 pb-1">
                 <h1 className="font-bold text-green-500">{discount}% OFF</h1>
               </div>
               <div className="w-full flex justify-between items-center">
                 <h1 className="font-bold text-gray-500">${price}</h1>
+
+
+
                 <button
                   onClick={() => handleAddToCart(product)}
-                  className="bg-gray-700 mr-5 text-white px-3 py-1 rounded-sm shadow-md"
+                  className=
+                  "bg-gray-700 mr-5 text-white px-3 py-1 rounded-sm shadow-md"
                 >
                   Add to Cart
                 </button>
@@ -46,6 +50,6 @@ const Card = ({ product, handleAddToCart }) => {
       </div>
     </>
   );
-};
+}
 
 export default Card;

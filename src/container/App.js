@@ -4,22 +4,27 @@ import CardDetail from "../views/user/CardDetails";
 import Error404 from "../views/Error 404/error";
 import Home from "../views/user/Home";
 import LandingPage from "../views/landingpage/landing";
-import ContainerT from "../views/TiendaPanel/ContainerT";
-import { Helmet } from "react-helmet";
+import SendReview from "../views/user/SendReview";
+import PrivateShop from "../routes/PrivateShop";
+import PrivateRoute from "../routes/PrivateRoute";
+import ShoppingList from "../components/cart/Cart";
+import NewCategory from "../components/category/NewCategory";
+import HomeShops from "../views/user/HomeShops";
 
 function App() {
   const [cartItems, setCartItems] = useState([]);
 
   useEffect(() => {
-    if (cartItems.length !== 0) localStorage.setItem('carrito', JSON.stringify(cartItems));
+    if (cartItems.length !== 0)
+      localStorage.setItem("carrito", JSON.stringify(cartItems));
   }, [cartItems]);
 
   useEffect(() => {
-    const items = JSON.parse(localStorage.getItem('carrito'));
+    const items = JSON.parse(localStorage.getItem("carrito"));
 
     if (items) setCartItems(items);
   }, []);
-  
+
   const getTotalItems = (items) => {
     return items.reduce((acc, item) => acc + item.amount, 0);
   };
@@ -41,11 +46,8 @@ function App() {
   };
 
   const handleRemoveFromCart = (id) => {
-    const items = JSON.parse(localStorage.getItem('carrito'));
-
-    if (items.length === 1) {
-      localStorage.removeItem('carrito')
-    }
+    const items = JSON.parse(localStorage.getItem("carrito"));
+    if (items.length === 1) localStorage.removeItem("carrito");
 
     setCartItems((prev) =>
       prev.reduce((acc, item) => {
@@ -61,42 +63,50 @@ function App() {
 
   const handleDeleteFromCart = (id) => {
     setCartItems((prev) => prev.filter((item) => item.id !== id));
-  
-    const items = JSON.parse(localStorage.getItem('carrito'));
 
-    if (items.length === 1) {
-      localStorage.removeItem('carrito')
-    }
+    const items = JSON.parse(localStorage.getItem("carrito"));
+    if (items.length === 1) localStorage.removeItem("carrito");
   };
 
   return (
     <BrowserRouter>
-      {/* <Helmet>
-        <meta charSet="utf-8" />
-        <title>Humblefood</title>
-        <link rel="canonical" href="http://mysite.com/example" />
-        <meta name="description" content="Helmet application" />
-      </Helmet> */}
       <div className="App">
         <Routes>
           <Route exact path="/" element={<LandingPage />} />
+          <Route exact path="/home" element={<HomeShops />} />
           <Route
             exact
-            path="/home"
+            path="/productShop/:shopId"
             element={
               <Home
                 cartItems={cartItems}
+                setCartItems={setCartItems}
                 getTotalItems={getTotalItems}
                 handleAddToCart={handleAddToCart}
                 handleRemoveFromCart={handleRemoveFromCart}
                 handleDeleteFromCart={handleDeleteFromCart}
               />
             }
-          ></Route>
-          <Route exact path="/products/:id" element={<CardDetail  handleAddToCart={handleAddToCart} />}></Route>
-          <Route exact path="/tienda/:idTienda" element={<ContainerT/>}> </Route>
-
-          <Route path="*" element={<Error404 />}></Route>
+          />
+          <Route
+            exact
+            path="/products/:id"
+            element={<CardDetail handleAddToCart={handleAddToCart} />}
+          />
+          <Route
+            exact
+            path="/shopping-list"
+            element={<ShoppingList cartItems={cartItems} />}
+          />
+          <Route exact path="/settings/:userId" element={<PrivateRoute />} />
+          <Route exact path="/category" element={<NewCategory />} />
+          <Route exact path="/createShop" element={<PrivateShop />} />
+          <Route
+            exact
+            path="/send-review/:productId"
+            element={<SendReview />}
+          />
+          <Route path="*" element={<Error404 />} />
         </Routes>
       </div>
     </BrowserRouter>
