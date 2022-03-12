@@ -128,12 +128,13 @@ const CreateShop = ({ user }) => {
                         <textarea
                           onChange={(e) => handleInputChange(e)}
                           name="description"
-                          rows="3"
+                          rows="2"
                           className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md"
                           placeholder="Ej: Panadaria y pasteleria con mas de 20 años de experiencia en el mercado..."
                         ></textarea>
                       </div>
                     </div>
+
                     {/* Correo asociado al paypal*/}
 
                     <div className="col-span-3 sm:col-span-2">
@@ -157,7 +158,7 @@ const CreateShop = ({ user }) => {
                         {" "}
                         Foto de la tienda:{" "}
                       </label>
-                      <div className="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
+                      <div className="mt-1 flex justify-center px-6 pt-0 pb-0 border-2 border-gray-300 border-dashed rounded-md">
                         <div className="space-y-1 text-center">
                           {!newShop.image ? (
                             <svg
