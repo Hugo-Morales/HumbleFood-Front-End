@@ -17,6 +17,8 @@ export const GET_DATA_USER = "GET_DATA_USER";
 export const GET_SHOPS_ID = "GET_SHOPS_ID";
 export const GET_ALL_USERS = "GET_ALL_USERS";
 export const GET_USER = "GET_USER";
+export const LOADING_PANEL = "LOADING_PANEL";
+export const GET_NAME_OF_SHOP = "GET_NAME_OF_SHOP";
 const URL = process.env.REACT_APP_URL;
 
 export const getShopsId = (id) => async (dispatch) => {
@@ -182,6 +184,13 @@ export const loading = () => (dispatch) => {
     type: LOADING,
   });
 };
+
+export const loading_panel = () => (dispatch) => {
+  dispatch({
+    type: LOADING_PANEL,
+  });
+};
+
 //  - - - - POST/REVIEWS - - - -
 export const postReview = (review) => async (dispatch) => {
   try {
@@ -240,4 +249,35 @@ export const getUser = (userId) => async (dispatch) => {
   } catch (error) {
     console.error(error);
   }
+};
+
+export const ban = (id) => async () => {
+  try {
+    axios.put(`${URL}user/${id}`);
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export const admin = (email) => async () => {
+  try {
+    axios.put(`${URL}user/${email}`);
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export const getnameOfShop = (id) => {
+  return async (dispatch) => {
+    try {
+      const nameShop = await axios.get(`${URL}shop/${id}`);
+      console.log(nameShop.data.shop.name);
+      dispatch({
+        type: GET_NAME_OF_SHOP,
+        payload: nameShop.data.shop.name,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
 };
