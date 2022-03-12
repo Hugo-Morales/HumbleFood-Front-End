@@ -99,7 +99,7 @@ export default function Cart({
                   <div className="flex-1 overflow-y-auto py-6 px-4 sm:px-6">
                     <div className="flex items-start justify-between">
                       <Dialog.Title className="text-lg font-medium text-gray-900 flex items-center">
-                        Carrito de Compras
+                        Carrito de Comprass
                         <MdShoppingCart className="w-6 h-6 ml-2" />
                       </Dialog.Title>
                       <div className="ml-3 flex h-7 items-center">
