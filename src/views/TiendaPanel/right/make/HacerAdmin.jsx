@@ -10,37 +10,22 @@ export default function HacerAdmin() {
     // console.log(users)
 
     useEffect(() => {
-        dispatch(getAllUser(0));
+        dispatch(getAllUser(1));
     }, [dispatch]);
 
-    const quitarBan = (id) => {
-        // console.log(id)
+    const banUser = (type, id) => {
+        dispatch(ban(type, id))
         dispatch(loading_panel());
         setTimeout(() => {
-            dispatch(getAllUser(0));
+            dispatch(getAllUser(1));
         }, 700);
     };
 
-    const makeAdmin = (email) => {
-        dispatch(admin(email));
+    const adminUser = (type, id) => {
+        dispatch(admin(type, id));
         dispatch(loading_panel());
         setTimeout(() => {
-            dispatch(getAllUser(0));
-        }, 700);
-    };
-
-    const quitarAdmin = (id) => {
-        dispatch(loading_panel());
-        setTimeout(() => {
-            dispatch(getAllUser(0));
-        }, 700);
-    };
-
-    const Ban = (id) => {
-        dispatch(ban(id))
-        dispatch(loading_panel());
-        setTimeout(() => {
-            dispatch(getAllUser(0));
+            dispatch(getAllUser(1));
         }, 700);
     };
 
@@ -104,12 +89,10 @@ export default function HacerAdmin() {
                                                     </td>
                                                     <td className="px-6 py-4 text-sm leading-5 text-gray-500 whitespace-no-wrap border-b border-gray-200">
                                                         {
-                                                            u?.rol === 3 ? (<button className="inline-flex px-2 text-xs font-semibold leading-5 text-red-800 bg-red-100 rounded-full" onClick={() => quitarBan(u?.email)}>Quitar Ban</button>) :
-                                                                u?.rol === 2 ? (<button className="inline-flex px-2 text-xs font-semibold leading-5 text-red-800 bg-red-100 rounded-full" onClick={() => quitarAdmin(u?.email)}>Quitar Admin</button>) : (
-                                                                    <>
-                                                                        <button className="inline-flex px-2 text-xs font-semibold leading-5 text-red-800 bg-red-100 rounded-full" onClick={() => Ban(u?.userId)}>Banear Usuario</button>
-                                                                        <button className="inline-flex px-2 mt-2 text-xs font-semibold leading-5 text-green-800 bg-green-100 rounded-full" onClick={() => makeAdmin(u?.email)}>Hacer Admin</button>
-                                                                    </>)
+                                                            u?.rol === 3 ? (<button className="inline-flex px-2 text-xs font-semibold leading-5 text-red-800 bg-red-100 rounded-full" onClick={() => banUser('unban', u?.userId)}>Quitar Ban</button>) :
+                                                                u?.rol === 2 ? (<button className="inline-flex px-2 text-xs font-semibold leading-5 text-red-800 bg-red-100 rounded-full" onClick={() => adminUser('takeAdmin', u?.email)}>Quitar Admin</button>) : (<><button className="inline-flex px-2 text-xs font-semibold leading-5 text-red-800 bg-red-100 rounded-full" onClick={() => banUser('ban', u?.userId)}>Quitar Ban</button>
+                                                                    <button className="inline-flex px-2 mt-2 text-xs font-semibold leading-5 text-green-800 bg-green-100 rounded-full" onClick={() => adminUser('makeAdmin', u?.email)}>Hacer Admin</button>
+                                                                </>)
                                                         }
                                                     </td>
                                                     <td className="px-6 py-4 text-sm leading-5 text-gray-500 whitespace-no-wrap border-b border-gray-200">

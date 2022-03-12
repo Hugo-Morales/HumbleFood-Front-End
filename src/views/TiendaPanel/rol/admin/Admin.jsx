@@ -1,7 +1,6 @@
 import Button from "../../left/Button";
 import { BiUserPlus } from "react-icons/bi";
 import { MdDelete } from "react-icons/md";
-import { IoBan } from 'react-icons/io5';
 
 export default function Admin({ setId }) {
     return (
