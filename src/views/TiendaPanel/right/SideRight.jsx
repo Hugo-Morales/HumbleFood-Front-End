@@ -5,7 +5,7 @@ import Styles from "./SideRight.module.css";
 
 export default function SideRight({ rol, product, idS, shopsId, paging, currentPage }) {
   const { products, next, prev, pagesTotal } = product;
-  console.log(idS)
+  // console.log(idS)
 
   const renderSwitch = (x) => {
     switch (x) {

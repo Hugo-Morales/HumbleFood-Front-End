@@ -8,10 +8,7 @@ import SendReview from "../views/user/SendReview";
 import PrivateShop from "../routes/PrivateShop";
 import PrivateRoute from "../routes/PrivateRoute";
 import ShoppingList from "../components/cart/Cart";
-import ContainerT from "../views/TiendaPanel/ContainerT";
-// import { Helmet } from "react-helmet";
-import CreateProduct from "../views/TiendaPanel/right/Create/CreateProducts";
-// import Card from "../components/cards/Card";
+import NewCategory from "../components/category/NewCategory";
 import HomeShops from "../views/user/HomeShops";
 
 function App() {
@@ -76,7 +73,7 @@ function App() {
       <div className="App">
         <Routes>
           <Route exact path="/" element={<LandingPage />} />
-          <Route exact path="/home" element={<HomeShops />}></Route>
+          <Route exact path="/home" element={<HomeShops />} />
           <Route
             exact
             path="/productShop/:shopId"
@@ -102,21 +99,7 @@ function App() {
             element={<ShoppingList cartItems={cartItems} />}
           />
           <Route exact path="/settings/:userId" element={<PrivateRoute />} />
-
-          <Route
-            exact
-            path="/products/:id"
-            element={<CardDetail handleAddToCart={handleAddToCart} />}
-          ></Route>
-          <Route
-            exact
-            path="/products/:id"
-            element={<CardDetail handleAddToCart={handleAddToCart} />}
-          ></Route>
-          <Route exact path="/create" element={<CreateProduct />}></Route>
-          {/* <Route exact path="/category" element={<NewCategory />}></Route> */}
-          {/* <Route exact path="/tienda/:idTienda" element={<ContainerT/>}> </Route> */}
-          <Route exact path="/tienda/:idTienda" element={<ContainerT />} />
+          <Route exact path="/category" element={<NewCategory />} />
           <Route exact path="/createShop" element={<PrivateShop />} />
           <Route
             exact
