@@ -11,6 +11,7 @@ import Paginado from "../../components/paginado/Paginado";
 
 const Home = ({
   cartItems,
+  setCartItems,
   getTotalItems,
   handleAddToCart,
   handleRemoveFromCart,
@@ -27,14 +28,12 @@ const Home = ({
   const [currentPage, setCurrentPage] = useState(0);
   const { isAuthenticated, user } = useAuth0();
 
-  console.log(shop.email);
-
   const paging = (num) => {
     if (num >= 0 && num <= pagesTotal) {
       setCurrentPage(num);
     }
   };
-  console.log("shop", shop);
+
   const newUser = {
     userId: user?.sub.split("|")[1],
     name: user?.name,
@@ -55,7 +54,6 @@ const Home = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch, shopId]);
 
-  console.log("shopshop", shop);
   return (
     <div>
       {
@@ -65,6 +63,7 @@ const Home = ({
           <>
             <Nav
               cartItems={cartItems}
+              setCartItems={setCartItems}
               shopEmail={shop.email}
               getTotalItems={getTotalItems}
               handleAddToCart={handleAddToCart}

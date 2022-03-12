@@ -10,7 +10,6 @@ import PrivateRoute from "../routes/PrivateRoute";
 import ShoppingList from "../components/cart/Cart";
 import ContainerT from "../views/TiendaPanel/ContainerT";
 // import { Helmet } from "react-helmet";
-import NewCategory from "../components/category/NewCategory";
 import CreateProduct from "../views/TiendaPanel/right/Create/CreateProducts";
 // import Card from "../components/cards/Card";
 import HomeShops from "../views/user/HomeShops";
@@ -84,6 +83,7 @@ function App() {
             element={
               <Home
                 cartItems={cartItems}
+                setCartItems={setCartItems}
                 getTotalItems={getTotalItems}
                 handleAddToCart={handleAddToCart}
                 handleRemoveFromCart={handleRemoveFromCart}
@@ -102,7 +102,6 @@ function App() {
             element={<ShoppingList cartItems={cartItems} />}
           />
           <Route exact path="/settings/:userId" element={<PrivateRoute />} />
-          <Route path="*" element={<Error404 />} />
 
           <Route
             exact
@@ -124,6 +123,7 @@ function App() {
             path="/send-review/:productId"
             element={<SendReview />}
           />
+          <Route path="*" element={<Error404 />} />
         </Routes>
       </div>
     </BrowserRouter>
