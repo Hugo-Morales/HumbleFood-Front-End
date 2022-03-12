@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useState } from "react";
+import { Fragment, useState } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 import { Dialog, Transition } from "@headlessui/react";
 import { XIcon } from "@heroicons/react/outline";
@@ -28,15 +28,15 @@ export default function Cart({
   const [checkout, setCheckout] = useState(false);
   const { user } = useAuth0();
 
-  useEffect(() => {
-    if (cartItems.length) {
-      return () => {
-        alert("Me vacié");
-        setCartItems([]);
-      };
-    }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  // useEffect(() => {
+  //   if (cartItems.length) {
+  //     return () => {
+  //       alert("Me vacié");
+  //       setCartItems([]);
+  //     };
+  //   }
+  // // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, []);
 
 
   // model Orders {

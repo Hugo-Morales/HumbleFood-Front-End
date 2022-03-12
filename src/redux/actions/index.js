@@ -14,7 +14,6 @@ export const FILTER_BY_DISCOUNT = "FILTER_BY_DISCOUNT";
 export const POST_NEW_SHOP = "POST_NEW_SHOP";
 export const GET_SHOPS_ID = "GET_SHOPS_ID";
 export const GET_ALL_USERS = "GET_ALL_USERS";
-export const GET_USER = "GET_USER";
 export const LOADING_PANEL = "LOADING_PANEL";
 export const GET_NAME_OF_SHOP = "GET_NAME_OF_SHOP";
 export const GET_DATA_USER = "GET_DATA_USER";
@@ -23,9 +22,7 @@ const URL = process.env.REACT_APP_URL;
 
 export const getShopsId = (id) => async (dispatch) => {
   try {
-    const allShopsId = await axios.get(
-      `https://back-end-prueba.herokuapp.com/shop/${id}`
-    );
+    const allShopsId = await axios.get(`${URL}shop/${id}`);
     dispatch({
       type: GET_SHOPS_ID,
       payload: allShopsId.data.shop,
@@ -37,9 +34,7 @@ export const getShopsId = (id) => async (dispatch) => {
 
 export const getShops = () => async (dispatch) => {
   try {
-    const allShops = await axios.get(
-      "https://back-end-prueba.herokuapp.com/shops"
-    );
+    const allShops = await axios.get(`${URL}shops`);
     dispatch({
       type: GET_SHOPS,
       payload: allShops.data,
@@ -130,7 +125,7 @@ export const postproducts = (input) => {
 export const NewCategory = () => {
   return async () => {
     const name = prompt("save New Category ");
-    await axios.post("https://back-end-prueba.herokuapp.com/category", {
+    await axios.post(`${URL}category`, {
       name,
     });
   };
@@ -236,32 +231,27 @@ export const getAllUser = (page) => async (dispatch) => {
   } catch (error) {
     console.error(error);
   }
-};
+}
 
-export const getUser = (userId) => async (dispatch) => {
+export const banU = (type, id) => async () => {
   try {
-    const user = await axios.get(`${URL}user/${userId}`);
-
-    dispatch({
-      type: GET_ALL_USERS,
-      payload: user.data,
-    });
+    axios.put(`${URL}user/alter/${type}/${id}`)
   } catch (error) {
     console.error(error);
   }
 };
 
-export const ban = (id) => async () => {
+export const banS = (type, id) => async () => {
   try {
-    axios.put(`${URL}user/${id}`);
+    axios.put(`${URL}shop/alter/${type}/${id}`)
   } catch (error) {
     console.error(error);
   }
 };
 
-export const admin = (email) => async () => {
+export const admin = (type, id) => async () => {
   try {
-    axios.put(`${URL}user/${email}`);
+    axios.put(`${URL}user/${type}/${id}`)
   } catch (error) {
     console.error(error);
   }

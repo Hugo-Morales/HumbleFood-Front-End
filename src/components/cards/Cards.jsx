@@ -1,7 +1,6 @@
 import Card from "./Card";
 
 const Cards = ({ handleAddToCart, products }) => {
-
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-5 mx-20">
       {products &&
