@@ -63,7 +63,7 @@ function PaypalCheckoutButton({ cartItems, shopEmail }) {
           ],
         });
       }}
-      onAprove={async (data, actions) => {
+      onApprove={async (data, actions) => {
         const order = await actions.order.capture();
         console.log("order", order);
 
