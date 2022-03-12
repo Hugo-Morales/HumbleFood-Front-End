@@ -54,7 +54,7 @@ const Nav = ({
     <div className="font-poppins w-full h-24 bg-ochre flex justify-between">
       <div className="w-1/3 flex justify-between items-center p-1">
         <Link to="/home" className="ml-4">
-          <img src={logo} className="w-20" alt="logo" />
+          <img src={logo} className="sm:h-2 md:w-32" alt="logos" />
         </Link>
         <div className="ml-4">
           <SearchBar />
@@ -62,7 +62,7 @@ const Nav = ({
         <div className="ml-4 w-full text-isabelline font-bold flex justify-around items-center">
           <select
             onChange={(e) => handleFilterCategories(e)}
-            name="category"
+            name="categorys"
             className="p-2 h-10 focus:outline-none bg-ochre hover:bg-princetonOrange font-bold border-none text-center"
           >
             <option value="All">Categorías</option>

@@ -121,3 +121,24 @@ button:active .shadow {
 button:focus:not(:focus-visible) {
   outline: none;
 }
+
+@media (max-width: 640px) { 
+  .container {
+    padding: 20px;
+  }
+  .title {
+    margin-right: 0;
+  }
+  .button {
+    margin-right: 0;
+  }
+}
+
+@media (min-width: 768px) {
+  .title {
+    margin-right: 0;
+  }
+  .button {
+    margin-right: 0;
+  }
+}
