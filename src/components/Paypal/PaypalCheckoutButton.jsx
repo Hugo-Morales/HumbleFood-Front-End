@@ -2,8 +2,7 @@ import { useState } from "react";
 import { PayPalButtons } from "@paypal/react-paypal-js";
 import { calculateTotal } from "../cart/Cart";
 
-function PaypalCheckoutButton({ cartItems, shopEmail }) {
-
+function PaypalCheckoutButton({ cartItems, setCartItems, shopEmail, setOpen }) {
   const [paidFor, setPaidFor] = useState(false);
   const [error, setError] = useState(null);
 
@@ -63,8 +62,12 @@ function PaypalCheckoutButton({ cartItems, shopEmail }) {
           ],
         });
       }}
-      onAprove={async (data, actions) => {
-        const order = await actions.order.capture();
+      onApprove={async (data, actions) => {
+        const order = await actions.order.capture().then((details) => {
+          console.log(details);
+          setCartItems([]);
+          setOpen(false);
+        });
         console.log("order", order);
 
         handleAprove(data.orderID);
@@ -75,6 +78,7 @@ function PaypalCheckoutButton({ cartItems, shopEmail }) {
       onError={(err) => {
         setError(err);
         console.error("PayPal Checkout onError", err);
+        window.location.href = "/error404";
       }}
     />
   );

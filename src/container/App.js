@@ -80,6 +80,7 @@ function App() {
             element={
               <Home
                 cartItems={cartItems}
+                setCartItems={setCartItems}
                 getTotalItems={getTotalItems}
                 handleAddToCart={handleAddToCart}
                 handleRemoveFromCart={handleRemoveFromCart}
@@ -99,13 +100,13 @@ function App() {
           />
           <Route exact path="/settings/:userId" element={<PrivateRoute />} />
           <Route exact path="/category" element={<NewCategory />} />
-          <Route path="*" element={<Error404 />} />
           <Route exact path="/createShop" element={<PrivateShop />} />
           <Route
             exact
             path="/send-review/:productId"
             element={<SendReview />}
           />
+          <Route path="*" element={<Error404 />} />
         </Routes>
       </div>
     </BrowserRouter>

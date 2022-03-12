@@ -24,6 +24,7 @@ const StyledButton = styled(IconButton)`
 
 const Nav = ({
   cartItems,
+  setCartItems,
   shopEmail,
   getTotalItems,
   handleAddToCart,
@@ -32,7 +33,6 @@ const Nav = ({
 }) => {
   const { isAuthenticated, user, loginWithRedirect } = useAuth0();
   const categories = useSelector((state) => state.categories);
-  // const { shopId } = useParams();
   const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
   const user_id = user?.sub.split("|")[1];
@@ -164,6 +164,7 @@ const Nav = ({
         open={open}
         setOpen={setOpen}
         cartItems={cartItems}
+        setCartItems={setCartItems}
         shopEmail={shopEmail}
         handleAddToCart={handleAddToCart}
         handleRemoveFromCart={handleRemoveFromCart}

@@ -10,6 +10,7 @@ import Paginado from "../../components/paginado/Paginado";
 
 const Home = ({
 	cartItems,
+	setCartItems,
 	getTotalItems,
 	handleAddToCart,
 	handleRemoveFromCart,
@@ -24,9 +25,8 @@ const Home = ({
 	const loading = useSelector((state) => state.isLoading);
 	const [currentPage, setCurrentPage] = useState(0);
 	const { isAuthenticated, user } = useAuth0();
-
-	console.log(shop.email);
-	console.log("shop", shop);
+	// console.log(shop.email);
+	// console.log("shop", shop);
 
 	const paging = (num) => {
 		if (num >= 0 && num <= pagesTotal) setCurrentPage(num);
