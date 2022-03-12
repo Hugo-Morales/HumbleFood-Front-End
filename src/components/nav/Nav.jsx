@@ -112,7 +112,7 @@ const Nav = ({
         {isAuthenticated ? (
           <div className="flex items-center">
             <h3 className="mr-3">
-              Bienvenido {user.given_name ? user.given_name : user.nickname}{" "}
+              Bienvenid@ {user.given_name ? user.given_name : user.nickname}{" "}
             </h3>
             <img
               src={user.picture}
@@ -148,7 +148,7 @@ const Nav = ({
               <path d="M6.168 18.849a4 4 0 0 1 3.832 -2.849h4a4 4 0 0 1 3.834 2.855" />
             </svg>
             <span className="text-sm text-white dark:text-gray-200">
-              Iniciar / Crear Cuenta
+              Iniciar / Crear Cuenta d
             </span>
           </button>
         )}
