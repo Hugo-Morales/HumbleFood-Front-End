@@ -233,9 +233,17 @@ export const getAllUser = (page) => async (dispatch) => {
   }
 }
 
-export const ban = (type, id) => async () => {
+export const banU = (type, id) => async () => {
   try {
     axios.put(`${URL}user/alter/${type}/${id}`)
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export const banS = (type, id) => async () => {
+  try {
+    axios.put(`${URL}shop/alter/${type}/${id}`)
   } catch (error) {
     console.error(error);
   }
