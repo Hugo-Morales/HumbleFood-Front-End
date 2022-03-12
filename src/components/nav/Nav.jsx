@@ -9,7 +9,7 @@ import Cart from "../cart/Cart";
 import SearchBar from "../serchbar/SearchBar";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useDispatch, useSelector } from "react-redux";
-import { getCategories } from "../../redux/actions";
+import { getCategories, getExistingUser } from "../../redux/actions";
 
 const StyledButton = styled(IconButton)`
   position: fixed;
@@ -25,31 +25,39 @@ const Nav = ({
   handleRemoveFromCart,
   handleDeleteFromCart,
 }) => {
-  const { isAuthenticated, user, loginWithRedirect, logout, getAccessTokenSilently } = useAuth0();
-  const categories = useSelector(state => state.categories);
+  const {
+    isAuthenticated,
+    user,
+    loginWithRedirect,
+    logout,
+    getAccessTokenSilently,
+  } = useAuth0();
+  const categories = useSelector((state) => state.categories);
   const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
 
-  // console.log(user);
-
+  
   useEffect(() => {
-    const getToken = async () => {
+    (async () => {
       try {
-        const token = await getAccessTokenSilently();
-
-        localStorage.setItem('hora', JSON.stringify(token));
+        if(isAuthenticated){
+          // const token = await getAccessTokenSilently();
+          //console.log(token.aud);
+          // localStorage.setItem("hora", JSON.stringify(token));
+         
+          user.userId = user.sub.split('|')[1] ;
+          console.log(user);
+        }
       } catch (error) {
         console.log(error);
       }
-    }
+    })()
 
-    getToken();
   }, []);
 
   useEffect(() => {
-    dispatch(getCategories())
-  }, [dispatch])
-
+    dispatch(getCategories());
+  }, [dispatch]);
 
   return (
     <div className="font-poppins w-full h-24 bg-ochre flex justify-between">
@@ -61,17 +69,34 @@ const Nav = ({
           <SearchBar />
         </div>
         <div className="ml-4 w-full text-isabelline font-bold flex justify-around items-center">
-          <select name="category" className="p-2 h-10 focus:outline-none bg-ochre hover:bg-princetonOrange font-bold border-none text-center">
+          <select
+            name="category"
+            className="p-2 h-10 focus:outline-none bg-ochre hover:bg-princetonOrange font-bold border-none text-center"
+          >
             <option value="">Categorías</option>
-            {
-              categories?.map((c, index) => (
-                <option key={index}>{c.name}</option>
-              ))
-            }
+            {categories?.map((c, index) => (
+              <option key={index}>{c.name}</option>
+            ))}
           </select>
           <Link to="/offers" className="ml-4 p-2 h-10 hover:bg-princetonOrange">
             Ofertas
           </Link>
+          {isAuthenticated ? (
+            <Link to="/createShop">
+              <button className="flex items-center justify-center w-20 mr-3 px-4 py-2 space-x-3 text-sm text-center bg-lime-700 text-isabelline transition-colors duration-200 transform bg-lime-500 hover:bg-lime-600 active:bg-lime-700 focus:outline-none focus:ring focus:ring-lime-300 rounded-md">
+                {" "}
+                Registra tu tienda!
+              </button>
+            </Link>
+          ) : (
+            <button
+              onClick={() => loginWithRedirect()}
+              className=" flex items-center justify-center w-20 mr-3 px-4 py-2 space-x-3 text-sm text-center bg-lime-700 text-isabelline transition-colors duration-200 transform bg-lime-500 hover:bg-lime-600 active:bg-lime-700 focus:outline-none focus:ring focus:ring-lime-300 rounded-md"
+            >
+              {" "}
+              Quieres vender?
+            </button>
+          )}
         </div>
       </div>
       <div

@@ -4,6 +4,7 @@ import CardDetail from "../views/user/CardDetails";
 import Error404 from "../views/Error 404/error";
 import Home from "../views/user/Home";
 import LandingPage from "../views/landingpage/landing";
+import CreateShop from "../views/seller/createNewShop/createShop";
 import ContainerT from "../views/TiendaPanel/ContainerT";
 import { Helmet } from "react-helmet";
 
@@ -11,15 +12,16 @@ function App() {
   const [cartItems, setCartItems] = useState([]);
 
   useEffect(() => {
-    if (cartItems.length !== 0) localStorage.setItem('carrito', JSON.stringify(cartItems));
+    if (cartItems.length !== 0)
+      localStorage.setItem("carrito", JSON.stringify(cartItems));
   }, [cartItems]);
 
   useEffect(() => {
-    const items = JSON.parse(localStorage.getItem('carrito'));
+    const items = JSON.parse(localStorage.getItem("carrito"));
 
     if (items) setCartItems(items);
   }, []);
-  
+
   const getTotalItems = (items) => {
     return items.reduce((acc, item) => acc + item.amount, 0);
   };
@@ -41,10 +43,10 @@ function App() {
   };
 
   const handleRemoveFromCart = (id) => {
-    const items = JSON.parse(localStorage.getItem('carrito'));
+    const items = JSON.parse(localStorage.getItem("carrito"));
 
     if (items.length === 1) {
-      localStorage.removeItem('carrito')
+      localStorage.removeItem("carrito");
     }
 
     setCartItems((prev) =>
@@ -61,11 +63,11 @@ function App() {
 
   const handleDeleteFromCart = (id) => {
     setCartItems((prev) => prev.filter((item) => item.id !== id));
-  
-    const items = JSON.parse(localStorage.getItem('carrito'));
+
+    const items = JSON.parse(localStorage.getItem("carrito"));
 
     if (items.length === 1) {
-      localStorage.removeItem('carrito')
+      localStorage.removeItem("carrito");
     }
   };
 
@@ -93,8 +95,15 @@ function App() {
               />
             }
           ></Route>
-          <Route exact path="/products/:id" element={<CardDetail  handleAddToCart={handleAddToCart} />}></Route>
-          <Route exact path="/tienda/:idTienda" element={<ContainerT/>}> </Route>
+          <Route exact path="/createShop" element={<CreateShop />}></Route>
+          <Route
+            exact
+            path="/products/:id"
+            element={<CardDetail handleAddToCart={handleAddToCart} />}
+          ></Route>
+          <Route exact path="/tienda/:idTienda" element={<ContainerT />}>
+            {" "}
+          </Route>
 
           <Route path="*" element={<Error404 />}></Route>
         </Routes>
