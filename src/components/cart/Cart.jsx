@@ -36,7 +36,8 @@ export default function Cart({
       };
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [setCartItems]);
+  }, []);
+
 
   // model Orders {
   //   id

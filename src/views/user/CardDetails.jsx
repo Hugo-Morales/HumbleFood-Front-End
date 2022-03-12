@@ -2,6 +2,7 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
+import { IoIosArrowBack } from "react-icons/io";
 import { useSelector, useDispatch } from "react-redux";
 import { getDetailProduct, reset, loading } from "../../redux/actions";
 import Loading from "../../components/loading/Loading";
@@ -10,20 +11,19 @@ import Reviews from "../../components/reviews/Reviews";
 const CardDetail = ({ handleAddToCart }) => {
   const dispatch = useDispatch();
   const spinner = useSelector((state) => state.isLoading);
-  const detailProduct = useSelector((state) => state.detailProduct);
-  const { id } = useParams([0]);
-  console.log("detail", detailProduct);
+  const { products } = useSelector((state) => state.detailProduct);
+  const { shopId, productId } = useParams([0]);
+
+  console.log("shopId", products);
 
   useEffect(() => {
     dispatch(loading());
-    dispatch(getDetailProduct(id));
+    dispatch(getDetailProduct(shopId, productId));
 
     return () => {
       dispatch(reset());
     };
-  }, [dispatch, id]);
-
-  // const [myProduct, setMyProduct] = useState([])
+  }, [dispatch, productId, shopId]);
 
   return (
     <>
@@ -37,10 +37,11 @@ const CardDetail = ({ handleAddToCart }) => {
                 <li>
                   <div className="flex items-center">
                     <Link
-                      to="/home"
-                      className="mr-2 text-sm font-medium text-gray-900"
+                      to={`/productShop/${shopId}`}
+                      className="flex items-center mr-2 text-sm font-medium text-gray-900"
                     >
-                      Home
+                      <IoIosArrowBack className="mr-2" />
+                      Regresar
                     </Link>
                     <svg
                       width="16"
@@ -63,7 +64,7 @@ const CardDetail = ({ handleAddToCart }) => {
                       className="mr-2 text-sm font-medium text-gray-900"
                     >
                       {" "}
-                      {detailProduct?.description}{" "}
+                      {products?.description}{" "}
                     </Link>
                     <svg
                       width="16"
@@ -86,7 +87,7 @@ const CardDetail = ({ handleAddToCart }) => {
                     className="font-medium text-gray-500 hover:text-gray-600"
                   >
                     {" "}
-                    {detailProduct?.name}{" "}
+                    {products?.name}{" "}
                   </Link>
                 </li>
               </ol>
@@ -95,7 +96,7 @@ const CardDetail = ({ handleAddToCart }) => {
             <div className="mt-6 max-w-2xl mx-auto sm:px-6 lg:max-w-7xl lg:px-8 lg:grid lg:grid-cols-3 lg:gap-x-8">
               <div className="hidden aspect-w-3 aspect-h-4 rounded-lg overflow-hidden lg:block">
                 <img
-                  src={detailProduct?.image}
+                  src={products?.image}
                   alt="Two each of gray, white, and black shirts laying flat."
                   className="w-full h-full object-center object-cover"
                 />
@@ -128,15 +129,13 @@ const CardDetail = ({ handleAddToCart }) => {
             <div className="max-w-2xl mx-auto pt-10 pb-16 px-4 sm:px-6 lg:max-w-7xl lg:pt-16 lg:pb-24 lg:px-8 lg:grid lg:grid-cols-3 lg:grid-rows-[auto,auto,1fr] lg:gap-x-8">
               <div className="lg:col-span-2 lg:border-r lg:border-gray-200 lg:pr-8">
                 <h1 className="text-2xl font-extrabold tracking-tight text-gray-900 sm:text-3xl">
-                  {detailProduct?.name}
+                  {products?.name}
                 </h1>
               </div>
 
               <div className="mt-4 lg:mt-0 lg:row-span-3">
                 {/* <h2 className="sr-only"></h2> */}
-                <p className="text-3xl text-gray-900">
-                  ${detailProduct?.price}
-                </p>
+                <p className="text-3xl text-gray-900">${products?.price}</p>
 
                 <div className="mt-6">
                   <h3 className="sr-only">Reviews</h3>
@@ -205,11 +204,11 @@ const CardDetail = ({ handleAddToCart }) => {
                 <form className="mt-10">
                   {/* <h2 className="sr-only"></h2> */}
                   <p className="text-3xl text-gray-900">
-                    {detailProduct?.discount} %Off
+                    {products?.discount} %Off
                   </p>
 
                   <button
-                    onClick={() => handleAddToCart(detailProduct)}
+                    onClick={() => handleAddToCart(products)}
                     type="submit"
                     className="mt-10 w-full bg-indigo-600 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 rorate:45"
                   >
@@ -224,7 +223,7 @@ const CardDetail = ({ handleAddToCart }) => {
 
                   <div className="space-y-6">
                     <p className="text-base text-gray-900">
-                      {detailProduct?.description}
+                      {/* {detailProduct?.description} */}
                     </p>
                   </div>
                 </div>

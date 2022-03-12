@@ -92,9 +92,9 @@ export const getallproducts = (page) => async (dispatch) => {
   }
 };
 
-export const getDetailProduct = (id) => async (dispatch) => {
+export const getDetailProduct = (idShop, idProduct) => async (dispatch) => {
   try {
-    const detailProduct = await axios.get(`${URL}products?id=${id}`);
+    const detailProduct = await axios.get(`${URL}productShop/${idShop}?id=${idProduct}`);
     dispatch({
       type: GET_DETAIL_PRODUCT,
       payload: detailProduct.data,

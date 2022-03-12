@@ -105,7 +105,7 @@ function App() {
 
           <Route
             exact
-            path="/products/:id"
+            path="/products/:shopId/:productId"
             element={<CardDetail handleAddToCart={handleAddToCart} />}
           ></Route>
           <Route
