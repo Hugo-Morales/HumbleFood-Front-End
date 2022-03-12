@@ -1,25 +1,32 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
+import { Auth0Provider } from "@auth0/auth0-react";
+import { PayPalScriptProvider } from "@paypal/react-paypal-js";
 import "./index.css";
 import App from "./container/App";
 import store from "./redux/store";
 import reportWebVitals from "./reportWebVitals";
-import { Auth0Provider } from "@auth0/auth0-react";
 
 const domain = process.env.REACT_APP_DOMAIN;
 const clientId = process.env.REACT_APP_CLIENT_ID;
 
 ReactDOM.render(
-  <Provider store={store}>
-    <React.StrictMode>
-      <Auth0Provider domain={domain}
-      clientId={clientId}
-      redirectUri={window.location.origin}>
-        <App />
-      </Auth0Provider>
-    </React.StrictMode>
-  </Provider>,
+  <React.StrictMode>
+    <Provider store={store}>
+      <PayPalScriptProvider
+        options={{ "client-id": process.env.REACT_APP_PAYPAL_CLIENT_ID }}
+      >
+        <Auth0Provider
+          domain={domain}
+          clientId={clientId}
+          redirectUri={"http://localhost:3000/home"}
+        >
+          <App />
+        </Auth0Provider>
+      </PayPalScriptProvider>
+    </Provider>
+  </React.StrictMode>,
   document.getElementById("root")
 );
 

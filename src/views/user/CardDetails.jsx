@@ -5,12 +5,14 @@ import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { getDetailProduct, reset, loading } from "../../redux/actions";
 import Loading from "../../components/loading/Loading";
+import Reviews from "../../components/reviews/Reviews";
 
 const CardDetail = ({ handleAddToCart }) => {
   const dispatch = useDispatch();
   const spinner = useSelector((state) => state.isLoading);
   const detailProduct = useSelector((state) => state.detailProduct);
   const { id } = useParams([0]);
+  console.log("detail", detailProduct);
 
   useEffect(() => {
     dispatch(loading());
@@ -31,14 +33,14 @@ const CardDetail = ({ handleAddToCart }) => {
         <div className="bg-white">
           <div className="pt-6">
             <nav aria-label="Breadcrumb">
-              <ol className="max-w-2xl mx-auto px-4 flex items-center space-x-2 sm:px-6 lg:max-w-7xl lg:px-8">
+              <ol className="max-w-2xl mx-auto p-4 flex items-center space-x-2 sm:px-6 lg:max-w-7xl lg:px-8">
                 <li>
                   <div className="flex items-center">
                     <Link
                       to="/home"
                       className="mr-2 text-sm font-medium text-gray-900"
                     >
-                      Restaurant
+                      Home
                     </Link>
                     <svg
                       width="16"
@@ -268,6 +270,10 @@ const CardDetail = ({ handleAddToCart }) => {
                     <p className="text-sm text-gray-600">La mejor comida</p>
                   </div>
                 </div>
+              </div>
+              <div className="justify-start">
+                <hr></hr>
+                <Reviews />
               </div>
             </div>
           </div>
