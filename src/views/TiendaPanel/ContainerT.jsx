@@ -13,6 +13,7 @@ export default function ContainerT({ user }) {
   const productos = useSelector((state) => state.productShop);
   const cargando = useSelector((state) => state.isLoading);
   const usuario = useSelector((state) => state.dataUser);
+
   const { userId } = useParams();
   // console.log(user, 'user');
   // console.log(usuario, 'usuario')

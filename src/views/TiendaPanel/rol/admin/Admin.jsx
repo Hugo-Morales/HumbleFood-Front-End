@@ -20,20 +20,6 @@ export default function Admin({ setId }) {
                 icon={<MdDelete className="mr-2" />}
             // f={() => setId("crear")}
             />
-            <Button
-                div="flex bg-green-200 justify-center p-2 rounded-lg mt-3 hover:bg-sky-700 cursor-pointer"
-                text="Borrar Mensajes"
-                buttonClass="flex items-center font-bold"
-                icon={<MdDelete className="mr-2" />}
-            // f={() => setId("crear")}
-            />
-            <Button
-                div="flex bg-green-200 justify-center p-2 rounded-lg mt-3 hover:bg-sky-700 cursor-pointer"
-                text="Banear Usuario"
-                buttonClass="flex items-center font-bold"
-                icon={<IoBan className="mr-2" />}
-            // f={() => setId("crear")}
-            />
         </div>
     )
 }
