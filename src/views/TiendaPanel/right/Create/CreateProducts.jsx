@@ -72,7 +72,7 @@ const CreateProduct = ({ shopId }) => {
     alert("Menu Creado!");
 
     const produc = {
-      shopId: shopId[0],
+      shopId: shopId[1],
       name: input.name,
       description: input.description,
       price: Number(input.price),

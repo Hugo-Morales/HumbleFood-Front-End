@@ -2,10 +2,11 @@ import { useState } from "react";
 import { PayPalButtons } from "@paypal/react-paypal-js";
 import { calculateTotal } from "../cart/Cart";
 
-function PaypalCheckoutButton({ cartItems }) {
+function PaypalCheckoutButton({ cartItems, shopEmail }) {
 
   const [paidFor, setPaidFor] = useState(false);
   const [error, setError] = useState(null);
+
 
   const handleAprove = (orderId) => {
     //Call backend function to fullfill order
@@ -57,7 +58,7 @@ function PaypalCheckoutButton({ cartItems }) {
                 value: calculateTotal(cartItems),
               },
               payee: {
-                email_address: "sb-bhz4x14328210@business.example.com",
+                email_address: shopEmail,
               },
             },
           ],

@@ -29,6 +29,7 @@ const CreateShop = ({ user }) => {
     description: "",
     image: "",
     userId: dataUser?.id,
+    email: "",
   });
 
   const handleInputChange = (e) => {
@@ -58,6 +59,7 @@ const CreateShop = ({ user }) => {
       description: "",
       image: "",
       userId: "",
+      email: "",
     });
   };
 
@@ -130,6 +132,23 @@ const CreateShop = ({ user }) => {
                           className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md"
                           placeholder="Ej: Panadaria y pasteleria con mas de 20 años de experiencia en el mercado..."
                         ></textarea>
+                      </div>
+                    </div>
+                    {/* Correo asociado al paypal*/}
+
+                    <div className="col-span-3 sm:col-span-2">
+                      <label className="font-bold block text-sm  text-gray-700">
+                        {" "}
+                        Correo de la tienda Asociado a Paypal:{" "}
+                      </label>
+                      <div className="mt-1 flex rounded-md shadow-sm">
+                        <input
+                          onChange={(e) => handleInputChange(e)}
+                          type="email"
+                          name="email"
+                          className="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300"
+                          placeholder="Ej: tienda123@gmail.com"
+                        />
                       </div>
                     </div>
                     {/* Foto */}

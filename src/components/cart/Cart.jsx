@@ -19,6 +19,7 @@ export default function Cart({
   open,
   setOpen,
   cartItems,
+  shopEmail,
   handleAddToCart,
   handleRemoveFromCart,
   handleDeleteFromCart,
@@ -161,6 +162,7 @@ export default function Cart({
                         <div className="paypal-button-container">
                           <PaypalCheckoutButton
                             cartItems={cartItems}
+                            shopEmail={shopEmail}
                           />
                         </div>
                       ) : (
