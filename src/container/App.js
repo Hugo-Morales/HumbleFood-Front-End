@@ -91,7 +91,6 @@ function App() {
               />
             }
           />
-          <Route exact path="/createShop" element={<PrivateShop />} />
           <Route
             exact
             path="/products/:id"
@@ -102,29 +101,12 @@ function App() {
             path="/shopping-list"
             element={<ShoppingList cartItems={cartItems} />}
           />
-          <Route
-            exact
-            path="/send-review/:productId"
-            element={<SendReview />}
-          />
           <Route exact path="/settings/:userId" element={<PrivateRoute />} />
           <Route path="*" element={<Error404 />} />
 
-          <Route
-            exact
-            path="/products/:id"
-            element={<CardDetail handleAddToCart={handleAddToCart} />}
-          ></Route>
-          <Route
-            exact
-            path="/products/:id"
-            element={<CardDetail handleAddToCart={handleAddToCart} />}
-          ></Route>
-          <Route exact path="/create" element={<CreateProduct />}></Route>
-          <Route exact path="/category" element={<NewCategory />}></Route>
+
           {/* <Route exact path="/tienda/:idTienda" element={<ContainerT/>}> </Route> */}
 
-          <Route path="*" element={<Error404 />}></Route>
           <Route exact path="/tienda/:idTienda" element={<ContainerT />} />
           <Route exact path="/createShop" element={<PrivateShop />} />
           <Route
