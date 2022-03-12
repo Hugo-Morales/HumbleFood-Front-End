@@ -26,7 +26,7 @@ const Card = ({ product, handleAddToCart, shop }) => {
               </Link>
               <span className="text-xs text-indigo-300 mt-0">{categories.join(' ')}</span>
             </div>
-            <p className="text-xs text-gray-500 w-4/5">{description}</p>
+            {/* <p className="text-xs text-gray-500 w-4/5">{description}</p> */}
             <div className="w-full flex flex-col">
               <div className="w-full flex justify-end items-center pr-5 pb-1">
                 <h1 className="font-bold text-green-500">{discount}% OFF</h1>

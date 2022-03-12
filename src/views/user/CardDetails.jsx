@@ -12,6 +12,7 @@ const CardDetail = ({ handleAddToCart }) => {
   const spinner = useSelector((state) => state.isLoading);
   const detailProduct = useSelector((state) => state.detailProduct);
   const { id } = useParams([0]);
+  console.log("detail", detailProduct);
 
   useEffect(() => {
     dispatch(loading());

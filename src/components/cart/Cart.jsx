@@ -1,4 +1,4 @@
-import { Fragment, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 import { Dialog, Transition } from "@headlessui/react";
 import { XIcon } from "@heroicons/react/outline";
@@ -19,6 +19,7 @@ export default function Cart({
   open,
   setOpen,
   cartItems,
+  setCartItems,
   shopEmail,
   handleAddToCart,
   handleRemoveFromCart,
@@ -26,21 +27,30 @@ export default function Cart({
 }) {
   const [checkout, setCheckout] = useState(false);
   const { user } = useAuth0();
-  // const product = {
-  //   description: "Design Code",
-  //   price: 4,
-  // };
+
+  useEffect(() => {
+    if (cartItems.length) {
+      return () => {
+        alert("Me vacié");
+        setCartItems([]);
+      };
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [setCartItems]);
 
   // model Orders {
+  //   id
   //   state       Int
   //   shopId      String
   //   productsId  String[]
-  //   cartId      String //@db.ObjectId Cuidado con este
   //   total       Float
   //   userId      String
   // }
 
-  const productsId = cartItems.map((item) => item.id);
+  const productsId = cartItems.map((item) => ({
+    id: item.id,
+    cantidad: item.amount,
+  }));
 
   let order = {
     state: 0,
@@ -162,7 +172,9 @@ export default function Cart({
                         <div className="paypal-button-container">
                           <PaypalCheckoutButton
                             cartItems={cartItems}
+                            setCartItems={setCartItems}
                             shopEmail={shopEmail}
+                            setOpen={setOpen}
                           />
                         </div>
                       ) : (
