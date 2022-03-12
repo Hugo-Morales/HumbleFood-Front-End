@@ -13,6 +13,7 @@ export const POST_NEW_USER = "POST_NEW_USER";
 export const GET_DATA_USER = "GET_DATA_USER";
 export const GET_ALL_USERS = 'GET_ALL_USERS';
 export const LOADING_PANEL = 'LOADING_PANEL';
+export const GET_NAME_OF_SHOP = "GET_NAME_OF_SHOP";
 const URL = process.env.REACT_APP_URL;
 
 export const postnewUser = (newUser) => {
@@ -218,6 +219,23 @@ export const admin = (email) => async () => {
   try {
     axios.put(`${URL}user/${email}`)
   } catch (error) {
-    console.error(error)
+    console.error(error);
   }
-}
+};
+
+export const getnameOfShop = (id) => {
+  return async (dispatch) => {
+    try {
+      const nameShop = await axios.get(
+        `${URL}shop/${id}`
+      );
+      console.log(nameShop.data.shop.name);
+      dispatch({
+        type: GET_NAME_OF_SHOP,
+        payload: nameShop.data.shop.name,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};

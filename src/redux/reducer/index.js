@@ -10,6 +10,7 @@ import {
   GET_DATA_USER,
   GET_ALL_USERS,
   LOADING_PANEL,
+  GET_NAME_OF_SHOP,
 } from "../actions";
 
 const initialStore = {
@@ -20,6 +21,7 @@ const initialStore = {
   postnewShop: [],
   dataUser: {},
   allUser: [],
+  nameOfShop: "",
   isLoading: true,
   loadingPanel: true,
 };
@@ -37,6 +39,11 @@ export default function reducer(state = initialStore, { type, payload }) {
         ...state,
         dataUser: payload.user,
         loadingPanel: false,
+      };
+    case GET_NAME_OF_SHOP:
+      return {
+        ...state,
+        nameOfShop: payload,
       };
     case GET_DETAIL_PRODUCT:
       return {
