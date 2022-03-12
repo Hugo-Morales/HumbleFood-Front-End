@@ -7,7 +7,6 @@ function PaypalCheckoutButton({ cartItems, shopEmail }) {
   const [paidFor, setPaidFor] = useState(false);
   const [error, setError] = useState(null);
 
-
   const handleAprove = (orderId) => {
     //Call backend function to fullfill order
     // if response is success
