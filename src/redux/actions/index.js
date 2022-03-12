@@ -1,4 +1,5 @@
 import axios from "axios";
+export const GET_SHOPS = "GET_SHOPS";
 export const GET_DETAIL_PRODUCT = "GET_DETAIL_PRODUCT";
 export const SEARCH_BY_NAME = "SEARCH_BY_NAME";
 export const GET_ALL_PRODUCTS = "GET_ALL_PRODUCTS";
@@ -8,13 +9,43 @@ export const RESET = "RESET";
 export const LOADING = "LOADING";
 export const POST_REVIEW = "POST_REVIEW";
 export const POST_PRODUCTS = "POST_PRODUCTS";
+export const FILTER_BY_CATEGORIES = 'FILTER_BY_CATEGORIES'
+export const FILTER_BY_DISCOUNT = 'FILTER_BY_DISCOUNT'
 export const POST_NEW_SHOP = "POST_NEW_SHOP";
 export const POST_NEW_USER = "POST_NEW_USER";
 export const GET_DATA_USER = "GET_DATA_USER";
+export const GET_SHOPS_ID = "GET_SHOPS_ID";
 export const GET_ALL_USERS = 'GET_ALL_USERS';
 export const LOADING_PANEL = 'LOADING_PANEL';
 export const GET_NAME_OF_SHOP = "GET_NAME_OF_SHOP";
 const URL = process.env.REACT_APP_URL;
+
+
+export const getShopsId = (id) => async (dispatch) => {
+  try {
+    const allShopsId = await axios.get(`${URL}shop/${id}`);
+    dispatch({
+      type: GET_SHOPS_ID,
+      payload: allShopsId.data,
+    })
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+
+export const getShops = () => async (dispatch) => {
+  try {
+    const allShops = await axios.get(`${URL}shops`);
+    dispatch({
+      type: GET_SHOPS,
+      payload: allShops.data,
+    })
+  } catch (error) {
+    console.log(error)
+  }
+}
+
 
 export const postnewUser = (newUser) => {
   return async () => {
@@ -104,6 +135,14 @@ export const postproducts = (input) => {
     }
   };
 };
+export const NewCategory = () => {
+  return async () => {
+    const name = prompt("save New Category ");
+    await axios.post(`${URL}category`, {
+      name,
+    });
+  };
+};
 
 export const postNewShop = (newShop) => async (dispatch) => {
   try {
@@ -140,7 +179,6 @@ export const getProductShop = (id, page) => async (dispatch) => {
     const products = await axios.get(
       `${URL}productShop/${id}?page=${page}`
     );
-
     dispatch({
       type: GET_PRODUCTS_SHOP,
       payload: products.data,
@@ -184,6 +222,19 @@ export const postReview = (review) => async (dispatch) => {
   }
 };
 
+export function filterProductsByCategories(payload) {
+  return {
+    type: FILTER_BY_CATEGORIES,
+    payload,
+  };
+}
+export function filterByDiscount(payload) {
+  return {
+    type: FILTER_BY_DISCOUNT,
+    payload
+  }
+}
+
 export const deleteProduct = (id) => async () => {
   try {
     await axios.delete(`${URL}product/delete/${id}`);
@@ -203,7 +254,7 @@ export const getAllUser = (page) => async (dispatch) => {
       payload: products.data,
     });
   } catch (error) {
-    console.error(error)
+    console.error(error);
   }
 }
 

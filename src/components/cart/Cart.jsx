@@ -1,10 +1,12 @@
 import { Fragment, useState } from "react";
+import { useAuth0 } from "@auth0/auth0-react";
 import { Dialog, Transition } from "@headlessui/react";
 import { XIcon } from "@heroicons/react/outline";
 import { MdShoppingCart } from "react-icons/md";
 import { AiOutlineDollarCircle } from "react-icons/ai";
 import CartItem from "./CartItem";
 import Paypal from "../Paypal/Paypal";
+// import { Link, useParams } from "react-router-dom";
 
 export function calculateTotal(items) {
   return items
@@ -20,13 +22,36 @@ export default function Cart({
   handleDeleteFromCart,
 }) {
   const [checkout, setCheckout] = useState(false);
+  const { user } = useAuth0();
+
+  // model Orders {
+  //   state       Int
+  //   shopId      String
+  //   productsId  String[]
+  //   cartId      String //@db.ObjectId Cuidado con este
+  //   total       Float
+  //   userId      String
+  // }
+
+  const productsId = cartItems.map((item) => item.id);
+
+  let order = {
+    state: 0,
+    productsId: productsId,
+    total: calculateTotal(cartItems),
+    userId: user?.sub.split("|")[1],
+  };
+  console.log("order", order);
 
   return (
     <Transition.Root show={open} as={Fragment}>
       <Dialog
         as="div"
         className="fixed inset-0 overflow-hidden"
-        onClose={setOpen}
+        onClose={() => {
+          setOpen(false);
+          setCheckout(false);
+        }}
       >
         <div className="absolute inset-0 overflow-hidden">
           <Transition.Child
@@ -87,6 +112,7 @@ export default function Cart({
                               handleAddToCart={handleAddToCart}
                               handleRemoveFromCart={handleRemoveFromCart}
                               handleDeleteFromCart={handleDeleteFromCart}
+                              checkout={checkout}
                             />
                           ))}
                         </ul>
@@ -104,7 +130,7 @@ export default function Cart({
                     >
                       <h2 className="text-2xl">
                         {" "}
-                        Total:{" "}
+                        Total del Carrito:{" "}
                         <span className="font-extrabold">
                           ${calculateTotal(cartItems)}
                         </span>
@@ -114,6 +140,17 @@ export default function Cart({
                       Envío e impuestos calculados al finalizar la compra.
                     </p>
                     <div className="mt-6 w-full">
+                      <button
+                        type="button"
+                        onClick={() => setCheckout(false)}
+                        className={
+                          checkout
+                            ? "w-full mb-4 p-2 font-medium text-indigo-600 border-solid border-2 border-indigo-600 rounded hover:text-isabelline hover:bg-indigo-500"
+                            : "hidden"
+                        }
+                      >
+                        Modificar Carrito
+                      </button>
                       {checkout ? (
                         <Paypal
                           className={cartItems.length ? "w-full" : "hidden"}
@@ -121,12 +158,13 @@ export default function Cart({
                         />
                       ) : (
                         <button
+                          type="button"
                           onClick={() => {
                             setCheckout(true);
                           }}
                           className={
                             cartItems.length
-                              ? "flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700"
+                              ? "w-full flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700"
                               : "hidden"
                           }
                         >

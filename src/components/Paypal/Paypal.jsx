@@ -8,6 +8,7 @@ function Paypal({ cartItems }) {
     window.paypal
       .Buttons({
         createOrder: (data, actions, error) => {
+          console.log(actions);
           return actions.order.create({
             intent: "CAPTURE",
             purchase_units: [
@@ -30,9 +31,8 @@ function Paypal({ cartItems }) {
         },
       })
       .render(paypal.current);
-      // console.log(paypal.current)
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [cartItems]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <div>

@@ -68,7 +68,6 @@ export default function SideLeft({ name, setId, rol, shopsId }) {
             rol === 1 ? (<Shop setId={setId} />) :
               rol === 0 ? (<User setId={setId} />) : (null)
         }
-
         {
           rol === 1 || rol === 0 ? (<>
             {/* Configurar Perfil */}
@@ -86,7 +85,7 @@ export default function SideLeft({ name, setId, rol, shopsId }) {
         <Button
           div="flex bg-red-600 justify-center p-2 rounded-lg mt-9 items-center cursor-pointer"
           text="Cerrar Sesión"
-          buttonClass="flex items-center font-bold"
+          buttonclass="flex items-center font-bold"
           icon={<AiOutlineLogout className="mr-2" />}
           f={() => logout({ returnTo: window.location.origin })}
         />

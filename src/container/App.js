@@ -7,6 +7,9 @@ import LandingPage from "../views/landingpage/landing";
 import SendReview from "../views/user/SendReview";
 import PrivateShop from "../routes/PrivateShop";
 import PrivateRoute from "../routes/PrivateRoute";
+import ShoppingList from "../components/cart/Cart";
+import NewCategory from "../components/category/NewCategory";
+import HomeShops from "../views/user/HomeShops";
 
 function App() {
   const [cartItems, setCartItems] = useState([]);
@@ -70,9 +73,10 @@ function App() {
       <div className="App">
         <Routes>
           <Route exact path="/" element={<LandingPage />} />
+          <Route exact path="/home" element={<HomeShops />} />
           <Route
             exact
-            path="/home"
+            path="/productShop/:shopId"
             element={
               <Home
                 cartItems={cartItems}
@@ -91,10 +95,16 @@ function App() {
           />
           <Route
             exact
+            path="/shopping-list"
+            element={<ShoppingList cartItems={cartItems} />}
+          />
+          <Route
+            exact
             path="/send-review/:productId"
             element={<SendReview />}
           />
           <Route exact path="/settings/:userId" element={<PrivateRoute />} />
+          <Route exact path="/category" element={<NewCategory />} />
           <Route path="*" element={<Error404 />} />
         </Routes>
       </div>

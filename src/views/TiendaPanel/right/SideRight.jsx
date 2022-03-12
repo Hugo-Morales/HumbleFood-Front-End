@@ -1,5 +1,5 @@
 import Table from "./Table";
-import CreateProducts from './Create/CreateProducts';
+import CreateProducts from "./Create/CreateProducts";
 import HacerAdmin from "./make/HacerAdmin";
 import Styles from "./SideRight.module.css";
 
