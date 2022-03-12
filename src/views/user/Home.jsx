@@ -8,6 +8,7 @@ import Paginado from '../../components/paginado/Paginado'
 import Carousell from "../../components/carousell/Carousell";
 import { useParams } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
+import Banners from "../../components/shops/Banners";
 // import Carousell from "../../components/carousell/Carousell";
 
 const Home = ({
@@ -21,6 +22,8 @@ const Home = ({
   const { products, next, prev, pagesTotal } = useSelector(
     (state) => state.productShop
   );
+
+
 
   const { shopId } = useParams();
 
@@ -97,7 +100,7 @@ const Home = ({
               <div className="lg:grid lg:grid-cols-2">
                 <div className="py-10 px-10 lg:px-0 max-w-3xl lg:max-w-md mx-auto">
                   <h2 className="text-4xl tracking-tight font-extrabold text-gray-100">
-                    <span className="block">Ready to dive in?</span>
+                    <span className="block"></span>
                     <span className="block">Start your free trial today.</span>
                   </h2>
                   <p className="text-gray-300 mt-5">
@@ -128,6 +131,7 @@ const Home = ({
 
             {/* <Carousell /> */}
             {/* <InformacionShop /> */}
+
             <Cards
               products={products}
               handleAddToCart={handleAddToCart}

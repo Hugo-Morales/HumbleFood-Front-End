@@ -14,6 +14,7 @@ import NewCategory from "../components/category/NewCategory";
 import CreateProduct from "../views/TiendaPanel/right/Create/CreateProducts";
 // import Card from "../components/cards/Card";
 import HomeShops from "../views/user/HomeShops";
+import Banner from "../components/shops/Banner";
 
 function App() {
   const [cartItems, setCartItems] = useState([]);
@@ -114,6 +115,7 @@ function App() {
             path="/send-review/:productId"
             element={<SendReview />}
           />
+          <Route exact path ='/Banner' element={<Banner/>}></Route>
         </Routes>
       </div>
     </BrowserRouter>

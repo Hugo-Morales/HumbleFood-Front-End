@@ -36,7 +36,7 @@ export const getShopsId = (id) => async (dispatch) => {
 
 export const getShops = () => async (dispatch) => {
   try {
-    const allShops = await axios.get("https://back-end-prueba.herokuapp.com/shops");
+    const allShops = await axios.get(`${URL}shops`);
     dispatch({
       type: GET_SHOPS,
       payload: allShops.data,
