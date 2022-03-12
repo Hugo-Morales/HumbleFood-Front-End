@@ -86,7 +86,7 @@ export default function SideLeft({ name, setId, rol, shopsId }) {
 				<Button
 					div="flex bg-red-600 justify-center p-2 rounded-lg mt-9 items-center cursor-pointer"
 					text="Cerrar Sesión"
-					buttonclass="flex items-center font-bold"
+					buttonClass="flex items-center font-bold"
 					icon={<AiOutlineLogout className="mr-2" />}
 					f={() => logout({ returnTo: window.location.origin })}
 				/>
