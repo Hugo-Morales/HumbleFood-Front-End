@@ -98,10 +98,10 @@ export const getDetailProduct = (idShop, idProduct) => async (dispatch) => {
     console.log(error);
   }
 };
-
-export const searchByName = (nameoffood) => async (dispatch) => {
+// https://back-end-prueba.herokuapp.com/productShop/6220d6937a2aaada4b5de940?name=Tomates
+export const searchByName = (shopId, nameoffood) => async (dispatch) => {
   try {
-    const found_product = await axios.get(`${URL}products?name=${nameoffood}`);
+    const found_product = await axios.get(`${URL}productShop/${shopId}?name=${nameoffood}`);
     dispatch({
       type: SEARCH_BY_NAME,
       payload: found_product.data,

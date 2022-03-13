@@ -1,12 +1,14 @@
-import { Fragment, useState } from "react";
+import { Fragment, useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useAuth0 } from "@auth0/auth0-react";
 import { Dialog, Transition } from "@headlessui/react";
 import { XIcon } from "@heroicons/react/outline";
 import { MdShoppingCart } from "react-icons/md";
 import { AiOutlineDollarCircle } from "react-icons/ai";
+import { getdataUser } from "../../redux/actions";
 import CartItem from "./CartItem";
-// import Paypal from "../Paypal/Paypal";
 import PaypalCheckoutButton from "../Paypal/PaypalCheckoutButton";
+import { useParams } from "react-router-dom";
 // import { Link, useParams } from "react-router-dom";
 
 export function calculateTotal(items) {
@@ -28,16 +30,27 @@ export default function Cart({
   const [checkout, setCheckout] = useState(false);
   const { user } = useAuth0();
 
+  const { shopId } = useParams();
+
+  const dispatch = useDispatch();
+  const dataUser = useSelector((state) => state.dataUser);
+
+  const userId = user?.sub.split("|")[1];
+
+  useEffect(() => {
+    dispatch(getdataUser(userId));
+  }, [dispatch, userId]);
+
+  // console.log("dataUser", dataUser.id);
+
   // useEffect(() => {
   //   if (cartItems.length) {
   //     return () => {
-  //       alert("Me vacié");
   //       setCartItems([]);
+  //       alert("Me vacié");
   //     };
   //   }
-  // // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, []);
-
+  // }, [cartItems, setCartItems]);
 
   // model Orders {
   //   id
@@ -56,8 +69,9 @@ export default function Cart({
   let order = {
     state: 0,
     productsId: productsId,
+    shopId: shopId,
     total: calculateTotal(cartItems),
-    userId: user?.sub.split("|")[1],
+    userId: dataUser.id,
   };
   console.log("order", order);
 
