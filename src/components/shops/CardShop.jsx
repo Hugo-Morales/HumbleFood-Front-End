@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 
 const CardShop = ({ shop }) => {
-  const { id, name, image, description, direction, userId } = shop;
+  const { id, name, image, description } = shop;
 
   return (
     <>

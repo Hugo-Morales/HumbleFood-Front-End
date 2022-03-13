@@ -138,7 +138,7 @@ export default function Table({
                                 <p>${(p?.price * p?.stock).toFixed(2)}</p>
                               </div>
                               <div className="text-gray-500">
-                                <p>${p?.price} c/stock</p>
+                                <p> ${p?.price} c/stock</p>
                               </div>
                             </>
                           )}

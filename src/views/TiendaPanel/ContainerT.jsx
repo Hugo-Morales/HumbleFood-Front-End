@@ -23,6 +23,7 @@ export default function ContainerT({ user }) {
   const { userId } = useParams();
   const pages =
     usuario?.rol === 2 ? allproducts.pagesTotal : productos.pagesTotal;
+
   // console.log(user, 'user');
   // console.log(currentPage);
 
@@ -38,9 +39,12 @@ export default function ContainerT({ user }) {
 
     if (usuario?.rol === 2) {
       dispatch(getallproducts(currentPage));
-    } else if (usuario?.rol === 1) {
-      dispatch(getProductShop(usuario?.shopsId, currentPage));
     }
+    // } else if (usuario?.rol === 1) {
+    //   dispatch(getProductShop(usuario?.shopsId, currentPage));
+    // } else if (usuario?.rol === 0) {
+    //   dispatch(getallproducts(currentPage));
+    // }
 
     return () => {
       dispatch(reset());
