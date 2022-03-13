@@ -22,23 +22,17 @@ const initialStore = {
   allproducts: [],
   detailProduct: [],
   categories: [],
-<<<<<<< HEAD
-  postnewShop: [],
-=======
   productShop: [],
   postnewShop: [],
   dataUser: {},
   allUser: [],
   nameOfShop: "",
->>>>>>> 40165b75c64ac26cf3230a2cf0225626c6f874cd
   isLoading: true,
   loadingPanel: true,
 };
 
 export default function reducer(state = initialStore, { type, payload }) {
   switch (type) {
-<<<<<<< HEAD
-=======
     case GET_SHOPS:
       return {
         ...state,
@@ -50,7 +44,6 @@ export default function reducer(state = initialStore, { type, payload }) {
         ...state,
         shop: payload,
       };
->>>>>>> 40165b75c64ac26cf3230a2cf0225626c6f874cd
     case GET_ALL_PRODUCTS:
       return {
         ...state,

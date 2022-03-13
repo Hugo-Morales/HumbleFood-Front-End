@@ -9,15 +9,11 @@ import Cart from "../cart/Cart";
 import SearchBar from "../serchbar/SearchBar";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useDispatch, useSelector } from "react-redux";
-<<<<<<< HEAD
-import { getCategories, getExistingUser } from "../../redux/actions";
-=======
 import {
   filterByDiscount,
   filterProductsByCategories,
   getCategories,
 } from "../../redux/actions";
->>>>>>> 40165b75c64ac26cf3230a2cf0225626c6f874cd
 
 const StyledButton = styled(IconButton)`
   position: fixed;
@@ -39,31 +35,8 @@ const Nav = ({
   const categories = useSelector((state) => state.categories);
   const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
-<<<<<<< HEAD
-
-  
-  useEffect(() => {
-    (async () => {
-      try {
-        if(isAuthenticated){
-          // const token = await getAccessTokenSilently();
-          //console.log(token.aud);
-          // localStorage.setItem("hora", JSON.stringify(token));
-         
-          user.userId = user.sub.split('|')[1] ;
-          console.log(user);
-        }
-      } catch (error) {
-        console.log(error);
-      }
-    })()
-
-  }, []);
-
-=======
   const user_id = user?.sub.split("|")[1];
   
->>>>>>> 40165b75c64ac26cf3230a2cf0225626c6f874cd
   useEffect(() => {
     dispatch(getCategories());
   }, [dispatch]);

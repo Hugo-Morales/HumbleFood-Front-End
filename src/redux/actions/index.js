@@ -3,13 +3,6 @@ export const GET_SHOPS = "GET_SHOPS";
 export const GET_DETAIL_PRODUCT = "GET_DETAIL_PRODUCT";
 export const SEARCH_BY_NAME = "SEARCH_BY_NAME";
 export const GET_ALL_PRODUCTS = "GET_ALL_PRODUCTS";
-<<<<<<< HEAD
-export const GET_CATEGORIES = 'GET_CATEGORIES';
-export const GET_PRODUCTS_SHOP = 'GET_PRODUCTS_SHOP';
-export const RESET = 'RESET';
-export const LOADING = 'LOADING';
-export const POST_NEW_SHOP = "POST_NEW_SHOP";
-=======
 export const GET_CATEGORIES = "GET_CATEGORIES";
 export const GET_PRODUCTS_SHOP = "GET_PRODUCTS_SHOP";
 export const RESET = "RESET";
@@ -79,7 +72,6 @@ export const getdataUser = (id) => {
     }
   };
 };
->>>>>>> 40165b75c64ac26cf3230a2cf0225626c6f874cd
 
 export const getallproducts = (page) => async (dispatch) => {
   try {
@@ -164,11 +156,7 @@ export const getCategories = () => async (dispatch) => {
   }
 };
 
-<<<<<<< HEAD
-export const getProductShop = (id) => async (dispatch) => {
-=======
 export const getProductShop = (id, page) => async (dispatch) => {
->>>>>>> 40165b75c64ac26cf3230a2cf0225626c6f874cd
   try {
     const products = await axios.get(`${URL}productShop/${id}?page=${page}`);
     dispatch({
@@ -180,11 +168,7 @@ export const getProductShop = (id, page) => async (dispatch) => {
   }
 };
 
-<<<<<<< HEAD
-export const reset = () => dispatch => {
-=======
 export const reset = () => (dispatch) => {
->>>>>>> 40165b75c64ac26cf3230a2cf0225626c6f874cd
   dispatch({
     type: RESET,
   });
