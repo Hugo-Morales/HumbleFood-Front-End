@@ -10,7 +10,6 @@ import SearchBar from "../serchbar/SearchBar";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  filterByDiscount,
   filterProductsByCategories,
   getCategories,
 } from "../../redux/actions";
@@ -44,8 +43,12 @@ const Nav = ({
   console.log(user.email);
 =======
   const user_id = user?.sub.split("|")[1];
+<<<<<<< HEAD
   
 >>>>>>> 40165b75c64ac26cf3230a2cf0225626c6f874cd
+=======
+
+>>>>>>> 174dde2c47bbf142dc3cb015061c0660672b87ca
   useEffect(() => {
     dispatch(getCategories());
   }, [dispatch]);
@@ -54,24 +57,20 @@ const Nav = ({
     dispatch(filterProductsByCategories(e.target.value));
     console.log(e.target.value);
   }
-  function handleSort(e) {
-    e.preventDefault();
-    dispatch(filterByDiscount(e.target.value));
-  }
 
   return (
     <div className="font-poppins w-full h-24 bg-ochre flex justify-between">
       <div className="w-1/3 flex justify-between items-center p-1">
         <Link to="/home" className="ml-4">
-          <img src={logo} className="w-20" alt="logo" />
+          <img src={logo} className="w-10 sm:w-11 lg:w-16" alt="logos" />
         </Link>
         <div className="ml-4">
           <SearchBar />
         </div>
-        <div className="ml-4 w-full text-isabelline font-bold flex justify-around items-center">
+        <div className="ml-8 w-full text-isabelline font-bold flex justify-around items-center">
           <select
             onChange={(e) => handleFilterCategories(e)}
-            name="category"
+            name="categorys"
             className="p-2 h-10 focus:outline-none bg-ochre hover:bg-princetonOrange font-bold border-none text-center"
           >
             <option value="All">Categorías</option>
@@ -83,13 +82,8 @@ const Nav = ({
               );
             })}
           </select>
-          {/* <Link to="/offers" className="ml-4 p-2 h-10 hover:bg-princetonOrange"> */}
-          <select onClick={handleSort}>
-            <option value="">hola</option>
-            <option value="ofertas">Ofertas</option>
-          </select>
-          {/* </Link> */}
-          <Link to="/offers" className="ml-4 p-2 h-10 hover:bg-princetonOrange">
+
+          <Link to="/offers" className="ml-8 p-2 h-10 hover:bg-princetonOrange">
             Ofertas
           </Link>
         </div>
@@ -121,8 +115,12 @@ const Nav = ({
         {isAuthenticated ? (
           <div className="flex items-center">
             <h3 className="mr-3">
+<<<<<<< HEAD
               Bienvenido {user.given_name ? user.given_name : user.nickname}{" "}
               
+=======
+              Bienvenid@ {user.given_name ? user.given_name : user.nickname}{" "}
+>>>>>>> 174dde2c47bbf142dc3cb015061c0660672b87ca
             </h3>
             <img
               src={user.picture}
@@ -158,7 +156,7 @@ const Nav = ({
               <path d="M6.168 18.849a4 4 0 0 1 3.832 -2.849h4a4 4 0 0 1 3.834 2.855" />
             </svg>
             <span className="text-sm text-white dark:text-gray-200">
-              Iniciar / Crear Cuenta
+              Iniciar / Crear Cuenta d
             </span>
           </button>
         )}

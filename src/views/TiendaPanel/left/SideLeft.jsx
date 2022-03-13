@@ -14,7 +14,7 @@ export default function SideLeft({ name, setId, rol, shopsId }) {
 	// console.log(rol, shopsId)
 
 	return (
-		<div className="bg-gray-700 overflow-y-auto h-screen p-6">
+		<div className="bg-gray-700 sticky top-0 sm-h-30 h-screen p-6">
 			<ButtonExit
 				text="Volver al home"
 				ruta="/home"
@@ -86,7 +86,7 @@ export default function SideLeft({ name, setId, rol, shopsId }) {
 				<Button
 					div="flex bg-red-600 justify-center p-2 rounded-lg mt-9 items-center cursor-pointer"
 					text="Cerrar Sesión"
-					buttonclass="flex items-center font-bold"
+					buttonClass="flex items-center font-bold"
 					icon={<AiOutlineLogout className="mr-2" />}
 					f={() => logout({ returnTo: window.location.origin })}
 				/>

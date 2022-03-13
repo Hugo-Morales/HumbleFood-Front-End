@@ -87,9 +87,9 @@ export const getallproducts = (page) => async (dispatch) => {
   }
 };
 
-export const getDetailProduct = (id) => async (dispatch) => {
+export const getDetailProduct = (idShop, idProduct) => async (dispatch) => {
   try {
-    const detailProduct = await axios.get(`${URL}products?id=${id}`);
+    const detailProduct = await axios.get(`${URL}productShop/${idShop}?id=${idProduct}`);
     dispatch({
       type: GET_DETAIL_PRODUCT,
       payload: detailProduct.data,
@@ -99,9 +99,9 @@ export const getDetailProduct = (id) => async (dispatch) => {
   }
 };
 
-export const searchByName = (nameoffood) => async (dispatch) => {
+export const searchByName = (shopId, nameoffood) => async (dispatch) => {
   try {
-    const found_product = await axios.get(`${URL}products?name=${nameoffood}`);
+    const found_product = await axios.get(`${URL}productShop/${shopId}?name=${nameoffood}`);
     dispatch({
       type: SEARCH_BY_NAME,
       payload: found_product.data,

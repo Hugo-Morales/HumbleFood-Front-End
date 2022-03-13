@@ -15,6 +15,7 @@ export default function HacerAdmin() {
 	const cargando = useSelector((state) => state.loadingPanel);
 
 	useEffect(() => {
+		dispatch(loading_panel());
 		dispatch(getAllUser(0));
 	}, [dispatch]);
 
