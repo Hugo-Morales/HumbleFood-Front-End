@@ -20,9 +20,10 @@ const Home = ({
 	const { products, next, prev, pagesTotal } = useSelector(
 		(state) => state.productsloaded
 	);
+	// const shops = useSelector((state) => state.shops);
 	const shop = useSelector((state) => state.shop);
-	const cargando = useSelector((state) => state.isLoading);
 	const [currentPage, setCurrentPage] = useState(0);
+	const cargando = useSelector((state) => state.isLoading);
 
 	const paging = (num) => {
 		if (num >= 0 && num <= pagesTotal) setCurrentPage(num);
@@ -35,7 +36,9 @@ const Home = ({
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [dispatch, shopId, currentPage]);
 
+	// console.log(shops);
 	// console.log("shopshop", shop);
+
 	return (
 		<div>
 			{cargando ? (
@@ -50,20 +53,14 @@ const Home = ({
 						handleRemoveFromCart={handleRemoveFromCart}
 						handleDeleteFromCart={handleDeleteFromCart}
 					/>
-					<div className="bg-gray-600">
+					<div className="bg-gray-500">
 						<div className="lg:grid lg:grid-cols-2">
-							<div className="py-10 px-10 lg:px-0 max-w-3xl lg:max-w-md mx-auto">
+							<div className="py-10 px-10 lg:px-0 max-w-3xl lg:max-w-md mx-auto font-bold 	font-weight: 700">
 								<h2 className="text-4xl tracking-tight font-extrabold text-gray-100">
-									<span className="block">Ready to dive in?</span>
-									<span className="block">Start your free trial today.</span>
+									<span className="block">{shop.name}</span>
 								</h2>
-								<p className="text-gray-300 mt-5">
-									Lorem Ipsum is simply dummy text of the printing and
-									typesetting industry. Lorem Ipsum has been the industry's
-									standard dummy text ever since the 1500s, when an unknown
-									printer took a galley of type and scrambled it to make a type
-									specimen book.
-								</p>
+								<p className="text-gray-300 mt-5">{shop.description}</p>
+
 								<div className="inline-block shadow mt-5">
 									<a
 										href="!#"
@@ -76,7 +73,7 @@ const Home = ({
 							<div className="lg:relative lg:mt-16">
 								<img
 									className="lg:absolute lg:inset-0 h-10 w-full lg:h-full object-cover object-center lg:rounded-tl-md"
-									src="https://alfabetajuega.com/hero/2019/04/CJ-1.jpg?width=1200&aspect_ratio=1200:631"
+									src={shop.image}
 									alt="Woman workcation on the beach"
 								/>
 							</div>
