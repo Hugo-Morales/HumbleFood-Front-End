@@ -13,7 +13,7 @@ const NavShop = () => {
 		<div className="font-poppins w-full h-24 bg-ochre flex justify-between">
 			<div className="w-1/2 flex justify-start items-center p-1">
 				<Link to="/home" className="ml-4">
-					<img src={logo} className="w-20" alt="logo" />
+					<img src={logo} className="w-10 sm:w-11 lg:w-16" alt="logo" />
 				</Link>
 				<div className="ml-4">
 					<SearchBar />
@@ -22,8 +22,8 @@ const NavShop = () => {
 			<div
 				className={
 					isAuthenticated
-						? "w-1/4 flex justify-around items-center mr-8"
-						: "w-1/6 flex justify-beetwen items-center mr-8"
+						? "w-1/4 flex justify-around items-center md:mr-8"
+						: "w-1/6 flex justify-beetwen items-center md:mr-8"
 				}
 			>
 				{isAuthenticated ? (
@@ -62,8 +62,8 @@ const NavShop = () => {
 							<circle cx="12" cy="10" r="3" />
 							<path d="M6.168 18.849a4 4 0 0 1 3.832 -2.849h4a4 4 0 0 1 3.834 2.855" />
 						</svg>
-						<span className="text-sm text-white dark:text-gray-200">
-							Iniciar / Crear Cuenta
+						<span className="text-sm text-white dark:text-gray-200 hidden md:block">
+							Iniciar / Crear Cuentas
 						</span>
 					</button>
 				)}

@@ -19,7 +19,6 @@ const initialStore = {
   shop: [],
   shops: [],
   productsloaded: [],
-  allproducts: [],
   detailProduct: [],
   categories: [],
   productShop: [],
@@ -99,6 +98,7 @@ export default function reducer(state = initialStore, { type, payload }) {
       return {
         ...state,
         detailProduct: [],
+        productsloaded: [],
         isLoading: true,
       };
     case LOADING:
