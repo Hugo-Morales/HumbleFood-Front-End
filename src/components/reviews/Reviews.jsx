@@ -21,7 +21,7 @@ function Reviews() {
 
   const rating = reviews.map((r) => r.pointProduct);
   const generalRating = rating.reduce((acc, rating) => acc + rating, 0);
-  
+
   return (
     <div className="mt-16">
       <div className="flex mb-8">

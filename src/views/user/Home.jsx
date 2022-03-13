@@ -23,6 +23,8 @@ const Home = ({
     (state) => state.productShop
   );
   const shop = useSelector((state) => state.shop);
+  const shops = useSelector((state) => state.shops);
+  console.log(shop, "shop");
   const loading = useSelector((state) => state.isLoading);
   const [currentPage, setCurrentPage] = useState(0);
   const { isAuthenticated, user } = useAuth0();
@@ -49,9 +51,9 @@ const Home = ({
 
   useEffect(() => {
     dispatch(getShopsId(shopId));
-    dispatch(getProductShop(shopId));
+    dispatch(getProductShop(shopId, currentPage));
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dispatch, shopId]);
+  }, [dispatch, shopId, currentPage]);
 
   console.log("shopshop", shop);
   return (
@@ -100,11 +102,7 @@ const Home = ({
                     <span className="block">Start your free trial today.</span>
                   </h2>
                   <p className="text-gray-300 mt-5">
-                    Lorem Ipsum is simply dummy text of the printing and
-                    typesetting industry. Lorem Ipsum has been the industry's
-                    standard dummy text ever since the 1500s, when an unknown
-                    printer took a galley of type and scrambled it to make a
-                    type specimen book.
+                    {shops.shops.description}
                   </p>
                   <div className="inline-block shadow mt-5">
                     {/* <a

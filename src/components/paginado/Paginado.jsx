@@ -18,9 +18,9 @@ const Paginado = ({ paging, currentPage, pagesTotal, prev, next }) => {
           </button>
         </div>
       )}
-      {
-        pages.length === 1 ? (null) : (
-          pages.map((p) => (
+      {pages.length === 1
+        ? null
+        : pages.map((p) => (
             <button
               type="button"
               key={p}
@@ -29,8 +29,7 @@ const Paginado = ({ paging, currentPage, pagesTotal, prev, next }) => {
             >
               {p + 1}
             </button>
-          )))
-      }
+          ))}
       {prev && (
         <button
           type="button"
@@ -44,4 +43,4 @@ const Paginado = ({ paging, currentPage, pagesTotal, prev, next }) => {
   );
 };
 
-export default Paginado
+export default Paginado;

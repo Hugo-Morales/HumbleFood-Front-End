@@ -24,7 +24,8 @@ const InfoDataUser = ({ dataUser }) => {
       <div className="flex justify-center md:justify-end -mt-16">
         <img
           className="w-20 h-20 object-cover rounded-full border-2 border-indigo-500"
-          src={user?.picture} alt='none'
+          src={user?.picture}
+          alt="none"
         />
       </div>
       <div className="font-bold">
@@ -44,14 +45,13 @@ const InfoDataUser = ({ dataUser }) => {
         </h3>
         <h3>
           Tipo de cuenta:{" "}
-          {
-            dataUser?.rol === 2 ? (
-              <span className="text-lime-500">Admin Master</span>
-            ) : dataUser?.rol === 0 ? (
-              <span className="text-lime-500">Cliente Comprador</span>
-            ) : (
-              <span className="text-lime-500">Cliente Vendedor</span>
-            )}
+          {dataUser?.rol === 2 ? (
+            <span className="text-lime-500">Admin Master</span>
+          ) : dataUser?.rol === 0 ? (
+            <span className="text-lime-500">Cliente Comprador</span>
+          ) : (
+            <span className="text-lime-500">Cliente Vendedor</span>
+          )}
         </h3>
         {dataUser?.rol === 1 ? (
           <h3>
