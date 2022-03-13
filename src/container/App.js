@@ -107,7 +107,6 @@ function App() {
             path="/send-review/:productId"
             element={<SendReview />}
           />
-          <Route exact path='/Banner' element={<Banner />}></Route>
           <Route path="*" element={<Error404 />} />
         </Routes>
       </div>
