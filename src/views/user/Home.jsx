@@ -96,7 +96,7 @@ const Home = ({
                 <a href="#" className="bg-purple-800 py-4 px-8 text-white font-bold uppercase text-xs rounded hover:bg-gray-200 hover:text-gray-800">Contact us</a>
               </div>
             </div> */}
-            <div className="bg-green-400">
+            <div className="bg-gray-500">
               <div className="lg:grid lg:grid-cols-2">
                 <div className="py-10 px-10 lg:px-0 max-w-3xl lg:max-w-md mx-auto font-bold 	font-weight: 700">
                   <h2 className="text-4xl tracking-tight font-extrabold text-gray-100"

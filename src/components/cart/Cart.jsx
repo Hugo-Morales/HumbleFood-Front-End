@@ -71,7 +71,7 @@ export default function Cart({
     productsId: productsId,
     shopId: shopId,
     total: calculateTotal(cartItems),
-    userId: dataUser.id,
+    // userId: dataUser.id,
   };
   console.log("order", order);
 

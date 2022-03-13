@@ -16,7 +16,7 @@ export default function ContainerT({ user }) {
 	const [id, setId] = useState("");
 	const [currentPage, setCurrentPage] = useState(0);
 	const dispatch = useDispatch();
-	const productos = useSelector((state) => state.productShop);
+	const productos = useSelector((state) => state.productLoaded);
 	const cargando = useSelector((state) => state.isLoading);
 	const usuario = useSelector((state) => state.dataUser);
 
