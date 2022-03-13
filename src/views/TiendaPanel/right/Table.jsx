@@ -53,25 +53,25 @@ export default function Table({
                   <tr>
                     <th
                       scope="col"
-                      className="px-6 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider text-center"
+                      className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider text-center"
                     >
                       Nombre del Producto
                     </th>
                     <th
                       scope="col"
-                      className="px-6 py-3  text-xs font-medium text-gray-500 uppercase tracking-wider text-center"
+                      className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider text-center"
                     >
                       Stock
                     </th>
                     <th
                       scope="col"
-                      className="px-6 py-3  text-xs font-medium text-gray-500 uppercase tracking-wider text-center"
+                      className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider text-center"
                     >
                       {dataUser.rol === 2 ? "Nombre de la Tienda" : "Estado"}
                     </th>
                     <th
                       scope="col"
-                      className="px-6 py-3  text-xs font-medium text-gray-500 uppercase tracking-wider text-center"
+                      className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider text-center"
                     >
                       Precio Total
                     </th>
@@ -122,7 +122,7 @@ export default function Table({
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap text-center">
                           <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                            Creado
+                            Creada
                           </span>
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap text-sm text-center">
@@ -138,7 +138,7 @@ export default function Table({
                                 <p>${(p?.price * p?.stock).toFixed(2)}</p>
                               </div>
                               <div className="text-gray-500">
-                                <p> ${p?.price} c/stock</p>
+                                <p>${p?.price} c/stock</p>
                               </div>
                             </>
                           )}

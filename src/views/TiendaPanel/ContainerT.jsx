@@ -10,6 +10,7 @@ import {
   getdataUser,
   getallproducts,
   reset,
+  stop,
 } from "../../redux/actions";
 
 export default function ContainerT({ user }) {
@@ -38,6 +39,8 @@ export default function ContainerT({ user }) {
       dispatch(getallproducts(currentPage));
     } else if (usuario?.rol === 1) {
       dispatch(getProductShop(usuario?.shopsId, currentPage));
+    } else if (usuario?.rol === 0) {
+      dispatch(stop());
     }
 
     return () => {

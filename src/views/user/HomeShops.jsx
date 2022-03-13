@@ -11,6 +11,7 @@ export default function HomeShops() {
   const dispatch = useDispatch();
   const { isAuthenticated, user, isLoading } = useAuth0();
   const shops = useSelector((state) => state.shops);
+  console.log(shops);
   const cargando = useSelector((state) => state.isLoading);
 
   const newUser = {

@@ -24,7 +24,11 @@ const Paginado = ({ paging, currentPage, pagesTotal, prev, next }) => {
             <button
               type="button"
               key={p}
-              className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-I"
+              className={
+                p === currentPage
+                  ? "bg-gray-500 text-gray-800 font-bold py-2 px-4 rounded-I"
+                  : "bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-I"
+              }
               onClick={() => paging((currentPage = p))}
             >
               {p + 1}

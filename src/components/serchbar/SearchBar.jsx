@@ -1,6 +1,6 @@
 import React from "react";
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import { searchByName } from "../../redux/actions";
 
@@ -8,6 +8,8 @@ const SearchBar = () => {
   const [input, setInput] = useState("");
   const dispatch = useDispatch();
   const { shopId } = useParams();
+
+  // console.log("producto", filteredByName);
 
   const HandleInputChange = (e) => {
     e.preventDefault();

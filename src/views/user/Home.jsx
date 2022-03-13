@@ -1,7 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
-import { getProductShop, getShopsId } from "../../redux/actions";
+import {
+  getProductShop,
+  getShopsId,
+  postnewUser,
+  getShops,
+  loading,
+} from "../../redux/actions";
 import Nav from "../../components/nav/Nav";
 import Cards from "../../components/cards/Cards";
 import Loading from "../../components/loading/Loading";
@@ -19,31 +25,48 @@ const Home = ({
   const { shopId } = useParams();
   const dispatch = useDispatch();
   const { products, next, prev, pagesTotal } = useSelector(
-    (state) => state.productShop
+    (state) => state.productsloaded
   );
-  const shop = useSelector((state) => state.shop);
   const shops = useSelector((state) => state.shops);
-  console.log(shop, "shop");
-  const loading = useSelector((state) => state.isLoading);
+  console.log(shops);
+  const shop = useSelector((state) => state.shop);
+  // const loading = useSelector((state) => state.isLoading);
   const [currentPage, setCurrentPage] = useState(0);
-
-  // console.log(shop.email);
-  // console.log("shop", shop);
+  // const { isAuthenticated, user } = useAuth0();
+  const cargando = useSelector((state) => state.isLoading);
 
   const paging = (num) => {
     if (num >= 0 && num <= pagesTotal) setCurrentPage(num);
   };
 
   useEffect(() => {
+    dispatch(loading());
     dispatch(getShopsId(shopId));
     dispatch(getProductShop(shopId, currentPage));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch, shopId, currentPage]);
 
+  // console.log("shopshop", shop);
+
   console.log("shopshop", shop);
 
   return (
     <div>
+      {
+        cargando ? (
+          <Loading />
+        ) : (
+          <>
+            <Nav
+              cartItems={cartItems}
+              shopEmail={shop.email}
+              getTotalItems={getTotalItems}
+              handleAddToCart={handleAddToCart}
+              handleRemoveFromCart={handleRemoveFromCart}
+              handleDeleteFromCart={handleDeleteFromCart}
+            />
+            {/* <div class="bg-cover bg-center  h-auto text-white py-24 px-10 object-fill"  >
+=======
       {loading ? (
         <Loading />
       ) : (
@@ -76,33 +99,71 @@ const Home = ({
                   className="mt-1  mb-6 ml-10 mr-0 bg-red-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded-full"
                 />
               </div>
-              <div className="lg:relative lg:mt-16">
-                <img
-                  className="lg:absolute lg:inset-0 h-10 w-full lg:h-full object-cover object-center lg:rounded-tl-md"
-                  src="https://alfabetajuega.com/hero/2019/04/CJ-1.jpg?width=1200&aspect_ratio=1200:631"
-                  alt="Woman workcation on the beach"
-                />
+            </div> */}
+            <div className="bg-gray-500">
+              <div className="lg:grid lg:grid-cols-2">
+                <div className="py-10 px-10 lg:px-0 max-w-3xl lg:max-w-md mx-auto font-bold 	font-weight: 700">
+                  <h2 className="text-4xl tracking-tight font-extrabold text-gray-100">
+                    <span className="block">{shop.name}</span>
+                  </h2>
+                  <p className="text-gray-300 mt-5">
+                    {shop.description}
+                    {console.log(shop.description)}
+                  </p>
+
+                  <ButtonExit
+                    text="Volver a ver tiendas"
+                    ruta="/home"
+                    className="mt-4 bg-red-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded-full"
+                  />
+                </div>
+                <div className="lg:relative lg:mt-16">
+                  <img
+                    className="lg:absolute lg:inset-0 h-10 w-full lg:h-full object-cover object-center lg:rounded-tl-md"
+                    src={shop.image}
+                    alt="Woman workcation on the beach"
+                  />
+                </div>
               </div>
             </div>
-          </div>
 
-          {/* <InformacionShop /> */}
-          <Cards
-            products={products}
-            handleAddToCart={handleAddToCart}
-            cartItems={cartItems}
-          />
-          <Paginado
-            paging={paging}
-            currentPage={currentPage}
-            pagesTotal={pagesTotal}
-            prev={prev}
-            next={next}
-          />
-        </div>
-      )}
+            {/* <InformacionShop /> */}
+            <Cards
+              products={products}
+              handleAddToCart={handleAddToCart}
+              cartItems={cartItems}
+            />
+            <Paginado
+              paging={paging}
+              currentPage={currentPage}
+              pagesTotal={pagesTotal}
+              prev={prev}
+              next={next}
+            />
+          </>
+        )
+        // {
+        // cargando ? <Loading /> : <>
+        //   <Nav
+        //     cartItems={cartItems}
+        //     getTotalItems={getTotalItems}
+        //     handleAddToCart={handleAddToCart}
+        //     handleRemoveFromCart={handleRemoveFromCart}
+        //     handleDeleteFromCart={handleDeleteFromCart}
+        //   />
+        //   <Cards
+        //     products={products}
+        //     handleAddToCart={handleAddToCart}
+        //     cartItems={cartItems}
+        //   />
+        //   <Paginado paging={paging} currentPage={currentPage} pagesTotal={pagesTotal} prev={prev} next={next} />
+        // </>
+      }
     </div>
   );
+  {
+    /* <InformacionShop /> */
+  }
 };
 
 export default Home;
