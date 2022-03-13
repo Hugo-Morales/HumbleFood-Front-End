@@ -44,7 +44,7 @@ const CreateProduct = ({ shopId }) => {
 		stock: 0,
 		categories: [],
 		image: "",
-	});
+	})
 
 	const handleChange = (e) => {
 		const { name, value } = e.target;
@@ -84,9 +84,9 @@ const CreateProduct = ({ shopId }) => {
 			stock: Number(input.stock),
 			categoriesId: input.categories,
 			image: input.image,
-		};
-		dispatch(postproducts(produc));
-	};
+		}
+		dispatch(postproducts(produc))
+	}
 
 	const handleSelect = (e) => {
 		// console.log(e.target.value)
@@ -104,18 +104,6 @@ const CreateProduct = ({ shopId }) => {
 				[e.target.name]: e.target.value,
 			})
 		);
-	};
-
-	const handleCategory = (e) => {
-		e.preventDefault();
-		const category = {
-			categories: input.categories,
-		};
-		if (input.categories) {
-			return dispatch(NewCategory(category));
-		} else if (!input.categories) {
-			return alert("no hay nada");
-		}
 	};
 
 	const handleDelete = (el) => {
@@ -148,12 +136,12 @@ const CreateProduct = ({ shopId }) => {
 									<Input
 										div="col-span-6 sm:col-span-3 font-bold"
 										forid="first-name"
-										lclass="block text-sm uppercase"
+										lclassName="block text-sm uppercase"
 										tl="Nombre del Producto"
 										it="text"
 										iname="name"
 										iId="first-name"
-										iclass="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 border-2 rounded-md"
+										iclassName="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 border-2 rounded-md"
 										valor={input.name}
 										c={handleChange}
 										ediv="text-rose-800"
@@ -164,12 +152,12 @@ const CreateProduct = ({ shopId }) => {
 									<Input
 										div="col-span-1 font-bold"
 										forid="price"
-										lclass="block text-sm uppercase"
+										lclassName="block text-sm uppercase"
 										tl="Precio $"
 										it="number"
 										iname="price"
 										iId="price"
-										iclass="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-7 sm:text-sm border-gray-300 border-2 rounded-md"
+										iclassName="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-7 sm:text-sm border-gray-300 border-2 rounded-md"
 										valor={input.price}
 										c={handleChange}
 										ediv="text-rose-800"
@@ -180,12 +168,12 @@ const CreateProduct = ({ shopId }) => {
 									<Input
 										div="col-span-1 font-bold"
 										forid="discount"
-										lclass="block text-sm uppercase"
+										lclassName="block text-sm uppercase"
 										tl="Descuento %"
 										it="number"
 										iname="discount"
 										iId="discount"
-										iclass="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-7 sm:text-sm border-gray-300 border-2 rounded-md"
+										iclassName="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-7 sm:text-sm border-gray-300 border-2 rounded-md"
 										valor={input.discount}
 										c={handleChange}
 										ediv="text-rose-800"
@@ -196,12 +184,12 @@ const CreateProduct = ({ shopId }) => {
 									<Input
 										div="col-span-1 font-bold"
 										forid="stock"
-										lclass="block text-sm uppercase"
+										lclassName="block text-sm uppercase"
 										tl="Stock"
 										it="number"
 										iname="stock"
 										iId="stock"
-										iclass="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-7 sm:text-sm border-gray-300 border-2 rounded-md"
+										iclassName="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-7 sm:text-sm border-gray-300 border-2 rounded-md"
 										valor={input.stock}
 										c={handleChange}
 										ediv="text-rose-800"
@@ -229,7 +217,6 @@ const CreateProduct = ({ shopId }) => {
 										</div>
 									</div>
 
-									{/* TextArea Categorías */}
 									<div className="col-span-6 sm:col-span-6">
 										<label htmlFor="categories" className="font-bold">
 											Categorías
@@ -241,7 +228,7 @@ const CreateProduct = ({ shopId }) => {
 											autoComplete="categories"
 											className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
 										>
-											<option>Categorías</option>
+											<option>categories</option>
 											{categories?.map((c, index) => (
 												<option id={c.id} key={index}>
 													{c.name}
@@ -256,7 +243,6 @@ const CreateProduct = ({ shopId }) => {
 										<button onClick={(el) => handleDelete(el)}>Borrar</button>
 									</div>
 
-									{/* Imagen */}
 									<div className="col-span-6 sm:col-span-3">
 										<label className="block text-sm font-medium text-gray-700">
 											{" "}
@@ -301,15 +287,7 @@ const CreateProduct = ({ shopId }) => {
 								</div>
 							</div>
 						</div>
-						<div className="px-4 py-3e bg-gray-50 text-right sm:px-6">
-							<input
-								type="submit"
-								className="inline-flex justify-center py-2 px-4  border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-orange-600 hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-								value="Crear Categoria"
-								onClick={handleCategory}
-								ediv="text-rose-800"
-								err={errors.categories}
-							/>
+						<div className="px-4 py-3 bg-gray-50 text-right sm:px-6">
 							<input
 								type="submit"
 								className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
@@ -321,6 +299,7 @@ const CreateProduct = ({ shopId }) => {
 			</div>
 		</div>
 	);
+
 };
 
 export default CreateProduct;
