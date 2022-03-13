@@ -98,7 +98,7 @@ const Home = ({
             </div> */}
             <div className="bg-green-400">
               <div className="lg:grid lg:grid-cols-2">
-                <div className="py-10 px-10 lg:px-0 max-w-3xl lg:max-w-md mx-auto font-bold">
+                <div className="py-10 px-10 lg:px-0 max-w-3xl lg:max-w-md mx-auto font-bold 	font-weight: 700">
                   <h2 className="text-4xl tracking-tight font-extrabold text-gray-100"
                   >
                     <span className="block">{shop.name}</span>
