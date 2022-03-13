@@ -48,19 +48,23 @@ export default function SideLeft({ name, setId, rol, shopsId }) {
 			<div>
 				<h1 className="text-white uppercase">Opciones</h1>
 				<hr></hr>
-				{rol === 0 && shopsId.length === 0 ? (
-					<>
-						{/* Agregar otra Tienda */}
-						<Link to="/createShop">
-							<Button
-								div="flex bg-green-200 justify-center p-2 rounded-lg mb-10 mt-3 hover:bg-sky-700 cursor-pointer"
-								text="Registrar Tienda"
-								buttonClass="flex items-center font-bold"
-								icon={<GrAddCircle className="mr-2" />}
-							/>
-						</Link>
-					</>
-				) : null}
+				{
+					rol === 0 && shopsId.length === 0 ? (
+						<>
+							{/* Agregar otra Tienda */}
+							<Link to='/createShop'>
+								<Button
+									div="flex bg-green-200 justify-center p-2 rounded-lg mb-10 mt-3 hover:bg-sky-700 cursor-pointer"
+									text="Registrar Tienda"
+									buttonclassName="flex items-center font-bold"
+									icon={<GrAddCircle className="mr-2" />}
+								/>
+							</Link>
+						</>
+					) : (null)
+				}
+
+
 
 				{rol === 2 ? (
 					<Admin setId={setId} />
