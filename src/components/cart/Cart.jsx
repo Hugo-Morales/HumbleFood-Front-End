@@ -231,6 +231,10 @@ export default function Cart({
           </div>
         </div>
       </Dialog>
+      {/* <Paypal
+        className={cartItems.length ? "w-full" : "hidden"}
+        cartItems={cartItems}
+      /> */}
     </Transition.Root>
   );
 }
