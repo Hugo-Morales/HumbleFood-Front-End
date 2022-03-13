@@ -32,5 +32,6 @@ export default function Shop({ setId }) {
         f={() => setId("delete")}
       />
     </>
+
   );
 }
