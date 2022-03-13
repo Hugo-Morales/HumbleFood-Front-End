@@ -10,19 +10,18 @@ import {
   getdataUser,
   getallproducts,
   reset,
+  stop,
 } from "../../redux/actions";
 
 export default function ContainerT({ user }) {
   const [id, setId] = useState("");
   const [currentPage, setCurrentPage] = useState(0);
-  const productos = useSelector((state) => state.productShop);
+  const productos = useSelector((state) => state.productsloaded);
   const cargando = useSelector((state) => state.isLoading);
   const usuario = useSelector((state) => state.dataUser);
-  const allproducts = useSelector((state) => state.productsloaded);
   const dispatch = useDispatch();
   const { userId } = useParams();
-  const pages =
-    usuario?.rol === 2 ? allproducts.pagesTotal : productos.pagesTotal;
+  const pages = productos.pagesTotal;
   // console.log(user, 'user');
   // console.log(currentPage);
 
@@ -40,6 +39,8 @@ export default function ContainerT({ user }) {
       dispatch(getallproducts(currentPage));
     } else if (usuario?.rol === 1) {
       dispatch(getProductShop(usuario?.shopsId, currentPage));
+    } else if (usuario?.rol === 0) {
+      dispatch(stop());
     }
 
     return () => {
@@ -66,7 +67,7 @@ export default function ContainerT({ user }) {
           {/* Lado Derecho */}
           <div className="col-span-3">
             <SideRight
-              product={usuario.rol === 2 ? allproducts : productos}
+              product={productos}
               idS={id}
               shopsId={usuario?.shopsId}
               paging={paging}

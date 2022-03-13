@@ -12,12 +12,14 @@ export const POST_PRODUCTS = "POST_PRODUCTS";
 export const FILTER_BY_CATEGORIES = "FILTER_BY_CATEGORIES";
 export const FILTER_BY_DISCOUNT = "FILTER_BY_DISCOUNT";
 export const POST_NEW_SHOP = "POST_NEW_SHOP";
-export const GET_SHOPS_ID = "GET_SHOPS_ID";
-export const GET_ALL_USERS = "GET_ALL_USERS";
-export const LOADING_PANEL = "LOADING_PANEL";
-export const GET_NAME_OF_SHOP = "GET_NAME_OF_SHOP";
-export const GET_DATA_USER = "GET_DATA_USER";
 export const POST_NEW_USER = "POST_NEW_USER";
+export const GET_DATA_USER = "GET_DATA_USER";
+export const GET_SHOPS_ID = "GET_SHOPS_ID";
+export const GET_ALL_USERS = 'GET_ALL_USERS';
+export const LOADING_PANEL = 'LOADING_PANEL';
+export const GET_NAME_OF_SHOP = "GET_NAME_OF_SHOP";
+
+export const STOP = 'STOP';
 const URL = process.env.REACT_APP_URL;
 
 export const getShopsId = (id) => async (dispatch) => {
@@ -75,7 +77,7 @@ export const getdataUser = (id) => {
 
 export const getallproducts = (page) => async (dispatch) => {
   try {
-    const allproducts = await axios.get(`${URL}products?page=${page}`);
+    const allproducts = await axios.get(`${URL}productShops?page=${page}`);
     // console.log(allproducts);
 
     dispatch({
@@ -98,7 +100,7 @@ export const getDetailProduct = (idShop, idProduct) => async (dispatch) => {
     console.log(error);
   }
 };
-// https://back-end-prueba.herokuapp.com/productShop/6220d6937a2aaada4b5de940?name=Tomates
+
 export const searchByName = (shopId, nameoffood) => async (dispatch) => {
   try {
     const found_product = await axios.get(`${URL}productShop/${shopId}?name=${nameoffood}`);
@@ -179,12 +181,17 @@ export const loading = () => (dispatch) => {
     type: LOADING,
   });
 };
-
 export const loading_panel = () => (dispatch) => {
   dispatch({
     type: LOADING_PANEL,
   });
 };
+
+export const stop = () => (dispatch) => {
+  dispatch({
+    type: STOP,
+  });
+}
 
 //  - - - - POST/REVIEWS - - - -
 export const postReview = (review) => async (dispatch) => {
@@ -231,7 +238,7 @@ export const getAllUser = (page) => async (dispatch) => {
   } catch (error) {
     console.error(error);
   }
-}
+};
 
 export const banU = (type, id) => async () => {
   try {

@@ -13,15 +13,15 @@ import {
   GET_ALL_USERS,
   LOADING_PANEL,
   GET_NAME_OF_SHOP,
+  STOP,
 } from "../actions";
 
 const initialStore = {
   shop: [],
   shops: [],
-  productsloaded: { products: { filteredByName: [] } },
+  productsloaded: [],
   detailProduct: [],
   categories: [],
-  productShop: [],
   postnewShop: [],
   dataUser: {},
   allUser: [],
@@ -84,7 +84,7 @@ export default function reducer(state = initialStore, { type, payload }) {
     case GET_PRODUCTS_SHOP:
       return {
         ...state,
-        productShop: payload,
+        productsloaded: payload,
         isLoading: false,
       };
     case GET_ALL_USERS:
@@ -106,11 +106,18 @@ export default function reducer(state = initialStore, { type, payload }) {
         ...state,
         isLoading: true,
       };
+
     case LOADING_PANEL:
       return {
         ...state,
         loadingPanel: true,
       };
+    case STOP:
+      return {
+        ...state,
+        isLoading: false,
+        loadingPanel: false,
+      }
     default:
       return state;
   }
