@@ -11,18 +11,10 @@ const SearchBar = () => {
 
 	// console.log("producto", filteredByName);
 
-<<<<<<< HEAD
-  const HandleInputChange = (e) => {
-    e.preventDefault();
-    setInput(e.target.value);
-    dispatch(searchByName(input));
-  };
-=======
 	const HandleInputChange = (e) => {
 		e.preventDefault();
 		setInput(e.target.value);
 	};
->>>>>>> 40165b75c64ac26cf3230a2cf0225626c6f874cd
 
 	const handleSubmit = (e) => {
 		e.preventDefault();

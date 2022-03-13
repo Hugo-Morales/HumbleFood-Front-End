@@ -34,21 +34,16 @@ const Nav = ({
   const categories = useSelector((state) => state.categories);
   const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
-<<<<<<< HEAD
 
   // getIdTokenClaims().then(res => {console.log(res)})
   // getIdTokenClaims().then(res => {
   //   console.log(res.aud);
   // })
   console.log(user.email);
-=======
-  const user_id = user?.sub.split("|")[1];
-<<<<<<< HEAD
-  
->>>>>>> 40165b75c64ac26cf3230a2cf0225626c6f874cd
-=======
 
->>>>>>> 174dde2c47bbf142dc3cb015061c0660672b87ca
+  const user_id = user?.sub.split("|")[1];
+
+
   useEffect(() => {
     dispatch(getCategories());
   }, [dispatch]);
@@ -115,12 +110,7 @@ const Nav = ({
         {isAuthenticated ? (
           <div className="flex items-center">
             <h3 className="mr-3">
-<<<<<<< HEAD
-              Bienvenido {user.given_name ? user.given_name : user.nickname}{" "}
-              
-=======
               Bienvenid@ {user.given_name ? user.given_name : user.nickname}{" "}
->>>>>>> 174dde2c47bbf142dc3cb015061c0660672b87ca
             </h3>
             <img
               src={user.picture}

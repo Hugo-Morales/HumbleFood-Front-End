@@ -21,8 +21,8 @@ export default function ContainerT({ user }) {
   const dispatch = useDispatch();
   const { userId } = useParams();
   const pages = productos.pagesTotal;
-  // console.log(user, 'user');
-  // console.log(currentPage);
+   console.log(usuario.rol, 'user');
+   console.log(currentPage);
 
   const paging = (num) => {
     if (num >= 0 && num <= pages) {
