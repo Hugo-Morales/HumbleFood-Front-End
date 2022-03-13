@@ -14,7 +14,7 @@ export default function SideLeft({ name, setId, rol, shopsId }) {
 	// console.log(rol, shopsId)
 
 	return (
-		<div className="bg-gray-700 overflow-y-auto h-screen p-6">
+		<div className="bg-gray-700 sticky top-0 sm-h-30 h-screen p-6">
 			<ButtonExit
 				text="Volver al home"
 				ruta="/home"

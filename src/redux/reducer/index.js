@@ -19,10 +19,8 @@ const initialStore = {
   shop: [],
   shops: [],
   productsloaded: [],
-  allproducts: [],
   detailProduct: [],
   categories: [],
-  productShop: [],
   postnewShop: [],
   dataUser: {},
   allUser: [],
@@ -85,7 +83,7 @@ export default function reducer(state = initialStore, { type, payload }) {
     case GET_PRODUCTS_SHOP:
       return {
         ...state,
-        productShop: payload,
+        productsloaded: payload,
         isLoading: false,
       };
     case GET_ALL_USERS:
@@ -94,11 +92,12 @@ export default function reducer(state = initialStore, { type, payload }) {
         allUser: payload,
         isLoading: false,
         loadingPanel: false,
-      }
+      };
     case RESET:
       return {
         ...state,
         detailProduct: [],
+        productsloaded: [],
         isLoading: true,
       };
     case LOADING:
@@ -110,7 +109,7 @@ export default function reducer(state = initialStore, { type, payload }) {
       return {
         ...state,
         loadingPanel: true,
-      }
+      };
     default:
       return state;
   }
