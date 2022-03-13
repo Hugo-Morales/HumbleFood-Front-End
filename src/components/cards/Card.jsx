@@ -30,16 +30,35 @@ const Card = ({ product, handleAddToCart, shop }) => {
             {/* <p className="text-xs text-gray-500 w-4/5">{description}</p> */}
             <div className="w-full flex flex-col">
               <div className="w-full flex justify-end items-center pr-5 pb-1">
-                <h1 className="font-bold text-green-500">{discount}% OFF</h1>
+                <h1 className="font-bold text-green-500">{discount}% menos</h1>
               </div>
               <div className="w-full flex justify-between items-center">
                 <h1 className="font-bold text-gray-500">${price}</h1>
 
                 <button
                   onClick={() => handleAddToCart(product)}
-                  className="bg-gray-700 mr-5 text-white px-3 py-1 rounded-sm shadow-md"
+                  className="bg-gray-700 mr-5 text-white px-3 py-1 rounded-sm shadow-md flex"
                 >
-                  Add to Cart
+                  <p>Añadir</p>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="icon icon-tabler icon-tabler-shopping-cart-plus"
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    stroke-width="1.5"
+                    stroke="#ffffff"
+                    fill="none"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                    <circle cx="6" cy="19" r="2" />
+                    <circle cx="17" cy="19" r="2" />
+                    <path d="M17 17h-11v-14h-2" />
+                    <path d="M6 5l6.005 .429m7.138 6.573l-.143 .998h-13" />
+                    <path d="M15 6h6m-3 -3v6" />
+                  </svg>
                 </button>
               </div>
             </div>
