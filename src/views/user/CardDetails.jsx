@@ -145,7 +145,7 @@ const CardDetail = ({ handleAddToCart }) => {
 
                 <div className="mt-10">
                   <h2 className="text-xl font-bold text-gray-900">
-                    Detaille del producto
+                    Detalle del producto
                   </h2>
 
                   <div className="mt-4 space-y-6">

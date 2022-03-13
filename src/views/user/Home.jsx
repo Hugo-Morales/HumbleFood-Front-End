@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useParams } from "react-router-dom";
-import { getProductShop, getShopsId, postnewUser } from "../../redux/actions";
+import { getProductShop, getShopsId, postnewUser, getShops } from "../../redux/actions";
 import Nav from "../../components/nav/Nav";
 import Cards from "../../components/cards/Cards";
 import Loading from "../../components/loading/Loading";
@@ -21,6 +21,8 @@ const Home = ({
   const { products, next, prev, pagesTotal } = useSelector(
     (state) => state.productShop
   );
+  const shops = useSelector((state) => state.shops);
+  console.log(shops)
   const shop = useSelector((state) => state.shop);
   const loading = useSelector((state) => state.isLoading);
   const [currentPage, setCurrentPage] = useState(0);
@@ -48,9 +50,12 @@ const Home = ({
 
   useEffect(() => {
     dispatch(getShopsId(shopId));
-    dispatch(getProductShop(shopId));
+    dispatch(getProductShop(shopId, currentPage));
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dispatch, shopId]);
+  }, [dispatch, shopId, currentPage]);
+  useEffect(() => {
+    dispatch(getShops());
+  }, [dispatch]);
 
   console.log("shopshop", shop);
   return (
@@ -91,20 +96,18 @@ const Home = ({
                 <a href="#" className="bg-purple-800 py-4 px-8 text-white font-bold uppercase text-xs rounded hover:bg-gray-200 hover:text-gray-800">Contact us</a>
               </div>
             </div> */}
-            <div className="bg-gray-600">
+            <div className="bg-green-400">
               <div className="lg:grid lg:grid-cols-2">
-                <div className="py-10 px-10 lg:px-0 max-w-3xl lg:max-w-md mx-auto">
-                  <h2 className="text-4xl tracking-tight font-extrabold text-gray-100">
-                    <span className="block">Ready to dive in?</span>
-                    <span className="block">Start your free trial today.</span>
+                <div className="py-10 px-10 lg:px-0 max-w-3xl lg:max-w-md mx-auto font-bold">
+                  <h2 className="text-4xl tracking-tight font-extrabold text-gray-100"
+                  >
+                    <span className="block">{shop.name}</span>
                   </h2>
                   <p className="text-gray-300 mt-5">
-                    Lorem Ipsum is simply dummy text of the printing and
-                    typesetting industry. Lorem Ipsum has been the industry's
-                    standard dummy text ever since the 1500s, when an unknown
-                    printer took a galley of type and scrambled it to make a
-                    type specimen book.
+                    {shop.description}
+                    {console.log(shop.description)}
                   </p>
+
                   <div className="inline-block shadow mt-5">
                     <a
                       href="!#"
@@ -117,7 +120,7 @@ const Home = ({
                 <div className="lg:relative lg:mt-16">
                   <img
                     className="lg:absolute lg:inset-0 h-10 w-full lg:h-full object-cover object-center lg:rounded-tl-md"
-                    src="https://alfabetajuega.com/hero/2019/04/CJ-1.jpg?width=1200&aspect_ratio=1200:631"
+                    src={shop.image}
                     alt="Woman workcation on the beach"
                   />
                 </div>

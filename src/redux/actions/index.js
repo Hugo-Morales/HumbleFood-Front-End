@@ -76,7 +76,7 @@ export const getdataUser = (id) => {
 
 export const getallproducts = (page) => async (dispatch) => {
   try {
-    const allproducts = await axios.get(`${URL}products?page=${page}`);
+    const allproducts = await axios.get(`${URL}productShops?page=${page}`);
     // console.log(allproducts);
 
     dispatch({

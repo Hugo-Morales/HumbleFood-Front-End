@@ -13,10 +13,6 @@ export default function User({ setId }) {
         f={() => setId("crear")}
       />
     </>
-<<<<<<< HEAD
-  )
 
-=======
   );
->>>>>>> 4fda090dcde395ab44ad3c62a3d10a0b490da2c6
 }

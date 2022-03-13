@@ -7,42 +7,44 @@ import CardsShops from "../../components/shops/CardsShops";
 import Loading from "../../components/loading/Loading";
 import { getShops, loading, postnewUser } from "../../redux/actions";
 
+
 export default function HomeShops() {
-	const dispatch = useDispatch();
-	const { isAuthenticated, user, isLoading } = useAuth0();
-	const shops = useSelector((state) => state.shops);
-	const cargando = useSelector((state) => state.isLoading);
+  const dispatch = useDispatch();
+  const { isAuthenticated, user, isLoading } = useAuth0();
+  const shops = useSelector((state) => state.shops);
+  console.log(shops)
+  const cargando = useSelector((state) => state.isLoading);
 
-	const newUser = {
-		userId: user?.sub.split("|")[1],
-		name: user?.name,
-		name_user: user?.nickname,
-		email: user?.email,
-		direction: "",
-	};
+  const newUser = {
+    userId: user?.sub.split("|")[1],
+    name: user?.name,
+    name_user: user?.nickname,
+    email: user?.email,
+    direction: "",
+  };
 
-	useEffect(() => {
-		if (isAuthenticated && user) dispatch(postnewUser(newUser));
-	});
+  useEffect(() => {
+    if (isAuthenticated && user) dispatch(postnewUser(newUser));
+  });
 
-	useEffect(() => {
-		dispatch(loading());
-		dispatch(getShops());
-	}, [dispatch]);
+  useEffect(() => {
+    dispatch(loading());
+    dispatch(getShops());
+  }, [dispatch]);
 
-	if (isLoading) return <Loading />;
+  if (isLoading) return <Loading />;
 
-	return (
-		<>
-			{cargando ? (
-				<Loading />
-			) : (
-				<>
-					<NavShop />
-					<Carousell />
-					<CardsShops shops={shops} />
-				</>
-			)}
-		</>
-	);
+  return (
+    <>
+      {cargando ? (
+        <Loading />
+      ) : (
+        <>
+          <NavShop />
+          <Carousell />
+          <CardsShops shops={shops.shops} />
+        </>
+      )}
+    </>
+  );
 }
