@@ -23,7 +23,7 @@ export default function ContainerT({ user }) {
   const pages = productos.pagesTotal;
   // console.log(user, 'user');
   // console.log(currentPage);
-  console.log("productos", productos);
+
   const paging = (num) => {
     if (num >= 0 && num <= pages) {
       setCurrentPage(num);
