@@ -56,7 +56,7 @@ const Nav = ({
 				<Link to="/home" className="ml-4">
 					<img
 						src={logo}
-						className="sm:h-2 xl:h-20 md:w-32 xl:w-20"
+						className="w-10 sm:w-11 lg:w-16"
 						alt="logos"
 					/>
 				</Link>
