@@ -106,6 +106,7 @@ export default function reducer(state = initialStore, { type, payload }) {
         ...state,
         isLoading: true,
       };
+
     case LOADING_PANEL:
       return {
         ...state,
