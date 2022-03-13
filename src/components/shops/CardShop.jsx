@@ -7,7 +7,7 @@ const CardShop = ({ shop }) => {
   return (
     <>
       <div className="flex justify-center items-center w-full drop-shadow-4xl">
-        <div className="relative bg-white shadow-md h-96 mx-3 rounded-3xl  flex flex-col justify-around items-center overflow-hidden sm:flex-row sm:h-52 sm:w-3/5 md:w-96">
+        <div className="w-full relative bg-white shadow-md h-96 mx-3 rounded-3xl  flex flex-col justify-around items-center overflow-hidden sm:flex-row sm:h-52 sm:w-11/12 md:w-96">
           <img
             className="relative h-1/2 w-full sm:h-full sm:w-1/2 object-cover"
             src={image}
