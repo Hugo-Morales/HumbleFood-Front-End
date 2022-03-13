@@ -19,7 +19,7 @@ const Home = ({
   const { shopId } = useParams();
   const dispatch = useDispatch();
   const { products, next, prev, pagesTotal } = useSelector(
-    (state) => state.productShop
+    (state) => state.productsloaded
   );
   const shops = useSelector((state) => state.shops);
   console.log(shops)
@@ -27,8 +27,6 @@ const Home = ({
   const loading = useSelector((state) => state.isLoading);
   const [currentPage, setCurrentPage] = useState(0);
   const { isAuthenticated, user } = useAuth0();
-  // console.log(shop.email);
-  // console.log("shop", shop);
 
   const paging = (num) => {
     if (num >= 0 && num <= pagesTotal) setCurrentPage(num);

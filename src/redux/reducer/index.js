@@ -18,10 +18,9 @@ import {
 const initialStore = {
   shop: [],
   shops: [],
-  productsloaded: { products: { filteredByName: [] } },
+  productsloaded: [],
   detailProduct: [],
   categories: [],
-  productShop: [],
   postnewShop: [],
   dataUser: {},
   allUser: [],
@@ -84,7 +83,7 @@ export default function reducer(state = initialStore, { type, payload }) {
     case GET_PRODUCTS_SHOP:
       return {
         ...state,
-        productShop: payload,
+        productsloaded: payload,
         isLoading: false,
       };
     case GET_ALL_USERS:
