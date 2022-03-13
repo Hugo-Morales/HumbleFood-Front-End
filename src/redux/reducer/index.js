@@ -13,6 +13,7 @@ import {
   GET_ALL_USERS,
   LOADING_PANEL,
   GET_NAME_OF_SHOP,
+  STOP,
 } from "../actions";
 
 const initialStore = {
@@ -111,6 +112,12 @@ export default function reducer(state = initialStore, { type, payload }) {
         ...state,
         loadingPanel: true,
       };
+    case STOP:
+      return {
+        ...state,
+        isLoading: false,
+        loadingPanel: false,
+      }
     default:
       return state;
   }
