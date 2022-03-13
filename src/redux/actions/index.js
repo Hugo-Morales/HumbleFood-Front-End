@@ -18,6 +18,7 @@ export const LOADING_PANEL = "LOADING_PANEL";
 export const GET_NAME_OF_SHOP = "GET_NAME_OF_SHOP";
 export const GET_DATA_USER = "GET_DATA_USER";
 export const POST_NEW_USER = "POST_NEW_USER";
+export const STOP = 'STOP';
 const URL = process.env.REACT_APP_URL;
 
 export const getShopsId = (id) => async (dispatch) => {
@@ -185,6 +186,12 @@ export const loading_panel = () => (dispatch) => {
     type: LOADING_PANEL,
   });
 };
+
+export const stop = () => (dispatch) => {
+  dispatch({
+    type: STOP,
+  });
+}
 
 //  - - - - POST/REVIEWS - - - -
 export const postReview = (review) => async (dispatch) => {
