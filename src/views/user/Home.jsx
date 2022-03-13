@@ -1,13 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useAuth0 } from "@auth0/auth0-react";
 import { useParams } from "react-router-dom";
-import {
-  getProductShop,
-  getShopsId,
-  postnewUser,
-  getShops,
-} from "../../redux/actions";
+import { getProductShop, getShopsId } from "../../redux/actions";
 import Nav from "../../components/nav/Nav";
 import Cards from "../../components/cards/Cards";
 import Loading from "../../components/loading/Loading";
@@ -32,27 +26,13 @@ const Home = ({
   console.log(shop, "shop");
   const loading = useSelector((state) => state.isLoading);
   const [currentPage, setCurrentPage] = useState(0);
-  const { isAuthenticated, user } = useAuth0();
+
   // console.log(shop.email);
   // console.log("shop", shop);
 
   const paging = (num) => {
     if (num >= 0 && num <= pagesTotal) setCurrentPage(num);
   };
-
-  const newUser = {
-    userId: user?.sub.split("|")[1],
-    name: user?.name,
-    name_user: user?.nickname,
-    email: user?.email,
-    direction: "",
-  };
-
-  useEffect(() => {
-    if (isAuthenticated && user) {
-      dispatch(postnewUser(newUser));
-    }
-  });
 
   useEffect(() => {
     dispatch(getShopsId(shopId));
@@ -61,12 +41,13 @@ const Home = ({
   }, [dispatch, shopId, currentPage]);
 
   console.log("shopshop", shop);
+
   return (
     <div>
       {loading ? (
         <Loading />
       ) : (
-        <>
+        <div>
           <Nav
             cartItems={cartItems}
             shopEmail={shop.email}
@@ -75,7 +56,6 @@ const Home = ({
             handleRemoveFromCart={handleRemoveFromCart}
             handleDeleteFromCart={handleDeleteFromCart}
           />
-
           <div className="bg-gray-600">
             <div className="lg:grid lg:grid-cols-2">
               <div className="py-10 px-10 lg:px-0 max-w-3xl lg:max-w-md mx-auto">
@@ -83,14 +63,18 @@ const Home = ({
                   <span className="block">Ready to dive in?</span>
                   <span className="block">Start your free trial today.</span>
                 </h2>
-                <p className="text-gray-300 mt-5">{shops.shops.description}</p>
-                <div className="inline-block shadow mt-5">
-                  <ButtonExit
-                    text="Volver a ver mas tiendas"
-                    ruta="/home"
-                    className="mt-4 bg-red-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded-full"
-                  />
-                </div>
+                <p className="text-gray-300 mt-5">
+                  Lorem Ipsum is simply dummy text of the printing and
+                  typesetting industry. Lorem Ipsum has been the industry's
+                  standard dummy text ever since the 1500s, when an unknown
+                  printer took a galley of type and scrambled it to make a type
+                  specimen book.
+                </p>
+                <ButtonExit
+                  ruta="/home"
+                  text="Volver a ver mas tiendas"
+                  className="mt-1  mb-6 ml-10 mr-0 bg-red-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded-full"
+                />
               </div>
               <div className="lg:relative lg:mt-16">
                 <img
@@ -115,7 +99,7 @@ const Home = ({
             prev={prev}
             next={next}
           />
-        </>
+        </div>
       )}
     </div>
   );
