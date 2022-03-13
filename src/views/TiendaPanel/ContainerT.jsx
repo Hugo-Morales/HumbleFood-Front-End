@@ -4,7 +4,13 @@ import { useDispatch, useSelector } from "react-redux";
 import SideLeft from "./left/SideLeft";
 import SideRight from "./right/SideRight";
 import Loading from "../../components/loading/Loading";
-import { getProductShop, loading, getdataUser } from "../../redux/actions";
+import {
+	getProductShop,
+	loading,
+	getdataUser,
+	getallproducts,
+	reset,
+} from "../../redux/actions";
 
 export default function ContainerT({ user }) {
 	const [id, setId] = useState("");
@@ -14,13 +20,16 @@ export default function ContainerT({ user }) {
 	const cargando = useSelector((state) => state.isLoading);
 	const usuario = useSelector((state) => state.dataUser);
 
+	const allproducts = useSelector((state) => state.productsloaded);
 	const { userId } = useParams();
+	const pages =
+		usuario?.rol === 2 ? allproducts.pagesTotal : productos.pagesTotal;
 	// console.log(user, 'user');
-	// console.log(usuario, 'usuario')
+	// console.log(currentPage);
 
 
 	const paging = (num) => {
-		if (num >= 0 && num <= productos.pagesTotal) {
+		if (num >= 0 && num <= pages) {
 			setCurrentPage(num);
 		}
 	};
@@ -28,13 +37,18 @@ export default function ContainerT({ user }) {
 	useEffect(() => {
 		dispatch(loading());
 		dispatch(getdataUser(userId));
-		dispatch(getProductShop(usuario?.shopsId, currentPage));
+
+		if (usuario?.rol === 2) {
+			dispatch(getallproducts(currentPage));
+		} else if (usuario?.rol === 1) {
+			dispatch(getProductShop(usuario?.shopsId, currentPage));
+		}
 
 		return () => {
-			setCurrentPage(0);
+			dispatch(reset());
 		};
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [dispatch, userId, currentPage]);
+	}, [dispatch, userId, currentPage, usuario.rol]);
 
 	return (
 		<>
@@ -54,9 +68,8 @@ export default function ContainerT({ user }) {
 					{/* Lado Derecho */}
 					<div className="col-span-3">
 						<SideRight
-							product={productos}
+							product={usuario.rol === 2 ? allproducts : productos}
 							idS={id}
-							rol={usuario.rol}
 							shopsId={usuario?.shopsId}
 							paging={paging}
 							currentPage={currentPage}

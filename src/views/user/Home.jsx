@@ -127,6 +127,7 @@ const Home = ({
               </div>
             </div>
 
+
             {/* <InformacionShop /> */}
             <Cards
               products={products}

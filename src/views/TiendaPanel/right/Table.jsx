@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteProduct } from "../../../redux/actions";
 import Paginado from "../../../components/paginado/Paginado";
 import Modal from "../Modal";
 import InfoDataUser from "./InfoDataUser";
+import { deleteProduct } from "../../../redux/actions";
 
 export default function Table({
 	p,
@@ -15,7 +15,7 @@ export default function Table({
 	currentPage,
 }) {
 	const dataUser = useSelector((state) => state.dataUser);
-	// console.log(p?.length)
+	// console.log(p[1].shopId);
 	const dispatch = useDispatch();
 	const [showModal, setShowModal] = useState(false);
 	const [dele, setDele] = useState([]);
@@ -32,12 +32,23 @@ export default function Table({
 	};
 
 	if (showModal)
-		return <Modal name={dele?.name} id={dele?.id} del={delProduct} />;
+		return (
+			<Modal
+				name={dele?.name}
+				id={dele?.id}
+				del={delProduct}
+				setShowModal={setShowModal}
+			/>
+		);
 
 
 
 	return (
 		<>
+<<<<<<< HEAD
+=======
+			{currentPage === 0 ? <InfoDataUser dataUser={dataUser} /> : null}
+>>>>>>> master
 			<div className="flex flex-col">
 				<div className="overflow-x-auto-my-2 sm:-mx-6">
 					<div className="py-2 align-middle inline-block min-w-full sm:px-6">
@@ -61,7 +72,7 @@ export default function Table({
 											scope="col"
 											className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider text-center"
 										>
-											Estado
+											{dataUser.rol === 2 ? "Nombre de la Tienda" : "Estado"}
 										</th>
 										<th
 											scope="col"
@@ -94,6 +105,7 @@ export default function Table({
 													<div className="flex-shrink-0 h-10 w-10">
 														<img className="h-10 w-10 rounded-full" src={p?.image} alt="" />
 													</div>
+<<<<<<< HEAD
 													<div className="ml-4">
 														<div className="text-sm font-medium text-gray-900">{p.name}</div>
 														<div className="text-sm text-gray-500">{p?.categories.join(' ')}</div>
@@ -115,13 +127,34 @@ export default function Table({
 											<td className="px-6 py-4 whitespace-nowrap text-sm text-center">
 												{
 													p?.stock === 0 ? (
+=======
+												</td>
+												<td className="py-4 whitespace-nowrap text-center">
+													{p?.stock === 0 ? (
+														<div className="text-sm text-gray-900">
+															Sin Stock
+														</div>
+													) : (
+														<div className="text-sm text-gray-500">
+															{p?.stock}
+														</div>
+													)}
+												</td>
+												<td className="px-6 py-4 whitespace-nowrap text-center">
+													<span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+														Creado
+													</span>
+												</td>
+												<td className="px-6 py-4 whitespace-nowrap text-sm text-center">
+													{p?.stock === 0 ? (
+>>>>>>> master
 														<>
 															<div className="text-sm text-gray-900">Sin Stock</div>
 														</>
 													) : (
 														<>
 															<div className="text-gray-900">
-																<p>${p?.price * p?.stock}</p>
+																<p>${(p?.price * p?.stock).toFixed(2)}</p>
 															</div>
 															<div className="text-gray-500"><p>${p?.price} c/stock</p></div>
 														</>
