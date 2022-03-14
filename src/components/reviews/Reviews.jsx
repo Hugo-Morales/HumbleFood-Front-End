@@ -19,10 +19,8 @@ function Reviews() {
     getReviews();
   }, [id]);
 
-  // console.log(reviews);
   const rating = reviews.map((r) => r.pointProduct);
   const generalRating = rating.reduce((acc, rating) => acc + rating, 0);
-  // console.log(generalRating / rating.length);
 
   return (
     <div className="mt-16">

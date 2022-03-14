@@ -8,10 +8,10 @@ import SendReview from "../views/user/SendReview";
 import PrivateShop from "../routes/PrivateShop";
 import PrivateRoute from "../routes/PrivateRoute";
 import ShoppingList from "../components/cart/Cart";
-import ContainerT from "../views/TiendaPanel/ContainerT";
 import NewCategory from "../components/category/NewCategory";
-import CreateProduct from "../views/TiendaPanel/right/Create/CreateProducts";
 // import { Helmet } from "react-helmet";
+import HomeShops from "../views/user/HomeShops";
+import Banner from "../components/shops/Banner";
 
 function App() {
   const [cartItems, setCartItems] = useState([]);
@@ -75,12 +75,14 @@ function App() {
       <div className="App">
         <Routes>
           <Route exact path="/" element={<LandingPage />} />
+          <Route exact path="/home" element={<HomeShops />} />
           <Route
             exact
-            path="/home"
+            path="/productShop/:shopId"
             element={
               <Home
                 cartItems={cartItems}
+                setCartItems={setCartItems}
                 getTotalItems={getTotalItems}
                 handleAddToCart={handleAddToCart}
                 handleRemoveFromCart={handleRemoveFromCart}
@@ -88,10 +90,9 @@ function App() {
               />
             }
           />
-          <Route exact path="/createShop" element={<PrivateShop />} />
           <Route
             exact
-            path="/products/:id"
+            path="/products/:shopId/:productId"
             element={<CardDetail handleAddToCart={handleAddToCart} />}
           />
           <Route
@@ -99,25 +100,15 @@ function App() {
             path="/shopping-list"
             element={<ShoppingList cartItems={cartItems} />}
           />
+          <Route exact path="/settings/:userId" element={<PrivateRoute />} />
+          <Route exact path="/category" element={<NewCategory />} />
+          <Route exact path="/createShop" element={<PrivateShop />} />
           <Route
             exact
             path="/send-review/:productId"
             element={<SendReview />}
           />
-          <Route exact path="/settings/:idTienda" element={<PrivateRoute />} />
           <Route path="*" element={<Error404 />} />
-
-          <Route
-            exact
-            path="/products/:id"
-            element={<CardDetail handleAddToCart={handleAddToCart} />}
-          ></Route>
-          <Route exact path="/create" element={<CreateProduct />}></Route>
-          <Route exact path="/category" element={<NewCategory />}></Route>
-          {/* <Route exact path="/tienda/:idTienda" element={<ContainerT/>}> </Route> */}
-
-          <Route path="*" element={<Error404 />}></Route>
-          <Route exact path="/tienda/:idTienda" element={<ContainerT />} />
         </Routes>
       </div>
     </BrowserRouter>

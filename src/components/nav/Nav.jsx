@@ -20,56 +20,54 @@ const StyledButton = styled(IconButton)`
 
 const Nav = ({
   cartItems,
+  setCartItems,
+  shopEmail,
   getTotalItems,
   handleAddToCart,
   handleRemoveFromCart,
   handleDeleteFromCart,
 }) => {
-  const {
-    isAuthenticated,
-    user,
-    loginWithRedirect,
-  } = useAuth0();
+  const { isAuthenticated, user, loginWithRedirect } = useAuth0();
   const categories = useSelector((state) => state.categories);
   const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
-  const user_id = user?.sub.split('|')[1];
-  // console.log(user_id)
-  // console.log(user?.sub.split('|')[1]);
+  const user_id = user?.sub.split("|")[1];
 
   useEffect(() => {
     dispatch(getCategories());
   }, [dispatch]);
 
-
   function handleFilterCategories(e) {
-    dispatch(filterProductsByCategories(e.target.value))
-    console.log(e.target.value)
+    dispatch(filterProductsByCategories(e.target.value));
+    console.log(e.target.value);
   }
 
   return (
     <div className="font-poppins w-full h-24 bg-ochre flex justify-between">
       <div className="w-1/3 flex justify-between items-center p-1">
-        <Link to="/" className="ml-4">
-          <img src={logo} className="w-20" alt="logo" />
+        <Link to="/home" className="ml-4">
+          <img src={logo} className="w-10 sm:w-11 lg:w-16" alt="logos" />
         </Link>
         <div className="ml-4">
           <SearchBar />
         </div>
-        <div className="ml-4 w-full text-isabelline font-bold flex justify-around items-center">
-
-          <select onChange={e => handleFilterCategories(e)} name="category" className="p-2 h-10 focus:outline-none bg-ochre hover:bg-princetonOrange font-bold border-none text-center">
+        <div className="ml-8 w-full text-isabelline font-bold flex justify-around items-center">
+          <select
+            onChange={(e) => handleFilterCategories(e)}
+            name="categorys"
+            className="p-2 h-10 focus:outline-none bg-ochre hover:bg-princetonOrange font-bold border-none text-center"
+          >
             <option value="All">Categorías</option>
-            {
-              categories?.map((c, index) => {
-                return (
-                  <option key={index} value={c.name}>{c.name}</option>
-
-                )
-              })
-            }
+            {categories?.map((c, index) => {
+              return (
+                <option key={index} value={c.name}>
+                  {c.name}
+                </option>
+              );
+            })}
           </select>
-          <Link to="/offers" className="ml-4 p-2 h-10 hover:bg-princetonOrange">
+
+          <Link to="/offers" className="ml-8 p-2 h-10 hover:bg-princetonOrange">
             Ofertas
           </Link>
         </div>
@@ -101,7 +99,7 @@ const Nav = ({
         {isAuthenticated ? (
           <div className="flex items-center">
             <h3 className="mr-3">
-              Bienvenido {user.given_name ? user.given_name : user.nickname}{" "}
+              Bienvenid@ {user.given_name ? user.given_name : user.nickname}{" "}
             </h3>
             <img
               src={user.picture}
@@ -109,9 +107,7 @@ const Nav = ({
               className="w-10 rounded-full mr-3"
             />
             <Link to={`/settings/${user_id}`}>
-              <button
-                className="flex items-center justify-center w-38 mr-3 px-4 py-2 space-x-3 text-sm text-center bg-darkGreen text-isabelline transition-colors duration-200 transform dark:text-gray-300 dark:border-gray-300 hover:bg-gray-600 dark:hover:bg-gray-700 rounded-md"
-              >
+              <button className="flex items-center justify-center w-38 mr-3 px-4 py-2 space-x-3 text-sm text-center bg-darkGreen text-isabelline transition-colors duration-200 transform dark:text-gray-300 dark:border-gray-300 hover:bg-gray-600 dark:hover:bg-gray-700 rounded-md">
                 Panel de Usuario
               </button>
             </Link>
@@ -139,7 +135,7 @@ const Nav = ({
               <path d="M6.168 18.849a4 4 0 0 1 3.832 -2.849h4a4 4 0 0 1 3.834 2.855" />
             </svg>
             <span className="text-sm text-white dark:text-gray-200">
-              Iniciar / Crear Cuenta
+              Iniciar / Crear Cuenta d
             </span>
           </button>
         )}
@@ -155,6 +151,8 @@ const Nav = ({
         open={open}
         setOpen={setOpen}
         cartItems={cartItems}
+        setCartItems={setCartItems}
+        shopEmail={shopEmail}
         handleAddToCart={handleAddToCart}
         handleRemoveFromCart={handleRemoveFromCart}
         handleDeleteFromCart={handleDeleteFromCart}
