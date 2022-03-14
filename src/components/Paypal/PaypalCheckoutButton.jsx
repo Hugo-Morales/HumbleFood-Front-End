@@ -1,10 +1,14 @@
 import { useState } from "react";
 import { PayPalButtons } from "@paypal/react-paypal-js";
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
 import { calculateTotal } from "../cart/Cart";
 
 function PaypalCheckoutButton({ cartItems, setCartItems, shopEmail, setOpen }) {
   const [paidFor, setPaidFor] = useState(false);
   const [error, setError] = useState(null);
+
+  const MySwal = withReactContent(Swal);
 
   const handleAprove = (orderId) => {
     //Call backend function to fullfill order
@@ -16,16 +20,48 @@ function PaypalCheckoutButton({ cartItems, setCartItems, shopEmail, setOpen }) {
 
     // if the response is error
     // setError ("Your payment was processed successfully. However, we are unable to fullfill your purchase. Please contact us at suport@designcode.io for assistance.")
+    if (error) {
+      MySwal.fire({
+        title: setError(
+          "Su pago se procesó correctamente. Sin embargo, no podemos completar su compra. Póngase en contacto con nosotros en suport@designcode.io para obtener ayuda"
+        ),
+        icon: "error",
+        confirmButtonText: "OK",
+        backdrop: `
+        rgba(0,0,123,0.4)
+        left top
+        no-repeat
+      `,
+      });
+    }
   };
 
   if (paidFor) {
     //   Display success message, modal or redirect usere to succes page
-    alert("Gracias por su compra");
+    MySwal.fire({
+      title: `Gracias por su compra`,
+      icon: "success",
+      confirmButtonText: "OK",
+      backdrop: `
+      rgba(0,0,123,0.4)
+      left top
+      no-repeat
+    `,
+    });
   }
 
   if (error) {
     //Display error message, modal or redirect user to error page
-    alert(error);
+    MySwal.fire({
+      title: error,
+      icon: "error",
+      confirmButtonText: "OK",
+      backdrop: `
+      rgba(0,0,123,0.4)
+      left top
+      no-repeat
+    `,
+    });
   }
 
   return (
