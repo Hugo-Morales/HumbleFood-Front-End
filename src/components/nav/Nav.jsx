@@ -34,6 +34,10 @@ const Nav = ({
   const categories = useSelector((state) => state.categories);
   const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
+<<<<<<< HEAD
+=======
+
+>>>>>>> master
 
   // getIdTokenClaims().then(res => {console.log(res)})
   // getIdTokenClaims().then(res => {
@@ -43,7 +47,10 @@ const Nav = ({
 
   const user_id = user?.sub.split("|")[1];
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> master
   useEffect(() => {
     dispatch(getCategories());
   }, [dispatch]);
@@ -110,7 +117,12 @@ const Nav = ({
         {isAuthenticated ? (
           <div className="flex items-center">
             <h3 className="mr-3">
+<<<<<<< HEAD
               Bienvenid@ {user.given_name ? user.given_name : user.nickname}{" "}
+=======
+              Bienvenido {user.given_name ? user.given_name : user.nickname}{" "}
+              
+>>>>>>> master
             </h3>
             <img
               src={user.picture}
