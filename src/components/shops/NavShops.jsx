@@ -1,7 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import logo from "../../img/logo.png";
-import SearchBar from "../serchbar/SearchBar";
 import { useAuth0 } from "@auth0/auth0-react";
 
 const NavShop = () => {
@@ -12,12 +11,10 @@ const NavShop = () => {
   return (
     <div className="font-poppins w-full h-24 bg-ochre flex justify-between">
       <div className="w-1/2 flex justify-start items-center p-1">
-        <Link to="/home" className="ml-4">
+        <Link to="/home" className="ml-4 flex items-center">
           <img src={logo} className="w-10 sm:w-11 lg:w-16" alt="logo" />
+          <h1 className="ml-4 text-isabelline text-3xl font-extrabold">Humblefood</h1>
         </Link>
-        <div className="ml-4">
-          <SearchBar />
-        </div>
       </div>
       <div
         className={
