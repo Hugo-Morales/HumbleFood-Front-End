@@ -14,6 +14,7 @@ import {
   GET_SHOPS_ID,
   GET_ALL_USERS,
   LOADING_PANEL,
+  FILTER_BY_CATEGORIES,
   GET_NAME_OF_SHOP,
   STOP,
 } from "../actions";
@@ -56,6 +57,11 @@ export default function reducer(state = initialStore, { type, payload }) {
         ...state,
         dataUser: payload.user,
         loadingPanel: false,
+      };
+    case FILTER_BY_CATEGORIES:
+      return {
+        ...state,
+        productsloaded: payload,
       };
     case GET_NAME_OF_SHOP:
       return {
