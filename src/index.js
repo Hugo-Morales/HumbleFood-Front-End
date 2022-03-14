@@ -20,7 +20,7 @@ ReactDOM.render(
         <Auth0Provider
           domain={domain}
           clientId={clientId}
-          redirectUri={"http://localhost:3000/home"}
+          redirectUri={"https://humblefood.vercel.app/home"}
         >
           <App />
         </Auth0Provider>
