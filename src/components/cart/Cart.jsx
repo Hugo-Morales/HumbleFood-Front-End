@@ -41,25 +41,16 @@ export default function Cart({
     dispatch(getdataUser(userId));
   }, [dispatch, userId]);
 
-  // console.log("dataUser", dataUser.id);
+  // console.log("dataUser", dataUser);
 
   // useEffect(() => {
-  //   if (cartItems.length) {
+  //   if (window.location.origin) {
   //     return () => {
   //       setCartItems([]);
   //       alert("Me vacié");
   //     };
   //   }
-  // }, [cartItems, setCartItems]);
-
-  // model Orders {
-  //   id
-  //   state       Int
-  //   shopId      String
-  //   productsId  String[]
-  //   total       Float
-  //   userId      String
-  // }
+  // }, [setCartItems]);
 
   const productsId = cartItems.map((item) => ({
     id: item.id,
@@ -67,11 +58,9 @@ export default function Cart({
   }));
 
   let order = {
-    state: 0,
-    productsId: productsId,
+    products: productsId,
     shopId: shopId,
-    total: calculateTotal(cartItems),
-    // userId: dataUser.id,
+    userId: dataUser?.id,
   };
   console.log("order", order);
 
@@ -186,6 +175,7 @@ export default function Cart({
                       {checkout ? (
                         <div className="paypal-button-container">
                           <PaypalCheckoutButton
+                            order={order}
                             cartItems={cartItems}
                             setCartItems={setCartItems}
                             shopEmail={shopEmail}
