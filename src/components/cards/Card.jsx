@@ -27,16 +27,15 @@ const Card = ({ product, handleAddToCart, shop }) => {
                   {name}
                 </h1>
               </Link>
-              <span className="text-xs text-indigo-300 mt-0">
-                {categories.join(" ")}
-              </span>
+              {/* Solucion momentanea para que no se rompa la card al filtrar por descuento */}
+              {/* <span className="text-xs text-indigo-300 mt-0">{categories}</span> */}
             </div>
             {/* <p className="text-xs text-gray-500 w-4/5">{description}</p> */}
             <div className="w-full flex flex-col">
               <div className="w-full flex justify-end items-center pr-5 pb-1">
                 <Link to={`/products/${shopId}/${id}`}>
                   <h1 className="font-bold text-green-500">
-                    {discount}% menos
+                    {discount}% descuento!
                   </h1>
                 </Link>
               </div>
@@ -50,7 +49,7 @@ const Card = ({ product, handleAddToCart, shop }) => {
                   <p>Añadir</p>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                   className="icon icon-tabler icon-tabler-shopping-cart-plus"
+                    className="icon icon-tabler icon-tabler-shopping-cart-plus"
                     width="20"
                     height="20"
                     viewBox="0 0 24 24"
