@@ -144,7 +144,7 @@ const Nav = ({
               <path d="M6.168 18.849a4 4 0 0 1 3.832 -2.849h4a4 4 0 0 1 3.834 2.855" />
             </svg>
             <span className="text-sm text-white dark:text-gray-200">
-              Iniciar / Crear Cuenta d
+              Iniciar / Crear Cuenta
             </span>
           </button>
         )}
