@@ -1,12 +1,14 @@
-import Card from "./Card";
+import CardShop from "./CardShop";
 
-const Cards = ({ handleAddToCart, products }) => {
+const Cards = ({ shops }) => {
+  // console.log(shops);
+
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-5 mx-20">
-      {products &&
-        products?.map((product, index) => (
+      {shops &&
+        shops?.map((shop, index) => (
           <div key={index} className="mb-5 mr-5">
-            <Card handleAddToCart={handleAddToCart} product={product} />
+            <CardShop shop={shop} />
           </div>
         ))}
     </div>

@@ -52,12 +52,13 @@ function Carousell() {
   };
 
   return (
-    <div
-      ref={slideRef}
-      className="w-full mb-20 select-none relative"
-    >
+    <div ref={slideRef} className="w-full mb-20 select-none relative">
       <div>
-        <img className="h-fit w-full" src={featureProducts[currentIndex]} alt="" />
+        <img
+          className="h-fit w-full"
+          src={featureProducts[currentIndex]}
+          alt=""
+        />
       </div>
 
       <div className="absolute w-full top-1/2 transform -translate-y-1/2 flex justify-between items-start px-3">

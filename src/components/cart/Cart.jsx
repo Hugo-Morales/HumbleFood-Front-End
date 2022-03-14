@@ -1,11 +1,14 @@
-import { Fragment, useState } from "react";
+import { Fragment, useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useAuth0 } from "@auth0/auth0-react";
 import { Dialog, Transition } from "@headlessui/react";
 import { XIcon } from "@heroicons/react/outline";
 import { MdShoppingCart } from "react-icons/md";
 import { AiOutlineDollarCircle } from "react-icons/ai";
+import { getdataUser } from "../../redux/actions";
 import CartItem from "./CartItem";
-import Paypal from "../Paypal/Paypal";
+import PaypalCheckoutButton from "../Paypal/PaypalCheckoutButton";
+import { useParams } from "react-router-dom";
 // import { Link, useParams } from "react-router-dom";
 
 export function calculateTotal(items) {
@@ -13,10 +16,13 @@ export function calculateTotal(items) {
     .reduce((acc, item) => acc + item.amount * item.price, 0)
     .toFixed(2);
 }
+
 export default function Cart({
   open,
   setOpen,
   cartItems,
+  setCartItems,
+  shopEmail,
   handleAddToCart,
   handleRemoveFromCart,
   handleDeleteFromCart,
@@ -24,22 +30,48 @@ export default function Cart({
   const [checkout, setCheckout] = useState(false);
   const { user } = useAuth0();
 
+  const { shopId } = useParams();
+
+  const dispatch = useDispatch();
+  const dataUser = useSelector((state) => state.dataUser);
+
+  const userId = user?.sub.split("|")[1];
+
+  useEffect(() => {
+    dispatch(getdataUser(userId));
+  }, [dispatch, userId]);
+
+  // console.log("dataUser", dataUser.id);
+
+  // useEffect(() => {
+  //   if (cartItems.length) {
+  //     return () => {
+  //       setCartItems([]);
+  //       alert("Me vacié");
+  //     };
+  //   }
+  // }, [cartItems, setCartItems]);
+
   // model Orders {
+  //   id
   //   state       Int
   //   shopId      String
   //   productsId  String[]
-  //   cartId      String //@db.ObjectId Cuidado con este
   //   total       Float
   //   userId      String
   // }
 
-  const productsId = cartItems.map((item) => item.id);
+  const productsId = cartItems.map((item) => ({
+    id: item.id,
+    cantidad: item.amount,
+  }));
 
   let order = {
     state: 0,
     productsId: productsId,
+    shopId: shopId,
     total: calculateTotal(cartItems),
-    userId: user?.sub.split("|")[1],
+    // userId: dataUser.id,
   };
   console.log("order", order);
 
@@ -81,7 +113,7 @@ export default function Cart({
                   <div className="flex-1 overflow-y-auto py-6 px-4 sm:px-6">
                     <div className="flex items-start justify-between">
                       <Dialog.Title className="text-lg font-medium text-gray-900 flex items-center">
-                        Carrito de Compras
+                        Carrito de Comprass
                         <MdShoppingCart className="w-6 h-6 ml-2" />
                       </Dialog.Title>
                       <div className="ml-3 flex h-7 items-center">
@@ -152,10 +184,14 @@ export default function Cart({
                         Modificar Carrito
                       </button>
                       {checkout ? (
-                        <Paypal
-                          className={cartItems.length ? "w-full" : "hidden"}
-                          cartItems={cartItems}
-                        />
+                        <div className="paypal-button-container">
+                          <PaypalCheckoutButton
+                            cartItems={cartItems}
+                            setCartItems={setCartItems}
+                            shopEmail={shopEmail}
+                            setOpen={setOpen}
+                          />
+                        </div>
                       ) : (
                         <button
                           type="button"
@@ -195,6 +231,10 @@ export default function Cart({
           </div>
         </div>
       </Dialog>
+      {/* <Paypal
+        className={cartItems.length ? "w-full" : "hidden"}
+        cartItems={cartItems}
+      /> */}
     </Transition.Root>
   );
 }

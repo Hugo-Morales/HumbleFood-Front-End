@@ -1,4 +1,5 @@
 import {
+  GET_SHOPS,
   GET_DETAIL_PRODUCT,
   SEARCH_BY_NAME,
   GET_ALL_PRODUCTS,
@@ -7,23 +8,42 @@ import {
   RESET,
   LOADING,
   POST_NEW_SHOP,
-  FILTER_BY_CATEGORIES,
   GET_DATA_USER,
+  GET_DATA_USER,
+  GET_SHOPS_ID,
+  GET_ALL_USERS,
+  LOADING_PANEL,
+  GET_NAME_OF_SHOP,
+  STOP,
 } from "../actions";
 
 const initialStore = {
+  shop: [],
+  shops: [],
   productsloaded: [],
-  allproducts: [],
   detailProduct: [],
   categories: [],
-  productShop: [],
   postnewShop: [],
   dataUser: {},
+  allUser: [],
+  nameOfShop: "",
   isLoading: true,
+  loadingPanel: true,
 };
 
 export default function reducer(state = initialStore, { type, payload }) {
   switch (type) {
+    case GET_SHOPS:
+      return {
+        ...state,
+        shops: payload,
+        isLoading: false,
+      };
+    case GET_SHOPS_ID:
+      return {
+        ...state,
+        shop: payload,
+      };
     case GET_ALL_PRODUCTS:
       return {
         ...state,
@@ -34,6 +54,12 @@ export default function reducer(state = initialStore, { type, payload }) {
       return {
         ...state,
         dataUser: payload.user,
+        loadingPanel: false,
+      };
+    case GET_NAME_OF_SHOP:
+      return {
+        ...state,
+        nameOfShop: payload,
       };
     case GET_DETAIL_PRODUCT:
       return {
@@ -59,13 +85,21 @@ export default function reducer(state = initialStore, { type, payload }) {
     case GET_PRODUCTS_SHOP:
       return {
         ...state,
-        productShop: payload,
+        productsloaded: payload,
         isLoading: false,
+      };
+    case GET_ALL_USERS:
+      return {
+        ...state,
+        allUser: payload,
+        isLoading: false,
+        loadingPanel: false,
       };
     case RESET:
       return {
         ...state,
         detailProduct: [],
+        productsloaded: [],
         isLoading: true,
       };
     case LOADING:
@@ -73,21 +107,17 @@ export default function reducer(state = initialStore, { type, payload }) {
         ...state,
         isLoading: true,
       };
-    case FILTER_BY_CATEGORIES:
-      const productsloaded = state.productsloaded;
-      console.log(state.allproducts);
-      const typesFiltered =
-        payload === "All"
-          ? productsloaded
-          : productsloaded.products?.filter(
-              (el) =>
-                el.categories[0] === payload || el.categories[1] === payload
-            );
-      // si mi payload es todo , me devolves todo. Sino entra a allpokemons y filtramelo por le payload que te llega, por payload le pasamos cada una de los status que tengo el back entonces al value de la etiqueta option le pongo lo que tengo en el back pq es lo que me llegara por payload y va a tener que coincidir en el filtro
-      console.log(typesFiltered);
+
+    case LOADING_PANEL:
       return {
         ...state,
-        productsloaded: typesFiltered,
+        loadingPanel: true,
+      };
+    case STOP:
+      return {
+        ...state,
+        isLoading: false,
+        loadingPanel: false,
       };
     default:
       return state;
