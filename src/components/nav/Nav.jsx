@@ -9,10 +9,7 @@ import Cart from "../cart/Cart";
 import SearchBar from "../serchbar/SearchBar";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  filterProductsByCategories,
-  getCategories,
-} from "../../redux/actions";
+import { filterProductsByCategories, getCategories } from "../../redux/actions";
 
 const StyledButton = styled(IconButton)`
   position: fixed;

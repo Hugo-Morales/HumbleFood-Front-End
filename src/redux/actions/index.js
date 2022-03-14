@@ -15,8 +15,8 @@ export const POST_NEW_SHOP = "POST_NEW_SHOP";
 export const POST_NEW_USER = "POST_NEW_USER";
 export const GET_DATA_USER = "GET_DATA_USER";
 export const GET_SHOPS_ID = "GET_SHOPS_ID";
-export const GET_ALL_USERS = 'GET_ALL_USERS';
-export const LOADING_PANEL = 'LOADING_PANEL';
+export const GET_ALL_USERS = "GET_ALL_USERS";
+export const LOADING_PANEL = "LOADING_PANEL";
 export const GET_NAME_OF_SHOP = "GET_NAME_OF_SHOP";
 
 export const STOP = 'STOP';
@@ -77,7 +77,7 @@ export const getdataUser = (id) => {
 
 export const getallproducts = (page) => async (dispatch) => {
   try {
-    const allproducts = await axios.get(`${URL}productShops?page=${page}`);
+    const allproducts = await axios.get(`${URL}products?page=${page}`);
     // console.log(allproducts);
 
     dispatch({
@@ -91,7 +91,9 @@ export const getallproducts = (page) => async (dispatch) => {
 
 export const getDetailProduct = (idShop, idProduct) => async (dispatch) => {
   try {
-    const detailProduct = await axios.get(`${URL}productShop/${idShop}?id=${idProduct}`);
+    const detailProduct = await axios.get(
+      `${URL}productShop/${idShop}?id=${idProduct}`
+    );
     dispatch({
       type: GET_DETAIL_PRODUCT,
       payload: detailProduct.data,
@@ -103,7 +105,9 @@ export const getDetailProduct = (idShop, idProduct) => async (dispatch) => {
 
 export const searchByName = (shopId, nameoffood) => async (dispatch) => {
   try {
-    const found_product = await axios.get(`${URL}productShop/${shopId}?name=${nameoffood}`);
+    const found_product = await axios.get(
+      `${URL}productShop/${shopId}?name=${nameoffood}`
+    );
     dispatch({
       type: SEARCH_BY_NAME,
       payload: found_product.data,
@@ -242,7 +246,7 @@ export const getAllUser = (page) => async (dispatch) => {
 
 export const banU = (type, id) => async () => {
   try {
-    axios.put(`${URL}user/alter/${type}/${id}`)
+    axios.put(`${URL}user/alter/${type}/${id}`);
   } catch (error) {
     console.error(error);
   }
@@ -250,7 +254,7 @@ export const banU = (type, id) => async () => {
 
 export const banS = (type, id) => async () => {
   try {
-    axios.put(`${URL}shop/alter/${type}/${id}`)
+    axios.put(`${URL}shop/alter/${type}/${id}`);
   } catch (error) {
     console.error(error);
   }
@@ -258,7 +262,7 @@ export const banS = (type, id) => async () => {
 
 export const admin = (type, id) => async () => {
   try {
-    axios.put(`${URL}user/${type}/${id}`)
+    axios.put(`${URL}user/${type}/${id}`);
   } catch (error) {
     console.error(error);
   }

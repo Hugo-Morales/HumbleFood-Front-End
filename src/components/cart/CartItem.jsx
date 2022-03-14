@@ -36,9 +36,14 @@ function CartItem({
           <div className="flex justify-between text-base font-medium text-gray-900">
             <h3 className="font-bold">{product.name}</h3>
             <div>
-              <p className="ml-4">Precio: <span className="font-bold">${product.price}</span></p>
               <p className="ml-4">
-                Total: <span className="font-bold">${(product.price * product.amount).toFixed(2)}</span>
+                Precio: <span className="font-bold">${product.price}</span>
+              </p>
+              <p className="ml-4">
+                Total:{" "}
+                <span className="font-bold">
+                  ${(product.price * product.amount).toFixed(2)}
+                </span>
               </p>
             </div>
           </div>
