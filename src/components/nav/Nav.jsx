@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import AddShoppingCartIcon from "@material-ui/icons/AddShoppingCart";
 import Badge from "@material-ui/core/Badge";
 import IconButton from "@material-ui/core/IconButton";
@@ -27,18 +27,20 @@ const Nav = ({
   handleRemoveFromCart,
   handleDeleteFromCart,
 }) => {
+  const { shopId } = useParams();
   const { isAuthenticated, user, loginWithRedirect } = useAuth0();
-  const categories = useSelector((state) => state.categories);
   const dispatch = useDispatch();
+  const categories = useSelector((state) => state.categories);
   const [open, setOpen] = useState(false);
-  const user_id = user?.sub.split("|")[1];
 
+  const user_id = user?.sub.split("|")[1];
+  console.log(shopEmail);
   useEffect(() => {
     dispatch(getCategories());
   }, [dispatch]);
 
   function handleFilterCategories(e) {
-    dispatch(filterProductsByCategories(e.target.value));
+    dispatch(filterProductsByCategories(shopId, e.target.value));
     console.log(e.target.value);
   }
 
@@ -57,7 +59,7 @@ const Nav = ({
             name="categorys"
             className="p-2 h-10 focus:outline-none bg-ochre hover:bg-princetonOrange font-bold border-none text-center"
           >
-            <option value="All">Categorías</option>
+            <option value="">Categorías</option>
             {categories?.map((c, index) => {
               return (
                 <option key={index} value={c.name}>

@@ -210,11 +210,16 @@ export const postReview = (review) => async (dispatch) => {
   }
 };
 
-export function filterProductsByCategories(payload) {
-  return {
-    type: FILTER_BY_CATEGORIES,
-    payload,
-  };
+export const filterProductsByCategories = (shopId, category ) => async (dispatch) => {
+  try {
+    const response = await axios.get(`${URL}productShop/${shopId}?category=${category}`)
+    dispatch({
+      type: FILTER_BY_CATEGORIES,
+      payload: response.data,
+    });
+  } catch (error) {
+    console.log(error);
+  }
 }
 export function filterByDiscount(payload) {
   return {
