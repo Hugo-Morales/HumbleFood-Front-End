@@ -10,6 +10,8 @@ function PaypalCheckoutButton({ cartItems, setCartItems, shopEmail, setOpen }) {
     //Call backend function to fullfill order
     // if response is success
     setPaidFor(true);
+    setCartItems([]);
+    setOpen(false);
     // Refresh user's account or subscription status
 
     // if the response is error

@@ -9,10 +9,7 @@ import Cart from "../cart/Cart";
 import SearchBar from "../serchbar/SearchBar";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  filterProductsByCategories,
-  getCategories,
-} from "../../redux/actions";
+import { filterProductsByCategories, getCategories } from "../../redux/actions";
 
 const StyledButton = styled(IconButton)`
   position: fixed;
@@ -37,7 +34,7 @@ const Nav = ({
   const [open, setOpen] = useState(false);
 
   const user_id = user?.sub.split("|")[1];
-
+  console.log(shopEmail);
   useEffect(() => {
     dispatch(getCategories());
   }, [dispatch]);
@@ -62,7 +59,7 @@ const Nav = ({
             name="categorys"
             className="p-2 h-10 focus:outline-none bg-ochre hover:bg-princetonOrange font-bold border-none text-center"
           >
-            <option value="All">Categorías</option>
+            <option value="">Categorías</option>
             {categories?.map((c, index) => {
               return (
                 <option key={index} value={c.name}>
