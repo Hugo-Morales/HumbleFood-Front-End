@@ -18,6 +18,7 @@ export const GET_SHOPS_ID = "GET_SHOPS_ID";
 export const GET_ALL_USERS = "GET_ALL_USERS";
 export const LOADING_PANEL = "LOADING_PANEL";
 export const GET_NAME_OF_SHOP = "GET_NAME_OF_SHOP";
+export const POST_ORDER = "POST_ORDER";
 
 export const STOP = "STOP";
 const URL = process.env.REACT_APP_URL;
@@ -221,6 +222,7 @@ export const filterProductsByCategories = (shopId, category ) => async (dispatch
     console.log(error);
   }
 }
+
 export function filterByDiscount(payload) {
   return {
     type: FILTER_BY_DISCOUNT,
@@ -287,3 +289,15 @@ export const getnameOfShop = (id) => {
     }
   };
 };
+
+export const postOrder = (order) => async(dispatch) => {
+  try {
+    const response = await axios.post(`{URL}order`, order);
+    dispatch({
+      type: POST_ORDER,
+      payload: response.data,
+    })
+  } catch (error) {
+    
+  }
+}

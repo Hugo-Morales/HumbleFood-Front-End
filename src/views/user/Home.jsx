@@ -55,7 +55,7 @@ const Home = ({
               handleRemoveFromCart={handleRemoveFromCart}
               handleDeleteFromCart={handleDeleteFromCart}
             />
-            <div className="bg-gray-500">
+            <div className="bg-gradient-to-r from-gray-500 to-isabelline">
               <div className="lg:grid lg:grid-cols-2">
                 <div className="py-10 px-10 lg:px-0 max-w-3xl lg:max-w-md mx-auto font-bold 	font-weight: 700">
                   <h2 className="text-4xl tracking-tight font-extrabold text-gray-100">
