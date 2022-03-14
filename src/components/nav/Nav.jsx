@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import AddShoppingCartIcon from "@material-ui/icons/AddShoppingCart";
 import Badge from "@material-ui/core/Badge";
 import IconButton from "@material-ui/core/IconButton";
@@ -30,10 +30,12 @@ const Nav = ({
   handleRemoveFromCart,
   handleDeleteFromCart,
 }) => {
+  const { shopId } = useParams();
   const { isAuthenticated, user, loginWithRedirect } = useAuth0();
-  const categories = useSelector((state) => state.categories);
   const dispatch = useDispatch();
+  const categories = useSelector((state) => state.categories);
   const [open, setOpen] = useState(false);
+
   const user_id = user?.sub.split("|")[1];
 
   useEffect(() => {
@@ -41,7 +43,7 @@ const Nav = ({
   }, [dispatch]);
 
   function handleFilterCategories(e) {
-    dispatch(filterProductsByCategories(e.target.value));
+    dispatch(filterProductsByCategories(shopId, e.target.value));
     console.log(e.target.value);
   }
 

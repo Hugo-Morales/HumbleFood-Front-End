@@ -39,10 +39,8 @@ const Home = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch, shopId, currentPage]);
 
-  // console.log("shopshop", shop);
+  console.log("productos por categoría", products);
 
-
-  console.log("shopshop", shop);
   return (
     <div>
       {
