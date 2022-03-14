@@ -69,9 +69,9 @@ const Home = ({
                     className="mt-4 bg-red-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded-full"
                   />
                 </div>
-                <div className="lg:relative lg:mt-16">
+                <div className="lg:relative w-3/4">
                   <img
-                    className="lg:absolute lg:inset-0 h-10 w-full lg:h-full object-cover object-center lg:rounded-tl-md"
+                    className="lg:absolute w-full h-1/2 lg:h-full object-cover object-center lg:rounded-tl-md"
                     src={shop.image}
                     alt="Woman workcation on the beach"
                   />
