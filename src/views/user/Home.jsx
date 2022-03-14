@@ -37,98 +37,18 @@ const Home = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch, shopId, currentPage]);
 
-  // console.log(shops);
-  // console.log("shopshop", shop);
+  console.log("productos por categoría", products);
 
-  {
-    loading ? (
-      <Loading />
-    ) : (
-      <div>
-        <Nav
-          cartItems={cartItems}
-          shopEmail={shop.email}
-          getTotalItems={getTotalItems}
-          handleAddToCart={handleAddToCart}
-          handleRemoveFromCart={handleRemoveFromCart}
-          handleDeleteFromCart={handleDeleteFromCart}
-        />
-        <div className="bg-gray-600">
-          <div className="lg:grid lg:grid-cols-2">
-            <div className="py-10 px-10 lg:px-0 max-w-3xl lg:max-w-md mx-auto">
-              <h2 className="text-4xl tracking-tight font-extrabold text-gray-100">
-                <span className="block">Ready to dive in?</span>
-                <span className="block">Start your free trial today.</span>
-              </h2>
-              <p className="text-gray-300 mt-5">
-                Lorem Ipsum is simply dummy text of the printing and typesetting
-                industry. Lorem Ipsum has been the industry's standard dummy
-                text ever since the 1500s, when an unknown printer took a galley
-                of type and scrambled it to make a type specimen book.
-              </p>
-              <ButtonExit
-                ruta="/home"
-                text="Volver a ver mas tiendas"
-                className="mt-1  mb-6 ml-10 mr-0 bg-red-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded-full"
-              />
-            </div>
-          </div>
-          <div className="bg-gray-500">
-            <div className="lg:grid lg:grid-cols-2">
-              <div className="py-10 px-10 lg:px-0 max-w-3xl lg:max-w-md mx-auto font-bold 	font-weight: 700">
-                <h2 className="text-4xl tracking-tight font-extrabold text-gray-100">
-                  <span className="block">{shop.name}</span>
-                </h2>
-                <p className="text-gray-300 mt-5">
-                  {shop.description}
-                  {console.log(shop.description)}
-                </p>
-
-                <ButtonExit
-                  text="Volver a ver tiendas"
-                  ruta="/home"
-                  className="mt-4 bg-red-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded-full"
-                />
-              </div>
-              <div className="lg:relative lg:mt-16">
-                <img
-                  className="lg:absolute lg:inset-0 h-10 w-full lg:h-full object-cover object-center lg:rounded-tl-md"
-                  src={shop.image}
-                  alt="Woman workcation on the beach"
-                />
-              </div>
-            </div>
-          </div>
-
-          {/* <InformacionShop /> */}
-          <Cards
-            products={products}
-            handleAddToCart={handleAddToCart}
-            cartItems={cartItems}
-          />
-          <Paginado
-            paging={paging}
-            currentPage={currentPage}
-            pagesTotal={pagesTotal}
-            prev={prev}
-            next={next}
-          />
-        </div>
-        )
-      </div>
-    );
-    {
-      /* <InformacionShop /> */
-    }
-
-    return (
-      <div>
-        {cargando ? (
+  return (
+    <div>
+      {
+        cargando ? (
           <Loading />
         ) : (
           <>
             <Nav
               cartItems={cartItems}
+              setCartItems={setCartItems}
               shopEmail={shop.email}
               getTotalItems={getTotalItems}
               handleAddToCart={handleAddToCart}
@@ -173,9 +93,10 @@ const Home = ({
               next={next}
             />
           </>
-        )}
-      </div>
-    );
-  }
+        )
+      }
+    </div>
+  );
 };
+
 export default Home;
