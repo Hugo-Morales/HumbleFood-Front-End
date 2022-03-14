@@ -9,8 +9,8 @@ import {
   POST_NEW_SHOP,
   FILTER_BY_CATEGORIES,
   GET_DATA_USER,
-  FILTER_BY_CATEGORIES,
-  GET_DATA_USER,
+  // FILTER_BY_CATEGORIES,
+  // GET_DATA_USER,
 } from "../actions";
 
 const initialStore = {
