@@ -19,6 +19,8 @@ export const GET_ALL_USERS = "GET_ALL_USERS";
 export const LOADING_PANEL = "LOADING_PANEL";
 export const GET_NAME_OF_SHOP = "GET_NAME_OF_SHOP";
 export const GET_DISCOUNTS = "GET_DISCOUNTS";
+export const POST_ORDER = "POST_ORDER";
+
 export const STOP = "STOP";
 const URL = process.env.REACT_APP_URL;
 
@@ -253,20 +255,6 @@ export const filterProductsByCategories =
     }
   };
 
-// export const filterByOffers = (shopId, discount) => async (dispatch) => {
-//   try {
-//     const products = await axios.get(
-//       `${URL}productShop/${shopId}?discount=${discount}`
-//     );
-//     dispatch({
-//       type: GET_OFFERS,
-//       payload: products.data,
-//     });
-//   } catch (error) {
-//     console.log(error);
-//   }
-// };
-
 export const deleteProduct = (id) => async () => {
   try {
     await axios.delete(`${URL}product/delete/${id}`);
@@ -334,3 +322,15 @@ export const getnameOfShop = (id) => {
     }
   };
 };
+
+export const postOrder = (order) => async(dispatch) => {
+  try {
+    const response = await axios.post(`{URL}order`, order);
+    dispatch({
+      type: POST_ORDER,
+      payload: response.data,
+    })
+  } catch (error) {
+    
+  }
+}
