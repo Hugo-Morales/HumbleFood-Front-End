@@ -273,6 +273,14 @@ export const admin = (type, id) => async () => {
   }
 };
 
+export const editProduct = (obj) => async () => {
+  try {
+    axios.put(`${URL}product/update`, obj);
+  } catch (error) {
+    console.error(error);
+  }
+};
+
 export const getnameOfShop = (id) => {
   return async (dispatch) => {
     try {
