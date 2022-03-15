@@ -324,13 +324,14 @@ export const getnameOfShop = (id) => {
   };
 };
 
-export const postOrder = (order) => async(dispatch) => {
+export const postOrder = (order) => async (dispatch) => {
   try {
     const response = await axios.post(`${URL}order`, order);
     dispatch({
       type: POST_ORDER,
       payload: response.data,
-    })
+    });
+    console.log("Response", response.data)
   } catch (error) {
     console.log(error);
   }

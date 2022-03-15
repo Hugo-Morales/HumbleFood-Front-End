@@ -14,6 +14,7 @@ import HomeShops from "../views/user/HomeShops";
 
 function App() {
   const [cartItems, setCartItems] = useState([]);
+  const [open, setOpen] = useState(false);
 
   useEffect(() => {
     if (cartItems.length !== 0)
@@ -37,7 +38,11 @@ function App() {
       if (isItemInCart) {
         return prev.map((item) =>
           item.id === clickedItem.id
-            ? { ...item, amount: item.amount + 1 }
+            ? {
+                ...item,
+                amount:
+                  item.amount < item.stock ? item.amount + 1 : item.amount,
+              }
             : item
         );
       }
@@ -80,6 +85,8 @@ function App() {
             path="/productShop/:shopId"
             element={
               <Home
+                open={open}
+                setOpen={setOpen}
                 cartItems={cartItems}
                 setCartItems={setCartItems}
                 getTotalItems={getTotalItems}
@@ -92,7 +99,18 @@ function App() {
           <Route
             exact
             path="/products/:shopId/:productId"
-            element={<CardDetail handleAddToCart={handleAddToCart} />}
+            element={
+              <CardDetail
+                open={open}
+                setOpen={setOpen}
+                cartItems={cartItems}
+                setCartItems={setCartItems}
+                getTotalItems={getTotalItems}
+                handleAddToCart={handleAddToCart}
+                handleRemoveFromCart={handleRemoveFromCart}
+                handleDeleteFromCart={handleDeleteFromCart}
+              />
+            }
           />
           <Route
             exact
