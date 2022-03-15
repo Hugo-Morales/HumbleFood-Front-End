@@ -152,9 +152,9 @@ export const postNewShop = (newShop) => async (dispatch) => {
   }
 };
 
-export const getCategories = () => async (dispatch) => {
+export const getCategories = (shopId) => async (dispatch) => {
   try {
-    const categories = await axios.get(`${URL}categories`);
+    const categories = await axios.get(`${URL}categories/?shopId=${shopId}`);
     dispatch({
       type: GET_CATEGORIES,
       payload: categories.data,
