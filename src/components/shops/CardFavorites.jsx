@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useDispatch, useSelector } from "react-redux";
@@ -17,7 +18,11 @@ const CardShop = ({ shop }) => {
 	const shopsID = misfavoritos.map((i) => i.id);
 	const shopIdguardado = shopsID.includes(id);
 
-	// console.log(shopID.includes(id))
+	// console.log(shopID.includes(id));
+	useEffect(() => {
+		dispatch(getAllFavorites(userId));
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
 
 	const guardar = () => {
 		// console.log(id);
