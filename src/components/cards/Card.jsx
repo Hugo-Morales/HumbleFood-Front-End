@@ -1,12 +1,12 @@
 import { Link, useParams } from "react-router-dom";
 
 const Card = ({ product, handleAddToCart, shop }) => {
-  const { id, name, image, price, discount, categories } = product;
-  const { shopId } = useParams();
+	const { id, name, image, price, discount, categories } = product;
+	const { shopId } = useParams();
 
   return (
     <>
-      <div className="flex justify-center items-center ml-4 mobile:w-11/12 w-full drop-shadow-lg">
+      <div className="flex justify-center items-center mobile:w-11/12 w-full drop-shadow-lg">
         <div className="relative w-full bg-white shadow-md h-96 rounded-xl  flex flex-col justify-around items-center overflow-hidden sm:flex-row sm:h-52 sm:w-11/12 md:w-96">
           <div className="md:h-full md:w-1/2">
             <Link to={`/products/${shopId}/${id}`}>
