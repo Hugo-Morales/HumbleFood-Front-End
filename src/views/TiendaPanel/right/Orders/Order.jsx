@@ -25,6 +25,7 @@ function Order({ id, total }) {
         <option value="completado">Completado</option>
         <option value="cancelado">Cancelado</option>
       </select>
+      <div>hola</div>
       <p>{total}</p>
     </div>
   );
