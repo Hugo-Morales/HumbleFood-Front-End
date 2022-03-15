@@ -16,15 +16,16 @@ function PaypalCheckoutButton({
   const [paidFor, setPaidFor] = useState(false);
   const [error, setError] = useState(null);
   const dispatch = useDispatch();
-  
+
   const MySwal = withReactContent(Swal);
 
   const handleAprove = (orderId) => {
     //Call backend function to fullfill order
     // if response is success
-    setPaidFor(true);
+    dispatch(postOrder(order));
     setCartItems([]);
     setOpen(false);
+    setPaidFor(true);
     // Refresh user's account or subscription status
 
     // if the response is error
@@ -47,7 +48,6 @@ function PaypalCheckoutButton({
 
   if (paidFor) {
     //   Display success message, modal or redirect usere to succes page
-    dispatch(postOrder(order));
     MySwal.fire({
       title: `Gracias por su compra`,
       icon: "success",
@@ -56,8 +56,9 @@ function PaypalCheckoutButton({
       rgba(0,0,123,0.4)
       left top
       no-repeat
-    `,
+      `,
     });
+    console.log(paidFor)
   }
 
   if (error) {
@@ -113,8 +114,6 @@ function PaypalCheckoutButton({
       onApprove={async (data, actions) => {
         const order = await actions.order.capture().then((details) => {
           console.log(details);
-          setCartItems([]);
-          setOpen(false);
         });
         console.log("order", order);
 
