@@ -18,6 +18,8 @@ export const GET_SHOPS_ID = "GET_SHOPS_ID";
 export const GET_ALL_USERS = "GET_ALL_USERS";
 export const LOADING_PANEL = "LOADING_PANEL";
 export const GET_NAME_OF_SHOP = "GET_NAME_OF_SHOP";
+export const GET_DISCOUNTS = "GET_DISCOUNTS";
+export const POST_ORDER = "POST_ORDER";
 
 export const STOP = "STOP";
 const URL = process.env.REACT_APP_URL;
@@ -162,6 +164,34 @@ export const getCategories = () => async (dispatch) => {
   }
 };
 
+export const getDiscounts = (id) => async (dispatch) => {
+  try {
+    const discounts = await axios.get(`${URL}productShop/${id}/discounts`);
+    // console.log(discounts.data, "DISCOUNTS");
+    dispatch({
+      type: GET_DISCOUNTS,
+      payload: discounts.data,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const filterProductsByDiscounts =
+  (shopId, discount) => async (dispatch) => {
+    try {
+      const response = await axios.get(
+        `${URL}productShop/${shopId}?discount=${discount}`
+      );
+      dispatch({
+        type: FILTER_BY_DISCOUNT,
+        payload: response.data,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
 export const getProductShop = (id, page) => async (dispatch) => {
   try {
     const products = await axios.get(`${URL}productShop/${id}?page=${page}`);
@@ -210,23 +240,20 @@ export const postReview = (review) => async (dispatch) => {
   }
 };
 
-export const filterProductsByCategories = (shopId, category ) => async (dispatch) => {
-  try {
-    const response = await axios.get(`${URL}productShop/${shopId}?category=${category}`)
-    dispatch({
-      type: FILTER_BY_CATEGORIES,
-      payload: response.data,
-    });
-  } catch (error) {
-    console.log(error);
-  }
-}
-export function filterByDiscount(payload) {
-  return {
-    type: FILTER_BY_DISCOUNT,
-    payload,
+export const filterProductsByCategories =
+  (shopId, category) => async (dispatch) => {
+    try {
+      const response = await axios.get(
+        `${URL}productShop/${shopId}?category=${category}`
+      );
+      dispatch({
+        type: FILTER_BY_CATEGORIES,
+        payload: response.data,
+      });
+    } catch (error) {
+      console.log(error);
+    }
   };
-}
 
 export const deleteProduct = (id) => async () => {
   try {
@@ -273,6 +300,14 @@ export const admin = (type, id) => async () => {
   }
 };
 
+export const editProduct = (obj) => async () => {
+  try {
+    axios.put(`${URL}product/update`, obj);
+  } catch (error) {
+    console.error(error);
+  }
+};
+
 export const getnameOfShop = (id) => {
   return async (dispatch) => {
     try {
@@ -287,3 +322,15 @@ export const getnameOfShop = (id) => {
     }
   };
 };
+
+export const postOrder = (order) => async(dispatch) => {
+  try {
+    const response = await axios.post(`{URL}order`, order);
+    dispatch({
+      type: POST_ORDER,
+      payload: response.data,
+    })
+  } catch (error) {
+    
+  }
+}

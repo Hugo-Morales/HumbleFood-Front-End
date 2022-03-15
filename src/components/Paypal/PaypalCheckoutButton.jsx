@@ -1,13 +1,22 @@
 import { useState } from "react";
 import { PayPalButtons } from "@paypal/react-paypal-js";
+import { useDispatch } from "react-redux";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import { calculateTotal } from "../cart/Cart";
+import { postOrder } from "../../redux/actions";
 
-function PaypalCheckoutButton({ cartItems, setCartItems, shopEmail, setOpen }) {
+function PaypalCheckoutButton({
+  order,
+  cartItems,
+  setCartItems,
+  shopEmail,
+  setOpen,
+}) {
   const [paidFor, setPaidFor] = useState(false);
   const [error, setError] = useState(null);
-
+  const dispatch = useDispatch();
+  
   const MySwal = withReactContent(Swal);
 
   const handleAprove = (orderId) => {
@@ -38,6 +47,7 @@ function PaypalCheckoutButton({ cartItems, setCartItems, shopEmail, setOpen }) {
 
   if (paidFor) {
     //   Display success message, modal or redirect usere to succes page
+    dispatch(postOrder(order));
     MySwal.fire({
       title: `Gracias por su compra`,
       icon: "success",
