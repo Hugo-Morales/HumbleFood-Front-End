@@ -9,6 +9,8 @@ import Paginado from "../../components/paginado/Paginado";
 import ButtonExit from "../../../src/components/buttonExit/buttonexit";
 
 const Home = ({
+  open,
+  setOpen,
   cartItems,
   setCartItems,
   getTotalItems,
@@ -41,60 +43,60 @@ const Home = ({
 
   return (
     <div>
-      {
-        cargando ? (
-          <Loading />
-        ) : (
-          <>
-            <Nav
-              cartItems={cartItems}
-              setCartItems={setCartItems}
-              shopEmail={shop.email}
-              getTotalItems={getTotalItems}
-              handleAddToCart={handleAddToCart}
-              handleRemoveFromCart={handleRemoveFromCart}
-              handleDeleteFromCart={handleDeleteFromCart}
-            />
-            <div className="bg-gradient-to-r from-gray-500 to-isabelline">
-              <div className="grid md:grid-cols-2">
-                <div className="py-10 px-10 lg:px-0 max-w-3xl lg:max-w-md mx-auto font-bold 	font-weight: 700">
-                  <h2 className="text-4xl tracking-tight font-extrabold text-gray-100">
-                    <span className="block">{shop.name}</span>
-                  </h2>
-                  <p className="text-gray-300 mt-5">{shop.description}</p>
+      {cargando ? (
+        <Loading />
+      ) : (
+        <div>
+          <Nav
+            open={open}
+            setOpen={setOpen}
+            cartItems={cartItems}
+            setCartItems={setCartItems}
+            shopEmail={shop.email}
+            getTotalItems={getTotalItems}
+            handleAddToCart={handleAddToCart}
+            handleRemoveFromCart={handleRemoveFromCart}
+            handleDeleteFromCart={handleDeleteFromCart}
+          />
+          <div className="bg-gradient-to-r from-gray-500 to-isabelline">
+            <div className="grid md:grid-cols-2">
+              <div className="py-10 px-10 lg:px-0 max-w-3xl lg:max-w-md mx-auto font-bold 	font-weight: 700">
+                <h2 className="text-4xl tracking-tight font-extrabold text-gray-100">
+                  <span className="block">{shop.name}</span>
+                </h2>
+                <p className="text-gray-300 mt-5">{shop.description}</p>
 
-                  <ButtonExit
-                    text="Volver a ver mas tiendas"
-                    ruta="/home"
-                    className="mt-4 bg-red-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded-full"
-                  />
-                </div>
-                <div className="flex justify-center mobile:mx-auto">
-                  <img
-                    className="object-cover object-center w-64 lg:rounded-tl-md mobile:p-6"
-                    src={shop.image}
-                    alt="Woman workcation on the beach"
-                  />
-                </div>
+                <ButtonExit
+                  text="Volver a ver mas tiendas"
+                  ruta="/home"
+                  className="mt-4 bg-red-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded-full"
+                />
+              </div>
+              <div className="flex justify-center mobile:mx-auto">
+                <img
+                  className="object-cover object-center w-64 lg:rounded-tl-md mobile:p-6"
+                  src={shop.image}
+                  alt="Woman workcation on the beach"
+                />
               </div>
             </div>
+          </div>
 
-            {/* <InformacionShop /> */}
-            <Cards
-              products={products}
-              handleAddToCart={handleAddToCart}
-              cartItems={cartItems}
-            />
-            <Paginado
-              paging={paging}
-              currentPage={currentPage}
-              pagesTotal={pagesTotal}
-              prev={prev}
-              next={next}
-            />
-          </>
-        )
-      }
+          {/* <InformacionShop /> */}
+          <Cards
+            products={products}
+            handleAddToCart={handleAddToCart}
+            cartItems={cartItems}
+          />
+          <Paginado
+            paging={paging}
+            currentPage={currentPage}
+            pagesTotal={pagesTotal}
+            prev={prev}
+            next={next}
+          />
+        </div>
+      )}
     </div>
   );
 };
