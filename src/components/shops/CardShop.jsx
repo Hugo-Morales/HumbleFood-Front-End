@@ -1,15 +1,14 @@
 import { Link } from "react-router-dom";
 
-
 const CardShop = ({ shop }) => {
   const { id, name, image, description } = shop;
 
   return (
     <>
-      <div className="flex justify-center items-center w-full drop-shadow-4xl">
-        <div className="w-full relative bg-white shadow-md h-96 mx-3 rounded-3xl  flex flex-col justify-around items-center overflow-hidden sm:flex-row sm:h-52 sm:w-11/12 md:w-96">
+      <div className="flex justify-center items-center mobile:ml-6 mobile:w-11/12 w-full drop-shadow-lg">
+        <div className="w-full relative bg-white shadow-md h-96 rounded-xl  flex flex-col justify-around items-center overflow-hidden sm:flex-row sm:h-52 sm:w-11/12 md:w-96">
           <img
-            className="relative h-1/2 w-full sm:h-full sm:w-1/2 object-cover"
+            className="relative w-full sm:w-1/2 h-3/4 sm:h-full  object-cover"
             src={image}
             alt="comida"
           />

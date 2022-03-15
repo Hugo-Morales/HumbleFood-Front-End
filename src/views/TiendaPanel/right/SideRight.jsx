@@ -29,18 +29,6 @@ export default function SideRight({
 				);
 			case "crear":
 				return <CreateProducts shopId={shopsId} />;
-			case "delete":
-				return (
-					<Table
-						p={products}
-						d={true}
-						next={next}
-						prev={prev}
-						pagesTotal={pagesTotal}
-						paging={paging}
-						currentPage={currentPage}
-					/>
-				);
 			case "makeAdmin":
 				return <HacerAdmin />;
 			default:

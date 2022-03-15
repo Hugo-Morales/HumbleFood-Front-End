@@ -2,9 +2,11 @@ import React, { useEffect, useState } from "react";
 import Rating from "@mui/material/Rating";
 import { useDispatch } from "react-redux";
 import { postReview } from "../../redux/actions";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 import Stack from "@mui/material/Stack";
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
 
 function SendReview() {
   const { isAuthenticated, loginWithRedirect, user } = useAuth0();
@@ -13,6 +15,10 @@ function SendReview() {
   const [productId, setProductId] = useState("");
   const [value, setValue] = useState(0);
   const [review, setReview] = useState("");
+
+  console.log("review", id);
+
+  const MySwal = withReactContent(Swal);
 
   useEffect(() => {
     const getProductId = async () => {
@@ -26,7 +32,7 @@ function SendReview() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const userReview = {
       userId: user?.sub.split("|")[1],
@@ -35,7 +41,16 @@ function SendReview() {
       pointProduct: value,
     };
     dispatch(postReview(userReview));
-    alert("Calificación enviada");
+    MySwal.fire({
+      title: "Gracias por dejarnos tu opinión",
+      icon: "success",
+      confirmButtonText: "OK",
+      backdrop: `
+      rgba(0,0,123,0.4)
+      left top
+      no-repeat
+    `,
+    });
   };
 
   return (
@@ -72,12 +87,20 @@ function SendReview() {
                 className="h-40 mt-4 p-2 rounded-md border-2 border-slate-300 focus:outline-none resize-none "
               />
             </div>
-            <button
-              type="submit"
-              className="mt-10 w-auto bg-indigo-600 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 rorate:45"
-            >
-              Calificar
-            </button>
+            <div className="w-full flex justify-between">
+              <button
+                type="submit"
+                className="mt-10 w-auto bg-indigo-600 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 rorate:45"
+              >
+                Calificar
+              </button>
+              <Link
+                to="/home"
+                className="mt-10 w-auto bg-princetonOrange border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 rorate:45"
+              >
+                Volver al inicio
+              </Link>
+            </div>
           </form>
         </div>
       ) : (

@@ -8,12 +8,17 @@ import {
   RESET,
   LOADING,
   POST_NEW_SHOP,
+  // FILTER_BY_CATEGORIES,
+  // GET_DATA_USER,
   GET_DATA_USER,
   GET_SHOPS_ID,
   GET_ALL_USERS,
   LOADING_PANEL,
+  FILTER_BY_CATEGORIES,
+  FILTER_BY_DISCOUNT,
   GET_NAME_OF_SHOP,
   STOP,
+  GET_DISCOUNTS,
 } from "../actions";
 
 const initialStore = {
@@ -22,6 +27,7 @@ const initialStore = {
   productsloaded: [],
   detailProduct: [],
   categories: [],
+  discounts: [],
   postnewShop: [],
   dataUser: {},
   allUser: [],
@@ -55,6 +61,16 @@ export default function reducer(state = initialStore, { type, payload }) {
         dataUser: payload.user,
         loadingPanel: false,
       };
+    case FILTER_BY_CATEGORIES:
+      return {
+        ...state,
+        productsloaded: payload,
+      };
+    case FILTER_BY_DISCOUNT:
+      return {
+        ...state,
+        productsloaded: payload,
+      };
     case GET_NAME_OF_SHOP:
       return {
         ...state,
@@ -80,6 +96,11 @@ export default function reducer(state = initialStore, { type, payload }) {
       return {
         ...state,
         categories: payload,
+      };
+    case GET_DISCOUNTS:
+      return {
+        ...state,
+        discounts: payload,
       };
     case GET_PRODUCTS_SHOP:
       return {
@@ -117,7 +138,7 @@ export default function reducer(state = initialStore, { type, payload }) {
         ...state,
         isLoading: false,
         loadingPanel: false,
-      }
+      };
     default:
       return state;
   }
