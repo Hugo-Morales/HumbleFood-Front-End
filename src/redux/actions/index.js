@@ -21,6 +21,7 @@ export const GET_NAME_OF_SHOP = "GET_NAME_OF_SHOP";
 export const GET_DISCOUNTS = "GET_DISCOUNTS";
 export const POST_ORDER = "POST_ORDER";
 export const GET_ORDER_BY_SHOP = "GET_ORDER_BY_SHOP";
+export const ALL_FAVORITES = "ALL_FAVORITES";
 
 export const STOP = "STOP";
 const URL = process.env.REACT_APP_URL;
@@ -153,9 +154,9 @@ export const postNewShop = (newShop) => async (dispatch) => {
   }
 };
 
-export const getCategories = () => async (dispatch) => {
+export const getCategories = (shopId) => async (dispatch) => {
   try {
-    const categories = await axios.get(`${URL}categories`);
+    const categories = await axios.get(`${URL}categories/?shopId=${shopId}`);
     dispatch({
       type: GET_CATEGORIES,
       payload: categories.data,
@@ -333,9 +334,31 @@ export const postOrder = (order) => async (dispatch) => {
     });
     console.log("Response", response.data)
   } catch (error) {
-    console.error(error);
+    console.log(error);
   }
-};
+}
+
+
+//  - - - - Favorites Restaurants - - - -
+export const getAllFavorites = (id) => async(dispatch) => {
+  try {
+    const response = await axios.get(`${URL}user/${id}/favouriteShops`);
+    dispatch({
+      type: ALL_FAVORITES,
+      payload: response.data,
+    })
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export const addFavorites = (id, shopsID) => async () => {
+  try {
+    await axios.post(`${URL}user/${id}/favouriteShop/${shopsID}`);
+  } catch (error) {
+    console.log(error);
+  }
+}
 
 // - - - - - - - ORDENES - - - - - - -
 
@@ -352,3 +375,10 @@ export const getOrderByShop= (shopId) => {
     }
   };
 };
+export const removeFavorites = (id, shopsID) => async () => {
+  try {
+    await axios.put(`${URL}user/${id}/deleteFavouriteShop/${shopsID}`);
+  } catch (error) {
+    console.log(error);
+  }
+}

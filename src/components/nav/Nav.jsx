@@ -44,7 +44,8 @@ const Nav = ({
   console.log(shopEmail);
 
   useEffect(() => {
-    dispatch(getCategories());
+    shopId ? dispatch(getCategories(shopId)) :
+    dispatch(getCategories()) 
     dispatch(getDiscounts(shopId));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch]);
@@ -110,7 +111,8 @@ const Nav = ({
         {isAuthenticated ? (
           <div className="flex items-center">
             <h3 className="mr-3">
-              Bienvenid@ {user.given_name ? user.given_name : user.nickname}{" "}
+              Bienvenido {user.given_name ? user.given_name : user.nickname}{" "}
+              
             </h3>
             <img
               src={user.picture}

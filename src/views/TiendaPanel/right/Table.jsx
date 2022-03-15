@@ -21,7 +21,7 @@ export default function Table({
 	const dispatch = useDispatch();
 	const [showEdit, setShowEdit] = useState(false);
 	const [producto, setProducto] = useState([]);
-	console.log(p);
+	// console.log(p);
 
 	const confirmProduct = (id) => {
 		console.log(id);
