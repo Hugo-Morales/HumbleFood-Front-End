@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import { AiOutlineLogout } from "react-icons/ai";
-import { GrAddCircle } from "react-icons/gr";
-import { FiSettings } from "react-icons/fi";
+import { GrAddCircle, GrConfigure } from "react-icons/gr";
 import { useAuth0 } from "@auth0/auth0-react";
 import User from "../rol/user/User";
 import Shop from "../rol/shop/Shop";
@@ -23,12 +22,6 @@ export default function SideLeft({ name, setId, rol, shopsId }) {
 			<div className="p-2 mb-5 text-white uppercase">
 				<h1>Bienvenido {name}</h1>
 			</div>
-			<div
-				className="text-center bg-white p-2 rounded-lg mb-10 cursor-pointer"
-				onClick={() => setId("home")}
-			>
-				<h1>{rol === 2 ? <>Panel de Admin</> : <>Panel de Control</>}</h1>
-			</div>
 			{/* <div>
                 Mensajes (Opcional)
                 - Responder Mensajes
@@ -48,6 +41,15 @@ export default function SideLeft({ name, setId, rol, shopsId }) {
 			<div>
 				<h1 className="text-white uppercase">Opciones</h1>
 				<hr></hr>
+				<div
+					className="text-center bg-green-200 p-2 rounded-lg hover:bg-sky-700 cursor-pointer mt-2"
+					onClick={() => setId("home")}
+				>
+					<h1 className="flex justify-center items-center font-bold">
+						<GrConfigure className="mr-2" />
+						{rol === 2 ? <>Panel de Admin</> : <>Panel de Control</>}
+					</h1>
+				</div>
 				{rol === 0 && shopsId.length === 0 ? (
 					<>
 						{/* Agregar otra Tienda */}
