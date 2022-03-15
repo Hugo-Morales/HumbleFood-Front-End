@@ -1,54 +1,63 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Paginado from "../../../components/paginado/Paginado";
-import Modal from "../Modal";
 import InfoDataUser from "./InfoDataUser";
-import { deleteProduct } from "../../../redux/actions";
 import Edit from "../Edit";
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
+import { deleteProduct, loading, stop } from "../../../redux/actions";
 
 export default function Table({
 	p,
-	d,
 	next,
 	prev,
 	pagesTotal,
 	paging,
 	currentPage,
 }) {
-	const dataUser = useSelector((state) => state.dataUser);
 	// console.log(p[1].shopId);
+	const MySwal = withReactContent(Swal);
+	const dataUser = useSelector((state) => state.dataUser);
 	const dispatch = useDispatch();
-	const [showModal, setShowModal] = useState(false);
 	const [showEdit, setShowEdit] = useState(false);
-	const [dele, setDele] = useState([]);
 	const [producto, setProducto] = useState([]);
 
 	const confirmProduct = (id) => {
-		setShowModal(true);
-		setDele(id);
+		MySwal.fire({
+			title: "¿Estás seguro?",
+			text: "",
+			icon: "warning",
+			showCancelButton: true,
+			confirmButtonColor: "#3085d6",
+			cancelButtonColor: "#d33",
+			confirmButtonText: "Sí",
+			cancelButtonText: "No",
+			reverseButtons: true,
+			showCloseButton: true,
+		}).then((result) => {
+			if (result.isConfirmed) {
+				MySwal.fire({
+					title: "¡El producto se borró correctamente!",
+					text: "",
+					icon: "success",
+					timer: 2000,
+					timerProgressBar: true,
+					showConfirmButton: false,
+				});
+
+				dispatch(loading());
+				dispatch(deleteProduct(id));
+				setTimeout(() => {
+					dispatch(stop());
+				}, 700);
+			}
+		});
 	};
 
 	const editProduct = (p) => {
 		setShowEdit(true);
 		setProducto(p);
 	};
-
-	const delProduct = (id) => {
-		// console.log(id)
-		dispatch(deleteProduct(id));
-		setShowModal(false);
-	};
-
-	if (showModal) {
-		return (
-			<Modal
-				name={dele?.name}
-				id={dele?.id}
-				del={delProduct}
-				setShowModal={setShowModal}
-			/>
-		);
-	}
 
 	if (showEdit) {
 		return <Edit setShowEdit={setShowEdit} info={producto} />;
@@ -88,15 +97,12 @@ export default function Table({
 										>
 											Precio Total
 										</th>
-										{d ? (
-											<th scope="col" className="relative px-6 py-3">
-												{p?.length ? <p>Borrar</p> : <p>No hay Productos</p>}
-											</th>
-										) : (
-											<th scope="col" className="relative px-6 py-3">
-												{p?.length ? <p>Editar</p> : <p>No hay Productos</p>}
-											</th>
-										)}
+										<th scope="col" className="relative px-6 py-3">
+											<p>Editar</p>
+										</th>
+										<th scope="col" className="relative px-6 py-3">
+											<p>Borrar</p>
+										</th>
 									</tr>
 								</thead>
 								<tbody className="bg-white divide-y divide-gray-200">
@@ -162,27 +168,24 @@ export default function Table({
 														</>
 													)}
 												</td>
-												{d ? (
-													<td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-														<button
-															className="hover:text-indigo-900 bg-red-800 p-2 text-white rounded-lg"
-															onClick={() => confirmProduct(p)}
-														>
-															Borrar
-														</button>
-													</td>
-												) : (
-													<td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-														<button
-															className="bg-blue-200 text-black active:bg-blue-500 
+												<td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+													<button
+														className="bg-blue-200 text-black active:bg-blue-500 
       font-bold p-2 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1"
-															type="button"
-															onClick={() => editProduct(p)}
-														>
-															Editar
-														</button>
-													</td>
-												)}
+														type="button"
+														onClick={() => editProduct(p)}
+													>
+														Editar
+													</button>
+												</td>
+												<td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+													<button
+														className="hover:text-indigo-900 bg-red-800 p-2 text-white rounded-lg"
+														onClick={() => confirmProduct(p)}
+													>
+														Borrar
+													</button>
+												</td>
 											</tr>
 										))
 									) : (
