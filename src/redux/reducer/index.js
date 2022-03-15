@@ -95,6 +95,9 @@ export default function reducer(state = initialStore, { type, payload }) {
         postnewShop: payload,
       };
     case GET_CATEGORIES:
+      if(Array.isArray(payload)){
+        payload = payload.map(e => ({name: e}))
+      } 
       return {
         ...state,
         categories: payload,
