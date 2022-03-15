@@ -131,7 +131,7 @@ export default function Table({
 																{p.name}
 															</div>
 															<div className="text-sm text-gray-500">
-																{p?.categories.join(" ")}
+																{p?.categories?.join(" ")}
 															</div>
 														</div>
 													</div>

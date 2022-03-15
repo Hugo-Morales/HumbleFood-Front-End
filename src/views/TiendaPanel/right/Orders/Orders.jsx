@@ -1,10 +1,12 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getOrderByShop } from "../../../../redux/actions";
+import { getOrderByShop } from "../../../../redux/actions/actionsOrders";
+import Order from "./Order";
 
 function Orders({ shopId }) {
   const dispatch = useDispatch();
   const orders = useSelector((state) => state.orders);
+  
 
   useEffect(() => {
     dispatch(getOrderByShop(shopId));
@@ -22,18 +24,11 @@ function Orders({ shopId }) {
       </div>
       {orders &&
         orders?.map((order) => (
-          <div className="flex justify-between">
-            <p>{order.id}</p>
-            <select>
-              <option value="0">Pendiente De Procesamiento </option>
-              <option value="1">Creado</option>
-              <option value="2">Procesando</option>
-              <option value="3">Enviando</option>
-              <option value="4">Completado</option>
-              <option value="5">Cancelado</option>
-            </select>
-            <p>{order.total}</p>
-          </div>
+          <Order 
+            key={order.id}
+            id={order.id}
+            total={order.total}
+          />
         ))}
     </div>
   );
