@@ -66,7 +66,7 @@ const Nav = ({
         <div className="ml-4">
           <SearchBar />
         </div>
-        <div className="ml-8 w-full text-isabelline font-bold flex justify-around items-center">
+        <div className="hidden ml-8 w-full text-isabelline font-bold lg:flex justify-around items-center">
           <select
             onChange={(e) => handleFilterCategories(e)}
             name="categorys"
@@ -85,7 +85,7 @@ const Nav = ({
           <select
             onChange={(e) => handleFilterOffers(e)}
             name="offers"
-            className="p-2 h-10 focus:outline-none bg-ochre hover:bg-princetonOrange font-bold border-none text-center"
+            className="hidden lg:block p-2 h-10 focus:outline-none bg-ochre hover:bg-princetonOrange font-bold border-none text-center"
           >
             <option value="">Ofertas de la tienda</option>
             {discounts?.map((d, index) => {

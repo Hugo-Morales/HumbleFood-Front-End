@@ -62,7 +62,8 @@ export default function Cart({
     shopId: shopId,
     userId: dataUser?.id,
   };
-  console.log("order", order);
+  // console.log("order", order);
+  // console.table(order.products);
 
   return (
     <Transition.Root show={open} as={Fragment}>

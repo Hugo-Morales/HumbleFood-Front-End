@@ -56,7 +56,7 @@ const Home = ({
               handleDeleteFromCart={handleDeleteFromCart}
             />
             <div className="bg-gradient-to-r from-gray-500 to-isabelline">
-              <div className="lg:grid lg:grid-cols-2">
+              <div className="grid md:grid-cols-2">
                 <div className="py-10 px-10 lg:px-0 max-w-3xl lg:max-w-md mx-auto font-bold 	font-weight: 700">
                   <h2 className="text-4xl tracking-tight font-extrabold text-gray-100">
                     <span className="block">{shop.name}</span>
@@ -69,9 +69,9 @@ const Home = ({
                     className="mt-4 bg-red-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded-full"
                   />
                 </div>
-                <div className="lg:relative w-3/4">
+                <div className="flex justify-center mobile:mx-auto">
                   <img
-                    className="lg:absolute w-full h-1/2 lg:h-full object-cover object-center lg:rounded-tl-md"
+                    className="object-cover object-center w-64 lg:rounded-tl-md mobile:p-6"
                     src={shop.image}
                     alt="Woman workcation on the beach"
                   />
