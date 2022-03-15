@@ -1,8 +1,8 @@
 import React, { useEffect, useState, useRef } from "react";
 import { AiOutlineVerticalRight, AiOutlineVerticalLeft } from "react-icons/ai";
-import img1 from "../../img/image1.png";
-import img2 from "../../img/image2.png";
-import img3 from "../../img/image3.png";
+import img1 from "../../img/carrousel_1.jpg";
+import img2 from "../../img/carrousel_2.jpg";
+import img3 from "../../img/carrousel_3.jpg";
 
 const featureProducts = [img1, img2, img3];
 
@@ -52,12 +52,13 @@ function Carousell() {
   };
 
   return (
-    <div
-      ref={slideRef}
-      className="w-full mb-20 select-none relative"
-    >
+    <div ref={slideRef} className="w-full mb-20 select-none relative">
       <div>
-        <img className="h-fit w-full" src={featureProducts[currentIndex]} alt="" />
+        <img
+          className="h-fit w-full"
+          src={featureProducts[currentIndex]}
+          alt=""
+        />
       </div>
 
       <div className="absolute w-full top-1/2 transform -translate-y-1/2 flex justify-between items-start px-3">
