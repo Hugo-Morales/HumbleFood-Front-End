@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import AddShoppingCartIcon from "@material-ui/icons/AddShoppingCart";
 import Badge from "@material-ui/core/Badge";
@@ -24,6 +24,8 @@ const StyledButton = styled(IconButton)`
 `;
 
 const Nav = ({
+  open,
+  setOpen,
   cartItems,
   setCartItems,
   shopEmail,
@@ -37,7 +39,6 @@ const Nav = ({
   const dispatch = useDispatch();
   const categories = useSelector((state) => state.categories);
   const discounts = useSelector((state) => state.discounts);
-  const [open, setOpen] = useState(false);
 
   const user_id = user?.sub.split("|")[1];
   console.log(shopEmail);
@@ -45,6 +46,7 @@ const Nav = ({
   useEffect(() => {
     dispatch(getCategories());
     dispatch(getDiscounts(shopId));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch]);
 
   function handleFilterCategories(e) {
