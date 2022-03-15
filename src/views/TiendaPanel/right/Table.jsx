@@ -21,7 +21,7 @@ export default function Table({
 	const dispatch = useDispatch();
 	const [showEdit, setShowEdit] = useState(false);
 	const [producto, setProducto] = useState([]);
-	console.log(p);
+	// console.log(p);
 
 	const confirmProduct = (id) => {
 		console.log(id);
@@ -131,7 +131,7 @@ export default function Table({
 																{p.name}
 															</div>
 															<div className="text-sm text-gray-500">
-																{p?.categories.join(" ")}
+																{p?.categories?.join(" ")}
 															</div>
 														</div>
 													</div>

@@ -5,7 +5,7 @@ import { Dialog, Transition } from "@headlessui/react";
 import { XIcon } from "@heroicons/react/outline";
 import { MdShoppingCart } from "react-icons/md";
 import { AiOutlineDollarCircle } from "react-icons/ai";
-import { getdataUser, postOrder } from "../../redux/actions";
+import { getdataUser } from "../../redux/actions";
 import CartItem from "./CartItem";
 import PaypalCheckoutButton from "../Paypal/PaypalCheckoutButton";
 import { useParams } from "react-router-dom";
@@ -29,16 +29,18 @@ export default function Cart({
 }) {
   const [checkout, setCheckout] = useState(false);
   const { user, isAuthenticated, loginWithRedirect } = useAuth0();
-  
+
   const { shopId } = useParams();
-  
+
   const dispatch = useDispatch();
   const dataUser = useSelector((state) => state.dataUser);
-  
+
   const userId = user?.sub.split("|")[1];
   const productsId = cartItems.map((item) => ({
     id: item.id,
     cantidad: item.amount,
+    image: item.image,
+    name: item.name,
   }));
 
   let order = {
