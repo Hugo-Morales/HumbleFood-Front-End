@@ -6,19 +6,15 @@ const Card = ({ product, handleAddToCart, shop }) => {
 
   return (
     <>
-      <div className="flex justify-center items-center w-full drop-shadow-4xl">
-        <div className="relative bg-white shadow-md h-96 mx-3 rounded-3xl  flex flex-col justify-around items-center overflow-hidden sm:flex-row sm:h-52 sm:w-3/5 md:w-96">
-          <div className="h-full w-1/2">
+      <div className="flex justify-center items-center ml-4 mobile:w-11/12 w-full drop-shadow-lg">
+        <div className="relative w-full bg-white shadow-md h-96 rounded-xl  flex flex-col justify-around items-center overflow-hidden sm:flex-row sm:h-52 sm:w-11/12 md:w-96">
+          <div className="md:h-full md:w-1/2">
             <Link to={`/products/${shopId}/${id}`}>
-              <img
-                className="relative w-full h-full"
-                src={image}
-                alt="comida"
-              />
+              <img className="w-full md:h-full" src={image} alt="comida" />
+              <button className="absolute bg-gray-700 mr-5 text-white px-3 py-1 rounded-sm shadow-md top-0 left-0">
+                ✰
+              </button>
             </Link>
-            <button className="absolute bg-gray-700 mr-5 text-white px-3 py-1 rounded-sm shadow-md top-0 left-0">
-              ✰
-            </button>
           </div>
           <div className=" flex-1 w-full flex flex-col items-baseline justify-around h-1/2 pl-6 sm:h-full sm:items-baseline sm:w-1/2">
             <div className="flex flex-col justify-start items-baseline">
@@ -50,7 +46,7 @@ const Card = ({ product, handleAddToCart, shop }) => {
                   <p>Añadir</p>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                   className="icon icon-tabler icon-tabler-shopping-cart-plus"
+                    className="icon icon-tabler icon-tabler-shopping-cart-plus"
                     width="20"
                     height="20"
                     viewBox="0 0 24 24"

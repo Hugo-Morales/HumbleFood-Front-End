@@ -223,13 +223,6 @@ export const filterProductsByCategories = (shopId, category ) => async (dispatch
   }
 }
 
-export function filterByDiscount(payload) {
-  return {
-    type: FILTER_BY_DISCOUNT,
-    payload,
-  };
-}
-
 export const deleteProduct = (id) => async () => {
   try {
     await axios.delete(`${URL}product/delete/${id}`);
