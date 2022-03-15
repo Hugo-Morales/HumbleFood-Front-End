@@ -61,25 +61,23 @@ const LandingPage = () => {
               <div className="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start">
                 <Link to="/home">
                   <div className="rounded-md shadow">
-                    <a
+                    <button
                       href="#"
                       className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-amber-500 hover:bg-amber-600 md:py-4 md:text-lg md:px-10"
                     >
                       Empieza a descubrir...
-                    </a>
+                    </button>
                   </div>
                 </Link>
-                <a
-                  className="mt-3 sm:mt-0 sm:ml-3"
-                  onClick={() => loginWithRedirect()}
-                >
-                  <a
+                <div className="mt-3 sm:mt-0 sm:ml-3">
+                  <button
+                    onClick={() => loginWithRedirect()}
                     href="#"
                     className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-indigo-700 bg-indigo-100 hover:bg-indigo-200 md:py-4 md:text-lg md:px-10"
                   >
                     Registrate ya mismo!
-                  </a>
-                </a>
+                  </button>
+                </div>
               </div>
             </div>
           </div>
