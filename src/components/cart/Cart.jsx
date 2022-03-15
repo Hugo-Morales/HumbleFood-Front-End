@@ -28,7 +28,7 @@ export default function Cart({
   handleDeleteFromCart,
 }) {
   const [checkout, setCheckout] = useState(false);
-  const { user } = useAuth0();
+  const { user, isAuthenticated, loginWithRedirect } = useAuth0();
 
   const { shopId } = useParams();
 
@@ -41,25 +41,16 @@ export default function Cart({
     dispatch(getdataUser(userId));
   }, [dispatch, userId]);
 
-  // console.log("dataUser", dataUser.id);
+  // console.log("dataUser", dataUser);
 
   // useEffect(() => {
-  //   if (cartItems.length) {
+  //   if (window.location.origin) {
   //     return () => {
   //       setCartItems([]);
   //       alert("Me vacié");
   //     };
   //   }
-  // }, [cartItems, setCartItems]);
-
-  // model Orders {
-  //   id
-  //   state       Int
-  //   shopId      String
-  //   productsId  String[]
-  //   total       Float
-  //   userId      String
-  // }
+  // }, [setCartItems]);
 
   const productsId = cartItems.map((item) => ({
     id: item.id,
@@ -67,13 +58,12 @@ export default function Cart({
   }));
 
   let order = {
-    state: 0,
-    productsId: productsId,
+    products: productsId,
     shopId: shopId,
-    total: calculateTotal(cartItems),
-    // userId: dataUser.id,
+    userId: dataUser?.id,
   };
-  console.log("order", order);
+  // console.log("order", order);
+  // console.table(order.products);
 
   return (
     <Transition.Root show={open} as={Fragment}>
@@ -186,13 +176,14 @@ export default function Cart({
                       {checkout ? (
                         <div className="paypal-button-container">
                           <PaypalCheckoutButton
+                            order={order}
                             cartItems={cartItems}
                             setCartItems={setCartItems}
                             shopEmail={shopEmail}
                             setOpen={setOpen}
                           />
                         </div>
-                      ) : (
+                      ) : isAuthenticated ? (
                         <button
                           type="button"
                           onClick={() => {
@@ -206,6 +197,20 @@ export default function Cart({
                         >
                           Checkout
                           <AiOutlineDollarCircle className="ml-2 w-6 h-6" />
+                        </button>
+                      ) : (
+                        <button
+                          type="button"
+                          onClick={() => {
+                            loginWithRedirect();
+                          }}
+                          className={
+                            cartItems.length
+                              ? "w-full flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700"
+                              : "hidden"
+                          }
+                        >
+                          Por favor, Inicie Sesion
                         </button>
                       )}
                     </div>
