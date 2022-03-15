@@ -43,7 +43,8 @@ const Nav = ({
   console.log(shopEmail);
 
   useEffect(() => {
-    dispatch(getCategories());
+    shopId ? dispatch(getCategories(shopId)) :
+    dispatch(getCategories()) 
     dispatch(getDiscounts(shopId));
   }, [dispatch]);
 
