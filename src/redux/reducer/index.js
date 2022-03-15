@@ -19,6 +19,7 @@ import {
   GET_NAME_OF_SHOP,
   STOP,
   GET_DISCOUNTS,
+  GET_ORDER_BY_SHOP,
 } from "../actions";
 
 const initialStore = {
@@ -31,6 +32,7 @@ const initialStore = {
   postnewShop: [],
   dataUser: {},
   allUser: [],
+  orders: [],
   nameOfShop: "",
   isLoading: true,
   loadingPanel: true,
@@ -138,6 +140,12 @@ export default function reducer(state = initialStore, { type, payload }) {
         ...state,
         isLoading: false,
         loadingPanel: false,
+      };
+    case GET_ORDER_BY_SHOP:
+      return {
+        ...state,
+        isLoading: false,
+        orders: payload,
       };
     default:
       return state;

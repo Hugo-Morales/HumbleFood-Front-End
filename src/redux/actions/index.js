@@ -20,6 +20,7 @@ export const LOADING_PANEL = "LOADING_PANEL";
 export const GET_NAME_OF_SHOP = "GET_NAME_OF_SHOP";
 export const GET_DISCOUNTS = "GET_DISCOUNTS";
 export const POST_ORDER = "POST_ORDER";
+export const GET_ORDER_BY_SHOP = "GET_ORDER_BY_SHOP";
 
 export const STOP = "STOP";
 const URL = process.env.REACT_APP_URL;
@@ -336,14 +337,18 @@ export const postOrder = (order) => async (dispatch) => {
   }
 };
 
-// export const postReview = (review) => async (dispatch) => {
-//   try {
-//     const response = await axios.post(`${URL}review`, review);
-//     dispatch({
-//       type: POST_REVIEW,
-//       payload: response.data,
-//     });
-//   } catch (error) {
-//     console.error(error);
-//   }
-// };
+// - - - - - - - ORDENES - - - - - - -
+
+export const getOrderByShop= (shopId) => {
+  return async (dispatch) => {
+    try {
+      const orderShop = await axios.get(`${URL}orders/${shopId}`);
+      dispatch({
+        type: GET_ORDER_BY_SHOP,
+        payload: orderShop.data,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
