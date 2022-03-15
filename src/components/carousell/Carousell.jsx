@@ -1,8 +1,8 @@
 import React, { useEffect, useState, useRef } from "react";
 import { AiOutlineVerticalRight, AiOutlineVerticalLeft } from "react-icons/ai";
-import img1 from "../../img/carrousel_1.jpg";
-import img2 from "../../img/carrousel_2.jpg";
-import img3 from "../../img/carrousel_3.jpg";
+import img1 from "../../img/banner 1.jpg";
+import img2 from "../../img/banner 2.jpg";
+import img3 from "../../img/banner 3.jpg";
 
 const featureProducts = [img1, img2, img3];
 
