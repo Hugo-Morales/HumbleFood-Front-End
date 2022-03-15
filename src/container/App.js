@@ -9,7 +9,7 @@ import PrivateShop from "../routes/PrivateShop";
 import PrivateRoute from "../routes/PrivateRoute";
 import ShoppingList from "../components/cart/Cart";
 import NewCategory from "../components/category/NewCategory";
-// import { Helmet } from "react-helmet";
+import Favorites from "../components/shops/Favorites";
 import HomeShops from "../views/user/HomeShops";
 
 function App() {
@@ -107,6 +107,7 @@ function App() {
             path="/send-review/:productId"
             element={<SendReview />}
           />
+          <Route exact path="/favorites" element={<Favorites />}/>
           <Route path="*" element={<Error404 />} />
         </Routes>
       </div>
