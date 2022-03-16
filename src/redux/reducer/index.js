@@ -19,8 +19,9 @@ import {
   GET_NAME_OF_SHOP,
   STOP,
   GET_DISCOUNTS,
-  ALL_FAVORITES
-} from "../actions";
+  ALL_FAVORITES,
+} from "../actions/index";
+import { GET_ORDER_BY_SHOP } from "../actions/actionsOrders";
 
 const initialStore = {
   shop: [],
@@ -32,6 +33,7 @@ const initialStore = {
   postnewShop: [],
   dataUser: {},
   allUser: [],
+  orders: [],
   allFavorites: [],
   nameOfShop: "",
   isLoading: true,
@@ -95,9 +97,9 @@ export default function reducer(state = initialStore, { type, payload }) {
         postnewShop: payload,
       };
     case GET_CATEGORIES:
-      if(Array.isArray(payload)){
-        payload = payload.map(e => ({name: e}))
-      } 
+      if (Array.isArray(payload)) {
+        payload = payload.map((e) => ({ name: e }));
+      }
       return {
         ...state,
         categories: payload,
@@ -125,7 +127,7 @@ export default function reducer(state = initialStore, { type, payload }) {
         ...state,
         allFavorites: payload,
         isLoading: false,
-      }
+      };
     case RESET:
       return {
         ...state,
@@ -150,6 +152,12 @@ export default function reducer(state = initialStore, { type, payload }) {
         ...state,
         isLoading: false,
         loadingPanel: false,
+      };
+    case GET_ORDER_BY_SHOP:
+      return {
+        ...state,
+        isLoading: false,
+        orders: payload,
       };
     default:
       return state;

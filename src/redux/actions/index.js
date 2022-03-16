@@ -338,7 +338,7 @@ export const postOrder = (order) => async (dispatch) => {
 }
 
 
-//  - - - - Favorites Restaurants - - - -
+//  - - - - Favourites Restaurants - - - -
 export const getAllFavorites = (id) => async(dispatch) => {
   try {
     const response = await axios.get(`${URL}user/${id}/favouriteShops`);
@@ -366,3 +366,8 @@ export const removeFavorites = (id, shopsID) => async () => {
     console.log(error);
   }
 }
+
+
+
+
+

@@ -1,9 +1,9 @@
 import { Link, useParams } from "react-router-dom";
 
 const Card = ({ product, handleAddToCart }) => {
-  const { id, name, image, price, discount, categories, stock} = product;
+  const { id, name, image, price, discount, categories, stock } = product;
   const { shopId } = useParams();
-  
+
   return (
     <>
       <div className="flex justify-center items-center mobile:w-11/12 w-full drop-shadow-lg">
@@ -24,7 +24,7 @@ const Card = ({ product, handleAddToCart }) => {
                 </h1>
               </Link>
               <span className="text-xs text-indigo-300 mt-0">
-                {categories.join(" ")}
+                {categories?.join(" ")}
               </span>
             </div>
             {/* <p className="text-xs text-gray-500 w-4/5">{description}</p> */}
@@ -39,31 +39,31 @@ const Card = ({ product, handleAddToCart }) => {
                   </div>
                 </div>
               </Link>
-                <button
-                  onClick={() => handleAddToCart(product)}
-                  className="bg-gray-700 mr-5 text-white px-3 py-1 rounded-sm shadow-md flex justify-center"
+              <button
+                onClick={() => handleAddToCart(product)}
+                className="bg-gray-700 mr-5 text-white px-3 py-1 rounded-sm shadow-md flex justify-center"
+              >
+                <p>Añadir</p>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="icon icon-tabler icon-tabler-shopping-cart-plus"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  strokeWidth="1.5"
+                  stroke="#ffffff"
+                  fill="none"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                 >
-                  <p>Añadir</p>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="icon icon-tabler icon-tabler-shopping-cart-plus"
-                    width="20"
-                    height="20"
-                    viewBox="0 0 24 24"
-                    strokeWidth="1.5"
-                    stroke="#ffffff"
-                    fill="none"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  >
-                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                    <circle cx="6" cy="19" r="2" />
-                    <circle cx="17" cy="19" r="2" />
-                    <path d="M17 17h-11v-14h-2" />
-                    <path d="M6 5l6.005 .429m7.138 6.573l-.143 .998h-13" />
-                    <path d="M15 6h6m-3 -3v6" />
-                  </svg>
-                </button>
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                  <circle cx="6" cy="19" r="2" />
+                  <circle cx="17" cy="19" r="2" />
+                  <path d="M17 17h-11v-14h-2" />
+                  <path d="M6 5l6.005 .429m7.138 6.573l-.143 .998h-13" />
+                  <path d="M15 6h6m-3 -3v6" />
+                </svg>
+              </button>
             </div>
           </div>
         </div>

@@ -40,6 +40,8 @@ const Nav = ({
   const categories = useSelector((state) => state.categories);
   const discounts = useSelector((state) => state.discounts);
 
+  const itemsPerShop = cartItems.filter((item) => item.shopId === shopId);
+
   const user_id = user?.sub.split("|")[1];
   console.log(shopEmail);
 
@@ -154,7 +156,7 @@ const Nav = ({
         )}
         <div className={open ? "opacity-0" : "bg-emerald-400 rounded-full"}>
           <StyledButton onClick={() => setOpen(true)}>
-            <Badge badgeContent={getTotalItems(cartItems)} color="error">
+            <Badge badgeContent={getTotalItems(itemsPerShop)} color="error">
               <AddShoppingCartIcon />
             </Badge>
           </StyledButton>
@@ -163,6 +165,7 @@ const Nav = ({
       <Cart
         open={open}
         setOpen={setOpen}
+        itemsPerShop={itemsPerShop}
         cartItems={cartItems}
         setCartItems={setCartItems}
         shopEmail={shopEmail}
