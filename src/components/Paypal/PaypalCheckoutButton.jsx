@@ -29,6 +29,7 @@ function PaypalCheckoutButton({
     dispatch(postOrder(order));
     setOpen(false);
     setPaidFor(true);
+    console.log("orderId", orderId);
     // Refresh user's account or subscription status
 
     // if the response is error
@@ -61,7 +62,7 @@ function PaypalCheckoutButton({
       no-repeat
       `,
     });
-    console.log(paidFor);
+   
   }
 
   if (error) {
@@ -115,10 +116,9 @@ function PaypalCheckoutButton({
         });
       }}
       onApprove={async (data, actions) => {
-        const order = await actions.order.capture().then((details) => {
+        await actions.order.capture().then((details) => {
           console.log(details);
         });
-        console.log("order", order);
 
         handleAprove(data.orderID);
       }}
