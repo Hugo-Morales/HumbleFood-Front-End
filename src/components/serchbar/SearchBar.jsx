@@ -45,7 +45,7 @@ const SearchBar = () => {
         <input
           type="search"
           onChange={(e) => HandleInputChange(e)}
-          className="py-2 w-40 text-sm text-white bg-isabelle rounded-md pl-10 focus:outline-none focus:bg-white focus:text-gray-900"
+          className="py-2 w-40 md:w-64 text-sm text-white bg-isabelle rounded-md pl-10 focus:outline-none focus:bg-white focus:text-gray-900"
           placeholder="Buscar..."
           autoComplete="off"
         />

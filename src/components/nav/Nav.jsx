@@ -43,7 +43,6 @@ const Nav = ({
   const itemsPerShop = cartItems.filter((item) => item.shopId === shopId);
 
   const user_id = user?.sub.split("|")[1];
-  console.log(shopEmail);
 
   useEffect(() => {
     shopId ? dispatch(getCategories(shopId)) :
@@ -117,11 +116,13 @@ const Nav = ({
               Bienvenido {user.given_name ? user.given_name : user.nickname}{" "}
               
             </h3>
+            <Link to={`/settings/${user_id}`}>
             <img
               src={user.picture}
               alt="logo"
               className="w-10 rounded-full mr-3"
             />
+            </Link>
             <Link to={`/settings/${user_id}`}>
               <button className="hidden md:flex items-center justify-center w-38 mr-3 px-4 py-2 space-x-3 text-sm text-center bg-darkGreen text-isabelline transition-colors duration-200 transform dark:text-gray-300 dark:border-gray-300 hover:bg-gray-600 dark:hover:bg-gray-700 rounded-md">
                 Panel de Usuario
