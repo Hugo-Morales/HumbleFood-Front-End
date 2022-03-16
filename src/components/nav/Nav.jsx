@@ -52,6 +52,7 @@ const Nav = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch]);
 
+
   function handleFilterCategories(e) {
     dispatch(filterProductsByCategories(shopId, e.target.value));
     console.log(e.target.value);
@@ -112,7 +113,7 @@ const Nav = ({
       >
         {isAuthenticated ? (
           <div className="flex items-center">
-            <h3 className="mr-3">
+            <h3 className="hidden md:flex mr-3">
               Bienvenido {user.given_name ? user.given_name : user.nickname}{" "}
               
             </h3>
@@ -122,7 +123,7 @@ const Nav = ({
               className="w-10 rounded-full mr-3"
             />
             <Link to={`/settings/${user_id}`}>
-              <button className="flex items-center justify-center w-38 mr-3 px-4 py-2 space-x-3 text-sm text-center bg-darkGreen text-isabelline transition-colors duration-200 transform dark:text-gray-300 dark:border-gray-300 hover:bg-gray-600 dark:hover:bg-gray-700 rounded-md">
+              <button className="hidden md:flex items-center justify-center w-38 mr-3 px-4 py-2 space-x-3 text-sm text-center bg-darkGreen text-isabelline transition-colors duration-200 transform dark:text-gray-300 dark:border-gray-300 hover:bg-gray-600 dark:hover:bg-gray-700 rounded-md">
                 Panel de Usuario
               </button>
             </Link>
