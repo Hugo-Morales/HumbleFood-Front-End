@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { useAuth0 } from "@auth0/auth0-react";
+import { useDispatch, useSelector } from "react-redux";
 import CardDetail from "../views/user/CardDetails";
 import Error404 from "../views/Error 404/error";
 import Home from "../views/user/Home";
@@ -11,10 +13,16 @@ import ShoppingList from "../components/cart/Cart";
 import NewCategory from "../components/category/NewCategory";
 import Favorites from "../components/shops/Favorites";
 import HomeShops from "../views/user/HomeShops";
+import Loading from "../components/loading/Loading";
+import { getdataUser } from "../redux/actions/index"
 
 function App() {
+  const dispatch = useDispatch();
+  const { isLoading, user } = useAuth0();
   const [cartItems, setCartItems] = useState([]);
   const [open, setOpen] = useState(false);
+  const dataUser = useSelector((state) => state.dataUser);
+  const userId = user?.sub.split("|")[1];
 
   useEffect(() => {
     if (cartItems.length !== 0)
@@ -25,7 +33,8 @@ function App() {
     const items = JSON.parse(localStorage.getItem("carrito"));
 
     if (items) setCartItems(items);
-  }, []);
+    dispatch(getdataUser(userId));
+  }, [dispatch, userId]);
 
   const getTotalItems = (items) => {
     return items.reduce((acc, item) => acc + item.amount, 0);
@@ -74,10 +83,14 @@ function App() {
     if (items.length === 1) localStorage.removeItem("carrito");
   };
 
+  if (isLoading) return <Loading />;
+
   return (
     <BrowserRouter>
       <div className="App">
-        <Routes>
+          {
+            dataUser?.rol !== 3 ? (
+              <Routes>
           <Route exact path="/" element={<LandingPage />} />
           <Route exact path="/home" element={<HomeShops />} />
           <Route
@@ -127,7 +140,9 @@ function App() {
           />
           <Route exact path="/favorites" element={<Favorites />}/>
           <Route path="*" element={<Error404 />} />
-        </Routes>
+          </Routes>
+            ) : (<Error404 />)
+          }
       </div>
     </BrowserRouter>
   );

@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import { useAuth0 } from "@auth0/auth0-react";
 import { useDispatch, useSelector } from "react-redux";
 import { BsFillHeartFill } from "react-icons/bs";
 import {
@@ -8,12 +7,10 @@ import {
 	removeFavorites,
 } from "../../redux/actions";
 
-const CardShop = ({ shop }) => {
+const CardShop = ({ shop, userId }) => {
 	const dispatch = useDispatch();
-	const { user } = useAuth0();
 	const { id, name, image, description } = shop;
 	const misfavoritos = useSelector((state) => state.allFavorites);
-	const userId = user?.sub.split("|")[1];
 	const shopsID = misfavoritos.map((i) => i.id);
 	const shopIdguardado = shopsID.includes(id);
 
@@ -25,7 +22,7 @@ const CardShop = ({ shop }) => {
 		dispatch(getAllFavorites(userId));
 	};
 
-	const borrar = async () => {
+	const borrar = () => {
 		// console.log(id);
 		dispatch(removeFavorites(userId, id));
 		dispatch(getAllFavorites(userId));
@@ -40,16 +37,19 @@ const CardShop = ({ shop }) => {
 						src={image}
 						alt="comida"
 					/>
-					<div
-						className="cursor-pointer"
-						onClick={shopIdguardado ? borrar : guardar}
-					>
-						<button className="absolute bg-gray-600 text-white p-2.5 rounded-sm shadow-md top-0 left-0">
-							<BsFillHeartFill
-								className={shopIdguardado ? "text-red-600" : "text-white-500"}
-							/>
-						</button>
-					</div>
+					{userId ? (
+						<div
+							className="cursor-pointer"
+							onClick={shopIdguardado ? borrar : guardar}
+						>
+							<button className="absolute bg-gray-600 text-white p-2.5 rounded-sm shadow-md top-0 left-0">
+								<BsFillHeartFill
+									className={shopIdguardado ? "text-red-600" : "text-white-500"}
+								/>
+							</button>
+						</div>
+					) : null}
+
 					<div className=" flex-1 w-full flex flex-col items-baseline justify-around h-1/2 pl-6 sm:h-full sm:items-baseline sm:w-1/2">
 						<div className="flex flex-col justify-start items-baseline">
 							<Link to={`/productShop/${id}`}>

@@ -11,18 +11,19 @@ import {
 
 const CardShop = ({ shop }) => {
 	const dispatch = useDispatch();
-	const { user } = useAuth0();
+	const { isAuthenticated, user } = useAuth0();
 	const { id, name, image, description } = shop;
 	const misfavoritos = useSelector((state) => state.allFavorites);
 	const userId = user?.sub.split("|")[1];
-	const shopsID = misfavoritos.map((i) => i.id);
-	const shopIdguardado = shopsID.includes(id);
+	const shopsID = misfavoritos?.map((i) => i.id);
+	const shopIdguardado = shopsID?.includes(id);
 
-	// console.log(shopID.includes(id));
+	console.log(misfavoritos, isAuthenticated);
 	useEffect(() => {
-		dispatch(getAllFavorites(userId));
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
+		if (isAuthenticated) {
+			dispatch(getAllFavorites(userId));
+		}
+	}, [dispatch, userId, isAuthenticated]);
 
 	const guardar = () => {
 		// console.log(id);
