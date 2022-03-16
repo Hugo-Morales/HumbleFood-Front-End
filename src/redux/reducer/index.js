@@ -3,6 +3,7 @@ import {
   GET_DETAIL_PRODUCT,
   SEARCH_BY_NAME,
   GET_ALL_PRODUCTS,
+  GET_ALL_CATEGORIES,
   GET_CATEGORIES,
   GET_PRODUCTS_SHOP,
   RESET,
@@ -59,6 +60,12 @@ export default function reducer(state = initialStore, { type, payload }) {
         productsloaded: payload,
         isLoading: false,
       };
+    case GET_ALL_CATEGORIES:
+      return {
+        ...state,
+        categories: payload,
+        isLoading: false,
+      }
     case GET_DATA_USER:
       return {
         ...state,

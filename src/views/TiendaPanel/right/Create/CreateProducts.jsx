@@ -1,53 +1,42 @@
-import { ErrorOutlineSharp } from "@material-ui/icons";
+// import { ErrorOutlineSharp } from "@material-ui/icons";
 import React from "react";
+import Swal from "sweetalert2";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   postproducts,
-  getCategories,
   NewCategory,
+  getallCategories,
 } from "../../../../redux/actions";
 import Input from "./Input";
-
+import { useNavigate } from "react-router-dom";
 export function validate(input) {
-  let errors = {};
 
-  if (!input.name) {
-    errors.name = "Este campo es obligatorio";
-  } else if (!input.price) {
-    errors.price = "Completa aqui";
-  } else if (input.price < 0) {
-    errors.price = 'Tiene que ser mayor a 0'
-  } else if (!input.discount) {
-    errors.discount = "Completa aqui";
-  } else if (input.discount < 0) {
-    errors.discount = "no menor a 0";
-  } else if (!input.stock) {
-    errors.stock = "complete here!";
-  } else if (input.stock < 0) {
-    errors.stock = 'No menor a 0'
-  } else if (!input.description) {
-    errors.description = "complete here!";
-  } else if (!input.categories) {
-    errors.categories = "complete here!";
-  } else if (!input.image) {
-    errors.image = "complete here!";
-  }
+  let errors = {};
+  if (!input.name) errors.name = 'Este campo es obligatorio';
+  if (!input.price || input.price < 0) errors.price = 'No menor a cero o igual a cero';
+  if (!input.stock || input.stock < 0) errors.stock = 'No menor a cero o igual a cero';
+  if (!input.discount || input.discount < 0) errors.discount = 'No menor a cero o igual a cero';
+  if (!input.description) errors.description = 'Este campo es obligatorio';
+  if (!input.categories) errors.categories = 'Este campo es obligatorio';
+  if (!input.image) errors.image = 'Este campo es obligatorio';
+  console.log(errors)
   return errors;
 }
 
 const CreateProduct = ({ shopId }) => {
   const [errors, setErrors] = useState({});
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const categories = useSelector((state) => state.categories);
   const activado = !errors.name && !errors.price && !errors.discount && !errors.stock && !errors.description;
   // const {shopId} = useParams()
   const [input, setInput] = useState({
     name: "",
-    description: "",
     price: 0,
     discount: 0,
     stock: 0,
+    description: "",
     categories: [],
     image: "",
   });
@@ -79,7 +68,13 @@ const CreateProduct = ({ shopId }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    alert("Menu Creado!");
+    Swal.fire({
+      position: 'center',
+      icon: 'success',
+      title: 'Se ha creado el producto con exito!',
+      showConfirmButton: false,
+      timer: 2000
+    })
 
     const produc = {
       shopId: shopId[0],
@@ -92,6 +87,15 @@ const CreateProduct = ({ shopId }) => {
       image: input.image,
     };
     dispatch(postproducts(produc));
+    Swal.fire({
+      position: 'top-end',
+      icon: 'success',
+      title: 'Producto Creado',
+      showConfirmButton: false,
+      timer: 1500
+    })
+    navigate('/home')
+
   };
 
   const handleSelect = (e) => {
@@ -119,7 +123,8 @@ const CreateProduct = ({ shopId }) => {
     };
     if (input.categories) {
       return dispatch(NewCategory(category));
-    } else if (!input.categories) {
+    }
+    else if (!input.categories) {
       return alert("no hay nada");
     }
   };
@@ -129,10 +134,26 @@ const CreateProduct = ({ shopId }) => {
       ...input,
       categories: input.categories.filter((t) => t === el),
     });
+    const Toast = Swal.mixin({
+      toast: true,
+      position: 'top-end',
+      showConfirmButton: false,
+      timer: 3000,
+      timerProgressBar: true,
+      didOpen: (toast) => {
+        toast.addEventListener('mouseenter', Swal.stopTimer)
+        toast.addEventListener('mouseleave', Swal.resumeTimer)
+      }
+    })
+
+    Toast.fire({
+      icon: 'success',
+      title: 'Categoria eliminada correctamente'
+    })
   };
 
   useEffect(() => {
-    dispatch(getCategories());
+    dispatch(getallCategories());
   }, [dispatch]);
 
   return (
@@ -162,6 +183,7 @@ const CreateProduct = ({ shopId }) => {
                     iclass="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 border-2 rounded-md"
                     valor={input.name}
                     c={handleChange}
+                    required
                     ediv="text-rose-800 border-black-300 "
                     err={errors.name}
                   />
@@ -179,7 +201,7 @@ const CreateProduct = ({ shopId }) => {
                     valor={input.price}
                     c={handleChange}
                     ediv="text-rose-800"
-                    placeholder='0'
+                    required
                     err={errors.price}
                   />
 
@@ -195,6 +217,7 @@ const CreateProduct = ({ shopId }) => {
                     iclass="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-7 sm:text-sm border-gray-300 border-2 rounded-md"
                     valor={input.discount}
                     c={handleChange}
+                    required
                     ediv="text-rose-800"
                     err={errors.discount}
                   />
@@ -211,6 +234,7 @@ const CreateProduct = ({ shopId }) => {
                     iclass="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-7 sm:text-sm border-gray-300 border-2 rounded-md"
                     valor={input.stock}
                     c={handleChange}
+                    required
                     ediv="text-rose-800"
                     err={errors.stock}
                   />
@@ -229,10 +253,12 @@ const CreateProduct = ({ shopId }) => {
                         className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md resize-none"
                         placeholder="Descripción del productos (Ej. Los ingredientes)"
                         type="text"
-                        value={input.description}
                         required
+                        value={input.description}
                         onChange={handleChange}
                       ></textarea>
+                      <p className="text-rose-800">{errors.description}</p>
+
                     </div>
                   </div>
 
@@ -245,6 +271,7 @@ const CreateProduct = ({ shopId }) => {
                       id="categories"
                       name="categories"
                       onChange={handleSelect}
+                      required
                       autoComplete="categories"
                       className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                     >
@@ -260,14 +287,14 @@ const CreateProduct = ({ shopId }) => {
                         <p>{categories.find((d) => d.id === c).name}</p>
                       </div>
                     ))}
-                    <button onClick={(el) => handleDelete(el)}>Borrar</button>
+
                   </div>
 
                   {/* Imagen */}
                   <div className="col-span-6 sm:col-span-3">
                     <label className="block text-sm font-medium text-gray-700">
                       {" "}
-                      Cover photo{" "}
+                      Elegi tu foto{" "}
                     </label>
                     <div className="mt-5 flex-wrap flex justify-center px-6 pt-6 pb-10 border-2 border-gray-300 border-dashed rounded-md">
                       <div className="space-y-1 text-center">
@@ -302,6 +329,7 @@ const CreateProduct = ({ shopId }) => {
                         <p className="text-xs text-gray-500">
                           PNG, JPG, GIF up to 10MB
                         </p>
+                        <p className="text-rose-800">{errors.image}</p>
                       </div>
                     </div>
                   </div>
@@ -315,7 +343,6 @@ const CreateProduct = ({ shopId }) => {
                 value="Crear Categoria"
                 onClick={handleCategory}
                 ediv="text-rose-800"
-                err={errors.categories}
               />
               <input
                 type="submit"
@@ -325,6 +352,9 @@ const CreateProduct = ({ shopId }) => {
               />
             </div>
           </form>
+          <div>
+            <button onClick={handleDelete} className="mt-4 bg-red-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded-full" >Borrar</button>
+          </div>
         </div>
       </div>
     </div>

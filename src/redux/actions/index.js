@@ -1,8 +1,10 @@
+import Swal from "sweetalert2";
 import axios from "axios";
 export const GET_SHOPS = "GET_SHOPS";
 export const GET_DETAIL_PRODUCT = "GET_DETAIL_PRODUCT";
 export const SEARCH_BY_NAME = "SEARCH_BY_NAME";
 export const GET_ALL_PRODUCTS = "GET_ALL_PRODUCTS";
+export const GET_ALL_CATEGORIES = "GET_ALL_CATEGORIES"
 export const GET_CATEGORIES = "GET_CATEGORIES";
 export const GET_PRODUCTS_SHOP = "GET_PRODUCTS_SHOP";
 export const RESET = "RESET";
@@ -23,8 +25,8 @@ export const POST_ORDER = "POST_ORDER";
 export const ALL_FAVORITES = "ALL_FAVORITES";
 
 export const STOP = "STOP";
-const URL = process.env.REACT_APP_URL;
 
+const URL = process.env.REACT_APP_URL;
 export const getShopsId = (id) => async (dispatch) => {
   try {
     const allShopsId = await axios.get(`${URL}shop/${id}`);
@@ -125,7 +127,6 @@ export const postproducts = (input) => {
   return async () => {
     try {
       await axios.post(`${URL}product`, input);
-      console.log("holaa");
     } catch (error) {
       console.log(error);
     }
@@ -137,6 +138,13 @@ export const NewCategory = () => {
     await axios.post(`${URL}category`, {
       name,
     });
+    Swal.fire({
+      position: 'center',
+      icon: 'success',
+      title: 'Se ha creado el producto con exito!',
+      showConfirmButton: true,
+      timer: 1500
+    })
   };
 };
 
@@ -152,6 +160,17 @@ export const postNewShop = (newShop) => async (dispatch) => {
     console.log(error);
   }
 };
+export const getallCategories = () => async (dispatch) => {
+  try {
+    const categories = await axios.get(`${URL}categories`);
+    dispatch({
+      type: GET_ALL_CATEGORIES,
+      payload: categories.data,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 export const getCategories = (shopId) => async (dispatch) => {
   try {
@@ -160,6 +179,7 @@ export const getCategories = (shopId) => async (dispatch) => {
       type: GET_CATEGORIES,
       payload: categories.data,
     });
+    console.log(categories.data)
   } catch (error) {
     console.log(error);
   }
@@ -339,7 +359,7 @@ export const postOrder = (order) => async (dispatch) => {
 
 
 //  - - - - Favourites Restaurants - - - -
-export const getAllFavorites = (id) => async(dispatch) => {
+export const getAllFavorites = (id) => async (dispatch) => {
   try {
     const response = await axios.get(`${URL}user/${id}/favouriteShops`);
     dispatch({

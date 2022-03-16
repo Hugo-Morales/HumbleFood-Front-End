@@ -101,7 +101,7 @@ const CardDetail = ({
                   className="font-bold text-white"
                 >
                   {" "}
-                  {products?.name}{" "}
+                  {products[0]?.name}{" "}
                 </Link>
               </li>
             </ol>
@@ -116,7 +116,7 @@ const CardDetail = ({
           <div className="md:flex items-start justify-center py-12 2xl:px-20 md:px-6 px-4">
             <div className="xl:w-2/6 lg:w-2/5 w-80 md:block">
               <img
-                src={products?.image}
+                src={products[0]?.image}
                 className="w-full"
                 alt="fondo of a girl posing"
               />
@@ -161,20 +161,20 @@ const CardDetail = ({
                   Balenciaga Fall Collection
                 </p>
                 <h1 class="lg:text-2xl text-xl font-semibold lg:leading-6 leading-7 text-black mt-2">
-                  {products?.name}
+                  {products[0]?.name}
                 </h1>
 
                 <div className="mt-4 lg:mt-0 lg:row-span-3">
                   <div className="flex justify-between items-center">
-                    <p className="text-3xl text-gray-900">${products?.price}</p>
+                    <p className="text-3xl text-gray-900">${products[0]?.price}</p>
                     <p className="text-3xl inline-block font-bold text-white p-2 bg-green-500 rounded-sm">
-                      {products?.discount}
+                      {products[0]?.discount}
                       <span className="">% Descuento</span>
                     </p>
                   </div>
                 </div>
                 <h1 className="lg:text-2xl text-xl font-semibold lg:leading-6 leading-7 text-gray-800 dark:text-white mt-2">
-                  {products?.price}{" "}
+                  {products[0]?.price}{" "}
                 </h1>
               </div>
 
@@ -184,7 +184,7 @@ const CardDetail = ({
                 </h1>
 
                 <p className="md:w-96 text-base leading-normal text-gray-600 mt-4">
-                  {products?.description}
+                  {products[0]?.description}
                 </p>
               </div>
               <div></div>

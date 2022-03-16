@@ -13,7 +13,7 @@ import { useParams } from "react-router-dom";
 
 export function calculateTotal(items) {
   return items
-    .reduce((acc, item) => acc + item.amount * item.price, 0)
+    ?.reduce((acc, item) => acc + item.amount * item.price, 0)
     .toFixed(2);
 }
 
@@ -36,7 +36,7 @@ export default function Cart({
   const dispatch = useDispatch();
   const dataUser = useSelector((state) => state.dataUser);
 
-  const productsId = itemsPerShop.map((item) => ({
+  const productsId = itemsPerShop?.map((item) => ({
     id: item.id,
     cantidad: item.amount,
     image: item.image,
@@ -116,10 +116,10 @@ export default function Cart({
                     <div className="mt-8">
                       <div className="flow-root">
                         <ul className="-my-6 divide-y divide-gray-200">
-                          {itemsPerShop.length === 0 ? (
+                          {itemsPerShop?.length === 0 ? (
                             <p>No hay items en el carrito</p>
                           ) : null}
-                          {itemsPerShop.map((product) => (
+                          {itemsPerShop?.map((product) => (
                             <CartItem
                               key={product.id}
                               product={product}
@@ -137,7 +137,7 @@ export default function Cart({
                   <div className="border-t border-gray-200 py-6 px-4 sm:px-6">
                     <div
                       className={
-                        itemsPerShop.length
+                        itemsPerShop?.length
                           ? "flex justify-end text-base font-medium text-gray-900"
                           : "opacity-0"
                       }
@@ -199,7 +199,7 @@ export default function Cart({
                             loginWithRedirect();
                           }}
                           className={
-                            itemsPerShop.length
+                            itemsPerShop?.length
                               ? "w-full flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700"
                               : "hidden"
                           }
