@@ -18,7 +18,6 @@ const CardShop = ({ shop }) => {
 	const shopsID = misfavoritos?.map((i) => i.id);
 	const shopIdguardado = shopsID?.includes(id);
 
-	console.log(misfavoritos, isAuthenticated);
 	useEffect(() => {
 		if (isAuthenticated) {
 			dispatch(getAllFavorites(userId));
@@ -31,7 +30,7 @@ const CardShop = ({ shop }) => {
 		dispatch(getAllFavorites(userId));
 	};
 
-	const borrar = async () => {
+	const borrar = () => {
 		// console.log(id);
 		dispatch(removeFavorites(userId, id));
 		dispatch(getAllFavorites(userId));
