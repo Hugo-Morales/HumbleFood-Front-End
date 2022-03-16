@@ -18,7 +18,7 @@ const NavShop = ({ no }) => {
 					</h1>
 				</Link>
 				{!no ? (
-					<div className="ml-4 font-bold w-40 text-center">
+					<div className="hidden md:inline-block ml-4 font-bold w-40 text-center">
 						<Link to="/favorites">
 							<h1>Mis Restaurantes favoritos</h1>
 						</Link>
@@ -34,7 +34,7 @@ const NavShop = ({ no }) => {
 			>
 				{isAuthenticated ? (
 					<div className="flex items-center">
-						<h3 className="mr-3">Bienvenido {user?.name}</h3>
+						<h3 className="hidden md:inline-block mr-3">Bienvenido {user?.name}</h3>
 						<img
 							src={user.picture}
 							alt="logo"

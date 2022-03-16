@@ -37,11 +37,13 @@ const CardDetail = ({
 }) => {
   const dispatch = useDispatch();
   const spinner = useSelector((state) => state.isLoading);
-  const { products } = useSelector((state) => state.detailProduct);
+  const products = useSelector((state) => state.detailProduct);
   const shop = useSelector((state) => state.shop);
   const { shopId, productId } = useParams([0]);
 
-  console.log("shopId", products);
+  const itemsPerShop = cartItems.filter((item) => item.shopId === shopId);
+
+  // console.log("product", products);
 
   useEffect(() => {
     dispatch(loading());
@@ -64,6 +66,7 @@ const CardDetail = ({
             setOpen={setOpen}
             cartItems={cartItems}
             setCartItems={setCartItems}
+            itemsPerShop={itemsPerShop}
             shopEmail={shop.email}
             getTotalItems={getTotalItems}
             handleAddToCart={handleAddToCart}
@@ -101,13 +104,13 @@ const CardDetail = ({
                   className="font-bold text-white"
                 >
                   {" "}
-                  {products[0]?.name}{" "}
+                  {products?.name}{" "}
                 </Link>
               </li>
             </ol>
             <div className={open ? "opacity-0" : "bg-emerald-400 rounded-full mr-4"}>
               <StyledButton onClick={() => setOpen(true)}>
-                <Badge badgeContent={getTotalItems(cartItems)} color="error">
+                <Badge badgeContent={getTotalItems(itemsPerShop)} color="error">
                   <AddShoppingCartIcon />
                 </Badge>
               </StyledButton>
@@ -116,7 +119,7 @@ const CardDetail = ({
           <div className="md:flex items-start justify-center py-12 2xl:px-20 md:px-6 px-4">
             <div className="xl:w-2/6 lg:w-2/5 w-80 md:block">
               <img
-                src={products[0]?.image}
+                src={products?.image}
                 className="w-full"
                 alt="fondo of a girl posing"
               />
@@ -160,21 +163,21 @@ const CardDetail = ({
                 <p className="text-sm leading-none text-gray-600 dark:text-gray-300 ">
                   Balenciaga Fall Collection
                 </p>
-                <h1 class="lg:text-2xl text-xl font-semibold lg:leading-6 leading-7 text-black mt-2">
-                  {products[0]?.name}
+                <h1 className="lg:text-2xl text-xl font-semibold lg:leading-6 leading-7 text-black mt-2">
+                  {products?.name}
                 </h1>
 
                 <div className="mt-4 lg:mt-0 lg:row-span-3">
                   <div className="flex justify-between items-center">
-                    <p className="text-3xl text-gray-900">${products[0]?.price}</p>
+                    <p className="text-3xl text-gray-900">${products?.price}</p>
                     <p className="text-3xl inline-block font-bold text-white p-2 bg-green-500 rounded-sm">
-                      {products[0]?.discount}
+                      {products?.discount}
                       <span className="">% Descuento</span>
                     </p>
                   </div>
                 </div>
                 <h1 className="lg:text-2xl text-xl font-semibold lg:leading-6 leading-7 text-gray-800 dark:text-white mt-2">
-                  {products[0]?.price}{" "}
+                  {products?.price}{" "}
                 </h1>
               </div>
 
@@ -184,7 +187,7 @@ const CardDetail = ({
                 </h1>
 
                 <p className="md:w-96 text-base leading-normal text-gray-600 mt-4">
-                  {products[0]?.description}
+                  {products?.description}
                 </p>
               </div>
               <div></div>

@@ -90,7 +90,7 @@ export default function reducer(state = initialStore, { type, payload }) {
     case GET_DETAIL_PRODUCT:
       return {
         ...state,
-        detailProduct: payload,
+        detailProduct: payload.products[0],
         isLoading: false,
       };
     case SEARCH_BY_NAME:
@@ -141,6 +141,7 @@ export default function reducer(state = initialStore, { type, payload }) {
         detailProduct: [],
         productsloaded: [],
         shops: [],
+        allFavorites: [],
         isLoading: true,
       };
     case LOADING:
