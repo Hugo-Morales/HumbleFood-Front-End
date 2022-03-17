@@ -31,15 +31,29 @@ const CardShop = ({ shop, userId }) => {
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	},[save, deleteFav])
 	const guardar = () => {
-		setSave(true);
-		setDeleteFav(false)
-		//console.log(id);
+		if(!save){
+			setSave(true);
+			setDeleteFav(false)
+			console.log("Click");
+		}
+		else{
+			setSave(false);
+			setDeleteFav(true);
+		}
+		
 	};
 	
 	const borrar = () => {
-		setDeleteFav(true)
-		setSave(false);
-		console.log("Delete: ",deleteFav);
+		if(!deleteFav){
+			setDeleteFav(true)
+			setSave(false);
+			console.log("Delete: ",deleteFav);
+		}
+		else{
+			setDeleteFav(false);
+			setSave(true)
+		}
+		
 	};
 	
 
