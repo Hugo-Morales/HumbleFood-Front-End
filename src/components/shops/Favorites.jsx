@@ -5,19 +5,25 @@ import { useAuth0 } from "@auth0/auth0-react";
 import NavShop from "./NavShops";
 import Loading from "../loading/Loading";
 import CardFavorites from "./CardFavorites";
-import { getAllFavorites, loading, stop } from "../../redux/actions";
+import { getAllFavorites, loading, stop, reset } from "../../redux/actions";
 
 export default function Favorites() {
 	const dispatch = useDispatch();
-	const { user } = useAuth0();
+	const { isAuthenticated, user } = useAuth0();
 	const all = useSelector((state) => state.allFavorites);
 	const cargando = useSelector((state) => state.isLoading);
 	const id = user?.sub.split("|")[1];
 
 	useEffect(() => {
 		dispatch(loading());
-		dispatch(getAllFavorites(id));
+		if (isAuthenticated) {
+			dispatch(getAllFavorites(id));
+		}
 		dispatch(stop());
+
+		return () => {
+			dispatch(reset());
+		};
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
@@ -39,7 +45,11 @@ export default function Favorites() {
 					) : (
 						<>
 							<div className="mt-6 mx-5 text-center font-bold">
-								<h1>Actualmente no tenes ningún restaurante añadido.</h1>
+								{id ? (
+									<h1>Actualmente no tenes ningún restaurante añadido.</h1>
+								) : (
+									<h1>Tenes que estar registrado</h1>
+								)}
 							</div>
 							<div className="flex justify-center items-center mt-10">
 								<Link

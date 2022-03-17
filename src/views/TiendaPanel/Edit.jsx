@@ -49,7 +49,7 @@ export default function Edit({ setShowEdit, info }) {
 							className="bg-transparent border-0 text-black float-right"
 							onClick={() => setShowEdit(false)}
 						>
-							<span className="flex justify-center items-center text-black opacity-7 h-6 w-6 text-xl block bg-gray-400 py-0 rounded-full hover:bg-red-500">
+							<span className="flex justify-center items-center text-black opacity-7 h-6 w-6 text-xl bg-gray-400 py-0 rounded-full hover:bg-red-500">
 								x
 							</span>
 						</button>

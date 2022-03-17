@@ -19,6 +19,7 @@ export default function HomeShops() {
 	const { isAuthenticated, user, isLoading } = useAuth0();
 	const shops = useSelector((state) => state.shops);
 	const cargando = useSelector((state) => state.isLoading);
+	const id = user?.sub.split("|")[1];
 	const [currentPage, setCurrentPage] = useState(0);
 
 	const paging = (num) => {
@@ -28,7 +29,7 @@ export default function HomeShops() {
 	};
 
 	const newUser = {
-		userId: user?.sub.split("|")[1],
+		userId: id,
 		name: user?.name,
 		name_user: user?.nickname,
 		email: user?.email,
@@ -37,7 +38,7 @@ export default function HomeShops() {
 
 	useEffect(() => {
 		if (isAuthenticated && user) dispatch(postnewUser(newUser));
-		dispatch(getAllFavorites(user?.sub.split("|")[1]));
+		if (isAuthenticated) dispatch(getAllFavorites(id));
 	});
 
 	useEffect(() => {
@@ -59,7 +60,7 @@ export default function HomeShops() {
 				<>
 					<NavShop />
 					<Carousell />
-					<CardsShops shops={shops.shops} />
+					<CardsShops shops={shops.shops} id={id} />
 					<Paginado
 						next={shops.next}
 						prev={shops.prev}

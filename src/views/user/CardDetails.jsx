@@ -37,11 +37,13 @@ const CardDetail = ({
 }) => {
   const dispatch = useDispatch();
   const spinner = useSelector((state) => state.isLoading);
-  const { products } = useSelector((state) => state.detailProduct);
+  const products = useSelector((state) => state.detailProduct);
   const shop = useSelector((state) => state.shop);
   const { shopId, productId } = useParams([0]);
 
-  console.log("shopId", products);
+  const itemsPerShop = cartItems.filter((item) => item.shopId === shopId);
+
+  // console.log("product", products);
 
   useEffect(() => {
     dispatch(loading());
@@ -64,6 +66,7 @@ const CardDetail = ({
             setOpen={setOpen}
             cartItems={cartItems}
             setCartItems={setCartItems}
+            itemsPerShop={itemsPerShop}
             shopEmail={shop.email}
             getTotalItems={getTotalItems}
             handleAddToCart={handleAddToCart}
@@ -114,7 +117,7 @@ const CardDetail = ({
               }
             >
               <StyledButton onClick={() => setOpen(true)}>
-                <Badge badgeContent={getTotalItems(cartItems)} color="error">
+                <Badge badgeContent={getTotalItems(itemsPerShop)} color="error">
                   <AddShoppingCartIcon />
                 </Badge>
               </StyledButton>
