@@ -37,11 +37,13 @@ const CardDetail = ({
 }) => {
   const dispatch = useDispatch();
   const spinner = useSelector((state) => state.isLoading);
-  const { products } = useSelector((state) => state.detailProduct);
+  const products = useSelector((state) => state.detailProduct);
   const shop = useSelector((state) => state.shop);
   const { shopId, productId } = useParams([0]);
 
-  //console.log("shopId", products);
+  const itemsPerShop = cartItems.filter((item) => item.shopId === shopId);
+
+  // console.log("product", products);
 
   useEffect(() => {
     dispatch(loading());
@@ -64,6 +66,7 @@ const CardDetail = ({
             setOpen={setOpen}
             cartItems={cartItems}
             setCartItems={setCartItems}
+            itemsPerShop={itemsPerShop}
             shopEmail={shop.email}
             getTotalItems={getTotalItems}
             handleAddToCart={handleAddToCart}
@@ -107,7 +110,7 @@ const CardDetail = ({
             </ol>
             <div className={open ? "opacity-0" : "bg-emerald-400 rounded-full mr-4"}>
               <StyledButton onClick={() => setOpen(true)}>
-                <Badge badgeContent={getTotalItems(cartItems)} color="error">
+                <Badge badgeContent={getTotalItems(itemsPerShop)} color="error">
                   <AddShoppingCartIcon />
                 </Badge>
               </StyledButton>
@@ -160,7 +163,7 @@ const CardDetail = ({
                 <p className="text-sm leading-none text-gray-600 dark:text-gray-300 ">
                   Balenciaga Fall Collection
                 </p>
-                <h1 class="lg:text-2xl text-xl font-semibold lg:leading-6 leading-7 text-black mt-2">
+                <h1 className="lg:text-2xl text-xl font-semibold lg:leading-6 leading-7 text-black mt-2">
                   {products?.name}
                 </h1>
 

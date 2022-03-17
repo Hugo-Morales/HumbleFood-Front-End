@@ -2,6 +2,7 @@ import Table from "./Table";
 import CreateProducts from "./Create/CreateProducts";
 import HacerAdmin from "./make/HacerAdmin";
 import Styles from "./SideRight.module.css";
+import Orders from "./Orders/Orders";
 
 export default function SideRight({
 	product,
@@ -29,6 +30,8 @@ export default function SideRight({
 				);
 			case "crear":
 				return <CreateProducts shopId={shopsId} />;
+			case "modificar ordenes":
+				return <Orders shopId={shopsId} />;
 			case "makeAdmin":
 				return <HacerAdmin />;
 			default:

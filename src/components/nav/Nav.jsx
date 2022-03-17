@@ -19,22 +19,22 @@ import {
 } from "../../redux/actions";
 
 const StyledButton = styled(IconButton)`
-  position: fixed;
-  z-index: 100;
-  right: 0px;
-  top: 0px;
+	position: fixed;
+	z-index: 100;
+	right: 0px;
+	top: 0px;
 `;
 
 const Nav = ({
-  open,
-  setOpen,
-  cartItems,
-  setCartItems,
-  shopEmail,
-  getTotalItems,
-  handleAddToCart,
-  handleRemoveFromCart,
-  handleDeleteFromCart,
+	open,
+	setOpen,
+	cartItems,
+	setCartItems,
+	shopEmail,
+	getTotalItems,
+	handleAddToCart,
+	handleRemoveFromCart,
+	handleDeleteFromCart,
 }) => {
   const { shopId } = useParams();
   const { isAuthenticated, user, loginWithRedirect } = useAuth0();
@@ -49,12 +49,10 @@ const Nav = ({
   const user_id = user?.sub.split("|")[1];
   //console.log(shopEmail);
 
-  useEffect(() => {
-    shopId ? dispatch(getCategories(shopId)) :
-    dispatch(getCategories()) 
-    dispatch(getDiscounts(shopId));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dispatch]);
+	function handleFilterCategories(e) {
+		dispatch(filterProductsByCategories(shopId, e.target.value));
+		// console.log(e.target.value);
+	}
 
   useEffect(()=> {
     if(category && discount){

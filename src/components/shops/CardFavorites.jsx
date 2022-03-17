@@ -1,4 +1,6 @@
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
+import { useAuth0 } from "@auth0/auth0-react";
 import { useDispatch, useSelector } from "react-redux";
 import { BsFillHeartFill } from "react-icons/bs";
 import {
@@ -7,14 +9,20 @@ import {
 	removeFavorites,
 } from "../../redux/actions";
 
-const CardShop = ({ shop, userId }) => {
+const CardShop = ({ shop }) => {
 	const dispatch = useDispatch();
+	const { isAuthenticated, user } = useAuth0();
 	const { id, name, image, description } = shop;
 	const misfavoritos = useSelector((state) => state.allFavorites);
-	const shopsID = misfavoritos.map((i) => i.id);
-	const shopIdguardado = shopsID.includes(id);
+	const userId = user?.sub.split("|")[1];
+	const shopsID = misfavoritos?.map((i) => i.id);
+	const shopIdguardado = shopsID?.includes(id);
 
-	// console.log(shopID.includes(id))
+	useEffect(() => {
+		if (isAuthenticated) {
+			dispatch(getAllFavorites(userId));
+		}
+	}, [dispatch, userId, isAuthenticated]);
 
 	const guardar = () => {
 		// console.log(id);
@@ -22,7 +30,7 @@ const CardShop = ({ shop, userId }) => {
 		dispatch(getAllFavorites(userId));
 	};
 
-	const borrar = async () => {
+	const borrar = () => {
 		// console.log(id);
 		dispatch(removeFavorites(userId, id));
 		dispatch(getAllFavorites(userId));
@@ -32,13 +40,11 @@ const CardShop = ({ shop, userId }) => {
 		<>
 			<div className="flex justify-center items-center mobile:ml-6 mobile:w-11/12 w-full drop-shadow-lg">
 				<div className="w-full relative bg-white shadow-md h-96 rounded-xl  flex flex-col justify-around items-center overflow-hidden sm:flex-row sm:h-52 sm:w-11/12 md:w-96">
-					<div className="absolute top-0 md:left-0 md:w-2/3 md:h-full md:h-64">
-						<img
-							className="w-full h-3/4 max-h-72 md:h-full"
-							src={image}
-							alt="comida"
-						/>
-					</div>
+					<img
+						className="relative w-full sm:w-1/2 h-3/4 sm:h-full  object-cover"
+						src={image}
+						alt="comida"
+					/>
 					<div
 						className="cursor-pointer"
 						onClick={shopIdguardado ? borrar : guardar}
@@ -49,17 +55,15 @@ const CardShop = ({ shop, userId }) => {
 							/>
 						</button>
 					</div>
-					<div className="mobile:absolute md:right-0 md:top-0 w-full xl:my-2 flex justify-center md:h-full md:w-1/3">
-						<div className="mobile:absolute m-2 flex flex-col justify-center mobile:bottom-180">
+					<div className=" flex-1 w-full flex flex-col items-baseline justify-around h-1/2 pl-6 sm:h-full sm:items-baseline sm:w-1/2">
+						<div className="flex flex-col justify-start items-baseline">
 							<Link to={`/productShop/${id}`}>
-								<h1 className="text-xl md:text-lg font-bold mb-2 text-gray-600 font-sans">
+								<h1 className="text-lg font-normal mb-0 text-gray-600 font-sans">
 									{name}
 								</h1>
 							</Link>
-							<p className="text-md md:text-sm text-black w-4/5">
-								{description}
-							</p>
 						</div>
+						<p className="text-xs text-gray-500 w-4/5">{description}</p>
 					</div>
 				</div>
 			</div>

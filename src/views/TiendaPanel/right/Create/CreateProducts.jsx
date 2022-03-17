@@ -1,3 +1,4 @@
+import { ErrorOutlineSharp } from "@material-ui/icons";
 import React from "react";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -14,13 +15,17 @@ export function validate(input) {
   if (!input.name) {
     errors.name = "Este campo es obligatorio";
   } else if (!input.price) {
-    errors.price = "completed here!";
+    errors.price = "Completa aqui";
+  } else if (input.price < 0) {
+    errors.price = 'Tiene que ser mayor a 0'
   } else if (!input.discount) {
-    errors.discount = "completed here!";
+    errors.discount = "Completa aqui";
   } else if (input.discount < 0) {
     errors.discount = "no menor a 0";
   } else if (!input.stock) {
     errors.stock = "complete here!";
+  } else if (input.stock < 0) {
+    errors.stock = 'No menor a 0'
   } else if (!input.description) {
     errors.description = "complete here!";
   } else if (!input.categories) {
@@ -35,6 +40,7 @@ const CreateProduct = ({ shopId }) => {
   const [errors, setErrors] = useState({});
   const dispatch = useDispatch();
   const categories = useSelector((state) => state.categories);
+  const activado = !errors.name && !errors.price && !errors.discount && !errors.stock && !errors.description;
   // const {shopId} = useParams()
   const [input, setInput] = useState({
     name: "",
@@ -156,7 +162,7 @@ const CreateProduct = ({ shopId }) => {
                     iclass="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 border-2 rounded-md"
                     valor={input.name}
                     c={handleChange}
-                    ediv="text-rose-800"
+                    ediv="text-rose-800 border-black-300 "
                     err={errors.name}
                   />
 
@@ -173,6 +179,7 @@ const CreateProduct = ({ shopId }) => {
                     valor={input.price}
                     c={handleChange}
                     ediv="text-rose-800"
+                    placeholder='0'
                     err={errors.price}
                   />
 
@@ -312,6 +319,7 @@ const CreateProduct = ({ shopId }) => {
               />
               <input
                 type="submit"
+                disabled={!activado}
                 className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                 value="Crear Producto"
               />

@@ -21,6 +21,7 @@ export const GET_NAME_OF_SHOP = "GET_NAME_OF_SHOP";
 export const GET_DISCOUNTS = "GET_DISCOUNTS";
 export const POST_ORDER = "POST_ORDER";
 export const FILTER_BY_CAT_DISC = "FILTER_BY_CAT_DISC";
+export const ALL_FAVORITES = "ALL_FAVORITES";
 
 export const STOP = "STOP";
 const URL = process.env.REACT_APP_URL;
@@ -346,18 +347,41 @@ export const postOrder = (order) => async (dispatch) => {
     });
     console.log("Response", response.data)
   } catch (error) {
-    console.error(error);
+    console.log(error);
   }
-};
+}
 
-// export const postReview = (review) => async (dispatch) => {
-//   try {
-//     const response = await axios.post(`${URL}review`, review);
-//     dispatch({
-//       type: POST_REVIEW,
-//       payload: response.data,
-//     });
-//   } catch (error) {
-//     console.error(error);
-//   }
-// };
+
+//  - - - - Favourites Restaurants - - - -
+export const getAllFavorites = (id) => async(dispatch) => {
+  try {
+    const response = await axios.get(`${URL}user/${id}/favouriteShops`);
+    dispatch({
+      type: ALL_FAVORITES,
+      payload: response.data,
+    })
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export const addFavorites = (id, shopsID) => async () => {
+  try {
+    await axios.post(`${URL}user/${id}/favouriteShop/${shopsID}`);
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export const removeFavorites = (id, shopsID) => async () => {
+  try {
+    await axios.put(`${URL}user/${id}/deleteFavouriteShop/${shopsID}`);
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+
+
+
+
