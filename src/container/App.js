@@ -11,7 +11,7 @@ import ShoppingList from "../components/cart/Cart";
 import NewCategory from "../components/category/NewCategory";
 import Favorites from "../components/shops/Favorites";
 import HomeShops from "../views/user/HomeShops";
-
+import DirectionMap from "../views/seller/createNewShop/directionMap";
 function App() {
   const [cartItems, setCartItems] = useState([]);
   const [open, setOpen] = useState(false);
@@ -125,7 +125,8 @@ function App() {
             path="/send-review/:productId"
             element={<SendReview />}
           />
-          <Route exact path="/favorites" element={<Favorites />}/>
+          <Route exact path="/favorites" element={<Favorites />} />
+          <Route exact path="/createShop/map" element={<DirectionMap />} />
           <Route path="*" element={<Error404 />} />
         </Routes>
       </div>

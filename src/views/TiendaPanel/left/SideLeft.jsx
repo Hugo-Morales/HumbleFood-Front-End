@@ -57,7 +57,7 @@ export default function SideLeft({ name, setId, rol, shopsId }) {
               <Button
                 div="flex bg-green-200 justify-center p-2 rounded-lg mb-10 mt-3 hover:bg-sky-700 cursor-pointer"
                 text="Registrar Tienda"
-                buttonclass="flex items-center font-bold"
+                buttonclassName="flex items-center font-bold"
                 icon={<GrAddCircle className="mr-2" />}
               />
             </Link>
@@ -76,7 +76,7 @@ export default function SideLeft({ name, setId, rol, shopsId }) {
         <Button
           div="flex bg-red-600 justify-center p-2 rounded-lg mt-9 items-center cursor-pointer"
           text="Cerrar Sesión"
-          buttonclass="flex items-center font-bold"
+          buttonclassName="flex items-center font-bold"
           icon={<AiOutlineLogout className="mr-2" />}
           f={() => logout({ returnTo: window.location.origin })}
         />
