@@ -15,7 +15,7 @@ export default function SideLeft({ name, setId, rol, shopsId }) {
 	return (
 		<div className="bg-gray-700 sticky top-0 sm-h-30 h-screen p-6">
 			<ButtonExit
-				text="Volver al home"
+				text="Volver a ver tiendas"
 				ruta="/home"
 				className="mt-1  mb-6 ml-10 mr-0 bg-red-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded-full"
 			/>

@@ -39,8 +39,6 @@ export default function Cart({
   const productsId = itemsPerShop?.map((item) => ({
     id: item.id,
     cantidad: item.amount,
-    image: item.image,
-    name: item.name,
   }));
 
   const userId = user?.sub.split("|")[1];
@@ -51,6 +49,8 @@ export default function Cart({
     userId: dataUser?.id,
     total: Number(calculateTotal(itemsPerShop)),
   };
+
+  // console.log("order", order);
 
   useEffect(() => {
     dispatch(getdataUser(userId));

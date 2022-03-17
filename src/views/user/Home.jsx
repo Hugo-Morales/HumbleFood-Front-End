@@ -74,7 +74,7 @@ const Home = ({
               </div>
               <div className="flex justify-center mobile:mx-auto">
                 <img
-                  className="object-cover object-center w-64 lg:rounded-tl-md mobile:p-6"
+                  className="object-cover object-center w-64 md:w-80 lg:rounded-tl-md mobile:p-6"
                   src={shop.image}
                   alt="Woman workcation on the beach"
                 />

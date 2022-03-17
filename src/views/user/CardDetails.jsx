@@ -73,7 +73,10 @@ const CardDetail = ({
             handleRemoveFromCart={handleRemoveFromCart}
             handleDeleteFromCart={handleDeleteFromCart}
           />
-          <nav aria-label="Breadcrumb" className="flex justify-between w-full mt-4 h-12">
+          <nav
+            aria-label="Breadcrumb"
+            className="flex justify-between w-full mt-4 h-12"
+          >
             <ol className="max-w-2xl p-4 flex items-center space-x-2 sm:px-6 lg:max-w-7xl lg:px-8 bg-ochre rounded-r-md">
               <li>
                 <div className="flex items-center">
@@ -108,7 +111,11 @@ const CardDetail = ({
                 </Link>
               </li>
             </ol>
-            <div className={open ? "opacity-0" : "bg-emerald-400 rounded-full mr-4"}>
+            <div
+              className={
+                open ? "opacity-0" : "bg-emerald-400 rounded-full mr-4"
+              }
+            >
               <StyledButton onClick={() => setOpen(true)}>
                 <Badge badgeContent={getTotalItems(itemsPerShop)} color="error">
                   <AddShoppingCartIcon />
@@ -160,10 +167,7 @@ const CardDetail = ({
 						</div> */}
             <div className="xl:w-2/5 md:w-1/2 lg:ml-8 md:ml-6 md:mt-0 mt-6">
               <div className="border-b border-gray-200 pb-6">
-                <p className="text-sm leading-none text-gray-600 dark:text-gray-300 ">
-                  Balenciaga Fall Collection
-                </p>
-                <h1 className="lg:text-2xl text-xl font-semibold lg:leading-6 leading-7 text-black mt-2">
+                <h1 className="lg:text-2xl text-xl font-semibold lg:leading-6 leading-7 text-black mt-2 mb-4">
                   {products?.name}
                 </h1>
 
