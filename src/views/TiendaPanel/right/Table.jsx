@@ -205,6 +205,7 @@ export default function Table({
 											<td></td>
 											<td></td>
 											<td></td>
+											<td></td>
 										</tr>
 									)}
 								</tbody>

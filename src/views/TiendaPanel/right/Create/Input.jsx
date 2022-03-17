@@ -11,6 +11,7 @@ export default function Input({
   c,
   ediv,
   err,
+  placeholder
 }) {
   return (
     <div className={div}>
@@ -24,6 +25,7 @@ export default function Input({
         className={iclass}
         value={valor}
         onChange={c}
+        placeholder={placeholder}
       />
       <div className={ediv}>{err && <p>{err}</p>}</div>
     </div>

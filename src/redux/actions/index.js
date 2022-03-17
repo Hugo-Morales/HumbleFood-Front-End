@@ -3,6 +3,7 @@ export const GET_SHOPS = "GET_SHOPS";
 export const GET_DETAIL_PRODUCT = "GET_DETAIL_PRODUCT";
 export const SEARCH_BY_NAME = "SEARCH_BY_NAME";
 export const GET_ALL_PRODUCTS = "GET_ALL_PRODUCTS";
+export const GET_ALL_CATEGORIES = "GET_ALL_CATEGORIES";
 export const GET_CATEGORIES = "GET_CATEGORIES";
 export const GET_PRODUCTS_SHOP = "GET_PRODUCTS_SHOP";
 export const RESET = "RESET";
@@ -131,12 +132,10 @@ export const postproducts = (input) => {
     }
   };
 };
-export const NewCategory = () => {
+
+export const NewCategory = (name) => {
   return async () => {
-    const name = prompt("save New Category ");
-    await axios.post(`${URL}category`, {
-      name,
-    });
+    await axios.post(`${URL}category`, name);
   };
 };
 
@@ -158,6 +157,18 @@ export const getCategories = (shopId) => async (dispatch) => {
     const categories = await axios.get(`${URL}categories/?shopId=${shopId}`);
     dispatch({
       type: GET_CATEGORIES,
+      payload: categories.data,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getallCategories = () => async (dispatch) => {
+  try {
+    const categories = await axios.get(`${URL}categories`);
+    dispatch({
+      type: GET_ALL_CATEGORIES,
       payload: categories.data,
     });
   } catch (error) {
