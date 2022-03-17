@@ -1,10 +1,9 @@
-import Swal from "sweetalert2";
 import axios from "axios";
 export const GET_SHOPS = "GET_SHOPS";
 export const GET_DETAIL_PRODUCT = "GET_DETAIL_PRODUCT";
 export const SEARCH_BY_NAME = "SEARCH_BY_NAME";
 export const GET_ALL_PRODUCTS = "GET_ALL_PRODUCTS";
-export const GET_ALL_CATEGORIES = "GET_ALL_CATEGORIES"
+export const GET_ALL_CATEGORIES = "GET_ALL_CATEGORIES";
 export const GET_CATEGORIES = "GET_CATEGORIES";
 export const GET_PRODUCTS_SHOP = "GET_PRODUCTS_SHOP";
 export const RESET = "RESET";
@@ -22,11 +21,12 @@ export const LOADING_PANEL = "LOADING_PANEL";
 export const GET_NAME_OF_SHOP = "GET_NAME_OF_SHOP";
 export const GET_DISCOUNTS = "GET_DISCOUNTS";
 export const POST_ORDER = "POST_ORDER";
+export const FILTER_BY_CAT_DISC = "FILTER_BY_CAT_DISC";
 export const ALL_FAVORITES = "ALL_FAVORITES";
 
 export const STOP = "STOP";
-
 const URL = process.env.REACT_APP_URL;
+
 export const getShopsId = (id) => async (dispatch) => {
   try {
     const allShopsId = await axios.get(`${URL}shop/${id}`);
@@ -127,24 +127,16 @@ export const postproducts = (input) => {
   return async () => {
     try {
       await axios.post(`${URL}product`, input);
+      console.log("holaa");
     } catch (error) {
       console.log(error);
     }
   };
 };
-export const NewCategory = () => {
+
+export const NewCategory = (name) => {
   return async () => {
-    const name = prompt(" ");
-    await axios.post(`${URL}category`, {
-      name,
-    });
-    Swal.fire({
-      position: 'center',
-      icon: 'success',
-      title: 'Se ha creado el producto con exito!',
-      showConfirmButton: true,
-      timer: 1500
-    })
+    await axios.post(`${URL}category`, name);
   };
 };
 
@@ -160,17 +152,6 @@ export const postNewShop = (newShop) => async (dispatch) => {
     console.log(error);
   }
 };
-export const getallCategories = () => async (dispatch) => {
-  try {
-    const categories = await axios.get(`${URL}categories`);
-    dispatch({
-      type: GET_ALL_CATEGORIES,
-      payload: categories.data,
-    });
-  } catch (error) {
-    console.log(error);
-  }
-};
 
 export const getCategories = (shopId) => async (dispatch) => {
   try {
@@ -179,7 +160,18 @@ export const getCategories = (shopId) => async (dispatch) => {
       type: GET_CATEGORIES,
       payload: categories.data,
     });
-    console.log(categories.data)
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getallCategories = () => async (dispatch) => {
+  try {
+    const categories = await axios.get(`${URL}categoriesId`);
+    dispatch({
+      type: GET_ALL_CATEGORIES,
+      payload: categories.data,
+    });
   } catch (error) {
     console.log(error);
   }
@@ -260,7 +252,20 @@ export const postReview = (review) => async (dispatch) => {
     console.error(error);
   }
 };
-
+export const filterByCat_Disc = (shopId, discount, category) => async (dispatch) => {
+  try {
+    const response = await axios.get(
+      `${URL}productShop/${shopId}?category=${category}&discount=${discount}`
+    );
+    console.log(`${URL}productsShop/${shopId}?category=${category}&discount=${discount}`);
+    dispatch({
+      type: FILTER_BY_CAT_DISC,
+      payload: response.data,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+}
 export const filterProductsByCategories =
   (shopId, category) => async (dispatch) => {
     try {
@@ -386,8 +391,3 @@ export const removeFavorites = (id, shopsID) => async () => {
     console.log(error);
   }
 }
-
-
-
-
-

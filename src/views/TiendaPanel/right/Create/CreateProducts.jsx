@@ -1,175 +1,42 @@
-// import { ErrorOutlineSharp } from "@material-ui/icons";
-import React from "react";
-import Swal from "sweetalert2";
-import { useState, useEffect } from "react";
+
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  postproducts,
-  NewCategory,
-  getallCategories,
-} from "../../../../redux/actions";
+import Validate from "./Validate";
+import Functions from "./Functions";
 import Input from "./Input";
-import { useNavigate } from "react-router-dom";
-export function validate(input) {
+import { getallCategories } from "../../../../redux/actions";
+import { MdDelete } from "react-icons/md";
 
-  let errors = {};
-  if (!input.name) errors.name = 'Este campo es obligatorio';
-  if (!input.price || input.price < 0) errors.price = 'No menor a cero o igual a cero';
-  if (!input.stock || input.stock < 0) errors.stock = 'No menor a cero o igual a cero';
-  if (!input.discount || input.discount < 0) errors.discount = 'No menor a cero o igual a cero';
-  if (!input.description) errors.description = 'Este campo es obligatorio';
-  if (!input.categories) errors.categories = 'Este campo es obligatorio';
-  if (!input.image) errors.image = 'Este campo es obligatorio';
-  console.log(errors)
-  return errors;
-}
-
-const CreateProduct = ({ shopId }) => {
-  const [errors, setErrors] = useState({});
+export default function CreateProducts({ shopId }) {
+  const {
+    handleChange,
+    add,
+    handleSubmit,
+    input,
+    err,
+    listcategories,
+    handleUploadImg,
+    eliminar,
+  } = Functions(Validate, shopId);
   const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const categories = useSelector((state) => state.categories);
-  const activado = !errors.name && !errors.price && !errors.discount && !errors.stock && !errors.description;
-  // const {shopId} = useParams()
-  const [input, setInput] = useState({
-    name: "",
-    price: 0,
-    discount: 0,
-    stock: 0,
-    description: "",
-    categories: [],
-    image: "",
-  });
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-
-    setInput({
-      ...input,
-      [name]: value,
-    });
-
-    setErrors(
-      validate({
-        ...input,
-        [name]: value,
-      })
-    );
-  };
-
-  const handleUploadImg = (element) => {
-    const file = element.target.files[0];
-    const reader = new FileReader();
-    reader.onloadend = function () {
-      setInput({ ...input, image: reader.result });
-    };
-    reader.readAsDataURL(file); //transforma la imagen a b64 (string), y asi lo puede leer
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    Swal.fire({
-      position: 'center',
-      icon: 'success',
-      title: 'Se ha creado el producto con exito!',
-      showConfirmButton: false,
-      timer: 2000
-    })
-
-    const produc = {
-      shopId: shopId[0],
-      name: input.name,
-      description: input.description,
-      price: Number(input.price),
-      discount: Number(input.discount),
-      stock: Number(input.stock),
-      categoriesId: input.categories,
-      image: input.image,
-    };
-    dispatch(postproducts(produc));
-    Swal.fire({
-      position: 'top-end',
-      icon: 'success',
-      title: 'Producto Creado',
-      showConfirmButton: false,
-      timer: 1500
-    })
-    navigate('/home')
-
-  };
-
-  const handleSelect = (e) => {
-    // console.log(e.target.value)
-    const index = e.target.selectedIndex;
-    const el = e.target.childNodes[index];
-    const id = el.getAttribute("id");
-    setInput({
-      ...input,
-      categories: [...input.categories, id],
-    });
-
-    setErrors(
-      validate({
-        ...input,
-        [e.target.name]: e.target.value,
-      })
-    );
-  };
-
-  const handleCategory = (e) => {
-    e.preventDefault();
-    const category = {
-      categories: input.categories,
-    };
-    if (input.categories) {
-      return dispatch(NewCategory(category));
-    }
-    else if (!input.categories) {
-      return alert("no hay nada");
-    }
-  };
-
-  const handleDelete = (el) => {
-    setInput({
-      ...input,
-      categories: input.categories.filter((t) => t === el),
-    });
-    const Toast = Swal.mixin({
-      toast: true,
-      position: 'top-end',
-      showConfirmButton: false,
-      timer: 3000,
-      timerProgressBar: true,
-      didOpen: (toast) => {
-        toast.addEventListener('mouseenter', Swal.stopTimer)
-        toast.addEventListener('mouseleave', Swal.resumeTimer)
-      }
-    })
-
-    Toast.fire({
-      icon: 'success',
-      title: 'Categoria eliminada correctamente'
-    })
-  };
+  const categories = useSelector((state) => state.allcategories);
 
   useEffect(() => {
     dispatch(getallCategories());
   }, [dispatch]);
 
   return (
-    <div>
+    <>
       <div className="hidden sm:block" aria-hidden="true">
-        <div className="py-5">
-          <div className="border-b border-gray-200">
-            <h1 className="uppercase font-bold">Formulario</h1>
-          </div>
+        <div className="border-b border-gray-200 bg-red-200 text-center rounded-t-lg">
+          <h1 className="uppercase font-bold">Formulario</h1>
         </div>
       </div>
       <div className="mt-10 sm:mt-0">
-        <div className="mt-5 md:mt-0">
-          <form onSubmit={handleSubmit}>
-            <div className="shadow overflow-hidden sm:rounded-md">
-              <div className="px-4 py-5 bg-white sm:p-6">
+        <form onSubmit={handleSubmit}>
+          <div className="shadow overflow-hidden">
+            <div className="bg-white">
+              <div className="px-2 py-5 bg-white sm:p-6">
                 <div className="grid grid-cols-6 gap-6">
                   {/* Input Nombre */}
                   <Input
@@ -180,12 +47,12 @@ const CreateProduct = ({ shopId }) => {
                     it="text"
                     iname="name"
                     iId="first-name"
-                    iclass="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 border-2 rounded-md"
+                    iclass="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 border-2 rounded-md pl-3 py-1"
                     valor={input.name}
                     c={handleChange}
-                    required
                     ediv="text-rose-800 border-black-300 "
-                    err={errors.name}
+                    err={err.name}
+                    placeholder="Ingrese nombre del producto"
                   />
 
                   {/* Input Precio */}
@@ -194,34 +61,30 @@ const CreateProduct = ({ shopId }) => {
                     forid="price"
                     lclass="block text-sm uppercase"
                     tl="Precio $"
-
                     it="number"
                     iname="price"
                     iId="price"
-                    iclass="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-7 sm:text-sm border-gray-300 border-2 rounded-md"
+                    iclass="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-3 py-1 sm:text-sm border-gray-300 border-2 rounded-md"
                     valor={input.price}
                     c={handleChange}
                     ediv="text-rose-800"
-                    required
-                    err={errors.price}
-
+                    err={err.price}
                   />
-                  <span class="inline-flex items-center px-3 rounded-l-md border border-r-0 border-gray-300 bg-gray-50 text-gray-500 text-sm"> http:// </span>
+
                   {/* Input Descuento */}
                   <Input
                     div="col-span-1 font-bold"
                     forid="discount"
                     lclass="block text-sm uppercase"
-                    tl="Descuento %"
+                    tl="Descuento"
                     it="number"
                     iname="discount"
                     iId="discount"
-                    iclass="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-7 sm:text-sm border-gray-300 border-2 rounded-md"
+                    iclass="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-3 py-1 sm:text-sm border-gray-300 border-2 rounded-md"
                     valor={input.discount}
                     c={handleChange}
-                    required
                     ediv="text-rose-800"
-                    err={errors.discount}
+                    err={err.discount}
                   />
 
                   {/* Input Stock */}
@@ -233,16 +96,15 @@ const CreateProduct = ({ shopId }) => {
                     it="number"
                     iname="stock"
                     iId="stock"
-                    iclass="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-7 sm:text-sm border-gray-300 border-2 rounded-md"
+                    iclass="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-3 py-1 sm:text-sm border-gray-300 border-2 rounded-md"
                     valor={input.stock}
                     c={handleChange}
-                    required
                     ediv="text-rose-800"
-                    err={errors.stock}
+                    err={err.stock}
                   />
 
                   {/* TextArea Description */}
-                  <div className="col-span-6 sm:col-span-3">
+                  <div className="col-span-12 sm:col-span-6">
                     <label htmlFor="description" className="font-bold">
                       {" "}
                       Descripción{" "}
@@ -251,53 +113,66 @@ const CreateProduct = ({ shopId }) => {
                       <textarea
                         id="description"
                         name="description"
-                        rows="3"
-                        className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md resize-none"
+                        rows="4"
+                        className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 pl-3 py-1 block w-full sm:text-sm border border-gray-300 rounded-md resize-none"
                         placeholder="Descripción del productos (Ej. Los ingredientes)"
                         type="text"
-                        required
                         value={input.description}
                         onChange={handleChange}
                       ></textarea>
-                      <p className="text-rose-800">{errors.description}</p>
-
+                      <div className="text-rose-800 font-bold">
+                        {err.description && <p>{err.description}</p>}
+                      </div>
                     </div>
                   </div>
 
                   {/* TextArea Categorías */}
                   <div className="col-span-6 sm:col-span-6">
-                    <label htmlFor="categories" className="font-bold">
-                      Categorías
-                    </label>
-                    <select
-                      id="categories"
-                      name="categories"
-                      onChange={handleSelect}
-                      required
-                      autoComplete="categories"
-                      className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                    >
-                      <option>Categorías</option>
-                      {categories?.map((c, index) => (
-                        <option id={c.id} key={index}>
-                          {c.name}
-                        </option>
-                      ))}
-                    </select>
-                    {input.categories?.map((c, index) => (
-                      <div key={index}>
-                        <p>{categories.find((d) => d.id === c).name}</p>
+                    <div className="flex flex-col">
+                      <label htmlFor="categories" className="font-bold">
+                        Categorías
+                      </label>
+                      <input
+                        className="h-30"
+                        type="text"
+                        name="categories"
+                        placeholder="Ingrese una categoría del producto."
+                        list="categories"
+                        value={input.categories}
+                        onChange={handleChange}
+                        autoComplete="off"
+                      />
+                      <datalist id="categories">
+                        {categories?.map((pais, index) => (
+                          <option key={index} value={pais.name} />
+                        ))}
+                      </datalist>
+                      <div className="text-rose-800 font-bold">
+                        {err.listcategories && <p>{err.listcategories}</p>}
                       </div>
-                    ))}
-
+                    </div>
+                    <input
+                      className="inline-flex justify-center my-2 py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                      type="button"
+                      value="Agregar Categoria"
+                      style={{ cursor: "pointer" }}
+                      onClick={add}
+                    />
+                    {listcategories.add?.map((c, index) => {
+                      return (
+                        <div key={index} className="flex justify-between">
+                          <label className="">{c}</label>
+                          <button className="" onClick={() => eliminar(c)}>
+                            <MdDelete className="text-red-600" />
+                          </button>
+                        </div>
+                      );
+                    })}
                   </div>
 
                   {/* Imagen */}
-                  <div className="col-span-6 sm:col-span-3">
-                    <label className="block text-sm font-medium text-gray-700">
-                      {" "}
-                      Elegi tu foto{" "}
-                    </label>
+                  <div className="col-span-6 sm:col-span-6">
+                    <label className="font-bold">Imagen(es) del producto</label>
                     <div className="mt-5 flex-wrap flex justify-center px-6 pt-6 pb-10 border-2 border-gray-300 border-dashed rounded-md">
                       <div className="space-y-1 text-center">
                         {!input.image ? (
@@ -331,36 +206,23 @@ const CreateProduct = ({ shopId }) => {
                         <p className="text-xs text-gray-500">
                           PNG, JPG, GIF up to 10MB
                         </p>
-                        <p className="text-rose-800">{errors.image}</p>
                       </div>
                     </div>
                   </div>
+                  {/* Aca termina */}
                 </div>
               </div>
             </div>
-            <div className="px-4 py-3e bg-gray-50 text-right sm:px-6">
-              <input
-                type="submit"
-                className="inline-flex justify-center py-2 px-4  border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-orange-600 hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                value="Crear Categoria"
-                onClick={handleCategory}
-                ediv="text-rose-800"
-              />
-              <input
-                type="submit"
-                disabled={!activado}
-                className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                value="Crear Producto"
-              />
-            </div>
-          </form>
-          <div>
-            <button onClick={handleDelete} className="mt-4 bg-red-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded-full" >Borrar</button>
           </div>
-        </div>
+          <div className="px-4 py-3 bg-gray-50 text-right sm:px-6 rounded-b-lg">
+            <input
+              type="submit"
+              className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+              value="Crear Producto"
+            />
+          </div>
+        </form>
       </div>
-    </div>
+    </>
   );
-};
-
-export default CreateProduct;
+}

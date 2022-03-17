@@ -13,8 +13,9 @@ import ShoppingList from "../components/cart/Cart";
 import NewCategory from "../components/category/NewCategory";
 import Favorites from "../components/shops/Favorites";
 import HomeShops from "../views/user/HomeShops";
+import DirectionMap from "../views/seller/createNewShop/directionMap";
 import Loading from "../components/loading/Loading";
-import { getdataUser } from "../redux/actions/index"
+import { getdataUser } from "../redux/actions/index";
 
 function App() {
   const dispatch = useDispatch();
@@ -88,61 +89,62 @@ function App() {
   return (
     <BrowserRouter>
       <div className="App">
-          {
-            dataUser?.rol !== 3 ? (
-              <Routes>
-          <Route exact path="/" element={<LandingPage />} />
-          <Route exact path="/home" element={<HomeShops />} />
-          <Route
-            exact
-            path="/productShop/:shopId"
-            element={
-              <Home
-                open={open}
-                setOpen={setOpen}
-                cartItems={cartItems}
-                setCartItems={setCartItems}
-                getTotalItems={getTotalItems}
-                handleAddToCart={handleAddToCart}
-                handleRemoveFromCart={handleRemoveFromCart}
-                handleDeleteFromCart={handleDeleteFromCart}
-              />
-            }
-          />
-          <Route
-            exact
-            path="/products/:shopId/:productId"
-            element={
-              <CardDetail
-                open={open}
-                setOpen={setOpen}
-                cartItems={cartItems}
-                setCartItems={setCartItems}
-                getTotalItems={getTotalItems}
-                handleAddToCart={handleAddToCart}
-                handleRemoveFromCart={handleRemoveFromCart}
-                handleDeleteFromCart={handleDeleteFromCart}
-              />
-            }
-          />
-          <Route
-            exact
-            path="/shopping-list"
-            element={<ShoppingList cartItems={cartItems} />}
-          />
-          <Route exact path="/settings/:userId" element={<PrivateRoute />} />
-          <Route exact path="/category" element={<NewCategory />} />
-          <Route exact path="/createShop" element={<PrivateShop />} />
-          <Route
-            exact
-            path="/send-review/:productId"
-            element={<SendReview />}
-          />
-          <Route exact path="/favorites" element={<Favorites />}/>
-          <Route path="*" element={<Error404 />} />
+        {dataUser?.rol !== 3 ? (
+          <Routes>
+            <Route exact path="/" element={<LandingPage />} />
+            <Route exact path="/home" element={<HomeShops />} />
+            <Route
+              exact
+              path="/productShop/:shopId"
+              element={
+                <Home
+                  open={open}
+                  setOpen={setOpen}
+                  cartItems={cartItems}
+                  setCartItems={setCartItems}
+                  getTotalItems={getTotalItems}
+                  handleAddToCart={handleAddToCart}
+                  handleRemoveFromCart={handleRemoveFromCart}
+                  handleDeleteFromCart={handleDeleteFromCart}
+                />
+              }
+            />
+            <Route
+              exact
+              path="/products/:shopId/:productId"
+              element={
+                <CardDetail
+                  open={open}
+                  setOpen={setOpen}
+                  cartItems={cartItems}
+                  setCartItems={setCartItems}
+                  getTotalItems={getTotalItems}
+                  handleAddToCart={handleAddToCart}
+                  handleRemoveFromCart={handleRemoveFromCart}
+                  handleDeleteFromCart={handleDeleteFromCart}
+                />
+              }
+            />
+            <Route
+              exact
+              path="/shopping-list"
+              element={<ShoppingList cartItems={cartItems} />}
+            />
+            <Route exact path="/settings/:userId" element={<PrivateRoute />} />
+            <Route exact path="/category" element={<NewCategory />} />
+            <Route exact path="/createShop" element={<PrivateShop />} />
+            <Route
+              exact
+              path="/send-review/:productId"
+              element={<SendReview />}
+            />
+            <Route exact path="/favorites" element={<Favorites />} />
+            <Route exact path="/createShop/map" element={<DirectionMap />} />
+            <Route path="*" element={<Error404 />} />
           </Routes>
-            ) : (<Error404 />)
-          }
+        ) : (
+          <Error404 />
+        )}
       </div>
     </BrowserRouter>
   );
