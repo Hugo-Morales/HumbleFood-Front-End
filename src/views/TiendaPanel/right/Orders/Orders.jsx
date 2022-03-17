@@ -22,6 +22,8 @@ function Orders({ shopId }) {
     (order) => order.state === newState.indexOf(filterOrder)
   );
 
+  console.log(orders);
+
   useEffect(() => {
     dispatch(getOrderByShop(shopId));
   }, [dispatch, shopId]);
@@ -40,7 +42,9 @@ function Orders({ shopId }) {
           >
             <option value="">Todas las Ordenes</option>
             {newState.map((stateOrter, i) => (
-              <option key={i} value={stateOrter}>{stateOrter}</option>
+              <option key={i} value={stateOrter}>
+                {stateOrter}
+              </option>
             ))}
           </select>
         </div>
@@ -65,6 +69,7 @@ function Orders({ shopId }) {
                 id={order.id}
                 state={order.state}
                 total={order.total}
+                userId={order.userId}
               />
             ))}
       </div>

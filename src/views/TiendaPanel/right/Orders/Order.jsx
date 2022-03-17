@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 // import { getdataUser } from "../../../../redux/actions";
 import { updateOrderState } from "../../../../redux/actions/actionsOrders";
 
@@ -17,19 +17,19 @@ function Order({ id, total, state, index, userId }) {
     "cancelado",
   ];
 
-  // useEffect(() => {
-  //   // dispatch(getdataUser(userId));
-  //   if (stateOrder !== "") {
-  //   }
-  // }, [dispatch, id, stateOrder, userId]);
+  useEffect(() => {
+      dispatch(updateOrderState(id, stateOrder));
+    // dispatch(getdataUser(userId));
+    if (stateOrder !== "") {
+    }
+  }, [dispatch, id, stateOrder]);
 
-  const onChangeState = (e) => {
-    e.preventDefault();
-    setStateOrder({
-      [e.target.name]: e.target.value,
-    });
-    dispatch(updateOrderState(id, stateOrder));
-  };
+  // const onChangeState = (e) => {
+  //   e.preventDefault();
+  //   setStateOrder({
+  //     [e.target.name]: e.target.value,
+  //   });
+  // };
 
   return (
     <div>
@@ -39,8 +39,8 @@ function Order({ id, total, state, index, userId }) {
           {id}
         </p>
         <select
-          className=" w-56 pl-2 focus:outline-none bg-isabelline rounded-md"
-          onChange={onChangeState}
+        onChange={(e) => setStateOrder(e.target.value)}
+          className="w-56 pl-2 focus:outline-none bg-isabelline rounded-md" 
         >
           <option value={newState[state]}>
             {newState[state]}
