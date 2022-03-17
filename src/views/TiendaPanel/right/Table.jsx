@@ -168,10 +168,21 @@ export default function Table({
 													) : (
 														<>
 															<div className="text-gray-900">
-																<p>${(p?.price * p?.stock).toFixed(2)}</p>
+																<p>
+																	$
+																	{new Intl.NumberFormat("de-DE").format(
+																		p?.price * p?.stock
+																	)}
+																</p>
 															</div>
 															<div className="text-gray-500">
-																<p>${p?.price} c/stock</p>
+																<p>
+																	$
+																	{new Intl.NumberFormat("de-DE").format(
+																		p?.price
+																	)}{" "}
+																	c/stock
+																</p>
 															</div>
 														</>
 													)}
