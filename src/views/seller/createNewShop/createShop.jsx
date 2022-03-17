@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { postNewShop, getdataUser } from "../../../redux/actions";
 import Loading from "../../../components/loading/Loading";
 import Styles from "./createShop.module.css";
+import { Link } from "react-router-dom";
 
 const CreateShop = ({ user }) => {
   const dispatch = useDispatch();
@@ -13,6 +14,7 @@ const CreateShop = ({ user }) => {
   const id = dataUser?.userId;
 
   const [loading, setloading] = useState(true);
+  const [modalOpen, setModalOpen] = useState(false);
 
   useEffect(() => {
     setTimeout(() => {
@@ -52,7 +54,7 @@ const CreateShop = ({ user }) => {
   const handleformSubmit = (e) => {
     e.preventDefault();
     dispatch(postNewShop(newShop));
-    alert("Tienda registrada con exito!");
+    // alert("Tienda registrada con exito!");
     setNewShop({
       name: "",
       direction: "",
@@ -116,6 +118,36 @@ const CreateShop = ({ user }) => {
                           className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md"
                           placeholder="Ej: La Urbina calle 3A"
                         ></textarea>
+                      </div>
+                      <div className="mt-5 flex justify-around font-bold">
+                        <p> Verificar direccion con google maps: </p>
+                        <Link to="/createShop/map">
+                          <button className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-indigo-700 bg-indigo-100 hover:bg-indigo-200 md:py-4 md:text-lg md:px-10">
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              className="icon icon-tabler icon-tabler-map-2"
+                              width="32"
+                              height="32"
+                              viewBox="0 0 24 24"
+                              strokeWidth="2"
+                              stroke="#00b341"
+                              fill="none"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                            >
+                              <path
+                                stroke="none"
+                                d="M0 0h24v24H0z"
+                                fill="none"
+                              />
+                              <line x1="18" y1="6" x2="18" y2="6.01" />
+                              <path d="M18 13l-3.5 -5a4 4 0 1 1 7 0l-3.5 5" />
+                              <polyline points="10.5 4.75 9 4 3 7 3 20 9 17 15 20 21 17 21 15" />
+                              <line x1="9" y1="4" x2="9" y2="17" />
+                              <line x1="15" y1="15" x2="15" y2="20" />
+                            </svg>
+                          </button>
+                        </Link>
                       </div>
                     </div>
 
