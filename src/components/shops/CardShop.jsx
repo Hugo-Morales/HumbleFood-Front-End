@@ -17,7 +17,7 @@ const CardShop = ({ shop, userId }) => {
 	const [save, setSave] = useState(false);
 	const [deleteFav, setDeleteFav] = useState(false);
 	// console.log(shopID.includes(id))
-	
+	console.log("deleteFav ",deleteFav);
 	useEffect(() => {
 		if(save){
 			console.log(save);
@@ -31,15 +31,29 @@ const CardShop = ({ shop, userId }) => {
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	},[save, deleteFav])
 	const guardar = () => {
-		// console.log(id);
-		setSave(true);
-		setDeleteFav(false)
+		if(!save){
+			setSave(true);
+			setDeleteFav(false)
+			console.log("Click");
+		}
+		else{
+			setSave(false);
+			setDeleteFav(true);
+		}
+		
 	};
 	
 	const borrar = () => {
-		// console.log(id);
-		setDeleteFav(true)
-		setSave(false);
+		if(!deleteFav){
+			setDeleteFav(true)
+			setSave(false);
+			console.log("Delete: ",deleteFav);
+		}
+		else{
+			setDeleteFav(false);
+			setSave(true)
+		}
+		
 	};
 	
 
@@ -60,7 +74,7 @@ const CardShop = ({ shop, userId }) => {
 					>
 						<button className="absolute bg-gray-600 text-white p-2.5 rounded-sm shadow-md top-0 left-0">
 							<BsFillHeartFill
-								className={save && !deleteFav ? "text-red-600" : "text-white-500"}
+								className={save && !deleteFav ? "text-red-600" :shopIdguardado && !deleteFav ? "text-red-600": "text-white-500"}
 							/>
 						</button>
 					</div>
