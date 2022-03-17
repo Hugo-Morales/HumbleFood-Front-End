@@ -134,7 +134,7 @@ export const postproducts = (input) => {
 };
 export const NewCategory = () => {
   return async () => {
-    const name = prompt("save New Category ");
+    const name = prompt(" ");
     await axios.post(`${URL}category`, {
       name,
     });

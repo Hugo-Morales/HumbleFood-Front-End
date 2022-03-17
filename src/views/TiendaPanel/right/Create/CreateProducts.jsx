@@ -194,6 +194,7 @@ const CreateProduct = ({ shopId }) => {
                     forid="price"
                     lclass="block text-sm uppercase"
                     tl="Precio $"
+
                     it="number"
                     iname="price"
                     iId="price"
@@ -203,8 +204,9 @@ const CreateProduct = ({ shopId }) => {
                     ediv="text-rose-800"
                     required
                     err={errors.price}
-                  />
 
+                  />
+                  <span class="inline-flex items-center px-3 rounded-l-md border border-r-0 border-gray-300 bg-gray-50 text-gray-500 text-sm"> http:// </span>
                   {/* Input Descuento */}
                   <Input
                     div="col-span-1 font-bold"

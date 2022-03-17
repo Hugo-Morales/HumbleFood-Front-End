@@ -176,9 +176,7 @@ const CardDetail = ({
                     </p>
                   </div>
                 </div>
-                <h1 className="lg:text-2xl text-xl font-semibold lg:leading-6 leading-7 text-gray-800 dark:text-white mt-2">
-                  {products?.price}{" "}
-                </h1>
+
               </div>
 
               <div>
