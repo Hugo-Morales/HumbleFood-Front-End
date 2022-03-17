@@ -47,7 +47,7 @@ export default function ContainerT({ user }) {
 			dispatch(reset());
 		};
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [dispatch, userId, currentPage, usuario.rol]);
+	}, [dispatch, userId, currentPage, usuario?.rol]);
 
 	return (
 		<>

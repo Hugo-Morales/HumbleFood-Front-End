@@ -3,6 +3,7 @@ import {
   GET_DETAIL_PRODUCT,
   SEARCH_BY_NAME,
   GET_ALL_PRODUCTS,
+  GET_ALL_CATEGORIES,
   GET_CATEGORIES,
   GET_PRODUCTS_SHOP,
   RESET,
@@ -29,6 +30,7 @@ const initialStore = {
   shops: [],
   productsloaded: [],
   detailProduct: [],
+  allcategories: [],
   categories: [],
   discounts: [],
   postnewShop: [],
@@ -102,6 +104,11 @@ export default function reducer(state = initialStore, { type, payload }) {
         ...state,
         postnewShop: payload,
       };
+    case GET_ALL_CATEGORIES:
+      return {
+        ...state,
+        allcategories: payload,
+      }
     case GET_CATEGORIES:
       if (Array.isArray(payload)) {
         payload = payload.map((e) => ({ name: e }));
