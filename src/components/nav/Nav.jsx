@@ -49,10 +49,11 @@ const Nav = ({
   const user_id = user?.sub.split("|")[1];
   //console.log(shopEmail);
 
-	function handleFilterCategories(e) {
-		dispatch(filterProductsByCategories(shopId, e.target.value));
-		// console.log(e.target.value);
-	}
+	useEffect(() => {
+		shopId ? dispatch(getCategories(shopId)) : dispatch(getCategories());
+		dispatch(getDiscounts(shopId));
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [dispatch]);
 
   useEffect(()=> {
     if(category && discount){
