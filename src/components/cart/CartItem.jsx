@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { BsTrash } from "react-icons/bs";
 
 export const Wrapper = styled.div`
   display: flex;
@@ -88,10 +89,11 @@ function CartItem({
                 className={
                   checkout
                     ? "hidden"
-                    : "px-2 py-1 font-medium text-lg text-red-600 border-solid border-2 border-red-600 rounded-md ease-in-out duration-300 hover:text-isabelline hover:bg-red-600"
+                    : "flex items-center px-2 py-1 font-medium text-lg text-red-600 border-solid border-2 border-red-600 rounded-md ease-in-out duration-300 hover:text-isabelline hover:bg-red-600"
                 }
               >
-                Remove
+                Borrar
+                <BsTrash className="ml-1" />
               </button>
             </div>
           </div>
