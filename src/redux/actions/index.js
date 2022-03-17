@@ -167,7 +167,7 @@ export const getCategories = (shopId) => async (dispatch) => {
 
 export const getallCategories = () => async (dispatch) => {
   try {
-    const categories = await axios.get(`${URL}categories`);
+    const categories = await axios.get(`${URL}categoriesId`);
     dispatch({
       type: GET_ALL_CATEGORIES,
       payload: categories.data,

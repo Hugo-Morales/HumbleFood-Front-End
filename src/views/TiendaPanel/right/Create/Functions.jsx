@@ -10,7 +10,6 @@ export default function Functions(Validate, shopId) {
 		add: [],
 	});
 	const categories = useSelector((state) => state.allcategories);
-	const existentes = categories?.map((c) => c.name);
 	const [input, setInput] = useState({
 		name: "",
 		description: "",
@@ -92,7 +91,7 @@ export default function Functions(Validate, shopId) {
 				text: "No se puede agregar la misma categoría.",
 			});
 		} else if (!Object.keys(err).includes("listcategories")) {
-			if (!existentes.find((f) => f === input.categories)) {
+			if (!categories.find((f) => f === input.categories)) {
 				const newc = { name: input.categories };
 				dispatch(NewCategory(newc));
 			}
