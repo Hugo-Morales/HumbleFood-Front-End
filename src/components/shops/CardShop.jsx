@@ -28,6 +28,7 @@ const CardShop = ({ shop, userId }) => {
 			dispatch(removeFavorites(userId, id));
 			dispatch(getAllFavorites(userId));
 		}
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	},[save, deleteFav])
 	const guardar = () => {
 		// console.log(id);
@@ -46,7 +47,7 @@ const CardShop = ({ shop, userId }) => {
 		<>
 			<div className="flex justify-center items-center mobile:ml-6 mobile:w-11/12 w-full drop-shadow-lg">
 				<div className="w-full relative bg-white shadow-md h-96 rounded-xl  flex flex-col justify-around items-center overflow-hidden sm:flex-row sm:h-52 sm:w-11/12 md:w-96">
-					<div className="absolute top-0 md:left-0 md:w-2/3 md:h-full md:h-64">
+					<div className="absolute top-0 md:left-0 md:w-2/3 md:h-full">
 						<img
 							className="w-full h-3/4 max-h-72 md:h-full"
 							src={image}
@@ -63,8 +64,8 @@ const CardShop = ({ shop, userId }) => {
 							/>
 						</button>
 					</div>
-					<div className="mobile:absolute md:right-0 md:top-0 w-full xl:my-2 flex justify-center md:h-full md:w-1/3">
-						<div className="mobile:absolute m-2 flex flex-col justify-center mobile:bottom-180">
+					<div className="mobile:absolute mobile:bottom-0 md:right-0 md:top-0 w-full xl:my-2 flex justify-center mobile:h-1/4 md:h-full md:w-1/3">
+						<div className="mobile:absolute m-2 flex flex-col justify-center">
 							<Link to={`/productShop/${id}`}>
 								<h1 className="text-xl md:text-lg font-bold mb-2 text-gray-600 font-sans">
 									{name}

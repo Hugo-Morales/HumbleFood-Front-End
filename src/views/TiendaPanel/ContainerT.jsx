@@ -21,7 +21,7 @@ export default function ContainerT({ user }) {
 	const usuario = useSelector((state) => state.dataUser);
 	const dispatch = useDispatch();
 	const { userId } = useParams();
-	const pages = productos.pagesTotal;
+	const pages = productos?.pagesTotal;
 	// console.log(user, 'user');
 	// console.log(currentPage);
 
@@ -58,10 +58,10 @@ export default function ContainerT({ user }) {
 					{/* Lado Izquierdo */}
 					<div className="col-span-1">
 						<SideLeft
-							name={user.name}
+							name={user?.name}
 							setId={setId}
-							rol={usuario.rol}
-							shopsId={usuario.shopsId}
+							rol={usuario?.rol}
+							shopsId={usuario?.shopsId}
 						/>
 					</div>
 					{/* Lado Derecho */}
@@ -72,9 +72,9 @@ export default function ContainerT({ user }) {
 							shopsId={usuario?.shopsId}
 							paging={paging}
 							currentPage={currentPage}
-							next={productos.next}
-							prev={productos.prev}
-							pagesTotal={productos.pagesTotal}
+							next={productos?.next}
+							prev={productos?.prev}
+							pagesTotal={productos?.pagesTotal}
 						/>
 					</div>
 				</div>
