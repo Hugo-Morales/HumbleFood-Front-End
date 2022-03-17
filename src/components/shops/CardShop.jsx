@@ -8,10 +8,13 @@ import {
 } from "../../redux/actions";
 import { useEffect, useState } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
 
 const CardShop = ({ shop, userId }) => {
-  const { isAuthenticated } = useAuth0();
   const dispatch = useDispatch();
+  const MySwal = withReactContent(Swal);
+  const { isAuthenticated } = useAuth0();
   const { id, name, image, description } = shop;
   const misfavoritos = useSelector((state) => state.allFavorites);
   const shopsID = misfavoritos.map((i) => i.id);
@@ -19,7 +22,7 @@ const CardShop = ({ shop, userId }) => {
   const [save, setSave] = useState(false);
   const [deleteFav, setDeleteFav] = useState(false);
   // console.log(shopID.includes(id))
-
+  console.log("deleteFav ", deleteFav);
   useEffect(() => {
     if (save) {
       console.log(save);
@@ -32,17 +35,44 @@ const CardShop = ({ shop, userId }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [save, deleteFav]);
   const guardar = () => {
-    // console.log(id);
-    setSave(true);
-    setDeleteFav(false);
+    if (isAuthenticated) {
+      if (!save) {
+        setSave(true);
+        setDeleteFav(false);
+        console.log("Click");
+      } else {
+        setSave(false);
+        setDeleteFav(true);
+      }
+    } else {
+      Swal.fire({
+        icon: "warning",
+        title: "La funcion añadir a favoritos no esta disponible",
+        text: "¡Registrate primero para poder usarla!",
+      });
+    }
   };
 
   const borrar = () => {
-    // console.log(id);
-    setDeleteFav(true);
-    setSave(false);
+    if (!deleteFav) {
+      setDeleteFav(true);
+      setSave(false);
+      console.log("Delete: ", deleteFav);
+    } else {
+      setDeleteFav(false);
+      setSave(true);
+    }
   };
-
+  // const handleclick = (e) => {
+  //   if (e.target.id === "heart") {
+  //     !isAuthenticated &&
+  //       Swal.fire({
+  //         icon: "error",
+  //         title: "La funcion añadir a favoritos no esta disponible :(",
+  //         text: "¡Registrate primero para poder usarla :)",
+  //       });
+  //   }
+  // };
   return (
     <>
       <div className="flex justify-center items-center mobile:ml-6 mobile:w-11/12 w-full drop-shadow-lg">
@@ -58,11 +88,18 @@ const CardShop = ({ shop, userId }) => {
             className="cursor-pointer"
             onClick={shopIdguardado ? borrar : guardar}
           >
-            {}
-            <button className="absolute bg-gray-600 text-white p-2.5 rounded-sm shadow-md top-0 left-0">
+            <button
+              // onClick={(e) => handleclick(e)}
+              id="heart"
+              className="absolute bg-gray-600 text-white p-2.5 rounded-sm shadow-md top-0 left-0"
+            >
               <BsFillHeartFill
                 className={
-                  save && !deleteFav ? "text-red-600" : "text-white-500"
+                  save && !deleteFav
+                    ? "text-red-600"
+                    : shopIdguardado && !deleteFav
+                    ? "text-red-600"
+                    : "text-white-500"
                 }
               />
             </button>
