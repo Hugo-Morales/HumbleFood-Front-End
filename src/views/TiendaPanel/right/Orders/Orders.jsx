@@ -18,51 +18,56 @@ function Orders({ shopId }) {
     "cancelado",
   ];
 
-  const filter = orders.filter(
+  const filter = orders?.filter(
     (order) => order.state === newState.indexOf(filterOrder)
   );
 
   useEffect(() => {
     dispatch(getOrderByShop(shopId));
   }, [dispatch, shopId]);
-  console.log("orders", orders);
 
   return (
-    <div className="w-11/12 h-11/12 p-4 bg-isabelline">
-      <h2 className="mb-2 text-center text-2xl font-bold">Estado de ordenes</h2>
-      <div className="flex justify-between mb-3">
-        <p>Nº de Order</p>
+    <div className="w-full h-full bg-white rounded-lg">
+      <h2 className="w-full mb-2 p-4 text-center text-2xl font-bold rounded-t-lg text-white bg-ochre">
+        Estado de ordenes
+      </h2>
+      <div className="flex justify-between mb-3 m-4">
+        <p className="font-extrabold">Nº de Order</p>
         <div className="flex">
-          <p>Estado de Order</p>
           <select
             onChange={(e) => setFilterOrder(e.target.value)}
-            className="ml-4"
+            className="w-56 ml-32 pl-2 text-white rounded-md focus:outline-none bg-gray-700"
           >
             <option value="">Todas las Ordenes</option>
-            {newState.map((stateOrter) => (
-              <option value={stateOrter}>{stateOrter}</option>
+            {newState.map((stateOrter, i) => (
+              <option key={i} value={stateOrter}>{stateOrter}</option>
             ))}
           </select>
         </div>
-        <p>Total</p>
+        <p className="font-extrabold">Total de la Orden</p>
       </div>
-      {filterOrder === ""
-        ? orders?.map((order) => (
-            <Order
-              key={order.id}
-              id={order.id}
-              state={order.state}
-              total={order.total}
-            />
-          ))
-        : filter?.map((order) => (
-            <Order
-              key={order.id}
-              id={order.id}
-              state={order.state}
-              total={order.total}
-            />
-          ))}
+      <div className=" overflow-y-auto">
+        {filterOrder === ""
+          ? orders?.map((order, i) => (
+              <Order
+                index={i}
+                key={order.id}
+                id={order.id}
+                state={order.state}
+                total={order.total}
+                userId={order.userId}
+              />
+            ))
+          : filter?.map((order, i) => (
+              <Order
+                index={i}
+                key={order.id}
+                id={order.id}
+                state={order.state}
+                total={order.total}
+              />
+            ))}
+      </div>
     </div>
   );
 }
