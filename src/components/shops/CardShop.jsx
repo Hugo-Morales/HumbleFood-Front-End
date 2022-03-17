@@ -6,6 +6,7 @@ import {
 	getAllFavorites,
 	removeFavorites,
 } from "../../redux/actions";
+import { useEffect, useState } from "react";
 
 const CardShop = ({ shop, userId }) => {
 	const dispatch = useDispatch();
@@ -13,20 +14,33 @@ const CardShop = ({ shop, userId }) => {
 	const misfavoritos = useSelector((state) => state.allFavorites);
 	const shopsID = misfavoritos.map((i) => i.id);
 	const shopIdguardado = shopsID.includes(id);
-
+	const [save, setSave] = useState(false);
+	const [deleteFav, setDeleteFav] = useState(false);
 	// console.log(shopID.includes(id))
-
+	
+	useEffect(() => {
+		if(save){
+			console.log(save);
+			dispatch(addFavorites(userId, id));
+			dispatch(getAllFavorites(userId));
+		}
+		else if(deleteFav){
+			dispatch(removeFavorites(userId, id));
+			dispatch(getAllFavorites(userId));
+		}
+	},[save, deleteFav])
 	const guardar = () => {
 		// console.log(id);
-		dispatch(addFavorites(userId, id));
-		dispatch(getAllFavorites(userId));
+		setSave(true);
+		setDeleteFav(false)
 	};
-
-	const borrar = async () => {
+	
+	const borrar = () => {
 		// console.log(id);
-		dispatch(removeFavorites(userId, id));
-		dispatch(getAllFavorites(userId));
+		setDeleteFav(true)
+		setSave(false);
 	};
+	
 
 	return (
 		<>
@@ -45,7 +59,7 @@ const CardShop = ({ shop, userId }) => {
 					>
 						<button className="absolute bg-gray-600 text-white p-2.5 rounded-sm shadow-md top-0 left-0">
 							<BsFillHeartFill
-								className={shopIdguardado ? "text-red-600" : "text-white-500"}
+								className={save && !deleteFav ? "text-red-600" : "text-white-500"}
 							/>
 						</button>
 					</div>
