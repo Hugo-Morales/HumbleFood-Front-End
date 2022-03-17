@@ -45,7 +45,7 @@ const Card = ({ product, handleAddToCart }) => {
 									{new Intl.NumberFormat("en-IN", {
 										style: "currency",
 										currency: "USD",
-									}).format((price / 100) * discount)}{" "}
+									}).format(price-(price / 100) * discount)}{" "}
 								</h1>
 							</Link>
 							{stock_max?.amount === stock ? (

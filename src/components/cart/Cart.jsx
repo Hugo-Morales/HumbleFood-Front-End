@@ -13,7 +13,11 @@ import { useParams } from "react-router-dom";
 
 export function calculateTotal(items) {
 	return items
-		?.reduce((acc, item) => acc + item.amount * item.price, 0)
+		?.reduce(
+			(acc, item) =>
+				acc + item.amount * (item.price - (item.price / 100) * item.discount),
+			0
+		)
 		.toFixed(2);
 }
 

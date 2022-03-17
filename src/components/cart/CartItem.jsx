@@ -22,7 +22,7 @@ function CartItem({
 	handleDeleteFromCart,
 	checkout,
 }) {
-	const precio = (product.price / 100) * product.discount;
+	const precio = product.price - (product.price / 100) * product.discount;
 	return (
 		<div>
 			<Wrapper key={product.id} className="flex py-6">
