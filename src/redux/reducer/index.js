@@ -14,6 +14,7 @@ import {
   GET_SHOPS_ID,
   GET_ALL_USERS,
   LOADING_PANEL,
+  FILTER_BY_CAT_DISC,
   FILTER_BY_CATEGORIES,
   FILTER_BY_DISCOUNT,
   GET_NAME_OF_SHOP,
@@ -33,7 +34,7 @@ const initialStore = {
   allUser: [],
   nameOfShop: "",
   isLoading: true,
-  loadingPanel: true,
+  loadingPanel: true
 };
 
 export default function reducer(state = initialStore, { type, payload }) {
@@ -61,6 +62,11 @@ export default function reducer(state = initialStore, { type, payload }) {
         dataUser: payload.user,
         loadingPanel: false,
       };
+    case FILTER_BY_CAT_DISC:
+      return {
+        ...state,
+        productsloaded: payload,
+      }
     case FILTER_BY_CATEGORIES:
       return {
         ...state,

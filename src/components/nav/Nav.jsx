@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import AddShoppingCartIcon from "@material-ui/icons/AddShoppingCart";
 import Badge from "@material-ui/core/Badge";
@@ -14,6 +14,8 @@ import {
   filterProductsByDiscounts,
   getDiscounts,
   getCategories,
+  filterByCat_Disc,
+  getProductShop
 } from "../../redux/actions";
 
 const StyledButton = styled(IconButton)`
@@ -39,9 +41,13 @@ const Nav = ({
   const dispatch = useDispatch();
   const categories = useSelector((state) => state.categories);
   const discounts = useSelector((state) => state.discounts);
+  
+  const [category, setCategory] = useState();
+  const [discount, setDiscount] = useState();
+
 
   const user_id = user?.sub.split("|")[1];
-  console.log(shopEmail);
+  //console.log(shopEmail);
 
   useEffect(() => {
     shopId ? dispatch(getCategories(shopId)) :
@@ -50,14 +56,52 @@ const Nav = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch]);
 
+  useEffect(()=> {
+    if(category && discount){
+      console.log(`Entro: ${category} y ${discount}`);
+      dispatch(filterByCat_Disc(shopId, discount, category))
+    }
+    else if(category && !discount){
+      setDiscount(undefined);
+      dispatch(filterProductsByCategories(shopId, category));
+    }
+    else if(!category && discount){
+      setCategory("")
+      dispatch(filterProductsByDiscounts(shopId, discount));
+    }
+  },[category, discount])
+
   function handleFilterCategories(e) {
-    dispatch(filterProductsByCategories(shopId, e.target.value));
-    console.log(e.target.value);
+    if(e.target.value === "category" && !discount){
+      setCategory(undefined);
+      console.log("entro en categorias");
+      dispatch(getProductShop(shopId))
+    }
+    else if(e.target.value === "category" && discount){
+      setCategory(undefined);
+      dispatch(filterProductsByDiscounts(shopId, discount));
+    }
+    else{
+      setCategory(e.target.value);
+    }
+   
   }
 
   function handleFilterOffers(e) {
-    dispatch(filterProductsByDiscounts(shopId, e.target.value));
-    // console.log(e.target.value);
+    if(e.target.value === "discount" && !category){
+      setDiscount(undefined);
+      console.log("entro en descuentos");
+      dispatch(getProductShop(shopId))
+    }
+    else if(e.target.value === "discount" && category){
+      setDiscount(undefined);
+      dispatch(filterProductsByCategories(shopId, category));
+    }
+    else{
+      setDiscount(e.target.value);
+
+    }
+    
   }
 
   return (
@@ -75,7 +119,7 @@ const Nav = ({
             name="categorys"
             className="p-2 h-10 focus:outline-none bg-ochre hover:bg-princetonOrange font-bold border-none text-center"
           >
-            <option value="">Categorías</option>
+            <option value="category" selected>Categorías</option>
             {categories?.map((c, index) => {
               return (
                 <option key={index} value={c.name}>
@@ -90,7 +134,7 @@ const Nav = ({
             name="offers"
             className="hidden lg:block p-2 h-10 focus:outline-none bg-ochre hover:bg-princetonOrange font-bold border-none text-center"
           >
-            <option value="">Ofertas de la tienda</option>
+            <option value="discount" >Ofertas de la tienda</option>
             {discounts?.map((d, index) => {
               return (
                 <option key={index} value={d}>

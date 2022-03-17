@@ -63,7 +63,7 @@ export default function Cart({
   //   }
   // }, [setCartItems]);
 
-  console.log("order", order);
+  //console.log("order", order);
   // console.table(order.products);
 
   return (

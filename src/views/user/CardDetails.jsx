@@ -41,7 +41,7 @@ const CardDetail = ({
   const shop = useSelector((state) => state.shop);
   const { shopId, productId } = useParams([0]);
 
-  console.log("shopId", products);
+  //console.log("shopId", products);
 
   useEffect(() => {
     dispatch(loading());
