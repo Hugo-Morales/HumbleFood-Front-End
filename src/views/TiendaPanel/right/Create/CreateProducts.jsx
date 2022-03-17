@@ -17,7 +17,7 @@ export function validate(input) {
   } else if (!input.price) {
     errors.price = "Completa aqui";
   } else if (input.price < 0) {
-    errors.price = 'Tiene que ser mayor a 0'
+    errors.price = "Tiene que ser mayor a 0";
   } else if (!input.discount) {
     errors.discount = "Completa aqui";
   } else if (input.discount < 0) {
@@ -25,7 +25,7 @@ export function validate(input) {
   } else if (!input.stock) {
     errors.stock = "complete here!";
   } else if (input.stock < 0) {
-    errors.stock = 'No menor a 0'
+    errors.stock = "No menor a 0";
   } else if (!input.description) {
     errors.description = "complete here!";
   } else if (!input.categories) {
@@ -40,7 +40,12 @@ const CreateProduct = ({ shopId }) => {
   const [errors, setErrors] = useState({});
   const dispatch = useDispatch();
   const categories = useSelector((state) => state.categories);
-  const activado = !errors.name && !errors.price && !errors.discount && !errors.stock && !errors.description;
+  const activado =
+    !errors.name &&
+    !errors.price &&
+    !errors.discount &&
+    !errors.stock &&
+    !errors.description;
   // const {shopId} = useParams()
   const [input, setInput] = useState({
     name: "",
@@ -154,12 +159,12 @@ const CreateProduct = ({ shopId }) => {
                   <Input
                     div="col-span-6 sm:col-span-3 font-bold"
                     forid="first-name"
-                    lclass="block text-sm uppercase"
+                    lclassName="block text-sm uppercase"
                     tl="Nombre del Producto"
                     it="text"
                     iname="name"
                     iId="first-name"
-                    iclass="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 border-2 rounded-md"
+                    iclassName="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 border-2 rounded-md"
                     valor={input.name}
                     c={handleChange}
                     ediv="text-rose-800 border-black-300 "
@@ -170,16 +175,16 @@ const CreateProduct = ({ shopId }) => {
                   <Input
                     div="col-span-1 font-bold"
                     forid="price"
-                    lclass="block text-sm uppercase"
+                    lclassName="block text-sm uppercase"
                     tl="Precio $"
                     it="number"
                     iname="price"
                     iId="price"
-                    iclass="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-7 sm:text-sm border-gray-300 border-2 rounded-md"
+                    iclassName="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-7 sm:text-sm border-gray-300 border-2 rounded-md"
                     valor={input.price}
                     c={handleChange}
                     ediv="text-rose-800"
-                    placeholder='0'
+                    placeholder="0"
                     err={errors.price}
                   />
 
@@ -187,12 +192,12 @@ const CreateProduct = ({ shopId }) => {
                   <Input
                     div="col-span-1 font-bold"
                     forid="discount"
-                    lclass="block text-sm uppercase"
+                    lclassName="block text-sm uppercase"
                     tl="Descuento %"
                     it="number"
                     iname="discount"
                     iId="discount"
-                    iclass="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-7 sm:text-sm border-gray-300 border-2 rounded-md"
+                    iclassName="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-7 sm:text-sm border-gray-300 border-2 rounded-md"
                     valor={input.discount}
                     c={handleChange}
                     ediv="text-rose-800"
@@ -203,12 +208,12 @@ const CreateProduct = ({ shopId }) => {
                   <Input
                     div="col-span-1 font-bold"
                     forid="stock"
-                    lclass="block text-sm uppercase"
+                    lclassName="block text-sm uppercase"
                     tl="Stock"
                     it="number"
                     iname="stock"
                     iId="stock"
-                    iclass="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-7 sm:text-sm border-gray-300 border-2 rounded-md"
+                    iclassName="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-7 sm:text-sm border-gray-300 border-2 rounded-md"
                     valor={input.stock}
                     c={handleChange}
                     ediv="text-rose-800"
