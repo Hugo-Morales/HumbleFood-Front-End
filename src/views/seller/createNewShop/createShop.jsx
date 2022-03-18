@@ -5,10 +5,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { postNewShop, getdataUser } from "../../../redux/actions";
 import Loading from "../../../components/loading/Loading";
 import Styles from "./createShop.module.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const CreateShop = ({ user }) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate()
   const dataUser = useSelector((state) => state.dataUser);
   console.log(dataUser);
   const id = dataUser?.userId;
@@ -54,6 +55,7 @@ const CreateShop = ({ user }) => {
   const handleformSubmit = (e) => {
     e.preventDefault();
     dispatch(postNewShop(newShop));
+    navigate('/home')
     // alert("Tienda registrada con exito!");
     setNewShop({
       name: "",
@@ -64,6 +66,8 @@ const CreateShop = ({ user }) => {
       email: "",
     });
   };
+
+
 
   return (
     <>

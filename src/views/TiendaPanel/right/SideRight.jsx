@@ -3,6 +3,7 @@ import CreateProducts from "./Create/CreateProducts";
 import HacerAdmin from "./make/HacerAdmin";
 import Styles from "./SideRight.module.css";
 import Orders from "./Orders/Orders";
+// import PaginationControlled from "./pagination";
 
 export default function SideRight({
 	product,
@@ -10,6 +11,7 @@ export default function SideRight({
 	shopsId,
 	paging,
 	currentPage,
+	PaginationControlled
 }) {
 	const { products, next, prev, pagesTotal } = product;
 	// console.log(products);
@@ -18,6 +20,7 @@ export default function SideRight({
 		switch (x) {
 			case "home":
 				return (
+
 					<Table
 						p={products}
 						d={false}
@@ -26,7 +29,10 @@ export default function SideRight({
 						pagesTotal={pagesTotal}
 						paging={paging}
 						currentPage={currentPage}
+						PaginationControlled={PaginationControlled}
 					/>
+
+
 				);
 			case "crear":
 				return <CreateProducts shopId={shopsId} />;
