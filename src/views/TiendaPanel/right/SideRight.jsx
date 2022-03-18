@@ -31,7 +31,7 @@ export default function SideRight({
 			case "crear":
 				return <CreateProducts shopId={shopsId} />;
 			case "modificar ordenes":
-				return <Orders shopId={shopsId} />;
+				return <Orders shopId={shopsId} idS={idS} />;
 			case "makeAdmin":
 				return <HacerAdmin />;
 			default:
