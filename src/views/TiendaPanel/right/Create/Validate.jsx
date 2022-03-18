@@ -19,7 +19,7 @@ export default function Validate(input, listcategories) {
 
 	if (!input.discount) {
 		err.discount = "Ingrese un valor";
-	} else if (Number(input.discount) < 0 || Number(input.discount) === 0) {
+	} else if (Number(input.discount) < 5 || Number(input.discount) === 0) {
 		err.discount = "Tiene que ser mayor a 5%.";
 	} else if (Number(input.discount) >= 100) {
 		err.discount = "El descuento no puede superar el 100.";

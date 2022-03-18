@@ -6,6 +6,7 @@ import Carousell from "../../components/carousell/Carousell";
 import CardsShops from "../../components/shops/CardsShops";
 import Loading from "../../components/loading/Loading";
 import Paginado from "../../components/paginado/Paginado";
+import PaginationControlled from "../TiendaPanel/right/pagination";
 import {
 	getShops,
 	loading,
@@ -26,6 +27,7 @@ export default function HomeShops() {
 		if (num >= 0 && num <= shops.pagesTotal) {
 			setCurrentPage(num);
 		}
+		console.log(num)
 	};
 
 	const newUser = {
@@ -61,12 +63,20 @@ export default function HomeShops() {
 					<NavShop />
 					<Carousell />
 					<CardsShops shops={shops.shops} id={id} />
-					<Paginado
+					{/* <Paginado
 						next={shops.next}
 						prev={shops.prev}
 						pagesTotal={shops.pagesTotal}
 						paging={paging}
 						currentPage={currentPage}
+					/> */}
+					<PaginationControlled
+						next={shops.next}
+						prev={shops.prev}
+						pagesTotal={shops.pagesTotal}
+						paging={paging}
+						currentPage={currentPage}
+						setCurrentPage={setCurrentPage}
 					/>
 				</>
 			)}
