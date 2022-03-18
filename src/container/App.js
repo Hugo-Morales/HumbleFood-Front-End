@@ -26,11 +26,6 @@ function App() {
   const userId = user?.sub.split("|")[1];
 
   useEffect(() => {
-    if (cartItems.length !== 0)
-      localStorage.setItem("carrito", JSON.stringify(cartItems));
-  }, [cartItems]);
-
-  useEffect(() => {
     const items = JSON.parse(localStorage.getItem("carrito"));
 
     if (items) setCartItems(items);
@@ -42,6 +37,7 @@ function App() {
   };
 
   const handleAddToCart = (clickedItem) => {
+    localStorage.setItem("carrito", JSON.stringify(cartItems));
     setCartItems((prev) => {
       const isItemInCart = prev.find((item) => item.id === clickedItem.id);
 
@@ -62,8 +58,7 @@ function App() {
   };
 
   const handleRemoveFromCart = (id) => {
-    const items = JSON.parse(localStorage.getItem("carrito"));
-    if (items.length === 1) localStorage.removeItem("carrito");
+    if (cartItems.length === 1) localStorage.removeItem("carrito");
 
     setCartItems((prev) =>
       prev.reduce((acc, item) => {
@@ -78,10 +73,10 @@ function App() {
   };
 
   const handleDeleteFromCart = (id) => {
+    // const items = JSON.parse(localStorage.getItem("carrito"));
+    if (cartItems.length === 1) localStorage.removeItem("carrito");
+  
     setCartItems((prev) => prev.filter((item) => item.id !== id));
-
-    const items = JSON.parse(localStorage.getItem("carrito"));
-    if (items.length === 1) localStorage.removeItem("carrito");
   };
 
   if (isLoading) return <Loading />;
