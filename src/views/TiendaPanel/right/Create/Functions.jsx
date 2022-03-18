@@ -72,6 +72,7 @@ export default function Functions(Validate, shopId) {
 			});
 
 			setlistcategories({ add: [] });
+			window.location.reload(false);
 		}
 	};
 
