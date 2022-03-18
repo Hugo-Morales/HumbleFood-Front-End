@@ -6,6 +6,7 @@ import {
   GET_ALL_CATEGORIES,
   GET_CATEGORIES,
   GET_PRODUCTS_SHOP,
+  GET_PRODUCTS_NAMES,
   RESET,
   LOADING,
   POST_NEW_SHOP,
@@ -29,6 +30,7 @@ const initialStore = {
   shop: [],
   shops: [],
   productsloaded: [],
+  productsNames: [],
   detailProduct: [],
   allcategories: [],
   categories: [],
@@ -134,6 +136,12 @@ export default function reducer(state = initialStore, { type, payload }) {
         productsloaded: payload,
         isLoading: false,
       };
+    case GET_PRODUCTS_NAMES:
+      return {
+        ...state,
+        productsNames: payload,
+        isLoading: false,
+      };
     case GET_ALL_USERS:
       return {
         ...state,
@@ -176,6 +184,7 @@ export default function reducer(state = initialStore, { type, payload }) {
     case GET_ORDER_BY_SHOP:
       return {
         ...state,
+        loadingPanel: false,
         isLoading: false,
         orders: payload,
       };
