@@ -64,12 +64,7 @@ export default function reducer(state = initialStore, { type, payload }) {
         productsloaded: payload,
         isLoading: false,
       };
-    case GET_ALL_CATEGORIES:
-      return {
-        ...state,
-        categories: payload,
-        isLoading: false,
-      }
+
     case GET_DATA_USER:
       return {
         ...state,
