@@ -2,11 +2,9 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { postproducts, NewCategory } from "../../../../redux/actions";
 import Swal from "sweetalert2";
-import { Link, useNavigate } from "react-router-dom";
 
 export default function Functions(Validate, shopId) {
 	const dispatch = useDispatch();
-	const navigate = useNavigate()
 	const [err, setErr] = useState({});
 	const [listcategories, setlistcategories] = useState({
 		add: [],
@@ -63,7 +61,6 @@ export default function Functions(Validate, shopId) {
 				text: `Se a creado el producto ${input.name} exitosamente.`,
 			});
 
-			navigate('/home')
 			setInput({
 				name: "",
 				description: "",
@@ -75,7 +72,6 @@ export default function Functions(Validate, shopId) {
 			});
 
 			setlistcategories({ add: [] });
-			window.location.reload(false);
 		}
 	};
 
