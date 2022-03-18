@@ -27,7 +27,6 @@ export default function Table({
 	const [producto, setProducto] = useState([]);
 
 	const confirmProduct = (id) => {
-		console.log(id);
 		MySwal.fire({
 			title: "¿Estás seguro?",
 			text: "",
