@@ -69,6 +69,7 @@ export default function ContainerT({ user }) {
 						<SideRight
 							product={productos}
 							idS={id}
+							userId={usuario?.id}
 							shopsId={usuario?.shopsId}
 							paging={paging}
 							currentPage={currentPage}

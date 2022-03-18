@@ -22,7 +22,7 @@ function Orders({ shopId }) {
     (order) => order.state === newState.indexOf(filterOrder)
   );
 
-  console.log(orders);
+  // console.log(orders);
 
   useEffect(() => {
     dispatch(getOrderByShop(shopId));
@@ -60,6 +60,8 @@ function Orders({ shopId }) {
                 state={order.state}
                 total={order.total}
                 userId={order.userId}
+                userInfo={order.userInfo?.name}
+                productsInfo={order.productsInfo}
               />
             ))
           : filter?.map((order, i) => (
@@ -70,6 +72,8 @@ function Orders({ shopId }) {
                 state={order.state}
                 total={order.total}
                 userId={order.userId}
+                userInfo={order.userInfo?.name}
+                productsInfo={order.productsInfo}
               />
             ))}
       </div>

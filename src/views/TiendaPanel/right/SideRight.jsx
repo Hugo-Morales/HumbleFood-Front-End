@@ -3,10 +3,12 @@ import CreateProducts from "./Create/CreateProducts";
 import HacerAdmin from "./make/HacerAdmin";
 import Styles from "./SideRight.module.css";
 import Orders from "./Orders/Orders";
+import ShoppingHistory from "./ShoppingHistory/ShoppingHistory";
 
 export default function SideRight({
 	product,
 	idS,
+	userId,
 	shopsId,
 	paging,
 	currentPage,
@@ -31,7 +33,9 @@ export default function SideRight({
 			case "crear":
 				return <CreateProducts shopId={shopsId} />;
 			case "modificar ordenes":
-				return <Orders shopId={shopsId} idS={idS} />;
+				return <Orders shopId={shopsId} />;
+			case "historial de compras":
+				return <ShoppingHistory userId={userId} />;
 			case "makeAdmin":
 				return <HacerAdmin />;
 			default:
