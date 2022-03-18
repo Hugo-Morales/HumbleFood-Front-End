@@ -169,18 +169,18 @@ export default function Table({
 														<>
 															<div className="text-gray-900">
 																<p>
-																	$
-																	{new Intl.NumberFormat("de-DE").format(
-																		p?.price * p?.stock
-																	)}
+																	{new Intl.NumberFormat("en-IN", {
+																		style: "currency",
+																		currency: "USD",
+																	}).format(p?.price * p?.stock)}
 																</p>
 															</div>
 															<div className="text-gray-500">
 																<p>
-																	$
-																	{new Intl.NumberFormat("de-DE").format(
-																		p?.price
-																	)}{" "}
+																	{new Intl.NumberFormat("en-IN", {
+																		style: "currency",
+																		currency: "USD",
+																	}).format(p?.price)}{" "}
 																	c/stock
 																</p>
 															</div>

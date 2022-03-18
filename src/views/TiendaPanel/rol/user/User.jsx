@@ -7,7 +7,7 @@ export default function User({ setId }) {
 			{/* Historial de Compras */}
 			<Button
 				div="flex bg-green-200 justify-center p-2 rounded-lg mt-3 mb-3 hover:bg-sky-700 cursor-pointer"
-				text="Historial de compra"
+				text="Historial de compras"
 				buttonclass="flex items-center font-bold"
 				icon={<BiEdit className="mr-2" />}
 				f={() => setId("historial")}

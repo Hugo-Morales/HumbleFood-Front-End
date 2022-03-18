@@ -4,9 +4,9 @@ import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import { Link } from "react-router-dom";
 
-
-function Buys({ total, shopInfo, productsInfo }) {
+function Buys({ index, total, shopInfo, shopId, productsInfo }) {
   return (
     <div>
       <Accordion>
@@ -15,45 +15,75 @@ function Buys({ total, shopInfo, productsInfo }) {
           aria-controls="panel1a-content"
           id="panel1a-header"
         >
-          <Typography>Tienda: {shopInfo?.name}</Typography>
-        </AccordionSummary>
-        <AccordionDetails>
           <Typography>
-            <div className="flex justify-between">
-              <div className="w-2/3">
+            <span className="mx-2 p-1 rounded-full bg-orange-700 text-white">
+              # {index + 1}
+            </span>
+            Tienda: {shopInfo?.name}
+          </Typography>
+        </AccordionSummary>
+        <AccordionDetails className="bg-orange-300">
+          <Typography>
+            <div className="flex flex-col">
+              <div className="w-full">
                 {productsInfo?.map((product, i) => (
                   <div
                     key={i}
-                    className="flex justify-between items-center mb-2"
+                    className="flex justify-between items-center my-2"
                   >
-                    <img
-                      src={product?.image}
-                      alt={product.name}
-                      className="w-16 h-16 rounded-full"
-                    />
-                    <p className="font-bold text-xl">{product.name}</p>
-                    <p>
+                    <Link to={`/products/${shopId}/${product.id}`}>
+                      <img
+                        src={product?.image}
+                        alt={product.name}
+                        className="w-16 h-16 rounded-full"
+                      />
+                      <p className="flex justify-start font-bold text-xl w-12">
+                        {product.name}
+                      </p>
+                    </Link>
+                    <p className="font-bold">
                       Cantidad:{" "}
                       <span className="font-bold">{product.cantidad}</span>
                     </p>
-                    <p>
+                    <p className="font-bold">
                       Precio:{" "}
-                      <span className="font-bold">{product.price}</span>
+                      <span className="font-bold">
+                        {new Intl.NumberFormat("en-IN", {
+                          style: "currency",
+                          currency: "USD",
+                        }).format(product.price)}
+                      </span>
                     </p>
-                    <p>
+                    <p className="font-bold">
                       Descuento:{" "}
-                      <span className="font-bold">{product.discount}</span>
+                      <span className="font-bold">{product.discount}%</span>
                     </p>
-                    <p>
+                    <p className="font-bold">
                       Pecio con descuento incluido:{" "}
-                      <span className="font-bold">{product.price - ((product.price / 100) * product.discount)}</span>
+                      <span className="font-bold">
+                        {new Intl.NumberFormat("en-IN", {
+                          style: "currency",
+                          currency: "USD",
+                        }).format(
+                          product.price -
+                            (product.price / 100) * product.discount
+                        )}
+                      </span>
                     </p>
                   </div>
                 ))}
               </div>
-              <p className="flex items-end font-bold">
-                Total de Compra: <span className="text-2xl ml-2">{total}</span>
-              </p>
+              <div className="relative flex items-center justify-end">
+                <p className="font-bold border-t-2 border-black">
+                  Total de Compra:{" "}
+                  <span className="text-2xl ml-2">
+                    {new Intl.NumberFormat("en-IN", {
+                      style: "currency",
+                      currency: "USD",
+                    }).format(total)}
+                  </span>
+                </p>
+              </div>
             </div>
           </Typography>
         </AccordionDetails>

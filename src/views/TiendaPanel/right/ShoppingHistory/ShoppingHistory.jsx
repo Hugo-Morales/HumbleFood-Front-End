@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { loading_panel } from "../../../../redux/actions/index";
 import { getOrderByShop } from "../../../../redux/actions/actionsOrders";
@@ -26,19 +26,24 @@ function ShoppingHistory({ userId }) {
       ) : (
         <div className="w-full h-full bg-white rounded-lg">
           <div className="overflow-y-auto">
-            {orders?.map((order, i) => (
-              <Buys
-                index={i}
-                key={order.id}
-                id={order.id}
-                state={order.state}
-                total={order.total}
-                userId={order.userId}
-                products={order.ordenProductsId}
-                shopInfo={order.shopInfo}
-                productsInfo={order.productsInfo}
-              />
-            ))}
+            {orders?.length === 0 ? (
+              <div>Aún no has hecho compras</div>
+            ) : (
+              orders?.map((order, i) => (
+                <Buys
+                  index={i}
+                  key={order.id}
+                  id={order.id}
+                  shopId={order.shopId}
+                  state={order.state}
+                  total={order.total}
+                  userId={order.userId}
+                  products={order.ordenProductsId}
+                  shopInfo={order.shopInfo}
+                  productsInfo={order.productsInfo}
+                />
+              ))
+            )}
           </div>
         </div>
       )}

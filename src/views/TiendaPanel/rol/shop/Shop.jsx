@@ -23,14 +23,6 @@ export default function Shop({ setId }) {
 				icon={<MdCreate className="mr-2" />}
 				f={() => setId("crear")}
 			/>
-			{/* Historial de Compras */}
-			<Button
-				div="flex bg-green-200 justify-center p-2 rounded-lg mt-3 hover:bg-sky-700 cursor-pointer"
-				text="Compras"
-				buttonclass="flex items-center font-bold"
-				icon={<HiOutlineShoppingBag className="mr-2" />}
-				f={() => setId("historial de compras")}
-			/>
 		</>
 	);
 }
