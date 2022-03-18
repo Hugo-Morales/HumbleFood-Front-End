@@ -57,7 +57,7 @@ export const postnewUser = (newUser) => {
     try {
       const response = await axios.get(`${URL}user/${newUser.userId}`);
       // console.log(response.data.hasOwnProperty("user"));
-      if (!response.data.hasOwnProperty("userId")) {
+      if (!response.data.hasOwnProperty("user")) {
         await axios.post(`${URL}user`, newUser);
         console.log("registrado");
       }
