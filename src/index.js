@@ -10,7 +10,6 @@ import reportWebVitals from "./reportWebVitals";
 
 const domain = process.env.REACT_APP_DOMAIN;
 const clientId = process.env.REACT_APP_CLIENT_ID;
-const local = process.env.REACT_APP_LOCAL;
 
 ReactDOM.render(
   <React.StrictMode>

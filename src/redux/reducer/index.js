@@ -64,7 +64,6 @@ export default function reducer(state = initialStore, { type, payload }) {
         productsloaded: payload,
         isLoading: false,
       };
-
     case GET_DATA_USER:
       return {
         ...state,
@@ -111,6 +110,7 @@ export default function reducer(state = initialStore, { type, payload }) {
       return {
         ...state,
         allcategories: payload,
+        loadingPanel: false
       }
     case GET_CATEGORIES:
       if (Array.isArray(payload)) {

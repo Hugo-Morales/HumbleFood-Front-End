@@ -27,7 +27,7 @@ export default function HomeShops() {
 		if (num >= 0 && num <= shops.pagesTotal) {
 			setCurrentPage(num);
 		}
-		console.log(num)
+		console.log(num);
 	};
 
 	const newUser = {
