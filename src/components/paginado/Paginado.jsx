@@ -7,7 +7,7 @@ const Paginado = ({ paging, currentPage, pagesTotal, prev, next }) => {
   }
 
   return (
-    <div className="w-full mb-2 flex justify-center">
+    <div className="w-full my-4 flex justify-center">
       {prev && (
         <button
           type="button"

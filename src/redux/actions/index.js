@@ -3,6 +3,7 @@ export const GET_SHOPS = "GET_SHOPS";
 export const GET_DETAIL_PRODUCT = "GET_DETAIL_PRODUCT";
 export const SEARCH_BY_NAME = "SEARCH_BY_NAME";
 export const GET_ALL_PRODUCTS = "GET_ALL_PRODUCTS";
+export const GET_ALL_CATEGORIES = "GET_ALL_CATEGORIES";
 export const GET_CATEGORIES = "GET_CATEGORIES";
 export const GET_PRODUCTS_SHOP = "GET_PRODUCTS_SHOP";
 export const RESET = "RESET";
@@ -20,6 +21,7 @@ export const LOADING_PANEL = "LOADING_PANEL";
 export const GET_NAME_OF_SHOP = "GET_NAME_OF_SHOP";
 export const GET_DISCOUNTS = "GET_DISCOUNTS";
 export const POST_ORDER = "POST_ORDER";
+export const FILTER_BY_CAT_DISC = "FILTER_BY_CAT_DISC";
 export const ALL_FAVORITES = "ALL_FAVORITES";
 
 export const STOP = "STOP";
@@ -131,12 +133,10 @@ export const postproducts = (input) => {
     }
   };
 };
-export const NewCategory = () => {
+
+export const NewCategory = (name) => {
   return async () => {
-    const name = prompt("save New Category ");
-    await axios.post(`${URL}category`, {
-      name,
-    });
+    await axios.post(`${URL}category`, name);
   };
 };
 
@@ -158,6 +158,18 @@ export const getCategories = (shopId) => async (dispatch) => {
     const categories = await axios.get(`${URL}categories/?shopId=${shopId}`);
     dispatch({
       type: GET_CATEGORIES,
+      payload: categories.data,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getallCategories = () => async (dispatch) => {
+  try {
+    const categories = await axios.get(`${URL}categoriesId`);
+    dispatch({
+      type: GET_ALL_CATEGORIES,
       payload: categories.data,
     });
   } catch (error) {
@@ -240,7 +252,20 @@ export const postReview = (review) => async (dispatch) => {
     console.error(error);
   }
 };
-
+export const filterByCat_Disc = (shopId, discount, category) => async (dispatch) => {
+  try {
+    const response = await axios.get(
+      `${URL}productShop/${shopId}?category=${category}&discount=${discount}`
+    );
+    console.log(`${URL}productsShop/${shopId}?category=${category}&discount=${discount}`);
+    dispatch({
+      type: FILTER_BY_CAT_DISC,
+      payload: response.data,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+}
 export const filterProductsByCategories =
   (shopId, category) => async (dispatch) => {
     try {
@@ -338,7 +363,7 @@ export const postOrder = (order) => async (dispatch) => {
 }
 
 
-//  - - - - Favorites Restaurants - - - -
+//  - - - - Favourites Restaurants - - - -
 export const getAllFavorites = (id) => async(dispatch) => {
   try {
     const response = await axios.get(`${URL}user/${id}/favouriteShops`);
@@ -366,3 +391,8 @@ export const removeFavorites = (id, shopsID) => async () => {
     console.log(error);
   }
 }
+
+
+
+
+

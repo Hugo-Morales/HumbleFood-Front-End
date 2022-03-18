@@ -3,6 +3,7 @@ import {
   GET_DETAIL_PRODUCT,
   SEARCH_BY_NAME,
   GET_ALL_PRODUCTS,
+  GET_ALL_CATEGORIES,
   GET_CATEGORIES,
   GET_PRODUCTS_SHOP,
   RESET,
@@ -14,28 +15,32 @@ import {
   GET_SHOPS_ID,
   GET_ALL_USERS,
   LOADING_PANEL,
+  FILTER_BY_CAT_DISC,
   FILTER_BY_CATEGORIES,
   FILTER_BY_DISCOUNT,
   GET_NAME_OF_SHOP,
   STOP,
   GET_DISCOUNTS,
-  ALL_FAVORITES
-} from "../actions";
+  ALL_FAVORITES,
+} from "../actions/index";
+import { GET_ORDER_BY_SHOP } from "../actions/actionsOrders";
 
 const initialStore = {
   shop: [],
   shops: [],
   productsloaded: [],
   detailProduct: [],
+  allcategories: [],
   categories: [],
   discounts: [],
   postnewShop: [],
   dataUser: {},
   allUser: [],
+  orders: [],
   allFavorites: [],
   nameOfShop: "",
   isLoading: true,
-  loadingPanel: true,
+  loadingPanel: true
 };
 
 export default function reducer(state = initialStore, { type, payload }) {
@@ -63,6 +68,11 @@ export default function reducer(state = initialStore, { type, payload }) {
         dataUser: payload.user,
         loadingPanel: false,
       };
+    case FILTER_BY_CAT_DISC:
+      return {
+        ...state,
+        productsloaded: payload,
+      }
     case FILTER_BY_CATEGORIES:
       return {
         ...state,
@@ -81,7 +91,7 @@ export default function reducer(state = initialStore, { type, payload }) {
     case GET_DETAIL_PRODUCT:
       return {
         ...state,
-        detailProduct: payload,
+        detailProduct: payload.products[0],
         isLoading: false,
       };
     case SEARCH_BY_NAME:
@@ -94,10 +104,15 @@ export default function reducer(state = initialStore, { type, payload }) {
         ...state,
         postnewShop: payload,
       };
+    case GET_ALL_CATEGORIES:
+      return {
+        ...state,
+        allcategories: payload,
+      }
     case GET_CATEGORIES:
-      if(Array.isArray(payload)){
-        payload = payload.map(e => ({name: e}))
-      } 
+      if (Array.isArray(payload)) {
+        payload = payload.map((e) => ({ name: e }));
+      }
       return {
         ...state,
         categories: payload,
@@ -125,13 +140,14 @@ export default function reducer(state = initialStore, { type, payload }) {
         ...state,
         allFavorites: payload,
         isLoading: false,
-      }
+      };
     case RESET:
       return {
         ...state,
         detailProduct: [],
         productsloaded: [],
         shops: [],
+        allFavorites: [],
         isLoading: true,
       };
     case LOADING:
@@ -150,6 +166,12 @@ export default function reducer(state = initialStore, { type, payload }) {
         ...state,
         isLoading: false,
         loadingPanel: false,
+      };
+    case GET_ORDER_BY_SHOP:
+      return {
+        ...state,
+        isLoading: false,
+        orders: payload,
       };
     default:
       return state;

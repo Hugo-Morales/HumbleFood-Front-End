@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useDispatch, useSelector } from "react-redux";
@@ -11,29 +11,42 @@ import {
 
 const CardShop = ({ shop }) => {
 	const dispatch = useDispatch();
-	const { user } = useAuth0();
+	const { isAuthenticated, user } = useAuth0();
 	const { id, name, image, description } = shop;
 	const misfavoritos = useSelector((state) => state.allFavorites);
 	const userId = user?.sub.split("|")[1];
-	const shopsID = misfavoritos.map((i) => i.id);
-	const shopIdguardado = shopsID.includes(id);
+	const shopsID = misfavoritos?.map((i) => i.id);
+	const shopIdguardado = shopsID?.includes(id);
+	const [save, setSave] = useState(false);
+	const [deleteFav, setDeleteFav] = useState(false);
 
-	// console.log(shopID.includes(id));
 	useEffect(() => {
-		dispatch(getAllFavorites(userId));
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
+		if (isAuthenticated) {
+			dispatch(getAllFavorites(userId));
+		}
+	}, [dispatch, userId, isAuthenticated]);
 
+	useEffect(() => {
+		if(save){
+			console.log(save);
+			dispatch(addFavorites(userId, id));
+			dispatch(getAllFavorites(userId));
+		}
+		else if(deleteFav){
+			dispatch(removeFavorites(userId, id));
+			dispatch(getAllFavorites(userId));
+		}
+	},[save, deleteFav])
 	const guardar = () => {
-		// console.log(id);
-		dispatch(addFavorites(userId, id));
-		dispatch(getAllFavorites(userId));
+		setSave(true);
+		setDeleteFav(false)
+		//console.log(id);
 	};
-
-	const borrar = async () => {
-		// console.log(id);
-		dispatch(removeFavorites(userId, id));
-		dispatch(getAllFavorites(userId));
+	
+	const borrar = () => {
+		setDeleteFav(true)
+		setSave(false);
+		console.log("Delete: ",deleteFav);
 	};
 
 	return (
@@ -51,7 +64,7 @@ const CardShop = ({ shop }) => {
 					>
 						<button className="absolute bg-gray-600 text-white p-2.5 rounded-sm shadow-md top-0 left-0">
 							<BsFillHeartFill
-								className={shopIdguardado ? "text-red-600" : "text-white-500"}
+								className={save && !deleteFav ? "text-red-600" :shopIdguardado && !deleteFav ? "text-red-600": "text-white-500"}
 							/>
 						</button>
 					</div>

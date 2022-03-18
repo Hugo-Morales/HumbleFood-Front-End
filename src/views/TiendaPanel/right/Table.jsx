@@ -131,7 +131,7 @@ export default function Table({
 																{p.name}
 															</div>
 															<div className="text-sm text-gray-500">
-																{p?.categories.join(" ")}
+																{p?.categories?.join(" ")}
 															</div>
 														</div>
 													</div>
@@ -168,10 +168,21 @@ export default function Table({
 													) : (
 														<>
 															<div className="text-gray-900">
-																<p>${(p?.price * p?.stock).toFixed(2)}</p>
+																<p>
+																	{new Intl.NumberFormat("en-IN", {
+																		style: "currency",
+																		currency: "USD",
+																	}).format(p?.price * p?.stock)}
+																</p>
 															</div>
 															<div className="text-gray-500">
-																<p>${p?.price} c/stock</p>
+																<p>
+																	{new Intl.NumberFormat("en-IN", {
+																		style: "currency",
+																		currency: "USD",
+																	}).format(p?.price)}{" "}
+																	c/stock
+																</p>
 															</div>
 														</>
 													)}
@@ -201,6 +212,7 @@ export default function Table({
 											<td className="text-center py-2">
 												No hay ninguno producto actualmente
 											</td>
+											<td></td>
 											<td></td>
 											<td></td>
 											<td></td>

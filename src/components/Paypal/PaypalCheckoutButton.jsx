@@ -8,8 +8,10 @@ import { postOrder } from "../../redux/actions";
 
 function PaypalCheckoutButton({
   order,
+  itemsPerShop,
   cartItems,
   setCartItems,
+  shopId,
   shopEmail,
   setOpen,
 }) {
@@ -22,10 +24,12 @@ function PaypalCheckoutButton({
   const handleAprove = (orderId) => {
     //Call backend function to fullfill order
     // if response is success
+    const cleanCart = cartItems.filter((item) => item.shopId !== shopId);
+    setCartItems(cleanCart);
     dispatch(postOrder(order));
-    setCartItems([]);
     setOpen(false);
     setPaidFor(true);
+    console.log("orderId", orderId);
     // Refresh user's account or subscription status
 
     // if the response is error
@@ -58,7 +62,7 @@ function PaypalCheckoutButton({
       no-repeat
       `,
     });
-    console.log(paidFor)
+   
   }
 
   if (error) {
@@ -102,7 +106,7 @@ function PaypalCheckoutButton({
             {
               description: "Cool looking table",
               amount: {
-                value: calculateTotal(cartItems),
+                value: calculateTotal(itemsPerShop),
               },
               payee: {
                 email_address: shopEmail,
@@ -112,10 +116,9 @@ function PaypalCheckoutButton({
         });
       }}
       onApprove={async (data, actions) => {
-        const order = await actions.order.capture().then((details) => {
+        await actions.order.capture().then((details) => {
           console.log(details);
         });
-        console.log("order", order);
 
         handleAprove(data.orderID);
       }}
