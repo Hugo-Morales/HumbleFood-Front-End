@@ -6,6 +6,7 @@ export const GET_ALL_PRODUCTS = "GET_ALL_PRODUCTS";
 export const GET_ALL_CATEGORIES = "GET_ALL_CATEGORIES";
 export const GET_CATEGORIES = "GET_CATEGORIES";
 export const GET_PRODUCTS_SHOP = "GET_PRODUCTS_SHOP";
+export const GET_PRODUCTS_NAMES = "GET_PRODUCTS_NAMES";
 export const RESET = "RESET";
 export const LOADING = "LOADING";
 export const POST_REVIEW = "POST_REVIEW";
@@ -216,6 +217,19 @@ export const getProductShop = (id, page) => async (dispatch) => {
     console.log(error);
   }
 };
+
+export const getProductNames = (id) => async (dispatch) => {
+  try {
+    const productsNames = await axios.get(`${URL}productShop/${id}/productNames`);
+    dispatch({
+      type: GET_PRODUCTS_NAMES,
+      payload: productsNames.data,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 
 export const reset = () => (dispatch) => {
   dispatch({

@@ -3,15 +3,16 @@ import CreateProducts from "./Create/CreateProducts";
 import HacerAdmin from "./make/HacerAdmin";
 import Styles from "./SideRight.module.css";
 import Orders from "./Orders/Orders";
-// import PaginationControlled from "./pagination";
+import ShoppingHistory from "./ShoppingHistory/ShoppingHistory";
 
 export default function SideRight({
 	product,
 	idS,
+	userId,
+	rol,
 	shopsId,
 	paging,
 	currentPage,
-	PaginationControlled
 }) {
 	const { products, next, prev, pagesTotal } = product;
 	// console.log(products);
@@ -20,7 +21,6 @@ export default function SideRight({
 		switch (x) {
 			case "home":
 				return (
-
 					<Table
 						p={products}
 						d={false}
@@ -29,29 +29,30 @@ export default function SideRight({
 						pagesTotal={pagesTotal}
 						paging={paging}
 						currentPage={currentPage}
-						PaginationControlled={PaginationControlled}
 					/>
-
-
 				);
 			case "crear":
 				return <CreateProducts shopId={shopsId} />;
 			case "modificar ordenes":
-				return <Orders shopId={shopsId} idS={idS} />;
+				return <Orders shopId={shopsId} />;
 			case "makeAdmin":
 				return <HacerAdmin />;
 			default:
-				return (
-					<Table
-						p={products}
-						d={false}
-						next={next}
-						prev={prev}
-						pagesTotal={pagesTotal}
-						paging={paging}
-						currentPage={currentPage}
-					/>
-				);
+				if (rol === 0) {
+					return <ShoppingHistory userId={userId} />;
+				} else {
+					return (
+						<Table
+							p={products}
+							d={false}
+							next={next}
+							prev={prev}
+							pagesTotal={pagesTotal}
+							paging={paging}
+							currentPage={currentPage}
+						/>
+					);
+				}
 		}
 	};
 
