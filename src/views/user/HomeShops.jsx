@@ -5,7 +5,6 @@ import NavShop from "../../components/shops/NavShops";
 import Carousell from "../../components/carousell/Carousell";
 import CardsShops from "../../components/shops/CardsShops";
 import Loading from "../../components/loading/Loading";
-import Paginado from "../../components/paginado/Paginado";
 import PaginationControlled from "../TiendaPanel/right/pagination";
 import {
 	getShops,

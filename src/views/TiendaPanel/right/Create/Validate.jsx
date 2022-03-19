@@ -45,7 +45,7 @@ export default function Validate(input, listcategories) {
 		err.listcategories = "No se permiten caractéres especiales.";
 	} else if (notnumber.test(input.categories)) {
 		err.listcategories = "No se permiten números.";
-	} else if (!listcategories.add.length && input.categories) {
+	} else if (!listcategories.add.length && !input.categories) {
 		err.listcategories = "Debes al menos ingresar una categoría al producto.";
 	} else if (notnumber.test(listcategories.add)) {
 		err.listcategories = "No se permiten números.";
