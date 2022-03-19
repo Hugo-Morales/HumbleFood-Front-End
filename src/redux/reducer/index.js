@@ -110,6 +110,7 @@ export default function reducer(state = initialStore, { type, payload }) {
       return {
         ...state,
         allcategories: payload,
+        loadingPanel: false
       }
     case GET_CATEGORIES:
       if (Array.isArray(payload)) {

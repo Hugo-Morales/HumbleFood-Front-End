@@ -40,9 +40,9 @@ const CardDetail = ({
 	const products = useSelector((state) => state.detailProduct);
 	const shop = useSelector((state) => state.shop);
 	const { shopId, productId } = useParams([0]);
-
+	const items = JSON.parse(localStorage.getItem("carrito"));
+	const stock_max = items?.find((i) => i.id === productId);
 	const itemsPerShop = cartItems.filter((item) => item.shopId === shopId);
-
 	// console.log("product", products);
 
 	useEffect(() => {
@@ -173,18 +173,25 @@ const CardDetail = ({
 
 								<div className="mt-4 lg:mt-0 lg:row-span-3">
 									<div className="flex justify-between items-center">
-										<p className="text-3xl text-gray-900">
-											$
-											{products?.price -
-												(products?.price / 100) * products?.discount}
+										<p className="text-3xl text-red-600 line-through">
+											{new Intl.NumberFormat("en-IN", {
+												style: "currency",
+												currency: "USD",
+											}).format(products?.price)}
 										</p>
 										<p className="text-3xl inline-block font-bold text-white p-2 bg-green-500 rounded-sm">
 											{products?.discount}
 											<span className="">% Descuento</span>
 										</p>
 									</div>
-									<p className="text-3xl text-red-600 line-through">
-										${products?.price}
+									<p className="text-3xl text-gray-900">
+										{new Intl.NumberFormat("en-IN", {
+											style: "currency",
+											currency: "USD",
+										}).format(
+											products?.price -
+												(products?.price / 100) * products?.discount
+										)}
 									</p>
 								</div>
 							</div>
@@ -198,33 +205,38 @@ const CardDetail = ({
 									{products?.description}
 								</p>
 							</div>
-							<div></div>
-							<button
-								onClick={() => handleAddToCart(products)}
-								type="submit"
-								className="mt-10 w-full bg-indigo-600 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 rorate:45"
-							>
-								<p className="mr-3">Añadir</p>{" "}
-								<svg
-									xmlns="http://www.w3.org/2000/svg"
-									className="icon icon-tabler icon-tabler-shopping-cart-plus"
-									width="20"
-									height="20"
-									viewBox="0 0 24 24"
-									strokeWidth="1.5"
-									stroke="#ffffff"
-									fill="none"
-									strokeLinecap="round"
-									strokeLinejoin="round"
+							{stock_max?.amount === products?.stock ? (
+								<div className="mt-10 w-full bg-red-600 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 rorate:45">
+									<h1>Agotado</h1>
+								</div>
+							) : (
+								<button
+									onClick={() => handleAddToCart(products)}
+									type="submit"
+									className="mt-10 w-full bg-indigo-600 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 rorate:45"
 								>
-									<path stroke="none" d="M0 0h24v24H0z" fill="none" />
-									<circle cx="6" cy="19" r="2" />
-									<circle cx="17" cy="19" r="2" />
-									<path d="M17 17h-11v-14h-2" />
-									<path d="M6 5l6.005 .429m7.138 6.573l-.143 .998h-13" />
-									<path d="M15 6h6m-3 -3v6" />
-								</svg>
-							</button>
+									<p className="mr-3">Añadir</p>{" "}
+									<svg
+										xmlns="http://www.w3.org/2000/svg"
+										className="icon icon-tabler icon-tabler-shopping-cart-plus"
+										width="20"
+										height="20"
+										viewBox="0 0 24 24"
+										strokeWidth="1.5"
+										stroke="#ffffff"
+										fill="none"
+										strokeLinecap="round"
+										strokeLinejoin="round"
+									>
+										<path stroke="none" d="M0 0h24v24H0z" fill="none" />
+										<circle cx="6" cy="19" r="2" />
+										<circle cx="17" cy="19" r="2" />
+										<path d="M17 17h-11v-14h-2" />
+										<path d="M6 5l6.005 .429m7.138 6.573l-.143 .998h-13" />
+										<path d="M15 6h6m-3 -3v6" />
+									</svg>
+								</button>
+							)}
 							<div className="justify-start">
 								<hr></hr>
 								<Reviews />

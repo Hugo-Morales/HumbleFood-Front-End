@@ -91,7 +91,7 @@ export default function Functions(Validate, shopId) {
 				text: "No se puede agregar la misma categoría.",
 			});
 		} else if (!Object.keys(err).includes("listcategories")) {
-			if (!categories.find((f) => f === input.categories)) {
+			if (!categories.find((f) => f.name === input.categories)) {
 				const newc = { name: input.categories };
 				dispatch(NewCategory(newc));
 			}
@@ -99,12 +99,12 @@ export default function Functions(Validate, shopId) {
 			if (input.categories !== "") {
 				listcategories.add.push(input.categories);
 			}
-		}
 
-		setInput({
-			...input,
-			categories: "",
-		});
+			setInput({
+				...input,
+				categories: "",
+			});
+		}
 	};
 
 	const eliminar = (name) => {
