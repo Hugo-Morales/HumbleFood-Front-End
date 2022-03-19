@@ -43,12 +43,12 @@ function Orders({ shopId }) {
           <h2 className="w-full mb-2 p-4 text-center text-2xl font-bold rounded-t-lg text-white bg-ochre">
             Estado de ordenes
           </h2>
-          <div className="flex justify-between mb-3 m-4">
-            <p className="font-extrabold">Nº de Order</p>
-            <div className="flex">
+          <div className="flex justify-center xl:justify-between m-4">
+            <p className="hidden xl:inline-block font-extrabold">Nº y Nombre del Comprador</p>
+            <div className="flex justify-center">
               <select
                 onChange={(e) => setFilterOrder(e.target.value)}
-                className="w-56 ml-32 pl-2 text-white rounded-md focus:outline-none bg-gray-700"
+                className="w-56 md:ml-32 p-2 text-white rounded-md focus:outline-none bg-gray-700"
               >
                 <option value="">Todas las Ordenes</option>
                 {newState.map((stateOrter, i) => (
@@ -58,7 +58,7 @@ function Orders({ shopId }) {
                 ))}
               </select>
             </div>
-            <p className="font-extrabold">Total de la Orden</p>
+            <p className="hidden xl:inline-block font-extrabold">Total de la Orden</p>
           </div>
           <div className=" overflow-y-auto">
             {filterOrder === ""
@@ -69,6 +69,7 @@ function Orders({ shopId }) {
                     id={order.id}
                     state={order.state}
                     total={order.total}
+                    shopId={order.shopId}
                     userId={order.userId}
                     userInfo={order.userInfo?.name}
                     productsInfo={order.productsInfo}
