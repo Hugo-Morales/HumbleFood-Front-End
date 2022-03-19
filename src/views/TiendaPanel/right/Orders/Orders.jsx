@@ -69,6 +69,7 @@ function Orders({ shopId }) {
                     id={order.id}
                     state={order.state}
                     total={order.total}
+                    shopId={order.shopId}
                     userId={order.userId}
                     userInfo={order.userInfo?.name}
                     productsInfo={order.productsInfo}
