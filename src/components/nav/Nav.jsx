@@ -10,12 +10,12 @@ import SearchBar from "../serchbar/SearchBar";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  filterProductsByCategories,
-  filterProductsByDiscounts,
-  getDiscounts,
-  getCategories,
-  filterByCat_Disc,
-  getProductShop
+	filterProductsByCategories,
+	filterProductsByDiscounts,
+	getDiscounts,
+	getCategories,
+	filterByCat_Disc,
+	getProductShop,
 } from "../../redux/actions";
 
 const StyledButton = styled(IconButton)`
@@ -36,18 +36,17 @@ const Nav = ({
 	handleRemoveFromCart,
 	handleDeleteFromCart,
 }) => {
-  const { shopId } = useParams();
-  const { isAuthenticated, user, loginWithRedirect } = useAuth0();
-  const dispatch = useDispatch();
-  const categories = useSelector((state) => state.categories);
-  const discounts = useSelector((state) => state.discounts);
-  const itemsPerShop = cartItems.filter((item) => item.shopId === shopId);
-  const [category, setCategory] = useState();
-  const [discount, setDiscount] = useState();
+	const { shopId } = useParams();
+	const { isAuthenticated, user, loginWithRedirect } = useAuth0();
+	const dispatch = useDispatch();
+	const categories = useSelector((state) => state.categories);
+	const discounts = useSelector((state) => state.discounts);
+	const itemsPerShop = cartItems.filter((item) => item.shopId === shopId);
+	const [category, setCategory] = useState();
+	const [discount, setDiscount] = useState();
 
-
-  const user_id = user?.sub.split("|")[1];
-  //console.log(shopEmail);
+	const user_id = user?.sub.split("|")[1];
+	//console.log(shopEmail);
 
 	useEffect(() => {
 		shopId ? dispatch(getCategories(shopId)) : dispatch(getCategories());
@@ -55,55 +54,47 @@ const Nav = ({
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [dispatch]);
 
-  useEffect(()=> {
-    if(category && discount){
-      console.log(`Entro: ${category} y ${discount}`);
-      dispatch(filterByCat_Disc(shopId, discount, category))
-    }
-    else if(category && !discount){
-      setDiscount(undefined);
-      dispatch(filterProductsByCategories(shopId, category));
-    }
-    else if(!category && discount){
-      setCategory("")
-      dispatch(filterProductsByDiscounts(shopId, discount));
-    }
-  },[category, discount])
+	useEffect(() => {
+		if (category && discount) {
+			console.log(`Entro: ${category} y ${discount}`);
+			dispatch(filterByCat_Disc(shopId, discount, category));
+		} else if (category && !discount) {
+			setDiscount(undefined);
+			dispatch(filterProductsByCategories(shopId, category));
+		} else if (!category && discount) {
+			setCategory("");
+			dispatch(filterProductsByDiscounts(shopId, discount));
+		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [category, discount]);
 
-  function handleFilterCategories(e) {
-    if(e.target.value === "category" && !discount){
-      setCategory(undefined);
-      console.log("entro en categorias");
-      dispatch(getProductShop(shopId))
-    }
-    else if(e.target.value === "category" && discount){
-      setCategory(undefined);
-      dispatch(filterProductsByDiscounts(shopId, discount));
-    }
-    else{
-      setCategory(e.target.value);
-    }
-   
-  }
+	function handleFilterCategories(e) {
+		if (e.target.value === "category" && !discount) {
+			setCategory(undefined);
+			console.log("entro en categorias");
+			dispatch(getProductShop(shopId));
+		} else if (e.target.value === "category" && discount) {
+			setCategory(undefined);
+			dispatch(filterProductsByDiscounts(shopId, discount));
+		} else {
+			setCategory(e.target.value);
+		}
+	}
 
-  function handleFilterOffers(e) {
-    if(e.target.value === "discount" && !category){
-      setDiscount(undefined);
-      console.log("entro en descuentos");
-      dispatch(getProductShop(shopId))
-    }
-    else if(e.target.value === "discount" && category){
-      setDiscount(undefined);
-      dispatch(filterProductsByCategories(shopId, category));
-    }
-    else{
-      setDiscount(e.target.value);
+	function handleFilterOffers(e) {
+		if (e.target.value === "discount" && !category) {
+			setDiscount(undefined);
+			console.log("entro en descuentos");
+			dispatch(getProductShop(shopId));
+		} else if (e.target.value === "discount" && category) {
+			setDiscount(undefined);
+			dispatch(filterProductsByCategories(shopId, category));
+		} else {
+			setDiscount(e.target.value);
+		}
+	}
 
-    }
-    
-  }
-
-  return (
+	return (
 		<div className="font-poppins w-full h-24 bg-ochre flex justify-between">
 			<div className="w-1/3 flex justify-between items-center p-1">
 				<Link to="/home" className="ml-4">

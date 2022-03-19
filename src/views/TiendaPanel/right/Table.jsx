@@ -72,7 +72,6 @@ export default function Table({
 						}, 700);
 					}
 				}
-				window.location.reload(false);
 			}
 		});
 	};
