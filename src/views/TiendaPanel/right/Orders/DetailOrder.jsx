@@ -11,10 +11,11 @@ const style = {
   transform: "translate(-50%, -50%)",
   width: 400,
   bgcolor: "background.paper",
-  borderRadius: "1rem",
+  borderRadius: "0.5rem",
   boxShadow: 24,
   p: 4,
 };
+
 
 export default function DetailOrder({ productsInfo, userInfo, shopId, total }) {
   const [open, setOpen] = React.useState(false);
@@ -22,8 +23,10 @@ export default function DetailOrder({ productsInfo, userInfo, shopId, total }) {
   const handleClose = () => setOpen(false);
 
   return (
-    <div>
-      <Button onClick={handleOpen}>Detalle</Button>
+    <div className="flex justify-end mr-2 md:inline-block md:mr-0">
+      <Button onClick={handleOpen} variant="contained" color="success" size="small">
+        Detalle
+      </Button>
       <Modal
         open={open}
         onClose={handleClose}
@@ -44,8 +47,10 @@ export default function DetailOrder({ productsInfo, userInfo, shopId, total }) {
                 />
                 <p className="w-1/3 font-extrabold">{product.name}</p>
                 <p className="font-bold w-1/3 text-gray-400">
-                  Cantidad: {" "}
-                  <span className="font-bold text-black text-xl ml-2">{product.cantidad}</span>
+                  Cantidad:{" "}
+                  <span className="font-bold text-black text-xl ml-2">
+                    {product.cantidad}
+                  </span>
                 </p>
               </div>
             ))}

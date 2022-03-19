@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { updateOrderState } from "../../../../redux/actions/actionsOrders";
 import DetailOrder from "./DetailOrder";
 
+
 function Order({ id, total, state, index, shopId, userInfo, productsInfo }) {
   const [stateOrder, setStateOrder] = useState("");
   const dispatch = useDispatch();
@@ -23,9 +24,9 @@ function Order({ id, total, state, index, shopId, userInfo, productsInfo }) {
 
   return (
     <div>
-      <div className="grid grid-flow-col mx-4 my-2">
+      <div className="ml-4 grid grid-cols-2 xl:grid-cols-4 gap-2 items-center md:mx-4 my-2">
         <p className="w-44">
-          <span className="font-bold mr-4"># {index + 1}</span>
+          <span className="font-bold mr-4 "># {index + 1}</span>
           {userInfo}
         </p>
         <DetailOrder
@@ -36,7 +37,7 @@ function Order({ id, total, state, index, shopId, userInfo, productsInfo }) {
         />
         <select
           onChange={(e) => setStateOrder(e.target.value)}
-          className="w-56 pl-2 focus:outline-none bg-isabelline rounded-md"
+          className="w-30 md:w-56 p-2 focus:outline-none bg-isabelline rounded-md"
         >
           <option value={newState[state]}>{newState[state]}</option>
           {newState.map((stateOrder, i) => (
@@ -45,7 +46,7 @@ function Order({ id, total, state, index, shopId, userInfo, productsInfo }) {
             </option>
           ))}
         </select>
-        <p className="font-bold text-right">
+        <p className="w-16 ml-16 sm:ml-48 md:w-32 md:ml-32 p-2 font-bold text-right bg-green-200">
           {new Intl.NumberFormat("en-IN", {
             style: "currency",
             currency: "USD",
