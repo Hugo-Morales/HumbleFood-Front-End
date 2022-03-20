@@ -45,7 +45,7 @@ const CardShop = ({ shop, userId }) => {
         setDeleteFav(true);
       }
     } else {
-      Swal.fire({
+      MySwal.fire({
         icon: "warning",
         title: "La funcion añadir a favoritos no esta disponible",
         text: "¡Registrate primero para poder usarla!",

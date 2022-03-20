@@ -6,8 +6,11 @@ import { postNewShop, getdataUser } from "../../../redux/actions";
 import Loading from "../../../components/loading/Loading";
 import Styles from "./createShop.module.css";
 import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
 
 const CreateShop = ({ user }) => {
+  const MySwal = withReactContent(Swal);
   const dispatch = useDispatch();
   const dataUser = useSelector((state) => state.dataUser);
   console.log(dataUser);
@@ -55,6 +58,13 @@ const CreateShop = ({ user }) => {
     e.preventDefault();
     dispatch(postNewShop(newShop));
     // alert("Tienda registrada con exito!");
+    MySwal.fire({
+      position: "center",
+      icon: "success",
+      title: "Tu tienda ha sido registrada con exito",
+      showConfirmButton: false,
+      timer: 2000,
+    });
     setNewShop({
       name: "",
       direction: "",
