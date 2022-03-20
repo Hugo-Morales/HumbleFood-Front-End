@@ -7,7 +7,6 @@ import {
 	addFavorites,
 	getAllFavorites,
 	removeFavorites,
-	loading,
 } from "../../redux/actions";
 
 const CardShop = ({ shop }) => {
@@ -22,7 +21,6 @@ const CardShop = ({ shop }) => {
 	const [deleteFav, setDeleteFav] = useState(false);
 
 	useEffect(() => {
-		dispatch(loading());
 		if (isAuthenticated) {
 			dispatch(getAllFavorites(userId));
 		}
