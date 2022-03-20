@@ -7,6 +7,7 @@ import {
 	addFavorites,
 	getAllFavorites,
 	removeFavorites,
+	loading,
 } from "../../redux/actions";
 
 const CardShop = ({ shop }) => {
@@ -21,32 +22,32 @@ const CardShop = ({ shop }) => {
 	const [deleteFav, setDeleteFav] = useState(false);
 
 	useEffect(() => {
+		dispatch(loading());
 		if (isAuthenticated) {
 			dispatch(getAllFavorites(userId));
 		}
 	}, [dispatch, userId, isAuthenticated]);
 
 	useEffect(() => {
-		if(save){
+		if (save) {
 			console.log(save);
 			dispatch(addFavorites(userId, id));
 			dispatch(getAllFavorites(userId));
-		}
-		else if(deleteFav){
+		} else if (deleteFav) {
 			dispatch(removeFavorites(userId, id));
 			dispatch(getAllFavorites(userId));
 		}
-	},[save, deleteFav])
+	}, [save, deleteFav]);
 	const guardar = () => {
 		setSave(true);
-		setDeleteFav(false)
+		setDeleteFav(false);
 		//console.log(id);
 	};
-	
+
 	const borrar = () => {
-		setDeleteFav(true)
+		setDeleteFav(true);
 		setSave(false);
-		console.log("Delete: ",deleteFav);
+		console.log("Delete: ", deleteFav);
 	};
 
 	return (
@@ -64,7 +65,13 @@ const CardShop = ({ shop }) => {
 					>
 						<button className="absolute bg-gray-600 text-white p-2.5 rounded-sm shadow-md top-0 left-0">
 							<BsFillHeartFill
-								className={save && !deleteFav ? "text-red-600" :shopIdguardado && !deleteFav ? "text-red-600": "text-white-500"}
+								className={
+									save && !deleteFav
+										? "text-red-600"
+										: shopIdguardado && !deleteFav
+										? "text-red-600"
+										: "text-white-500"
+								}
 							/>
 						</button>
 					</div>

@@ -1,4 +1,7 @@
-import React from "react";
+import * as React from "react";
+import IconButton from "@mui/material/IconButton";
+import Stack from "@mui/material/Stack";
+import DeleteIcon from "@mui/icons-material/Delete";
 import styled from "styled-components";
 import { BsTrash } from "react-icons/bs";
 
@@ -22,6 +25,7 @@ function CartItem({
   handleDeleteFromCart,
   checkout,
 }) {
+  const precio = product.price - (product.price / 100) * product.discount;
   return (
     <div>
       <Wrapper key={product.id} className="flex py-6">
@@ -38,12 +42,12 @@ function CartItem({
             <h3 className="font-bold">{product.name}</h3>
             <div>
               <p className="ml-4">
-                Precio: <span className="font-bold">${product.price}</span>
+                Precio: <span className="font-bold">${precio}</span>
               </p>
               <p className="ml-4">
                 Total:{" "}
                 <span className="font-bold">
-                  ${(product.price * product.amount).toFixed(2)}
+                  ${(precio * product.amount).toFixed(2)}
                 </span>
               </p>
             </div>
@@ -83,18 +87,17 @@ function CartItem({
               )}
             </div>
             <div className="flex">
-              <button
-                onClick={() => handleDeleteFromCart(product.id)}
-                type="button"
-                className={
-                  checkout
-                    ? "hidden"
-                    : "flex items-center px-2 py-1 font-medium text-lg text-red-600 border-solid border-2 border-red-600 rounded-md ease-in-out duration-300 hover:text-isabelline hover:bg-red-600"
-                }
-              >
-                Borrar
-                <BsTrash className="ml-1" />
-              </button>
+              <Stack direction="row" spacing={1}>
+                {!checkout ? (
+                  <IconButton
+                    aria-label="delete"
+                    color="error"
+                    onClick={() => handleDeleteFromCart(product.id)}
+                  >
+                    <DeleteIcon />
+                  </IconButton>
+                ) : null}
+              </Stack>
             </div>
           </div>
         </div>

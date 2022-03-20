@@ -1,22 +1,25 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { searchByName } from "../../redux/actions";
+import { getProductNames, searchByName } from "../../redux/actions";
 
 const SearchBar = () => {
   const [input, setInput] = useState("");
+  // const [p, setP] = useState();
   const dispatch = useDispatch();
   const { shopId } = useParams();
+  const productsNames = useSelector((state) => state.productsNames);
 
-  // console.log("producto", filteredByName);
+  useEffect(() => {
+    dispatch(getProductNames(shopId));
+  }, [dispatch, shopId]);
 
   const HandleInputChange = (e) => {
     e.preventDefault();
     setInput(e.target.value);
-    dispatch(searchByName(input));
+    // dispatch(searchByName(input));
   };
-
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -48,7 +51,15 @@ const SearchBar = () => {
           className="py-2 w-40 md:w-64 text-sm text-white bg-isabelle rounded-md pl-10 focus:outline-none focus:bg-white focus:text-gray-900"
           placeholder="Buscar..."
           autoComplete="off"
+          list="product"
+          name="product"
+          value={input}
         />
+        <datalist id="product">
+          {productsNames?.map((product, i) => {
+            return <option key={i} value={product} />;
+          })}
+        </datalist>
       </div>
     </form>
   );

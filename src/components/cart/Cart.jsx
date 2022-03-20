@@ -13,7 +13,11 @@ import { useParams } from "react-router-dom";
 
 export function calculateTotal(items) {
   return items
-    ?.reduce((acc, item) => acc + item.amount * item.price, 0)
+    ?.reduce(
+      (acc, item) =>
+        acc + item.amount * (item.price - (item.price / 100) * item.discount),
+      0
+    )
     .toFixed(2);
 }
 
@@ -48,9 +52,10 @@ export default function Cart({
     shopId: shopId,
     userId: dataUser?.id,
     total: Number(calculateTotal(itemsPerShop)),
+    date: new Date().toLocaleString(),
   };
 
-  // console.log("order", order);
+  console.log("order", order);
 
   useEffect(() => {
     dispatch(getdataUser(userId));
@@ -107,7 +112,7 @@ export default function Cart({
                             setCheckout(false);
                           }}
                         >
-                          <span className="sr-only">Close panel</span>
+                          <span className="sr-only">Cerrar</span>
                           <XIcon className="h-6 w-6" aria-hidden="true" />
                         </button>
                       </div>
@@ -193,7 +198,7 @@ export default function Cart({
                               : "hidden"
                           }
                         >
-                          Checkout
+                          Comprar carrito
                           <AiOutlineDollarCircle className="ml-2 w-6 h-6" />
                         </button>
                       ) : (
