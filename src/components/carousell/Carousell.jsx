@@ -52,7 +52,10 @@ function Carousell() {
   };
 
   return (
-    <div ref={slideRef} className="w-full mb-20 select-none relative">
+    <div
+      ref={slideRef}
+      className="hidden z-40 relative md:inline-block w-full mb-20 select-none relative"
+    >
       <div>
         <img
           className="h-fit w-full"
