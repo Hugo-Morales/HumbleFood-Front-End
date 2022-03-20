@@ -55,7 +55,7 @@ const NavShops2 = () => {
                 <div className="flex-shrink-0 flex items-center">
                   <Link to="/home">
                     <img
-                      className="hidden sm:block  sm:h-14 sm:w-14 sm:w-14 lg:w-14"
+                      className="hidden sm:block  sm:h-14 sm:w-14 lg:w-14"
                       src={logo}
                       alt="logo"
                     />
