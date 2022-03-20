@@ -151,7 +151,7 @@ const Nav = ({
             : "w-1/6 flex justify-beetwen items-center mr-8"
         }
       >
-        <Menu as="div" className="mt-1  relative">
+        <Menu as="div" className="mt-1  mr-10 relative">
           <div className="flex">
             <svg
               xmlns="http://www.w3.org/2000/svg"
