@@ -28,7 +28,6 @@ const Home = ({
 	const { products, next, prev, pagesTotal } = useSelector(
 		(state) => state.productsloaded
 	);
-	// const shops = useSelector((state) => state.shops);
 	const shop = useSelector((state) => state.shop);
 	const [currentPage, setCurrentPage] = useState(0);
 	const cargando = useSelector((state) => state.isLoading);
@@ -94,7 +93,7 @@ const Home = ({
 					<Cards
 						products={products}
 						handleAddToCart={handleAddToCart}
-						cartItems={cartItems}
+						shop={shop.name}
 					/>
 					<Paginado
 						paging={paging}
