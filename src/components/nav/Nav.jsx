@@ -151,7 +151,7 @@ const Nav = ({
             : "w-1/6 flex justify-beetwen items-center mr-8"
         }
       >
-        <Menu as="div" className="mt-1  mr-10 relative">
+        <Menu as="div" className="mt-1 mx-4 relative">
           <div className="flex">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -175,7 +175,7 @@ const Nav = ({
             {isAuthenticated ? (
               <Menu.Button className="bg-gray-800 flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
                 <img
-                  className="h-16 w-16 rounded-full"
+                  className="h-12 w-12 rounded-full"
                   src={user?.picture}
                   alt="img not found"
                 />

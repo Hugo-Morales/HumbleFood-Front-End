@@ -73,6 +73,7 @@ function Orders({ shopId }) {
                     userId={order.userId}
                     userInfo={order.userInfo?.name}
                     productsInfo={order.productsInfo}
+                    date={order.date}
                   />
                 ))
               : filter?.map((order, i) => (
@@ -85,6 +86,7 @@ function Orders({ shopId }) {
                     userId={order.userId}
                     userInfo={order.userInfo?.name}
                     productsInfo={order.productsInfo}
+                    date={order.date}
                   />
                 ))}
           </div>

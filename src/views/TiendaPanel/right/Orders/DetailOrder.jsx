@@ -17,7 +17,7 @@ const style = {
 };
 
 
-export default function DetailOrder({ productsInfo, userInfo, shopId, total }) {
+export default function DetailOrder({ productsInfo, userInfo, date }) {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -35,7 +35,8 @@ export default function DetailOrder({ productsInfo, userInfo, shopId, total }) {
       >
         <Box sx={style}>
           <Typography id="modal-modal-title" variant="h6" component="h2">
-            Orden de: <span className="text-princetonOrange">{userInfo}</span>
+            Orden de: <span className="text-princetonOrange">{userInfo}</span><br></br>
+            Creada el: <span className="text-princetonOrange">{date}</span>
           </Typography>
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
             {productsInfo?.map((product) => (
