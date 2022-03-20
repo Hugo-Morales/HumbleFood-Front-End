@@ -9,13 +9,14 @@ import { MdDelete } from "react-icons/md";
 export default function CreateProducts({ shopId }) {
 	const {
 		handleChange,
-		add,
 		handleSubmit,
 		input,
 		err,
 		listcategories,
 		handleUploadImg,
 		eliminar,
+		handleSelect,
+		
 	} = Functions(Validate, shopId);
 	const dispatch = useDispatch();
 	const categories = useSelector((state) => state.allcategories);
@@ -23,7 +24,7 @@ export default function CreateProducts({ shopId }) {
 	useEffect(() => {
 		dispatch(getallCategories());
 	}, [dispatch]);
-
+	//console.log(categories)
 	return (
 		<>
 			<div className="hidden sm:block" aria-hidden="true">
@@ -32,7 +33,7 @@ export default function CreateProducts({ shopId }) {
 				</div>
 			</div>
 			<div className="mt-10 sm:mt-0">
-				<form onSubmit={handleSubmit}>
+				<form onSubmit={(e) => handleSubmit(e)}>
 					<div className="shadow overflow-hidden">
 						<div className="bg-white">
 							<div className="px-2 py-5 bg-white sm:p-6">
@@ -131,42 +132,56 @@ export default function CreateProducts({ shopId }) {
 											<label htmlFor="categories" className="font-bold">
 												Categorías
 											</label>
-											<input
+											{/* <input
 												className="h-30"
 												type="text"
 												name="categories"
 												placeholder="Ingrese una categoría del producto."
-												list="categories"
-												value={input.categories}
+												
 												onChange={handleChange}
-												autoComplete="off"
-											/>
-											<datalist id="categories">
+												autoComplete="off" 
+											/> */}
+											{/* <datalist id="categories">
 												{categories?.map((pais, index) => (
 													<option key={index} value={pais.name} />
 												))}
-											</datalist>
+											</datalist> */}
+											{/* <input
+												className="inline-flex justify-center my-2 py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+												type="button"
+												value="Agregar nueva Categoria"
+												style={{ cursor: "pointer" }}
+												onClick={add}
+											/>
+											<label htmlFor="categories" className="font-bold">
+												Categorías disponibles
+											</label> */}
+											<select className=" py-1 border-2 border-zinc-500 rounded-xl" name="Selectcategories" onChange={handleSelect} >
+												<option value="default" selected disabled>Seleccione una categoría para el producto.</option>
+												{
+													categories?.map((pais, index) => {
+														return <option key={index} value={pais.name}>{pais.name}</option>
+													})
+												}
+											</select>
 											<div className="text-rose-800 font-bold">
 												{err.listcategories && <p>{err.listcategories}</p>}
 											</div>
 										</div>
-										<input
-											className="inline-flex justify-center my-2 py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-											type="button"
-											value="Agregar Categoria"
-											style={{ cursor: "pointer" }}
-											onClick={add}
-										/>
-										{listcategories.add?.map((c, index) => {
-											return (
-												<div key={index} className="flex justify-between">
-													<label className="">{c}</label>
-													<button className="" onClick={() => eliminar(c)}>
-														<MdDelete className="text-red-600" />
-													</button>
-												</div>
-											);
-										})}
+										{
+											listcategories?.add.map((c, index) => {
+															return (
+																<div key={index} className="flex justify-between">
+																	<label className="">{c}</label>
+																	<button className="" name="eliminar" onClick={(e) => eliminar(e,c)}>
+																		<MdDelete className="text-red-600" />
+																	</button>
+																</div>
+															);
+														})
+
+										}
+										
 									</div>
 
 									{/* Imagen */}
@@ -216,6 +231,7 @@ export default function CreateProducts({ shopId }) {
 					<div className="px-4 py-3 bg-gray-50 text-right sm:px-6 rounded-b-lg">
 						<input
 							type="submit"
+							name="submit"
 							className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
 							value="Crear Producto"
 						/>

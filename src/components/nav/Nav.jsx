@@ -15,7 +15,7 @@ import {
   getDiscounts,
   getCategories,
   filterByCat_Disc,
-  getProductShop
+  resetProductsShop
 } from "../../redux/actions";
 
 const StyledButton = styled(IconButton)`
@@ -47,7 +47,7 @@ const Nav = ({
 
 
   const user_id = user?.sub.split("|")[1];
-  //console.log(shopEmail);
+  //console.log(cartItems);
 
 	useEffect(() => {
 		shopId ? dispatch(getCategories(shopId)) : dispatch(getCategories());
@@ -57,7 +57,7 @@ const Nav = ({
 
   useEffect(()=> {
     if(category && discount){
-      console.log(`Entro: ${category} y ${discount}`);
+      //console.log(`Entro: ${category} y ${discount}`);
       dispatch(filterByCat_Disc(shopId, discount, category))
     }
     else if(category && !discount){
@@ -74,7 +74,7 @@ const Nav = ({
     if(e.target.value === "category" && !discount){
       setCategory(undefined);
       console.log("entro en categorias");
-      dispatch(getProductShop(shopId))
+      dispatch(resetProductsShop())
     }
     else if(e.target.value === "category" && discount){
       setCategory(undefined);
@@ -90,7 +90,7 @@ const Nav = ({
     if(e.target.value === "discount" && !category){
       setDiscount(undefined);
       console.log("entro en descuentos");
-      dispatch(getProductShop(shopId))
+      dispatch(resetProductsShop())
     }
     else if(e.target.value === "discount" && category){
       setDiscount(undefined);

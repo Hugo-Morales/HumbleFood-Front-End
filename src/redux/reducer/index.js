@@ -22,6 +22,7 @@ import {
   STOP,
   GET_DISCOUNTS,
   ALL_FAVORITES,
+  RESET_PRODUCTS_SHOP,
 } from "../actions/index";
 import { GET_ORDER_BY_SHOP } from "../actions/actionsOrders";
 
@@ -40,7 +41,8 @@ const initialStore = {
   allFavorites: [],
   nameOfShop: "",
   isLoading: true,
-  loadingPanel: true
+  loadingPanel: true,
+  allProductsShop: []
 };
 
 export default function reducer(state = initialStore, { type, payload }) {
@@ -126,8 +128,14 @@ export default function reducer(state = initialStore, { type, payload }) {
       return {
         ...state,
         productsloaded: payload,
+        allProductsShop: payload,
         isLoading: false,
       };
+    case RESET_PRODUCTS_SHOP:
+      return {
+        ...state,
+        productsloaded: state.allProductsShop
+      }
     case GET_ALL_USERS:
       return {
         ...state,
