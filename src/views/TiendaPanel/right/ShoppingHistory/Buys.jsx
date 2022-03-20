@@ -4,6 +4,8 @@ import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import Stack from "@mui/material/Stack";
+import Button from "@mui/material/Button";
 import { Link } from "react-router-dom";
 
 function Buys({ index, total, shopInfo, shopId, productsInfo }) {
@@ -41,11 +43,14 @@ function Buys({ index, total, shopInfo, shopId, productsInfo }) {
                         {product.name}
                       </p>
                     </Link>
+
+                    <Link to={`/send-review/${product.id}`}
+                    className="p-2 text-white bg-darkGreen rounded-sm hover:bg-teal-800">Calificar</Link>
                     <p className="font-bold">
                       Cantidad:{" "}
                       <span className="font-bold">{product.cantidad}</span>
                     </p>
-                    <p className="font-bold">
+                    {/* <p className="font-bold">
                       Precio:{" "}
                       <span className="font-bold">
                         {new Intl.NumberFormat("en-IN", {
@@ -57,7 +62,7 @@ function Buys({ index, total, shopInfo, shopId, productsInfo }) {
                     <p className="font-bold">
                       Descuento:{" "}
                       <span className="font-bold">{product.discount}%</span>
-                    </p>
+                    </p> */}
                     <p className="font-bold">
                       Pecio con descuento incluido:{" "}
                       <span className="font-bold">

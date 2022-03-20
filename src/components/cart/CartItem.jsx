@@ -91,7 +91,7 @@ function CartItem({
                 {!checkout ? (
                   <IconButton
                     aria-label="delete"
-					color="error"
+                    color="error"
                     onClick={() => handleDeleteFromCart(product.id)}
                   >
                     <DeleteIcon />
