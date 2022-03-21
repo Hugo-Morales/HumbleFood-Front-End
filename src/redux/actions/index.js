@@ -23,6 +23,8 @@ export const GET_DISCOUNTS = "GET_DISCOUNTS";
 export const POST_ORDER = "POST_ORDER";
 export const FILTER_BY_CAT_DISC = "FILTER_BY_CAT_DISC";
 export const ALL_FAVORITES = "ALL_FAVORITES";
+export const UNSUSCRIBE = "UNSUSCRIBE";
+export const SUSCRIBE = "SUSCRIBE";
 
 export const STOP = "STOP";
 const URL = process.env.REACT_APP_URL;
@@ -252,20 +254,23 @@ export const postReview = (review) => async (dispatch) => {
     console.error(error);
   }
 };
-export const filterByCat_Disc = (shopId, discount, category) => async (dispatch) => {
-  try {
-    const response = await axios.get(
-      `${URL}productShop/${shopId}?category=${category}&discount=${discount}`
-    );
-    console.log(`${URL}productsShop/${shopId}?category=${category}&discount=${discount}`);
-    dispatch({
-      type: FILTER_BY_CAT_DISC,
-      payload: response.data,
-    });
-  } catch (error) {
-    console.log(error);
-  }
-}
+export const filterByCat_Disc =
+  (shopId, discount, category) => async (dispatch) => {
+    try {
+      const response = await axios.get(
+        `${URL}productShop/${shopId}?category=${category}&discount=${discount}`
+      );
+      console.log(
+        `${URL}productsShop/${shopId}?category=${category}&discount=${discount}`
+      );
+      dispatch({
+        type: FILTER_BY_CAT_DISC,
+        payload: response.data,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
 export const filterProductsByCategories =
   (shopId, category) => async (dispatch) => {
     try {
@@ -356,25 +361,24 @@ export const postOrder = (order) => async (dispatch) => {
       type: POST_ORDER,
       payload: response.data,
     });
-    console.log("Response", response.data)
+    console.log("Response", response.data);
   } catch (error) {
     console.log(error);
   }
-}
-
+};
 
 //  - - - - Favourites Restaurants - - - -
-export const getAllFavorites = (id) => async(dispatch) => {
+export const getAllFavorites = (id) => async (dispatch) => {
   try {
     const response = await axios.get(`${URL}user/${id}/favouriteShops`);
     dispatch({
       type: ALL_FAVORITES,
       payload: response.data,
-    })
+    });
   } catch (error) {
     console.log(error);
   }
-}
+};
 
 export const addFavorites = (id, shopsID) => async () => {
   try {
@@ -382,7 +386,7 @@ export const addFavorites = (id, shopsID) => async () => {
   } catch (error) {
     console.log(error);
   }
-}
+};
 
 export const removeFavorites = (id, shopsID) => async () => {
   try {
@@ -390,9 +394,28 @@ export const removeFavorites = (id, shopsID) => async () => {
   } catch (error) {
     console.log(error);
   }
-}
+};
 
+export const unsuscribe = (id) => async (dispatch) => {
+  try {
+    const response = await axios.put(`${URL}user/${id}/mailingList/false`);
+    dispatch({
+      type: UNSUSCRIBE,
+      payload: response.data,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
 
-
-
-
+export const suscribe = (id) => async (dispatch) => {
+  try {
+    const response = await axios.put(`${URL}user/${id}/mailingList/true`);
+    dispatch({
+      type: SUSCRIBE,
+      payload: response.data,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};

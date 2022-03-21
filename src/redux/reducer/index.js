@@ -22,6 +22,8 @@ import {
   STOP,
   GET_DISCOUNTS,
   ALL_FAVORITES,
+  UNSUSCRIBE,
+  SUSCRIBE,
 } from "../actions/index";
 import { GET_ORDER_BY_SHOP } from "../actions/actionsOrders";
 
@@ -40,7 +42,8 @@ const initialStore = {
   allFavorites: [],
   nameOfShop: "",
   isLoading: true,
-  loadingPanel: true
+  loadingPanel: true,
+  mailingList: false,
 };
 
 export default function reducer(state = initialStore, { type, payload }) {
@@ -72,7 +75,7 @@ export default function reducer(state = initialStore, { type, payload }) {
       return {
         ...state,
         productsloaded: payload,
-      }
+      };
     case FILTER_BY_CATEGORIES:
       return {
         ...state,
@@ -108,7 +111,7 @@ export default function reducer(state = initialStore, { type, payload }) {
       return {
         ...state,
         allcategories: payload,
-      }
+      };
     case GET_CATEGORIES:
       if (Array.isArray(payload)) {
         payload = payload.map((e) => ({ name: e }));
@@ -172,6 +175,16 @@ export default function reducer(state = initialStore, { type, payload }) {
         ...state,
         isLoading: false,
         orders: payload,
+      };
+    case UNSUSCRIBE:
+      return {
+        ...state,
+        dataUser: payload.user,
+      };
+    case SUSCRIBE:
+      return {
+        ...state,
+        dataUser: payload.user,
       };
     default:
       return state;
