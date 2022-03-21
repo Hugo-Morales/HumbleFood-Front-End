@@ -1,9 +1,7 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { postproducts, NewCategory } from "../../../../redux/actions";
-<<<<<<< HEAD
 import { useNavigate } from "react-router-dom";
-=======
 import {
 	ref,
 	getDownloadURL,
@@ -11,13 +9,11 @@ import {
 	deleteObject,
 } from "firebase/storage";
 import { storage } from "./firebase";
->>>>>>> 971a0303b58529966aedda816ad38a9813f621ec
 import Swal from "sweetalert2";
 
 export default function Functions(Validate, shopId, shop) {
 	const dispatch = useDispatch();
 	const navigate = useNavigate()
-	const { id, name, image, description } = shop;
 	const [err, setErr] = useState({});
 	const [nameI, setNameI] = useState("");
 	const [progress, setProgress] = useState(0);

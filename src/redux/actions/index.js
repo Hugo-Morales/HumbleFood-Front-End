@@ -42,7 +42,9 @@ export const getShopsId = (id) => async (dispatch) => {
 
 export const getShops = (page) => async (dispatch) => {
   try {
+
     const allShops = await axios.get(`${URL}shops?page=${page}`);
+
     dispatch({
       type: GET_SHOPS,
       payload: allShops.data,

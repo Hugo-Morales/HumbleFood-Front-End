@@ -45,10 +45,10 @@ function App() {
         return prev.map((item) =>
           item.id === clickedItem.id
             ? {
-                ...item,
-                amount:
-                  item.amount < item.stock ? item.amount + 1 : item.amount,
-              }
+              ...item,
+              amount:
+                item.amount < item.stock ? item.amount + 1 : item.amount,
+            }
             : item
         );
       }
@@ -75,7 +75,7 @@ function App() {
   const handleDeleteFromCart = (id) => {
     // const items = JSON.parse(localStorage.getItem("carrito"));
     if (cartItems.length === 1) localStorage.removeItem("carrito");
-  
+
     setCartItems((prev) => prev.filter((item) => item.id !== id));
   };
 
