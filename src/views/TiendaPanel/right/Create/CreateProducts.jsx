@@ -226,7 +226,7 @@ export default function CreateProducts({ shopId }) {
 															className="h-10 w-10 rounded-lg cursor-pointer"
 															onClick={() => modal()}
 														/>
-														<button onClick={() => deleteImagen()}>
+														<button onClick={(e) => deleteImagen(e)}>
 															<MdDelete className="ml-4 text-red-600" />
 														</button>
 													</div>

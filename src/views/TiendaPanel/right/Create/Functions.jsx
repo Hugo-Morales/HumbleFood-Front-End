@@ -225,7 +225,8 @@ export default function Functions(Validate, shopId) {
 		});
 	};
 
-	const deleteImagen = () => {
+	const deleteImagen = (e) => {
+		e.preventDefault();
 		const desertRef = ref(storage, `files/${nameI}`);
 
 		deleteObject(desertRef)
