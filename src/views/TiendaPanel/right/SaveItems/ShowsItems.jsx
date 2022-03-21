@@ -17,12 +17,12 @@ export default function ShowsItems() {
 	}, [dispatch]);
 
 	const borrar = (id) => {
-		const index = items.indexOf(id);
+		// console.log(id);
+		const index = items.findIndex((e) => e.name === id);
+		items.splice(index, 1);
+		// const newArray = ;
 
-		if (index === -1) {
-			items.splice(index, 1);
-			localStorage.setItem("carrito", JSON.stringify(items));
-		}
+		localStorage.setItem("carrito", JSON.stringify(items));
 
 		dispatch(loading_panel());
 		setTimeout(() => {
@@ -44,7 +44,9 @@ export default function ShowsItems() {
 					{items.length ? (
 						<ItemsTable datos={items} borrar={borrar} />
 					) : (
-						<>Tiene algo</>
+						<div className="text-center font-bold p-4 text-red-400">
+							<h1>No tenes ningún producto guardado el en carrito</h1>
+						</div>
 					)}
 				</div>
 			)}

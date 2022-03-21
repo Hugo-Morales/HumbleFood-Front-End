@@ -68,7 +68,7 @@ export default function ItemsTable({ datos, borrar }) {
 											<div className="flex items-center justify-center">
 												<button
 													className="hover:text-indigo-900 bg-red-800 p-2 text-white rounded-lg"
-													onClick={() => borrar(index)}
+													onClick={() => borrar(d.name)}
 												>
 													Borrar
 												</button>

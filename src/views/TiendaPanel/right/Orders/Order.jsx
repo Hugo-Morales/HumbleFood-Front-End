@@ -5,7 +5,7 @@ import { updateOrderState } from "../../../../redux/actions/actionsOrders";
 import DetailOrder from "./DetailOrder";
 
 
-function Order({ id, total, state, index, shopId, userInfo, productsInfo }) {
+function Order({ id, total, state, index, shopId, userInfo, productsInfo, date }) {
   const [stateOrder, setStateOrder] = useState("");
   const dispatch = useDispatch();
 
@@ -32,8 +32,7 @@ function Order({ id, total, state, index, shopId, userInfo, productsInfo }) {
         <DetailOrder
           productsInfo={productsInfo}
           userInfo={userInfo}
-          shopId={shopId}
-          total={total}
+          date={date}
         />
         <select
           onChange={(e) => setStateOrder(e.target.value)}

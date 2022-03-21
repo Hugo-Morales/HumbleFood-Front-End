@@ -4,6 +4,7 @@ import { loading_panel } from "../../../../redux/actions/index";
 import { getOrderByShop } from "../../../../redux/actions/actionsOrders";
 import Loading from "../../../../components/loading/Loading";
 import Buys from "./Buys";
+import shopping from "../../../../img/shopping.png";
 
 function ShoppingHistory({ userId }) {
 	const dispatch = useDispatch();
@@ -27,8 +28,9 @@ function ShoppingHistory({ userId }) {
 				<div className="w-full h-full bg-white rounded-lg">
 					<div className="overflow-y-auto">
 						{orders?.length === 0 ? (
-							<div className="p-3 font-bold text-center">
-								Aún no has hecho compras
+							<div className="flex flex-col justify-center items-center p-4">
+								<h5>Aún no has hecho compras</h5>
+								<img src={shopping} alt="shopping bag" className="w-20 mt-4" />
 							</div>
 						) : (
 							orders?.map((order, i) => (

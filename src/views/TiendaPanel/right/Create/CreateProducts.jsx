@@ -49,10 +49,10 @@ export default function CreateProducts({ shopId }) {
 							<div className="shadow overflow-hidden">
 								<div className="bg-white">
 									<div className="px-2 py-5 bg-white sm:p-6">
-										<div className="grid grid-cols-6 gap-6">
+										<div className="lg:grid lg:grid-cols-6 gap-6">
 											{/* Input Nombre */}
 											<Input
-												div="col-span-6 sm:col-span-3 font-bold"
+												div="lg:col-span-6 sm:col-span-3 font-bold"
 												forid="first-name"
 												lclass="block text-sm uppercase"
 												tl="Nombre del Producto"
@@ -69,7 +69,7 @@ export default function CreateProducts({ shopId }) {
 
 											{/* Input Precio */}
 											<Input
-												div="col-span-1 font-bold"
+												div="col-span-1 font-bold "
 												forid="price"
 												lclass="block text-sm uppercase"
 												tl="Precio $"
