@@ -76,7 +76,7 @@ export default function MenuFilters({
   );
 
   return (
-    <div className="sm:hidden absolute top-8 right-24 mr-2">
+    <div className="sm:hidden absolute top-8 right-24 pb- mr-2">
       {["left"].map((anchor) => (
         <React.Fragment key={anchor}>
           <Button onClick={toggleDrawer(anchor, true)}>{<FilterListIcon />}</Button>
