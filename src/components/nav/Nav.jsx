@@ -12,12 +12,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import userRojo from "../../img/userRojo.png";
 import {
-	filterProductsByCategories,
-	filterProductsByDiscounts,
-	getDiscounts,
-	getCategories,
-	filterByCat_Disc,
-	getProductShop,
+  filterProductsByCategories,
+  filterProductsByDiscounts,
+  getDiscounts,
+  getCategories,
+  filterByCat_Disc,
+  resetProductsShop,
 } from "../../redux/actions";
 import MenuFilters from "./MenuFilters";
 
@@ -48,8 +48,8 @@ const Nav = ({
 	const [category, setCategory] = useState();
 	const [discount, setDiscount] = useState();
 
-	const user_id = user?.sub.split("|")[1];
-	//console.log(shopEmail);
+  const user_id = user?.sub.split("|")[1];
+  //console.log(cartItems);
 
 	function classNames(...classes) {
 		return classes.filter(Boolean).join(" ");
@@ -61,44 +61,47 @@ const Nav = ({
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [dispatch]);
 
-	useEffect(() => {
-		if (category && discount) {
-			console.log(`Entro: ${category} y ${discount}`);
-			dispatch(filterByCat_Disc(shopId, discount, category));
-		} else if (category && !discount) {
-			setDiscount(undefined);
-			dispatch(filterProductsByCategories(shopId, category));
-		} else if (!category && discount) {
-			setCategory("");
-			dispatch(filterProductsByDiscounts(shopId, discount));
-		}
-	}, [category, discount]);
+  useEffect(()=> {
+    if(category && discount){
+      //console.log(`Entro: ${category} y ${discount}`);
+      dispatch(filterByCat_Disc(shopId, discount, category))
+    }
+    else if(category && !discount){
+      setDiscount(undefined);
+      dispatch(filterProductsByCategories(shopId, category));
+    } else if (!category && discount) {
+      setCategory("");
+      dispatch(filterProductsByDiscounts(shopId, discount));
+    }
+  }, [category, discount]);
 
-	function handleFilterCategories(e) {
-		if (e.target.value === "category" && !discount) {
-			setCategory(undefined);
-			console.log("entro en categorias");
-			dispatch(getProductShop(shopId));
-		} else if (e.target.value === "category" && discount) {
-			setCategory(undefined);
-			dispatch(filterProductsByDiscounts(shopId, discount));
-		} else {
-			setCategory(e.target.value);
-		}
-	}
+  function handleFilterCategories(e) {
+    if (e.target.value === "category" && !discount) {
+      setCategory(undefined);
+      console.log("entro en categorias");
+      dispatch(resetProductsShop())
+    }
+    else if(e.target.value === "category" && discount){
+      setCategory(undefined);
+      dispatch(filterProductsByDiscounts(shopId, discount));
+    } else {
+      setCategory(e.target.value);
+    }
+  }
 
-	function handleFilterOffers(e) {
-		if (e.target.value === "discount" && !category) {
-			setDiscount(undefined);
-			console.log("entro en descuentos");
-			dispatch(getProductShop(shopId));
-		} else if (e.target.value === "discount" && category) {
-			setDiscount(undefined);
-			dispatch(filterProductsByCategories(shopId, category));
-		} else {
-			setDiscount(e.target.value);
-		}
-	}
+  function handleFilterOffers(e) {
+    if (e.target.value === "discount" && !category) {
+      setDiscount(undefined);
+      console.log("entro en descuentos");
+      dispatch(resetProductsShop())
+    }
+    else if(e.target.value === "discount" && category){
+      setDiscount(undefined);
+      dispatch(filterProductsByCategories(shopId, category));
+    } else {
+      setDiscount(e.target.value);
+    }
+  }
 
 	return (
 		<div className="font-poppins w-full h-24 bg-ochre flex justify-between">
