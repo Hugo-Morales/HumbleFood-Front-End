@@ -355,7 +355,7 @@ export const admin = (type, id) => async () => {
 
 export const editProduct = (obj) => async () => {
   try {
-    axios.put(`${URL}product/update`, obj);
+    await axios.put(`${URL}product/update`, obj);
   } catch (error) {
     console.error(error);
   }
