@@ -4,63 +4,70 @@ import HacerAdmin from "./make/HacerAdmin";
 import Styles from "./SideRight.module.css";
 import Orders from "./Orders/Orders";
 import ShoppingHistory from "./ShoppingHistory/ShoppingHistory";
+import ShowsItems from "./SaveItems/ShowsItems";
 
 export default function SideRight({
-  product,
-  idS,
-  userId,
-  rol,
-  shopsId,
-  paging,
-  currentPage,
+	product,
+	idS,
+	userId,
+	rol,
+	shopsId,
+	paging,
+	currentPage,
 }) {
-  const { products, next, prev, pagesTotal } = product;
-  // console.log(products);
+	const { products, next, prev, pagesTotal } = product;
+	// console.log(products);
 
-  const renderSwitch = (x) => {
-    switch (x) {
-      case "home":
-        return (
-          <Table
-            p={products}
-            d={false}
-            next={next}
-            prev={prev}
-            pagesTotal={pagesTotal}
-            paging={paging}
-            currentPage={currentPage}
-          />
-        );
-      case "crear":
-        return <CreateProducts shopId={shopsId} />;
-      case "modificar ordenes":
-        return <Orders shopId={shopsId} />;
-      case "makeAdmin":
-        return <HacerAdmin />;
-      default:
-        if (rol === 0) {
-          return <ShoppingHistory userId={userId} />;
-        } else {
-          return (
-            <Table
-              p={products}
-              d={false}
-              next={next}
-              prev={prev}
-              pagesTotal={pagesTotal}
-              paging={paging}
-              currentPage={currentPage}
-            />
-          );
-        }
-    }
-  };
+	const renderSwitch = (x) => {
+		switch (x) {
+			case "home":
+				if (rol === 0) {
+					return <ShowsItems />;
+				} else {
+					return (
+						<Table
+							p={products}
+							d={false}
+							next={next}
+							prev={prev}
+							pagesTotal={pagesTotal}
+							paging={paging}
+							currentPage={currentPage}
+						/>
+					);
+				}
+			case "crear":
+				return <CreateProducts shopId={shopsId} />;
+			case "modificar ordenes":
+				return <Orders shopId={shopsId} />;
+			case "makeAdmin":
+				return <HacerAdmin />;
+			case "historial":
+				return <ShoppingHistory userId={userId} />;
+			default:
+				if (rol === 0) {
+					return <ShowsItems />;
+				} else {
+					return (
+						<Table
+							p={products}
+							d={false}
+							next={next}
+							prev={prev}
+							pagesTotal={pagesTotal}
+							paging={paging}
+							currentPage={currentPage}
+						/>
+					);
+				}
+		}
+	};
 
-  return (
-    <div className="bg-gray-700 h-full p-6">
-      <div className={`${Styles.bg} ${"h-full p-6 sm:rounded-lg"}`}>
-        {renderSwitch(idS)}
-      </div>
-    </div>
-  );
+	return (
+		<div className="bg-gray-700 h-full p-6">
+			<div className={`${Styles.bg} ${"h-full p-6 sm:rounded-lg"}`}>
+				{renderSwitch(idS)}
+			</div>
+		</div>
+	);
 }

@@ -35,7 +35,7 @@ const CardShop = ({ shop }) => {
 			dispatch(removeFavorites(userId, id));
 			dispatch(getAllFavorites(userId));
 		}
-	// eslint-disable-next-line react-hooks/exhaustive-deps
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [save, deleteFav]);
 	const guardar = () => {
 		setSave(true);
