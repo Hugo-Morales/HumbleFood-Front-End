@@ -1,3 +1,4 @@
+import { async } from "@firebase/util";
 import axios from "axios";
 export const GET_SHOPS = "GET_SHOPS";
 export const GET_DETAIL_PRODUCT = "GET_DETAIL_PRODUCT";
@@ -24,8 +25,8 @@ export const GET_DISCOUNTS = "GET_DISCOUNTS";
 export const POST_ORDER = "POST_ORDER";
 export const FILTER_BY_CAT_DISC = "FILTER_BY_CAT_DISC";
 export const ALL_FAVORITES = "ALL_FAVORITES";
-export const UNSUSCRIBE = "UNSUSCRIBE";
-export const SUSCRIBE = "SUSCRIBE";
+export const SUSCRIBE_NEWSLETTER = "SUSCRIBE_NEWSLETTER";
+export const RESET_PRODUCTS_SHOP = "RESET_PRODUCTS_SHOP";
 
 export const STOP = "STOP";
 const URL = process.env.REACT_APP_URL;
@@ -220,6 +221,12 @@ export const getProductShop = (id, page) => async (dispatch) => {
   }
 };
 
+export const resetProductsShop = () => (dispatch) => {
+  dispatch({
+    type: RESET_PRODUCTS_SHOP,
+  });
+};
+
 export const getProductNames = (id) => async (dispatch) => {
   try {
     const productsNames = await axios.get(
@@ -348,7 +355,7 @@ export const admin = (type, id) => async () => {
 
 export const editProduct = (obj) => async () => {
   try {
-    axios.put(`${URL}product/update`, obj);
+    await axios.put(`${URL}product/update`, obj);
   } catch (error) {
     console.error(error);
   }
@@ -406,6 +413,17 @@ export const addFavorites = (id, shopsID) => async () => {
 export const removeFavorites = (id, shopsID) => async () => {
   try {
     await axios.put(`${URL}user/${id}/deleteFavouriteShop/${shopsID}`);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const suscribeNewsletter = (userId, bool) => async () => {
+  try {
+    // console.log(userId, bool);
+    await axios
+      .put(`${URL}user/${userId}/mailingList/${bool}`)
+      .then((response) => console.log(response, "CAMPANITA"));
   } catch (error) {
     console.log(error);
   }

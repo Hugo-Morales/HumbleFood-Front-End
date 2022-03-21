@@ -9,7 +9,7 @@ import Cart from "../cart/Cart";
 import SearchBar from "../serchbar/SearchBar";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useDispatch, useSelector } from "react-redux";
-import { Disclosure, Menu, Transition } from "@headlessui/react";
+import { Menu, Transition } from "@headlessui/react";
 import userRojo from "../../img/userRojo.png";
 import {
   filterProductsByCategories,
@@ -17,8 +17,9 @@ import {
   getDiscounts,
   getCategories,
   filterByCat_Disc,
-  getProductShop,
+  resetProductsShop,
 } from "../../redux/actions";
+import MenuFilters from "./MenuFilters";
 
 const StyledButton = styled(IconButton)`
   position: fixed;
@@ -48,7 +49,7 @@ const Nav = ({
   const [discount, setDiscount] = useState();
 
   const user_id = user?.sub.split("|")[1];
-  //console.log(shopEmail);
+  //console.log(cartItems);
 
   function classNames(...classes) {
     return classes.filter(Boolean).join(" ");
@@ -62,7 +63,7 @@ const Nav = ({
 
   useEffect(() => {
     if (category && discount) {
-      console.log(`Entro: ${category} y ${discount}`);
+      //console.log(`Entro: ${category} y ${discount}`);
       dispatch(filterByCat_Disc(shopId, discount, category));
     } else if (category && !discount) {
       setDiscount(undefined);
@@ -71,13 +72,14 @@ const Nav = ({
       setCategory("");
       dispatch(filterProductsByDiscounts(shopId, discount));
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [category, discount]);
 
   function handleFilterCategories(e) {
     if (e.target.value === "category" && !discount) {
       setCategory(undefined);
       console.log("entro en categorias");
-      dispatch(getProductShop(shopId));
+      dispatch(resetProductsShop());
     } else if (e.target.value === "category" && discount) {
       setCategory(undefined);
       dispatch(filterProductsByDiscounts(shopId, discount));
@@ -90,7 +92,7 @@ const Nav = ({
     if (e.target.value === "discount" && !category) {
       setDiscount(undefined);
       console.log("entro en descuentos");
-      dispatch(getProductShop(shopId));
+      dispatch(resetProductsShop());
     } else if (e.target.value === "discount" && category) {
       setDiscount(undefined);
       dispatch(filterProductsByCategories(shopId, category));
@@ -101,14 +103,20 @@ const Nav = ({
 
   return (
     <div className="font-poppins w-full h-24 bg-ochre flex justify-between">
-      <div className="w-1/3 flex justify-between items-center p-1">
-        <Link to="/home" className="ml-4">
+      <div className="w-1/3 flex justify-between items-center p-1 ">
+        <Link to="/home" className="ml-4 hidden sm:block">
           <img
             src={logo}
             className="w-10 sm:w-11 lg:w-16 lg:ml-28"
             alt="logos"
           />
         </Link>
+        <MenuFilters
+          handleFilterCategories={handleFilterCategories}
+          categories={categories}
+          handleFilterOffers={handleFilterOffers}
+          discounts={discounts}
+        />
         <div className="ml-4">
           <SearchBar />
         </div>
@@ -147,11 +155,11 @@ const Nav = ({
       <div
         className={
           isAuthenticated
-            ? "w-1/4 flex justify-center items-center mr-5"
-            : "w-1/6 flex justify-beetwen items-center mr-8"
+            ? "w-1/4 flex justify-center items-center mr-6"
+            : "w-1/6 flex justify-beetwen items-center mr-16"
         }
       >
-        <Menu as="div" className="mt-1 mx-4 relative">
+        <Menu as="div" className="mt-1 mr-4 relative">
           <div className="flex justify-center items-center">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -183,7 +191,7 @@ const Nav = ({
             ) : (
               <Menu.Button className="bg-gray-800 flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
                 <img
-                  className="h-16 w-16 rounded-full"
+                  className="h-12 w-12 rounded-full"
                   src={userRojo}
                   alt="img not found"
                 />
@@ -259,6 +267,7 @@ const Nav = ({
         </div>
       </div>
       <Cart
+        className="mr-10"
         open={open}
         setOpen={setOpen}
         itemsPerShop={itemsPerShop}

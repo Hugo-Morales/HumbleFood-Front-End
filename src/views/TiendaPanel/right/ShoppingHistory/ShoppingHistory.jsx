@@ -18,41 +18,42 @@ function ShoppingHistory({ userId }) {
 
 	// console.log("ordenes de compra", orders);
 
-	return (
-		<div>
-			{cargando ? (
-				<div className="flex justify-center items-center bg-white">
-					<Loading />
-				</div>
-			) : (
-				<div className="w-full h-full bg-white rounded-lg">
-					<div className="overflow-y-auto">
-						{orders?.length === 0 ? (
-							<div className="flex flex-col justify-center items-center p-4">
-								<h5>Aún no has hecho compras</h5>
-								<img src={shopping} alt="shopping bag" className="w-20 mt-4" />
-							</div>
-						) : (
-							orders?.map((order, i) => (
-								<Buys
-									index={i}
-									key={order.id}
-									id={order.id}
-									shopId={order.shopId}
-									state={order.state}
-									total={order.total}
-									userId={order.userId}
-									products={order.ordenProductsId}
-									shopInfo={order.shopInfo}
-									productsInfo={order.productsInfo}
-								/>
-							))
-						)}
-					</div>
-				</div>
-			)}
-		</div>
-	);
+  return (
+    <div>
+      {cargando ? (
+        <div className="flex justify-center items-center">
+          <Loading />
+        </div>
+      ) : (
+        <div className="w-full h-full bg-white rounded-lg">
+          <div className="overflow-y-auto">
+            {orders?.length === 0 ? (
+              <div className="flex flex-col justify-center items-center p-4">
+                <h5>Aún no has hecho compras</h5>
+                <img src={shopping} alt="shopping bag" className="w-20 mt-4" />
+              </div>
+            ) : (
+              orders?.map((order, i) => (
+                <Buys
+                  index={i}
+                  key={order.id}
+                  id={order.id}
+                  shopId={order.shopId}
+                  state={order.state}
+                  total={order.total}
+                  userId={order.userId}
+                  products={order.ordenProductsId}
+                  shopInfo={order.shopInfo}
+                  productsInfo={order.productsInfo}
+                  date={order.date}
+                />
+              ))
+            )}
+          </div>
+        </div>
+      )}
+    </div>
+  );
 }
 
 export default ShoppingHistory;

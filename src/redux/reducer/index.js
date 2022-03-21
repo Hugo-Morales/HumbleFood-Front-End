@@ -23,8 +23,7 @@ import {
   STOP,
   GET_DISCOUNTS,
   ALL_FAVORITES,
-  UNSUSCRIBE,
-  SUSCRIBE,
+  RESET_PRODUCTS_SHOP,
 } from "../actions/index";
 import { GET_ORDER_BY_SHOP } from "../actions/actionsOrders";
 
@@ -45,7 +44,7 @@ const initialStore = {
   nameOfShop: "",
   isLoading: true,
   loadingPanel: true,
-  mailingList: false,
+  allProductsShop: [],
 };
 
 export default function reducer(state = initialStore, { type, payload }) {
@@ -132,7 +131,13 @@ export default function reducer(state = initialStore, { type, payload }) {
       return {
         ...state,
         productsloaded: payload,
+        allProductsShop: payload,
         isLoading: false,
+      };
+    case RESET_PRODUCTS_SHOP:
+      return {
+        ...state,
+        productsloaded: state.allProductsShop,
       };
     case GET_PRODUCTS_NAMES:
       return {
@@ -185,16 +190,6 @@ export default function reducer(state = initialStore, { type, payload }) {
         loadingPanel: false,
         isLoading: false,
         orders: payload,
-      };
-    case UNSUSCRIBE:
-      return {
-        ...state,
-        dataUser: payload.user,
-      };
-    case SUSCRIBE:
-      return {
-        ...state,
-        dataUser: payload.user,
       };
     default:
       return state;
