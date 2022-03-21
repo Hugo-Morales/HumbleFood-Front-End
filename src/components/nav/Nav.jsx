@@ -19,6 +19,7 @@ import {
 	filterByCat_Disc,
 	getProductShop,
 } from "../../redux/actions";
+import MenuFilters from "./MenuFilters";
 
 const StyledButton = styled(IconButton)`
 	position: fixed;
@@ -269,6 +270,12 @@ const Nav = ({
 				handleRemoveFromCart={handleRemoveFromCart}
 				handleDeleteFromCart={handleDeleteFromCart}
 			/>
+			<MenuFilters
+			handleFilterCategories={handleFilterCategories}
+			categories={categories}
+			handleFilterOffers={handleFilterOffers}
+			discounts={discounts}
+			 />
 		</div>
 	);
 };
