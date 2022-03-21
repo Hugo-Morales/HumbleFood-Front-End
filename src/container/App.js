@@ -49,10 +49,10 @@ function App() {
         return prev.map((item) =>
           item.id === clickedItem.id
             ? {
-                ...item,
-                amount:
-                  item.amount < item.stock ? item.amount + 1 : item.amount,
-              }
+              ...item,
+              amount:
+                item.amount < item.stock ? item.amount + 1 : item.amount,
+            }
             : item
         );
       }

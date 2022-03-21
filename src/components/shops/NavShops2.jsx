@@ -44,9 +44,25 @@ const NavShops2 = () => {
       Setmailstate(false);
       dispatch(suscribeNewsletter(dataUser.id, false));
 
-      MySwal.fire({
-        icon: "info",
-        title: "¡Cancelaste la suscripción al boletin informativo!",
+      Swal.fire({
+        title: "¿Estás seguro?",
+        text: "Esta acción no se puede revertir.",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        cancelButtonText: "Cancelar",
+        confirmButtonText: "¡Sí, quiero!",
+        reverseButtons: true,
+      }).then((result) => {
+        if (result.isConfirmed) {
+          Swal.fire(
+            "Listo",
+            "Cancelacion de la suscripcion completa!",
+            "success"
+          )
+
+        }
       });
     } else {
       MySwal.fire({
