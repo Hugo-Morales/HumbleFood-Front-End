@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, Fragment } from "react";
 import { Link, useParams } from "react-router-dom";
 import AddShoppingCartIcon from "@material-ui/icons/AddShoppingCart";
 import Badge from "@material-ui/core/Badge";
@@ -9,6 +9,8 @@ import Cart from "../cart/Cart";
 import SearchBar from "../serchbar/SearchBar";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useDispatch, useSelector } from "react-redux";
+import { Disclosure, Menu, Transition } from "@headlessui/react";
+import userRojo from "../../img/userRojo.png";
 import {
   filterProductsByCategories,
   filterProductsByDiscounts,
@@ -16,10 +18,6 @@ import {
   getCategories,
   filterByCat_Disc,
   getProductShop,
-  getMailingList,
-  getdataUser,
-  unsuscribe,
-  suscribe,
 } from "../../redux/actions";
 
 const StyledButton = styled(IconButton)`
@@ -41,18 +39,20 @@ const Nav = ({
   handleDeleteFromCart,
 }) => {
   const { shopId } = useParams();
-  const { isAuthenticated, user, loginWithRedirect } = useAuth0();
+  const { isAuthenticated, user, loginWithRedirect, logout } = useAuth0();
   const dispatch = useDispatch();
   const categories = useSelector((state) => state.categories);
   const discounts = useSelector((state) => state.discounts);
   const itemsPerShop = cartItems.filter((item) => item.shopId === shopId);
   const [category, setCategory] = useState();
   const [discount, setDiscount] = useState();
-  const userDB = useSelector((state) => state.dataUser);
-  const [mailingList, setMailingList] = useState(userDB?.mailingList);
-  const [userDBId, setUserDBId] = useState(userDB?.id);
 
   const user_id = user?.sub.split("|")[1];
+  //console.log(shopEmail);
+
+  function classNames(...classes) {
+    return classes.filter(Boolean).join(" ");
+  }
 
   useEffect(() => {
     user_id && dispatch(getdataUser(user_id));
@@ -100,20 +100,15 @@ const Nav = ({
     }
   }
 
-  function sus() {
-    dispatch(suscribe(userDBId));
-    setMailingList(true);
-  }
-  function unsus() {
-    dispatch(unsuscribe(userDBId));
-    setMailingList(false);
-  }
-
   return (
     <div className="font-poppins w-full h-24 bg-ochre flex justify-between">
       <div className="w-1/3 flex justify-between items-center p-1">
         <Link to="/home" className="ml-4">
-          <img src={logo} className="w-10 sm:w-11 lg:w-16" alt="logos" />
+          <img
+            src={logo}
+            className="w-10 sm:w-11 lg:w-16 lg:ml-28"
+            alt="logos"
+          />
         </Link>
         <div className="ml-4">
           <SearchBar />
@@ -153,68 +148,109 @@ const Nav = ({
       <div
         className={
           isAuthenticated
-            ? "w-1/4 flex justify-around items-center mr-8"
+            ? "w-1/4 flex justify-center items-center mr-5"
             : "w-1/6 flex justify-beetwen items-center mr-8"
         }
       >
-        {isAuthenticated ? (
-          <div className="flex items-center">
-            {mailingList ? (
-              <button
-                onClick={(e) => unsus()}
-                className="hidden md:flex items-center justify-center w-38 mr-3 px-4 py-2 space-x-3 text-sm text-center bg-darkGreen text-isabelline transition-colors duration-200 transform dark:text-gray-300 dark:border-gray-300 hover:bg-gray-600 dark:hover:bg-gray-700 rounded-md"
-              >
-                Desuscribirse del Newsletter
-              </button>
-            ) : (
-              <button
-                onClick={(e) => sus()}
-                className="hidden md:flex items-center justify-center w-38 mr-3 px-4 py-2 space-x-3 text-sm text-center bg-darkGreen text-isabelline transition-colors duration-200 transform dark:text-gray-300 dark:border-gray-300 hover:bg-gray-600 dark:hover:bg-gray-700 rounded-md"
-              >
-                Suscribirse al Newsletter
-              </button>
-            )}
-            <h3 className="hidden md:flex mr-3">
-              Bienvenido {user.given_name ? user.given_name : user.nickname}{" "}
-            </h3>
-            <img
-              src={user.picture}
-              alt="logo"
-              className="w-10 rounded-full mr-3"
-            />
-            <Link to={`/settings/${user_id}`}>
-              <button className="hidden md:flex items-center justify-center w-38 mr-3 px-4 py-2 space-x-3 text-sm text-center bg-darkGreen text-isabelline transition-colors duration-200 transform dark:text-gray-300 dark:border-gray-300 hover:bg-gray-600 dark:hover:bg-gray-700 rounded-md">
-                Panel de Usuario
-              </button>
-            </Link>
-          </div>
-        ) : (
-          <button
-            onClick={() => loginWithRedirect()}
-            className="flex items-center justify-center w-38 mr-3 px-4 py-2 space-x-3 text-sm text-center bg-darkGreen text-isabelline transition-colors duration-200 transform dark:text-gray-300 dark:border-gray-300 hover:bg-gray-600 dark:hover:bg-gray-700 rounded-md"
-          >
+        <Menu as="div" className="mt-1 mx-4 relative">
+          <div className="flex justify-center items-center">
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="icon icon-tabler icon-tabler-user-circle"
-              width="28"
-              height="28"
+              className="mr-2 hidden md:inline-block icon icon-tabler icon-tabler-arrow-bar-right"
+              width="32"
+              height="32"
               viewBox="0 0 24 24"
-              strokeWidth="1.5"
-              stroke="#ffffff"
+              strokeWidth="1"
+              stroke="#000000"
               fill="none"
               strokeLinecap="round"
               strokeLinejoin="round"
             >
               <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-              <circle cx="12" cy="12" r="9" />
-              <circle cx="12" cy="10" r="3" />
-              <path d="M6.168 18.849a4 4 0 0 1 3.832 -2.849h4a4 4 0 0 1 3.834 2.855" />
+              <line x1="20" y1="12" x2="10" y2="12" />
+              <line x1="20" y1="12" x2="16" y2="16" />
+              <line x1="20" y1="12" x2="16" y2="8" />
+              <line x1="4" y1="4" x2="4" y2="20" />
             </svg>
-            <span className="text-sm text-white dark:text-gray-200">
-              Iniciar / Crear Cuenta
-            </span>
-          </button>
-        )}
+
+            {isAuthenticated ? (
+              <Menu.Button className="bg-gray-800 flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
+                <img
+                  className="h-12 w-12 rounded-full"
+                  src={user?.picture}
+                  alt="img not found"
+                />
+              </Menu.Button>
+            ) : (
+              <Menu.Button className="bg-gray-800 flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
+                <img
+                  className="h-16 w-16 rounded-full"
+                  src={userRojo}
+                  alt="img not found"
+                />
+              </Menu.Button>
+            )}
+          </div>
+          <Transition
+            as={Fragment}
+            enter="transition ease-out duration-100"
+            enterFrom="transform opacity-0 scale-95"
+            enterTo="transform opacity-100 scale-100"
+            leave="transition ease-in duration-75"
+            leaveFrom="transform opacity-100 scale-100"
+            leaveTo="transform opacity-0 scale-95"
+          >
+            <Menu.Items className="origin-top-right absolute z-50 right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-gray-800 ring-1 ring-black ring-opacity-5 focus:outline-none">
+              {isAuthenticated ? (
+                <>
+                  <Menu.Item>
+                    {({ active }) => (
+                      <a
+                        href={`/settings/${user_id}`}
+                        className={classNames(
+                          active ? "hover:bg-gray-700" : "",
+                          "block px-4 py-2 text-sm text-white"
+                        )}
+                      >
+                        Panel de usuario
+                      </a>
+                    )}
+                  </Menu.Item>
+
+                  <Menu.Item>
+                    {({ active }) => (
+                      <button
+                        onClick={() =>
+                          logout({ returnTo: window.location.origin })
+                        }
+                        className={classNames(
+                          active ? "hover:bg-gray-700" : "",
+                          "block px-4 py-2 text-sm text-white"
+                        )}
+                      >
+                        Cerrar sesion
+                      </button>
+                    )}
+                  </Menu.Item>
+                </>
+              ) : (
+                <Menu.Item>
+                  {({ active }) => (
+                    <button
+                      onClick={() => loginWithRedirect()}
+                      className={classNames(
+                        active ? "hover:bg-gray-700" : "",
+                        "block px-4 py-2 text-sm text-white"
+                      )}
+                    >
+                      Iniciar sesion / registrarse
+                    </button>
+                  )}
+                </Menu.Item>
+              )}
+            </Menu.Items>
+          </Transition>
+        </Menu>
         <div className={open ? "opacity-0" : "bg-emerald-400 rounded-full"}>
           <StyledButton onClick={() => setOpen(true)}>
             <Badge badgeContent={getTotalItems(itemsPerShop)} color="error">

@@ -6,6 +6,7 @@ export const GET_ALL_PRODUCTS = "GET_ALL_PRODUCTS";
 export const GET_ALL_CATEGORIES = "GET_ALL_CATEGORIES";
 export const GET_CATEGORIES = "GET_CATEGORIES";
 export const GET_PRODUCTS_SHOP = "GET_PRODUCTS_SHOP";
+export const GET_PRODUCTS_NAMES = "GET_PRODUCTS_NAMES";
 export const RESET = "RESET";
 export const LOADING = "LOADING";
 export const POST_REVIEW = "POST_REVIEW";
@@ -219,6 +220,20 @@ export const getProductShop = (id, page) => async (dispatch) => {
   }
 };
 
+export const getProductNames = (id) => async (dispatch) => {
+  try {
+    const productsNames = await axios.get(
+      `${URL}productShop/${id}/productNames`
+    );
+    dispatch({
+      type: GET_PRODUCTS_NAMES,
+      payload: productsNames.data,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 export const reset = () => (dispatch) => {
   dispatch({
     type: RESET,
@@ -391,30 +406,6 @@ export const addFavorites = (id, shopsID) => async () => {
 export const removeFavorites = (id, shopsID) => async () => {
   try {
     await axios.put(`${URL}user/${id}/deleteFavouriteShop/${shopsID}`);
-  } catch (error) {
-    console.log(error);
-  }
-};
-
-export const unsuscribe = (id) => async (dispatch) => {
-  try {
-    const response = await axios.put(`${URL}user/${id}/mailingList/false`);
-    dispatch({
-      type: UNSUSCRIBE,
-      payload: response.data,
-    });
-  } catch (error) {
-    console.log(error);
-  }
-};
-
-export const suscribe = (id) => async (dispatch) => {
-  try {
-    const response = await axios.put(`${URL}user/${id}/mailingList/true`);
-    dispatch({
-      type: SUSCRIBE,
-      payload: response.data,
-    });
   } catch (error) {
     console.log(error);
   }

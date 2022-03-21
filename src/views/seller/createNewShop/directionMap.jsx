@@ -18,7 +18,7 @@ const DirectionMap = () => {
     }, 2000);
   }, [dispatch]);
   const handleClick = () => {
-    Swal.fire({
+    MySwal.fire({
       position: "center",
       icon: "success",
       title: "Gracias por verificarla!",

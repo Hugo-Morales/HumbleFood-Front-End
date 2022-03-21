@@ -5,16 +5,17 @@ import { useDispatch, useSelector } from "react-redux";
 import { postNewShop, getdataUser } from "../../../redux/actions";
 import Loading from "../../../components/loading/Loading";
 import Styles from "./createShop.module.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
 
 const CreateShop = ({ user }) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const dataUser = useSelector((state) => state.dataUser);
-  console.log(dataUser);
   const id = dataUser?.userId;
-
   const [loading, setloading] = useState(true);
-  const [modalOpen, setModalOpen] = useState(false);
+  const MySwal = withReactContent(Swal);
 
   useEffect(() => {
     setTimeout(() => {
@@ -51,10 +52,20 @@ const CreateShop = ({ user }) => {
   };
 
   // console.log(newShop);
+
+  // console.log(newShop);
   const handleformSubmit = (e) => {
     e.preventDefault();
     dispatch(postNewShop(newShop));
     // alert("Tienda registrada con exito!");
+    MySwal.fire({
+      position: "center",
+      icon: "success",
+      title: "Tu tienda ha sido registrada con exito",
+      showConfirmButton: false,
+      timer: 2000,
+    });
+    navigate(`/settings/${id}`);
     setNewShop({
       name: "",
       direction: "",
@@ -64,7 +75,6 @@ const CreateShop = ({ user }) => {
       email: "",
     });
   };
-
   return (
     <>
       {loading ? (
@@ -237,7 +247,7 @@ const CreateShop = ({ user }) => {
                     />
                     <button
                       type="submit"
-                      className="  px-2 border border-transparent shadow-sm text-sm rounded-md text-white font-bold bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                      className="mt-4 bg-red-500 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded-full"
                     >
                       Registrar
                     </button>
