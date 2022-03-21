@@ -1,11 +1,20 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { postproducts, NewCategory } from "../../../../redux/actions";
+import {
+	ref,
+	getDownloadURL,
+	uploadBytesResumable,
+	deleteObject,
+} from "firebase/storage";
+import { storage } from "./firebase";
 import Swal from "sweetalert2";
 
 export default function Functions(Validate, shopId) {
 	const dispatch = useDispatch();
 	const [err, setErr] = useState({});
+	const [nameI, setNameI] = useState("");
+	const [progress, setProgress] = useState(0);
 	const [listcategories, setlistcategories] = useState({
 		add: [],
 	});
@@ -19,6 +28,7 @@ export default function Functions(Validate, shopId) {
 		categories: "",
 		image: "",
 	});
+
 	const handleChange = (e) => {
 		const { name, value } = e.target;
 
@@ -27,6 +37,38 @@ export default function Functions(Validate, shopId) {
 			[name]: value,
 		});
 		setErr(Validate(input, listcategories));
+	};
+
+	const handleImagen = (e) => {
+		const file = e.target.files[0];
+		uploadFiles(file);
+	};
+
+	const uploadFiles = (file) => {
+		//
+		if (!file) return;
+		const sotrageRef = ref(storage, `files/${file.name}`);
+		setNameI(file.name);
+		const uploadTask = uploadBytesResumable(sotrageRef, file);
+
+		uploadTask.on(
+			"state_changed",
+			(snapshot) => {
+				const prog = Math.round(
+					(snapshot.bytesTransferred / snapshot.totalBytes) * 100
+				);
+				setProgress(prog);
+			},
+			(error) => console.log(error),
+			() => {
+				getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+					setInput({
+						...input,
+						image: downloadURL,
+					});
+				});
+			}
+		);
 	};
 
 	const handleSubmit = (e) => {
@@ -59,19 +101,11 @@ export default function Functions(Validate, shopId) {
 				icon: "success",
 				title: "Éxito",
 				text: `Se a creado el producto ${input.name} exitosamente.`,
+			}).then((r) => {
+				if (r.isConfirmed) {
+					window.location.reload();
+				}
 			});
-
-			setInput({
-				name: "",
-				description: "",
-				price: 0,
-				discount: 0,
-				stock: 0,
-				categories: "",
-				image: "",
-			});
-
-			setlistcategories({ add: [] });
 		}
 	};
 
@@ -91,7 +125,7 @@ export default function Functions(Validate, shopId) {
 				text: "No se puede agregar la misma categoría.",
 			});
 		} else if (!Object.keys(err).includes("listcategories")) {
-			if (!categories.find((f) => f === input.categories)) {
+			if (!categories.find((f) => f.name === input.categories)) {
 				const newc = { name: input.categories };
 				dispatch(NewCategory(newc));
 			}
@@ -99,12 +133,12 @@ export default function Functions(Validate, shopId) {
 			if (input.categories !== "") {
 				listcategories.add.push(input.categories);
 			}
-		}
 
-		setInput({
-			...input,
-			categories: "",
-		});
+			setInput({
+				...input,
+				categories: "",
+			});
+		}
 	};
 
 	const eliminar = (name) => {
@@ -135,13 +169,43 @@ export default function Functions(Validate, shopId) {
 		});
 	};
 
-	const handleUploadImg = (element) => {
-		const file = element.target.files[0];
-		const reader = new FileReader();
-		reader.onloadend = function () {
-			setInput({ ...input, image: reader.result });
-		};
-		reader.readAsDataURL(file); //transforma la imagen a b64 (string), y asi lo puede leer
+	const modal = () => {
+		Swal.fire({
+			imageUrl: input.image,
+			imageWidth: 500,
+			imageHeight: 400,
+			imageAlt: "A tall image",
+		});
+	};
+
+	const deleteImagen = () => {
+		const desertRef = ref(storage, `files/${nameI}`);
+
+		deleteObject(desertRef)
+			.then(() => {
+				Swal.fire({
+					icon: "success",
+					title: "Éxito",
+					text: `Se quito la imagen.`,
+				}).then((r) => {
+					if (r.isConfirmed) {
+						setNameI("");
+						setProgress(0);
+						setInput({
+							...input,
+							image: "",
+						});
+					}
+				});
+			})
+			.catch((error) => {
+				console.log(error);
+				Swal.fire({
+					icon: "warning",
+					title: "Error",
+					text: `Hubo un error.`,
+				});
+			});
 	};
 
 	return {
@@ -152,6 +216,9 @@ export default function Functions(Validate, shopId) {
 		listcategories,
 		add,
 		eliminar,
-		handleUploadImg,
+		handleImagen,
+		progress,
+		modal,
+		deleteImagen,
 	};
 }

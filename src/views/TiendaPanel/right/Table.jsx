@@ -5,7 +5,11 @@ import InfoDataUser from "./InfoDataUser";
 import Edit from "../Edit";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
-import { deleteProduct, loading, getallproducts } from "../../../redux/actions";
+import {
+	deleteProduct,
+	getProductShop,
+	getallproducts,
+} from "../../../redux/actions";
 
 export default function Table({
 	p,
@@ -21,10 +25,8 @@ export default function Table({
 	const dispatch = useDispatch();
 	const [showEdit, setShowEdit] = useState(false);
 	const [producto, setProducto] = useState([]);
-	// console.log(p);
 
 	const confirmProduct = (id) => {
-		console.log(id);
 		MySwal.fire({
 			title: "¿Estás seguro?",
 			text: "",
@@ -47,16 +49,27 @@ export default function Table({
 					showConfirmButton: false,
 				});
 
-				dispatch(loading());
 				dispatch(deleteProduct(id));
-				if (p.length === 1) {
-					setTimeout(() => {
-						dispatch(getallproducts(currentPage - 1));
-					}, 700);
-				} else {
-					setTimeout(() => {
-						dispatch(getallproducts(currentPage));
-					}, 700);
+				if (dataUser?.rol === 2) {
+					if (p.length === 1) {
+						setTimeout(() => {
+							dispatch(getallproducts(currentPage - 1));
+						}, 700);
+					} else {
+						setTimeout(() => {
+							dispatch(getallproducts(currentPage));
+						}, 700);
+					}
+				} else if (dataUser?.rol === 1) {
+					if (p.length === 1) {
+						setTimeout(() => {
+							dispatch(getProductShop(dataUser?.shopsId, currentPage - 1));
+						}, 700);
+					} else {
+						setTimeout(() => {
+							dispatch(getProductShop(dataUser?.shopsId, currentPage));
+						}, 700);
+					}
 				}
 			}
 		});
@@ -117,7 +130,7 @@ export default function Table({
 									{p?.length ? (
 										p.map((p, index) => (
 											<tr key={index} className="dark:hover:bg-gray-400">
-												<td className="px-6 py-4 whitespace-nowrap ">
+												<td className="px-6 py-4 whitespace-nowrap">
 													<div className="flex items-center">
 														<div className="flex-shrink-0 h-10 w-10">
 															<img

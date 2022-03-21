@@ -9,11 +9,9 @@ import {
 import { useEffect, useState } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 import Swal from "sweetalert2";
-import withReactContent from "sweetalert2-react-content";
 
 const CardShop = ({ shop, userId }) => {
   const dispatch = useDispatch();
-  const MySwal = withReactContent(Swal);
   const { isAuthenticated } = useAuth0();
   const { id, name, image, description } = shop;
   const misfavoritos = useSelector((state) => state.allFavorites);
@@ -22,7 +20,7 @@ const CardShop = ({ shop, userId }) => {
   const [save, setSave] = useState(false);
   const [deleteFav, setDeleteFav] = useState(false);
   // console.log(shopID.includes(id))
-  console.log("deleteFav ", deleteFav);
+  // console.log("deleteFav ", deleteFav);
   useEffect(() => {
     if (save) {
       console.log(save);
@@ -39,7 +37,7 @@ const CardShop = ({ shop, userId }) => {
       if (!save) {
         setSave(true);
         setDeleteFav(false);
-        console.log("Click");
+        // console.log("Click");
       } else {
         setSave(false);
         setDeleteFav(true);
@@ -57,22 +55,13 @@ const CardShop = ({ shop, userId }) => {
     if (!deleteFav) {
       setDeleteFav(true);
       setSave(false);
-      console.log("Delete: ", deleteFav);
+      // console.log("Delete: ", deleteFav);
     } else {
       setDeleteFav(false);
       setSave(true);
     }
   };
-  // const handleclick = (e) => {
-  //   if (e.target.id === "heart") {
-  //     !isAuthenticated &&
-  //       Swal.fire({
-  //         icon: "error",
-  //         title: "La funcion añadir a favoritos no esta disponible :(",
-  //         text: "¡Registrate primero para poder usarla :)",
-  //       });
-  //   }
-  // };
+
   return (
     <>
       <div className="flex justify-center items-center mobile:ml-6 mobile:w-11/12 w-full drop-shadow-lg">

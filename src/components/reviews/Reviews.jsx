@@ -1,14 +1,13 @@
 import { Rating } from "@mui/material";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 function Reviews() {
   const { productId } = useParams();
   const [reviews, setReviews] = useState([]);
 
   useEffect(() => {
-    // dispatch(getReviews("6223c090aba4fcbd7aa97314"));
     const getReviews = async () => {
       return await axios
         .get(`https://back-end-prueba.herokuapp.com/reviews/${productId}`)
@@ -47,13 +46,6 @@ function Reviews() {
           </div>
         ))}
       </div>
-      <Link
-        to={`/send-review/${productId}`}
-        type="button"
-        className="mt-10 w-full bg-indigo-600 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 rorate:45"
-      >
-        Calificar producto
-      </Link>
     </div>
   );
 }
