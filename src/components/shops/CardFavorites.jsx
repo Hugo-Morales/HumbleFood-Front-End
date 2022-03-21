@@ -22,7 +22,6 @@ const CardShop = ({ shop }) => {
 	const [deleteFav, setDeleteFav] = useState(false);
 
 	useEffect(() => {
-		dispatch(loading());
 		if (isAuthenticated) {
 			dispatch(getAllFavorites(userId));
 		}

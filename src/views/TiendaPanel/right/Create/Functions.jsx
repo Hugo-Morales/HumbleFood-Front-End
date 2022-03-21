@@ -263,7 +263,6 @@ export default function Functions(Validate, shopId) {
 		listcategories,
 		add,
 		eliminar,
-		handleUploadImg,
 		handleSelect,
 		handleImagen,
 		progress,
