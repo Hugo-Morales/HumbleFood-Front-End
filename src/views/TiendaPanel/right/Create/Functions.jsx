@@ -1,10 +1,13 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { postproducts, NewCategory } from "../../../../redux/actions";
+import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 
-export default function Functions(Validate, shopId) {
+export default function Functions(Validate, shopId, shop) {
 	const dispatch = useDispatch();
+	const navigate = useNavigate()
+	const { id, name, image, description } = shop;
 	const [err, setErr] = useState({});
 	const [listcategories, setlistcategories] = useState({
 		add: [],
@@ -55,6 +58,7 @@ export default function Functions(Validate, shopId) {
 			input.stock
 		) {
 			dispatch(postproducts(produc));
+			navigate(`/home`)
 			Swal.fire({
 				icon: "success",
 				title: "Éxito",
