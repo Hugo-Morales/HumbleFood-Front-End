@@ -10,14 +10,14 @@ import ButtonExit from "../../../components/buttonExit/buttonexit";
 
 export default function SideLeft({ name, setId, rol, shopsId }) {
   const { logout } = useAuth0();
-  // console.log(rol, shopsId)
+  console.log(shopsId[0])
 
   return (
     <div className="bg-gray-700 sticky top-0 sm-h-30 h-screen p-6">
       <ButtonExit
         text="Volver a ver tiendas"
         ruta="/home"
-        className="mt-1  mb-6 ml-10 mr-0 bg-red-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded-full"
+        className="mt-1 mb-6 ml-10 mr-0 bg-red-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded-full"
       />
       <div className="p-2 mb-5 text-white uppercase">
         <h1>Bienvenido {name}</h1>
@@ -55,9 +55,9 @@ export default function SideLeft({ name, setId, rol, shopsId }) {
             {/* Agregar otra Tienda */}
             <Link to="/createShop">
               <Button
-                div="flex bg-green-200 justify-center p-2 rounded-lg mb-10 mt-3 hover:bg-sky-700 cursor-pointer"
+                div="flex bg-green-200 justify-center p-2 rounded-lg my-3 mt-3 hover:bg-sky-700 cursor-pointer"
                 text="Registrar Tienda"
-                buttonclassName="flex items-center font-bold"
+                buttonclass="flex items-center font-bold"
                 icon={<GrAddCircle className="mr-2" />}
               />
             </Link>
@@ -67,7 +67,7 @@ export default function SideLeft({ name, setId, rol, shopsId }) {
         {rol === 2 ? (
           <Admin setId={setId} />
         ) : rol === 1 ? (
-          <Shop setId={setId} />
+          <Shop setId={setId} shopsId={shopsId[0]} />
         ) : rol === 0 ? (
           <User setId={setId} />
         ) : null}
@@ -76,7 +76,7 @@ export default function SideLeft({ name, setId, rol, shopsId }) {
         <Button
           div="flex bg-red-600 justify-center p-2 rounded-lg mt-9 items-center cursor-pointer"
           text="Cerrar Sesión"
-          buttonclassName="flex items-center font-bold"
+          buttonclass="flex items-center font-bold"
           icon={<AiOutlineLogout className="mr-2" />}
           f={() => logout({ returnTo: window.location.origin })}
         />
