@@ -16,6 +16,7 @@ import HomeShops from "../views/user/HomeShops";
 import DirectionMap from "../views/seller/createNewShop/directionMap";
 import Loading from "../components/loading/Loading";
 import { getdataUser } from "../redux/actions/index";
+import Nosotros from "../views/nosotros/Nosotros";
 
 function App() {
   const dispatch = useDispatch();
@@ -24,6 +25,10 @@ function App() {
   const [open, setOpen] = useState(false);
   const dataUser = useSelector((state) => state.dataUser);
   const userId = user?.sub.split("|")[1];
+
+  useEffect(() => {
+    if (cartItems.length !== 0) localStorage.setItem("carrito", JSON.stringify(cartItems));
+  }, [cartItems]);
 
   useEffect(() => {
     const items = JSON.parse(localStorage.getItem("carrito"));
@@ -37,7 +42,6 @@ function App() {
   };
 
   const handleAddToCart = (clickedItem) => {
-    localStorage.setItem("carrito", JSON.stringify(cartItems));
     setCartItems((prev) => {
       const isItemInCart = prev.find((item) => item.id === clickedItem.id);
 
@@ -88,6 +92,7 @@ function App() {
           <Routes>
             <Route exact path="/" element={<LandingPage />} />
             <Route exact path="/home" element={<HomeShops />} />
+            <Route exact path="/home/equipo" element={<Nosotros />} />
             <Route
               exact
               path="/productShop/:shopId"

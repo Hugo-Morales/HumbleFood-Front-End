@@ -1,4 +1,4 @@
-import { Fragment } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { BellIcon, MenuIcon, XIcon } from "@heroicons/react/outline";
 import logo from "../../img/logo.png";
@@ -7,24 +7,46 @@ import { useAuth0 } from "@auth0/auth0-react";
 import userRojo from "../../img/userRojo.png";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
+import { suscribeNewsletter } from "../../redux/actions";
+import { useDispatch, useSelector } from "react-redux";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
 const NavShops2 = () => {
+  const dispatch = useDispatch();
+  const dataUser = useSelector((state) => state.dataUser);
+  const [mailState, Setmailstate] = useState("");
   const MySwal = withReactContent(Swal);
   const { isAuthenticated, user, loginWithRedirect, logout } = useAuth0();
   const user_id = user?.sub.split("|")[1];
 
-  const handleclick = () => {
-    if (isAuthenticated) {
+  // console.log(dataUser);
+  console.log(mailState, "mailstate");
+  useEffect(() => {
+    Setmailstate(dataUser?.mailingList);
+  }, [dataUser]);
+  const handleclick = (e) => {
+    e.preventDefault();
+    if (isAuthenticated && mailState === false) {
+      Setmailstate(true);
+      dispatch(suscribeNewsletter(dataUser.id, true));
+
       MySwal.fire({
         position: "center",
         icon: "success",
         title: "¡Te has suscrito al boletin informativo revisa tu email!",
-        showConfirmButton: false,
+
         timer: 3000,
+      });
+    } else if (isAuthenticated && mailState) {
+      Setmailstate(false);
+      dispatch(suscribeNewsletter(dataUser.id, false));
+
+      MySwal.fire({
+        icon: "info",
+        title: "¡Cancelaste la suscripción al boletin informativo!",
       });
     } else {
       MySwal.fire({
@@ -55,7 +77,7 @@ const NavShops2 = () => {
                 <div className="flex-shrink-0 flex items-center">
                   <Link to="/home">
                     <img
-                      className="hidden sm:block  sm:h-14 sm:w-14 lg:w-14"
+                      className="hidden sm:block  sm:h-14  sm:w-14 lg:w-14"
                       src={logo}
                       alt="logo"
                     />
@@ -78,6 +100,7 @@ const NavShops2 = () => {
                       Tus tiendas favoritas
                     </a>
                     <a
+                      href="/home/equipo"
                       className={classNames(
                         "bg-gray-900 hover:bg-gray-600 text-white px-3 py-2 rounded-md text-sm font-medium"
                       )}
@@ -89,7 +112,7 @@ const NavShops2 = () => {
               </div>
               <div className="mt-5 absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                 <button
-                  onClick={() => handleclick()}
+                  onClick={(e) => handleclick(e)}
                   type="button"
                   className="hidden md:inline-block  mt-4 mr-3 bg-gray-900 hover:bg-gray-600 p-1 rounded-full text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
                 >
@@ -160,9 +183,9 @@ const NavShops2 = () => {
                     ) : (
                       <Menu.Button className="bg-gray-800 flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
                         <img
-                          className="h-16 w-16 rounded-full"
                           src={userRojo}
                           alt="img not found"
+                          className="h-10 w-10 rounded-full"
                         />
                       </Menu.Button>
                     )}
@@ -176,7 +199,7 @@ const NavShops2 = () => {
                     leaveFrom="transform opacity-100 scale-100"
                     leaveTo="transform opacity-0 scale-95"
                   >
-                    <Menu.Items className="origin-top-right absolute z-50 right-0 mt-8 w-48 rounded-md shadow-lg py-1 bg-gray-800 ring-1 ring-black ring-opacity-5 focus:outline-none">
+                    <Menu.Items className="origin-top-right absolute z-50 right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-gray-800 ring-1 ring-black ring-opacity-5 focus:outline-none">
                       {isAuthenticated ? (
                         <>
                           <Menu.Item>
@@ -233,13 +256,15 @@ const NavShops2 = () => {
 
           <Disclosure.Panel className="sm:hidden absolute z-50">
             <div className="mt-8 px-2 pt-2 pb-3 space-y-1">
-              <Disclosure.Button
-                className={classNames(
-                  "bg-gray-900 hover:bg-gray-600 text-white block px-3 py-2 rounded-md text-base font-medium mb-1"
-                )}
-              >
-                ¿Quienes somos?
-              </Disclosure.Button>
+              <Link to="/home/equipo">
+                <Disclosure.Button
+                  className={classNames(
+                    "bg-gray-900 hover:bg-gray-600 text-white block px-3 py-2 rounded-md text-base font-medium mb-1"
+                  )}
+                >
+                  ¿Quienes somos?
+                </Disclosure.Button>
+              </Link>
 
               <Link to="/favorites">
                 <Disclosure.Button
@@ -250,14 +275,15 @@ const NavShops2 = () => {
                   ¡Tus tiendas favoritas!
                 </Disclosure.Button>
               </Link>
-
-              <Disclosure.Button
-                className={classNames(
-                  "bg-gray-900 hover:bg-gray-600 text-white block px-3 py-2 rounded-md text-base font-medium"
-                )}
-              >
-                ¡Suscribirse al boletin informativo!
-              </Disclosure.Button>
+              <button onClick={(e) => handleclick(e)}>
+                <Disclosure.Button
+                  className={classNames(
+                    "bg-gray-900 hover:bg-gray-600 text-white block px-3 py-2 rounded-md text-base font-medium"
+                  )}
+                >
+                  ¡Suscribirse al boletin informativo!
+                </Disclosure.Button>
+              </button>
             </div>
           </Disclosure.Panel>
         </>

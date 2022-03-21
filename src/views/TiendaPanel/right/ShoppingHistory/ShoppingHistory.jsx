@@ -7,16 +7,16 @@ import Buys from "./Buys";
 import shopping from "../../../../img/shopping.png";
 
 function ShoppingHistory({ userId }) {
-  const dispatch = useDispatch();
-  const orders = useSelector((state) => state.orders);
-  const cargando = useSelector((state) => state.loadingPanel);
+	const dispatch = useDispatch();
+	const orders = useSelector((state) => state.orders);
+	const cargando = useSelector((state) => state.loadingPanel);
 
-  useEffect(() => {
-    dispatch(loading_panel());
-    dispatch(getOrderByShop(userId));
-  }, [dispatch, userId]);
+	useEffect(() => {
+		dispatch(loading_panel());
+		dispatch(getOrderByShop(userId));
+	}, [dispatch, userId]);
 
-  // console.log("ordenes de compra", orders);
+	// console.log("ordenes de compra", orders);
 
   return (
     <div>
@@ -45,6 +45,7 @@ function ShoppingHistory({ userId }) {
                   products={order.ordenProductsId}
                   shopInfo={order.shopInfo}
                   productsInfo={order.productsInfo}
+                  date={order.date}
                 />
               ))
             )}

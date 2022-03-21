@@ -49,8 +49,8 @@ export default function Table({
 					showConfirmButton: false,
 				});
 
+				dispatch(deleteProduct(id));
 				if (dataUser?.rol === 2) {
-					dispatch(deleteProduct(id));
 					if (p.length === 1) {
 						setTimeout(() => {
 							dispatch(getallproducts(currentPage - 1));
@@ -61,7 +61,6 @@ export default function Table({
 						}, 700);
 					}
 				} else if (dataUser?.rol === 1) {
-					dispatch(deleteProduct(id));
 					if (p.length === 1) {
 						setTimeout(() => {
 							dispatch(getProductShop(dataUser?.shopsId, currentPage - 1));
@@ -131,7 +130,7 @@ export default function Table({
 									{p?.length ? (
 										p.map((p, index) => (
 											<tr key={index} className="dark:hover:bg-gray-400">
-												<td className="px-6 py-4 whitespace-nowrap ">
+												<td className="px-6 py-4 whitespace-nowrap">
 													<div className="flex items-center">
 														<div className="flex-shrink-0 h-10 w-10">
 															<img

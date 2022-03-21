@@ -4,6 +4,7 @@ import HacerAdmin from "./make/HacerAdmin";
 import Styles from "./SideRight.module.css";
 import Orders from "./Orders/Orders";
 import ShoppingHistory from "./ShoppingHistory/ShoppingHistory";
+import ShowsItems from "./SaveItems/ShowsItems";
 
 export default function SideRight({
 	product,
@@ -20,26 +21,32 @@ export default function SideRight({
 	const renderSwitch = (x) => {
 		switch (x) {
 			case "home":
-				return (
-					<Table
-						p={products}
-						d={false}
-						next={next}
-						prev={prev}
-						pagesTotal={pagesTotal}
-						paging={paging}
-						currentPage={currentPage}
-					/>
-				);
+				if (rol === 0) {
+					return <ShowsItems />;
+				} else {
+					return (
+						<Table
+							p={products}
+							d={false}
+							next={next}
+							prev={prev}
+							pagesTotal={pagesTotal}
+							paging={paging}
+							currentPage={currentPage}
+						/>
+					);
+				}
 			case "crear":
 				return <CreateProducts shopId={shopsId} />;
 			case "modificar ordenes":
 				return <Orders shopId={shopsId} />;
 			case "makeAdmin":
 				return <HacerAdmin />;
+			case "historial":
+				return <ShoppingHistory userId={userId} />;
 			default:
 				if (rol === 0) {
-					return <ShoppingHistory userId={userId} />;
+					return <ShowsItems />;
 				} else {
 					return (
 						<Table

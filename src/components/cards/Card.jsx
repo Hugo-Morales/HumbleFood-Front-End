@@ -1,6 +1,7 @@
 import { Link, useParams } from "react-router-dom";
 
-const Card = ({ product, handleAddToCart }) => {
+const Card = ({ product, handleAddToCart, shop }) => {
+	product.shop = shop;
 	const { id, name, image, price, discount, categories, stock } = product;
 	const items = JSON.parse(localStorage.getItem("carrito"));
 	const stock_max = items?.find((i) => i.id === id);
@@ -45,7 +46,7 @@ const Card = ({ product, handleAddToCart }) => {
 									{new Intl.NumberFormat("en-IN", {
 										style: "currency",
 										currency: "USD",
-									}).format(price-(price / 100) * discount)}{" "}
+									}).format(price - (price / 100) * discount)}{" "}
 								</h1>
 							</Link>
 							{stock_max?.amount === stock ? (

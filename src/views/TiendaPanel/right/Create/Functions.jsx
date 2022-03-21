@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { postproducts, NewCategory } from "../../../../redux/actions";
 import { useNavigate } from "react-router-dom";
@@ -20,6 +20,7 @@ export default function Functions(Validate, shopId, shop) {
 	const [listcategories, setlistcategories] = useState({
 		add: [],
 	});
+	
 	const categories = useSelector((state) => state.allcategories);
 	const [input, setInput] = useState({
 		name: "",
@@ -27,19 +28,47 @@ export default function Functions(Validate, shopId, shop) {
 		price: 0,
 		discount: 0,
 		stock: 0,
-		categories: "",
+		categories:"",
 		image: "",
 	});
+	
+	useEffect(()=> {
+		setErr(Validate(input,listcategories))
+		
+	},[input])
+
+	useEffect(()=>{
+		setErr(Validate(input,listcategories))
+		
+	},[listcategories])
 
 	const handleChange = (e) => {
+		e.preventDefault();
 		const { name, value } = e.target;
-
 		setInput({
 			...input,
 			[name]: value,
 		});
-		setErr(Validate(input, listcategories));
 	};
+	
+	const handleSelect = (e) => {
+		e.preventDefault();
+		const { value } = e.target;
+		if(value !== "default"){
+			if(!listcategories.add.find(e => e === value)){
+				setInput({
+					...input,
+					categories: value
+				});
+				setlistcategories({
+					add:[...listcategories.add, value]
+				})
+				e.target.value = "default"; 
+			}
+			else	e.target.value = "default";
+		}
+	}
+
 
 	const handleImagen = (e) => {
 		const file = e.target.files[0];
@@ -75,8 +104,8 @@ export default function Functions(Validate, shopId, shop) {
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
+		console.log(e.target.name);
 		setErr(Validate(input, listcategories));
-
 		let produc = {
 			shopId: shopId[0],
 			name: input.name,
@@ -84,12 +113,10 @@ export default function Functions(Validate, shopId, shop) {
 			price: Number(input.price),
 			discount: Number(input.discount),
 			stock: Number(input.stock),
-			image: !input.image
-				? "https://www.sinrumbofijo.com/wp-content/uploads/2016/05/default-placeholder.png"
-				: input.image,
-			categories: listcategories.add,
+			image: input.image? input.image: "https://www.sinrumbofijo.com/wp-content/uploads/2016/05/default-placeholder.png",
+			categories: listcategories?.add,
 		};
-
+		console.log("Errores",err);
 		if (
 			Object.keys(err).length === 0 &&
 			listcategories.add.length &&
@@ -97,7 +124,7 @@ export default function Functions(Validate, shopId, shop) {
 			input.price &&
 			input.discount &&
 			input.stock
-		) {
+			) {
 			dispatch(postproducts(produc));
 			navigate(`/home`)
 			Swal.fire({
@@ -109,6 +136,19 @@ export default function Functions(Validate, shopId, shop) {
 					window.location.reload();
 				}
 			});
+
+			setInput({
+				name: "",
+				description: "",
+				price: 0,
+				discount: 0,
+				stock: 0,
+				categories: "",
+				image: "",
+			});
+
+			setlistcategories({ add: [] });
+			
 		}
 	};
 
@@ -119,9 +159,10 @@ export default function Functions(Validate, shopId, shop) {
 			Swal.fire({
 				icon: "error",
 				title: "Error",
-				text: "El campo no puede estar vacío.",
+				text: "Debe agregar al menos una categoria.",
 			});
-		} else if (listcategories.add.some((c) => c === input.categories)) {
+		} else 
+		if (listcategories.add.some((c) => c === input.categories)) {
 			Swal.fire({
 				icon: "error",
 				title: "Error",
@@ -134,7 +175,10 @@ export default function Functions(Validate, shopId, shop) {
 			}
 
 			if (input.categories !== "") {
-				listcategories.add.push(input.categories);
+				setlistcategories({
+					add:[...add, input.categories]
+				})
+
 			}
 
 			setInput({
@@ -144,7 +188,8 @@ export default function Functions(Validate, shopId, shop) {
 		}
 	};
 
-	const eliminar = (name) => {
+	const eliminar = (e, name) => {
+		e.preventDefault();
 		Swal.fire({
 			title: "¿Estás seguro?",
 			text: "Esta acción no se puede revertir.",
@@ -162,12 +207,14 @@ export default function Functions(Validate, shopId, shop) {
 					"La categoría fue removida de la lista.",
 					"success"
 				);
-				let categories = listcategories.add.filter((c) => c !== name);
+				if(listcategories.add.find(c => c === name)){
+					let categori = listcategories.add.filter((c) => c !== name);
+					setlistcategories({
+						add: categori,
+					});
+					
+				}
 
-				setlistcategories({
-					...categories,
-					add: categories,
-				});
 			}
 		});
 	};
@@ -181,7 +228,8 @@ export default function Functions(Validate, shopId, shop) {
 		});
 	};
 
-	const deleteImagen = () => {
+	const deleteImagen = (e) => {
+		e.preventDefault();
 		const desertRef = ref(storage, `files/${nameI}`);
 
 		deleteObject(desertRef)
@@ -219,6 +267,7 @@ export default function Functions(Validate, shopId, shop) {
 		listcategories,
 		add,
 		eliminar,
+		handleSelect,
 		handleImagen,
 		progress,
 		modal,
