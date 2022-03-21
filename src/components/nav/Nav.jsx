@@ -55,7 +55,6 @@ const Nav = ({
   }
 
   useEffect(() => {
-    user_id && dispatch(getdataUser(user_id));
     shopId ? dispatch(getCategories(shopId)) : dispatch(getCategories());
     dispatch(getDiscounts(shopId));
     // eslint-disable-next-line react-hooks/exhaustive-deps
