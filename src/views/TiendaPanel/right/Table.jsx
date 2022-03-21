@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import Paginado from "../../../components/paginado/Paginado";
+import PaginationControlled from "./pagination";
 import InfoDataUser from "./InfoDataUser";
 import Edit from "../Edit";
 import Swal from "sweetalert2";
@@ -238,9 +238,7 @@ export default function Table({
 					</div>
 				</div>
 			</div>
-			<Paginado
-				next={next}
-				prev={prev}
+			<PaginationControlled
 				pagesTotal={pagesTotal}
 				paging={paging}
 				currentPage={currentPage}

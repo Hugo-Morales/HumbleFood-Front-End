@@ -15,7 +15,7 @@ export default function SideRight({
 	paging,
 	currentPage,
 }) {
-	const { products, next, prev, pagesTotal } = product;
+	const { products, pagesTotal } = product;
 	// console.log(products);
 
 	const renderSwitch = (x) => {
@@ -28,8 +28,6 @@ export default function SideRight({
 						<Table
 							p={products}
 							d={false}
-							next={next}
-							prev={prev}
 							pagesTotal={pagesTotal}
 							paging={paging}
 							currentPage={currentPage}
@@ -52,8 +50,6 @@ export default function SideRight({
 						<Table
 							p={products}
 							d={false}
-							next={next}
-							prev={prev}
 							pagesTotal={pagesTotal}
 							paging={paging}
 							currentPage={currentPage}
