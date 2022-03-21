@@ -1,3 +1,4 @@
+import { async } from "@firebase/util";
 import axios from "axios";
 export const GET_SHOPS = "GET_SHOPS";
 export const GET_DETAIL_PRODUCT = "GET_DETAIL_PRODUCT";
@@ -24,7 +25,7 @@ export const GET_DISCOUNTS = "GET_DISCOUNTS";
 export const POST_ORDER = "POST_ORDER";
 export const FILTER_BY_CAT_DISC = "FILTER_BY_CAT_DISC";
 export const ALL_FAVORITES = "ALL_FAVORITES";
-
+export const SUSCRIBE_NEWSLETTER = "SUSCRIBE_NEWSLETTER";
 export const STOP = "STOP";
 const URL = process.env.REACT_APP_URL;
 
@@ -220,7 +221,9 @@ export const getProductShop = (id, page) => async (dispatch) => {
 
 export const getProductNames = (id) => async (dispatch) => {
   try {
-    const productsNames = await axios.get(`${URL}productShop/${id}/productNames`);
+    const productsNames = await axios.get(
+      `${URL}productShop/${id}/productNames`
+    );
     dispatch({
       type: GET_PRODUCTS_NAMES,
       payload: productsNames.data,
@@ -229,7 +232,6 @@ export const getProductNames = (id) => async (dispatch) => {
     console.log(error);
   }
 };
-
 
 export const reset = () => (dispatch) => {
   dispatch({
@@ -266,20 +268,23 @@ export const postReview = (review) => async (dispatch) => {
     console.error(error);
   }
 };
-export const filterByCat_Disc = (shopId, discount, category) => async (dispatch) => {
-  try {
-    const response = await axios.get(
-      `${URL}productShop/${shopId}?category=${category}&discount=${discount}`
-    );
-    console.log(`${URL}productsShop/${shopId}?category=${category}&discount=${discount}`);
-    dispatch({
-      type: FILTER_BY_CAT_DISC,
-      payload: response.data,
-    });
-  } catch (error) {
-    console.log(error);
-  }
-}
+export const filterByCat_Disc =
+  (shopId, discount, category) => async (dispatch) => {
+    try {
+      const response = await axios.get(
+        `${URL}productShop/${shopId}?category=${category}&discount=${discount}`
+      );
+      console.log(
+        `${URL}productsShop/${shopId}?category=${category}&discount=${discount}`
+      );
+      dispatch({
+        type: FILTER_BY_CAT_DISC,
+        payload: response.data,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
 export const filterProductsByCategories =
   (shopId, category) => async (dispatch) => {
     try {
@@ -370,12 +375,11 @@ export const postOrder = (order) => async (dispatch) => {
       type: POST_ORDER,
       payload: response.data,
     });
-    console.log("Response", response.data)
+    console.log("Response", response.data);
   } catch (error) {
     console.log(error);
   }
-}
-
+};
 
 //  - - - - Favourites Restaurants - - - -
 export const getAllFavorites = (id) => async (dispatch) => {
@@ -384,11 +388,11 @@ export const getAllFavorites = (id) => async (dispatch) => {
     dispatch({
       type: ALL_FAVORITES,
       payload: response.data,
-    })
+    });
   } catch (error) {
     console.log(error);
   }
-}
+};
 
 export const addFavorites = (id, shopsID) => async () => {
   try {
@@ -396,7 +400,7 @@ export const addFavorites = (id, shopsID) => async () => {
   } catch (error) {
     console.log(error);
   }
-}
+};
 
 export const removeFavorites = (id, shopsID) => async () => {
   try {
@@ -404,4 +408,15 @@ export const removeFavorites = (id, shopsID) => async () => {
   } catch (error) {
     console.log(error);
   }
-}
+};
+
+export const suscribeNewsletter = (userId, bool) => async () => {
+  try {
+    // console.log(userId, bool);
+    await axios
+      .put(`${URL}user/${userId}/mailingList/${bool}`)
+      .then((response) => console.log(response, "CAMPANITA"));
+  } catch (error) {
+    console.log(error);
+  }
+};

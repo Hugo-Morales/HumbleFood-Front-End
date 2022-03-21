@@ -16,6 +16,7 @@ import HomeShops from "../views/user/HomeShops";
 import DirectionMap from "../views/seller/createNewShop/directionMap";
 import Loading from "../components/loading/Loading";
 import { getdataUser } from "../redux/actions/index";
+import Nosotros from "../views/nosotros/Nosotros";
 
 function App() {
   const dispatch = useDispatch();
@@ -75,7 +76,7 @@ function App() {
   const handleDeleteFromCart = (id) => {
     // const items = JSON.parse(localStorage.getItem("carrito"));
     if (cartItems.length === 1) localStorage.removeItem("carrito");
-  
+
     setCartItems((prev) => prev.filter((item) => item.id !== id));
   };
 
@@ -88,6 +89,7 @@ function App() {
           <Routes>
             <Route exact path="/" element={<LandingPage />} />
             <Route exact path="/home" element={<HomeShops />} />
+            <Route exact path="/home/equipo" element={<Nosotros />} />
             <Route
               exact
               path="/productShop/:shopId"

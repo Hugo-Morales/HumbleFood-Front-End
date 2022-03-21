@@ -42,7 +42,7 @@ const initialStore = {
   allFavorites: [],
   nameOfShop: "",
   isLoading: true,
-  loadingPanel: true
+  loadingPanel: true,
 };
 
 export default function reducer(state = initialStore, { type, payload }) {
@@ -74,7 +74,7 @@ export default function reducer(state = initialStore, { type, payload }) {
       return {
         ...state,
         productsloaded: payload,
-      }
+      };
     case FILTER_BY_CATEGORIES:
       return {
         ...state,
@@ -110,8 +110,8 @@ export default function reducer(state = initialStore, { type, payload }) {
       return {
         ...state,
         allcategories: payload,
-        loadingPanel: false
-      }
+        loadingPanel: false,
+      };
     case GET_CATEGORIES:
       if (Array.isArray(payload)) {
         payload = payload.map((e) => ({ name: e }));
@@ -183,6 +183,7 @@ export default function reducer(state = initialStore, { type, payload }) {
         isLoading: false,
         orders: payload,
       };
+
     default:
       return state;
   }
