@@ -4,7 +4,7 @@ import Drawer from "@mui/material/Drawer";
 import Button from "@mui/material/Button";
 import List from "@mui/material/List";
 import Divider from "@mui/material/Divider";
-import FilterListIcon from '@mui/icons-material/FilterList';
+import FilterListIcon from "@mui/icons-material/FilterList";
 
 export default function MenuFilters({
   handleFilterCategories,
@@ -76,10 +76,12 @@ export default function MenuFilters({
   );
 
   return (
-    <div className="sm:hidden absolute top-8 right-24 pb- mr-2">
+    <div className="sm:hidden  -mr-3">
       {["left"].map((anchor) => (
         <React.Fragment key={anchor}>
-          <Button onClick={toggleDrawer(anchor, true)}>{<FilterListIcon />}</Button>
+          <Button onClick={toggleDrawer(anchor, true)}>
+            {<FilterListIcon />}
+          </Button>
           <Drawer
             anchor={anchor}
             open={state[anchor]}
