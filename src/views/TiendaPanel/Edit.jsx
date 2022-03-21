@@ -32,10 +32,10 @@ export default function Edit({ setShowEdit, info }) {
 			price: !!input.price ? Number(input.price).toFixed(2) : info.price,
 			discount: !!input.discount ? Number(input.discount) : info.discount,
 			stock: !!input.stock ? Number(input.stock) : info.stock,
-			categoriesId: input.categories.toString(),
+			categories: input.categories.toString(),
 		};
 		console.log(obj);
-		// dispatch(editProduct(obj));
+		dispatch(editProduct(obj));
 		setShowEdit(false);
 	};
 
