@@ -1,6 +1,5 @@
 import { MdCreate } from "react-icons/md";
 import { BiEdit } from "react-icons/bi";
-import { HiOutlineShoppingBag } from "react-icons/hi";
 import Button from "../../left/Button";
 
 export default function Shop({ setId }) {

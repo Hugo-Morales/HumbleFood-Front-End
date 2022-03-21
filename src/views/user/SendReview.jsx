@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Rating from "@mui/material/Rating";
 import { useDispatch } from "react-redux";
-import { postReview } from "../../redux/actions";
+import { getdataUser, postReview } from "../../redux/actions";
 import { Link, useParams } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 import Stack from "@mui/material/Stack";
@@ -95,10 +95,10 @@ function SendReview() {
                 Calificar
               </button>
               <Link
-                to="/home"
+                to={`/settings/${user?.sub.split("|")[1]}`}
                 className="mt-10 w-auto bg-princetonOrange border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 rorate:45"
               >
-                Volver al inicio
+                Volver
               </Link>
             </div>
           </form>

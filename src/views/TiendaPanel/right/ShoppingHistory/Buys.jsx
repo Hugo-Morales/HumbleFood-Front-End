@@ -29,7 +29,7 @@ function Buys({ index, total, shopInfo, shopId, productsInfo }) {
                 {productsInfo?.map((product, i) => (
                   <div
                     key={i}
-                    className="flex justify-between items-center my-2"
+                    className="grid grid-cols-2 gap-4 lg:flex lg:justify-between lg:items-center my-2"
                   >
                     <Link to={`/products/${shopId}/${product.id}`}>
                       <img
@@ -41,22 +41,17 @@ function Buys({ index, total, shopInfo, shopId, productsInfo }) {
                         {product.name}
                       </p>
                     </Link>
+
+                    <Link
+                      to={`/send-review/${product.id}`}
+                      className="relative lg:w-44 lg:h-12 p-2 text-center text-white bg-darkGreen rounded-sm hover:bg-teal-800"
+                    >
+                      <p className="absolute top-3 left-14 hover:hidden">Calificar</p>
+                      <p className="absolute top-3 left-8 opacity-0 hover:opacity-100"> ⭐⭐⭐⭐⭐</p>
+                    </Link>
                     <p className="font-bold">
                       Cantidad:{" "}
                       <span className="font-bold">{product.cantidad}</span>
-                    </p>
-                    <p className="font-bold">
-                      Precio:{" "}
-                      <span className="font-bold">
-                        {new Intl.NumberFormat("en-IN", {
-                          style: "currency",
-                          currency: "USD",
-                        }).format(product.price)}
-                      </span>
-                    </p>
-                    <p className="font-bold">
-                      Descuento:{" "}
-                      <span className="font-bold">{product.discount}%</span>
                     </p>
                     <p className="font-bold">
                       Pecio con descuento incluido:{" "}

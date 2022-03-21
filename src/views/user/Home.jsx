@@ -8,6 +8,7 @@ import Loading from "../../components/loading/Loading";
 import Paginado from "../../components/paginado/Paginado";
 import ButtonExit from "../../../src/components/buttonExit/buttonexit";
 
+
 const Home = ({
   open,
   setOpen,

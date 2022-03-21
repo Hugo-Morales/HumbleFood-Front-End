@@ -15,8 +15,11 @@ export default function CreateProducts({ shopId }) {
 		input,
 		err,
 		listcategories,
-		handleUploadImg,
+		handleImagen,
 		eliminar,
+		progress,
+		modal,
+		deleteImagen,
 	} = Functions(Validate, shopId);
 	const dispatch = useDispatch();
 	const categories = useSelector((state) => state.allcategories);
@@ -46,10 +49,10 @@ export default function CreateProducts({ shopId }) {
 							<div className="shadow overflow-hidden">
 								<div className="bg-white">
 									<div className="px-2 py-5 bg-white sm:p-6">
-										<div className="grid grid-cols-6 gap-6">
+										<div className="lg:grid lg:grid-cols-6 gap-6">
 											{/* Input Nombre */}
 											<Input
-												div="col-span-6 sm:col-span-3 font-bold"
+												div="lg:col-span-6 sm:col-span-3 font-bold"
 												forid="first-name"
 												lclass="block text-sm uppercase"
 												tl="Nombre del Producto"
@@ -66,7 +69,7 @@ export default function CreateProducts({ shopId }) {
 
 											{/* Input Precio */}
 											<Input
-												div="col-span-1 font-bold"
+												div="col-span-1 font-bold "
 												forid="price"
 												lclass="block text-sm uppercase"
 												tl="Precio $"
@@ -180,57 +183,54 @@ export default function CreateProducts({ shopId }) {
 											</div>
 
 											{/* Imagen */}
-											<div className="col-span-6 sm:col-span-6">
-												<label className="font-bold">
-													Imagen(es) del producto
-												</label>
-												<div className="mt-5 flex-wrap flex justify-center px-6 pt-6 pb-10 border-2 border-gray-300 border-dashed rounded-md">
-													<div className="space-y-1 text-center">
-														{!input.image ? (
-															<svg
-																className="mx-auto h-12 w-12 text-gray-400"
-																stroke="currentColor"
-																fill="none"
-																viewBox="0 0 48 48"
-																aria-hidden="true"
-															>
-																<path
-																	d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02"
-																	strokeWidth="2"
-																	strokeLinecap="round"
-																	strokeLinejoin="round"
-																/>
-															</svg>
-														) : (
-															"Archivo subido"
-														)}
-														<span>Subir archivo </span>
-														<div className="flex text-sm text-gray-600">
-															<label
-																htmlFor="file-upload"
-																className="relative cursor-pointer bg-white rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500"
-															>
-																<input type="file" onChange={handleUploadImg} />
+											{input.image === "" ? (
+												<>
+													<div className="col-span-6 sm:col-span-6">
+														<div className="flex flex-col">
+															<label className="font-bold">Imagen</label>
+															<label className="text-red-500 font-bold">
+																(Nota: Sólo podés subir una imagen.)
 															</label>
+															<input
+																type="file"
+																className="w-full"
+																onChange={handleImagen}
+															/>
+															{progress !== 0 ? (
+																<h2>Subiendo archivo {progress}%</h2>
+															) : null}
 														</div>
-														<p className="pl-1">o arrastrar y soltar</p>
-														<p className="text-xs text-gray-500">
-															PNG, JPG, GIF up to 10MB
-														</p>
+													</div>
+												</>
+											) : (
+												<div className="flex flex-col">
+													<label className="font-bold mb-2">Imagen</label>
+													<div className="flex justify-around">
+														<img
+															src={input.image}
+															alt="product"
+															className="h-10 w-10 rounded-lg cursor-pointer"
+															onClick={() => modal()}
+														/>
+														<button onClick={() => deleteImagen()}>
+															<MdDelete className="ml-4 text-red-600" />
+														</button>
 													</div>
 												</div>
-											</div>
+											)}
+
 											{/* Aca termina */}
 										</div>
 									</div>
 								</div>
 							</div>
 							<div className="px-4 py-3 bg-gray-50 text-right sm:px-6 rounded-b-lg">
-								<input
+								<button
 									type="submit"
 									className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-									value="Crear Producto"
-								/>
+								>
+									Crear Producto{" "}
+								</button>
 							</div>
 						</form>
 					</div>
