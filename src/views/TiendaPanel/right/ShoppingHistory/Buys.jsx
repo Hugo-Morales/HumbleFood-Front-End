@@ -6,7 +6,7 @@ import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { Link } from "react-router-dom";
 
-function Buys({ index, total, shopInfo, shopId, productsInfo }) {
+function Buys({ index, total, shopInfo, shopId, productsInfo, date }) {
   return (
     <div>
       <Accordion>
@@ -19,7 +19,7 @@ function Buys({ index, total, shopInfo, shopId, productsInfo }) {
             <span className="mx-2 p-1 rounded-full bg-orange-700 text-white">
               # {index + 1}
             </span>
-            Tienda: {shopInfo?.name}
+            Tienda: {shopInfo?.name} {date}
           </Typography>
         </AccordionSummary>
         <AccordionDetails className="bg-orange-300">
@@ -44,10 +44,9 @@ function Buys({ index, total, shopInfo, shopId, productsInfo }) {
 
                     <Link
                       to={`/send-review/${product.id}`}
-                      className="relative lg:w-44 lg:h-12 p-2 text-center text-white bg-darkGreen rounded-sm hover:bg-teal-800"
+                      className="flex justify-center items-center lg:w-44 h-12 p-2 text-center text-white bg-darkGreen rounded-sm hover:bg-teal-800"
                     >
-                      <p className="absolute top-3 left-14 hover:hidden">Calificar</p>
-                      <p className="absolute top-3 left-8 opacity-0 hover:opacity-100"> ⭐⭐⭐⭐⭐</p>
+                      <p>Calificar</p>
                     </Link>
                     <p className="font-bold">
                       Cantidad:{" "}

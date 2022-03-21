@@ -45,6 +45,7 @@ function ShoppingHistory({ userId }) {
                   products={order.ordenProductsId}
                   shopInfo={order.shopInfo}
                   productsInfo={order.productsInfo}
+                  date={order.date}
                 />
               ))
             )}
