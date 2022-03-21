@@ -27,6 +27,10 @@ function App() {
   const userId = user?.sub.split("|")[1];
 
   useEffect(() => {
+    if (cartItems.length !== 0) localStorage.setItem("carrito", JSON.stringify(cartItems));
+  }, [cartItems]);
+
+  useEffect(() => {
     const items = JSON.parse(localStorage.getItem("carrito"));
 
     if (items) setCartItems(items);
@@ -38,7 +42,6 @@ function App() {
   };
 
   const handleAddToCart = (clickedItem) => {
-    localStorage.setItem("carrito", JSON.stringify(cartItems));
     setCartItems((prev) => {
       const isItemInCart = prev.find((item) => item.id === clickedItem.id);
 

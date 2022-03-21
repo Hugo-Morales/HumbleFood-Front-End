@@ -20,7 +20,7 @@ const InfoDataUser = ({ dataUser }) => {
   });
   // console.log(dataUser);
   return (
-    <div className="max-w-md py-4 px-8 bg-white shadow-lg rounded-lg my-1 ml-40">
+    <div className="max-w-md py-4 px-8 bg-white shadow-lg rounded-lg my-1 lg:ml-40">
       <div className="flex justify-center md:justify-end -mt-16">
         <img
           className="w-20 h-20 object-cover rounded-full border-2 border-indigo-500"

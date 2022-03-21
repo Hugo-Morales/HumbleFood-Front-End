@@ -10,13 +10,13 @@ import { MdDelete } from "react-icons/md";
 export default function CreateProducts({ shopId }) {
   const {
     handleChange,
-    add,
     handleSubmit,
     input,
     err,
     listcategories,
     handleImagen,
     eliminar,
+    handleSelect,
     progress,
     modal,
     deleteImagen,
@@ -30,7 +30,7 @@ export default function CreateProducts({ shopId }) {
     dispatch(loading_panel());
     dispatch(getallCategories());
   }, [dispatch]);
-
+  //console.log(categories)
   return (
     <>
       {cargando ? (
@@ -45,21 +45,21 @@ export default function CreateProducts({ shopId }) {
             </div>
           </div>
           <div className="mt-10 sm:mt-0">
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={(e) => handleSubmit(e)}>
               <div className="shadow overflow-hidden">
                 <div className="bg-white">
                   <div className="px-2 py-5 bg-white sm:p-6">
-                    <div className="grid grid-cols-6 gap-6">
+                    <div className="lg:grid lg:grid-cols-6 gap-6">
                       {/* Input Nombre */}
                       <Input
-                        div="col-span-6 sm:col-span-3 font-bold"
+                        div="lg:col-span-6 sm:col-span-3 font-bold"
                         forid="first-name"
-                        lclassName="block text-sm uppercase"
+                        lclass="block text-sm uppercase"
                         tl="Nombre del Producto"
                         it="text"
                         iname="name"
                         iId="first-name"
-                        iclassName="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 border-2 rounded-md pl-3 py-1"
+                        iclass="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 border-2 rounded-md pl-3 py-1"
                         valor={input.name}
                         c={handleChange}
                         ediv="text-rose-800 border-black-300 "
@@ -69,14 +69,14 @@ export default function CreateProducts({ shopId }) {
 
                       {/* Input Precio */}
                       <Input
-                        div="col-span-1 font-bold"
+                        div="col-span-1 font-bold "
                         forid="price"
-                        lclassName="block text-sm uppercase"
+                        lclass="block text-sm uppercase"
                         tl="Precio $"
                         it="number"
                         iname="price"
                         iId="price"
-                        iclassName="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-3 py-1 sm:text-sm border-gray-300 border-2 rounded-md"
+                        iclass="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-3 py-1 sm:text-sm border-gray-300 border-2 rounded-md"
                         valor={input.price}
                         c={handleChange}
                         ediv="text-rose-800"
@@ -144,37 +144,59 @@ export default function CreateProducts({ shopId }) {
                           <label htmlFor="categories" className="font-bold">
                             Categorías
                           </label>
-                          <input
-                            className="h-30"
-                            type="text"
-                            name="categories"
-                            placeholder="Ingrese una categoría del producto."
-                            list="categories"
-                            value={input.categories}
-                            onChange={handleChange}
-                            autoComplete="off"
-                          />
-                          <datalist id="categories">
-                            {categories?.map((c, index) => (
-                              <option key={index} value={c.name} />
-                            ))}
-                          </datalist>
+                          {/* <input
+												className="h-30"
+												type="text"
+												name="categories"
+												placeholder="Ingrese una categoría del producto."
+												
+												onChange={handleChange}
+												autoComplete="off" 
+											/> */}
+                          {/* <datalist id="categories">
+												{categories?.map((pais, index) => (
+													<option key={index} value={pais.name} />
+												))}
+											</datalist> */}
+                          {/* <input
+												className="inline-flex justify-center my-2 py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+												type="button"
+												value="Agregar nueva Categoria"
+												style={{ cursor: "pointer" }}
+												onClick={add}
+											/>
+											<label htmlFor="categories" className="font-bold">
+												Categorías disponibles
+											</label> */}
+                          <select
+                            className=" py-1 border-2 border-zinc-500 rounded-xl"
+                            name="Selectcategories"
+                            onChange={handleSelect}
+                          >
+                            <option value="default" selected disabled>
+                              Seleccione una categoría para el producto.
+                            </option>
+                            {categories?.map((pais, index) => {
+                              return (
+                                <option key={index} value={pais.name}>
+                                  {pais.name}
+                                </option>
+                              );
+                            })}
+                          </select>
                           <div className="text-rose-800 font-bold">
                             {err.listcategories && <p>{err.listcategories}</p>}
                           </div>
                         </div>
-                        <input
-                          className="inline-flex justify-center my-2 py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                          type="button"
-                          value="Agregar Categoria"
-                          style={{ cursor: "pointer" }}
-                          onClick={add}
-                        />
-                        {listcategories.add?.map((c, index) => {
+                        {listcategories?.add.map((c, index) => {
                           return (
                             <div key={index} className="flex justify-between">
                               <label className="">{c}</label>
-                              <button onClick={() => eliminar(c)}>
+                              <button
+                                className=""
+                                name="eliminar"
+                                onClick={(e) => eliminar(e, c)}
+                              >
                                 <MdDelete className="text-red-600" />
                               </button>
                             </div>
@@ -212,7 +234,7 @@ export default function CreateProducts({ shopId }) {
                               className="h-10 w-10 rounded-lg cursor-pointer"
                               onClick={() => modal()}
                             />
-                            <button onClick={() => deleteImagen()}>
+                            <button onClick={(e) => deleteImagen(e)}>
                               <MdDelete className="ml-4 text-red-600" />
                             </button>
                           </div>
@@ -227,6 +249,7 @@ export default function CreateProducts({ shopId }) {
               <div className="px-4 py-3 bg-gray-50 text-right sm:px-6 rounded-b-lg">
                 <button
                   type="submit"
+                  name="submit"
                   className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                 >
                   Crear Producto{" "}

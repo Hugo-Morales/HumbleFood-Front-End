@@ -183,9 +183,9 @@ const NavShops2 = () => {
                     ) : (
                       <Menu.Button className="bg-gray-800 flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
                         <img
-                          className="h-16 w-16 rounded-full"
                           src={userRojo}
                           alt="img not found"
+                          className="h-10 w-10 rounded-full"
                         />
                       </Menu.Button>
                     )}
@@ -199,7 +199,7 @@ const NavShops2 = () => {
                     leaveFrom="transform opacity-100 scale-100"
                     leaveTo="transform opacity-0 scale-95"
                   >
-                    <Menu.Items className="origin-top-right absolute z-50 right-0 mt-8 w-48 rounded-md shadow-lg py-1 bg-gray-800 ring-1 ring-black ring-opacity-5 focus:outline-none">
+                    <Menu.Items className="origin-top-right absolute z-50 right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-gray-800 ring-1 ring-black ring-opacity-5 focus:outline-none">
                       {isAuthenticated ? (
                         <>
                           <Menu.Item>

@@ -26,6 +26,8 @@ export const POST_ORDER = "POST_ORDER";
 export const FILTER_BY_CAT_DISC = "FILTER_BY_CAT_DISC";
 export const ALL_FAVORITES = "ALL_FAVORITES";
 export const SUSCRIBE_NEWSLETTER = "SUSCRIBE_NEWSLETTER";
+export const RESET_PRODUCTS_SHOP = "RESET_PRODUCTS_SHOP";
+
 export const STOP = "STOP";
 const URL = process.env.REACT_APP_URL;
 
@@ -217,6 +219,12 @@ export const getProductShop = (id, page) => async (dispatch) => {
   } catch (error) {
     console.log(error);
   }
+};
+
+export const resetProductsShop = () => (dispatch) => {
+  dispatch({
+    type: RESET_PRODUCTS_SHOP,
+  });
 };
 
 export const getProductNames = (id) => async (dispatch) => {

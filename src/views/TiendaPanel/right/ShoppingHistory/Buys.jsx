@@ -4,11 +4,9 @@ import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import Stack from "@mui/material/Stack";
-import Button from "@mui/material/Button";
 import { Link } from "react-router-dom";
 
-function Buys({ index, total, shopInfo, shopId, productsInfo }) {
+function Buys({ index, total, shopInfo, shopId, productsInfo, date }) {
   return (
     <div>
       <Accordion>
@@ -21,7 +19,7 @@ function Buys({ index, total, shopInfo, shopId, productsInfo }) {
             <span className="mx-2 p-1 rounded-full bg-orange-700 text-white">
               # {index + 1}
             </span>
-            Tienda: {shopInfo?.name}
+            Tienda: {shopInfo?.name} {date}
           </Typography>
         </AccordionSummary>
         <AccordionDetails className="bg-orange-300">
@@ -31,7 +29,7 @@ function Buys({ index, total, shopInfo, shopId, productsInfo }) {
                 {productsInfo?.map((product, i) => (
                   <div
                     key={i}
-                    className="flex justify-between items-center my-2"
+                    className="grid grid-cols-2 gap-4 lg:flex lg:justify-between lg:items-center my-2"
                   >
                     <Link to={`/products/${shopId}/${product.id}`}>
                       <img
@@ -44,25 +42,16 @@ function Buys({ index, total, shopInfo, shopId, productsInfo }) {
                       </p>
                     </Link>
 
-                    <Link to={`/send-review/${product.id}`}
-                    className="p-2 text-white bg-darkGreen rounded-sm hover:bg-teal-800">Calificar</Link>
+                    <Link
+                      to={`/send-review/${product.id}`}
+                      className="flex justify-center items-center lg:w-44 h-12 p-2 text-center text-white bg-darkGreen rounded-sm hover:bg-teal-800"
+                    >
+                      <p>Calificar</p>
+                    </Link>
                     <p className="font-bold">
                       Cantidad:{" "}
                       <span className="font-bold">{product.cantidad}</span>
                     </p>
-                    {/* <p className="font-bold">
-                      Precio:{" "}
-                      <span className="font-bold">
-                        {new Intl.NumberFormat("en-IN", {
-                          style: "currency",
-                          currency: "USD",
-                        }).format(product.price)}
-                      </span>
-                    </p>
-                    <p className="font-bold">
-                      Descuento:{" "}
-                      <span className="font-bold">{product.discount}%</span>
-                    </p> */}
                     <p className="font-bold">
                       Pecio con descuento incluido:{" "}
                       <span className="font-bold">
