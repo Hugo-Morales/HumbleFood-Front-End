@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import PaginationControlled from "./pagination";
 import InfoDataUser from "./InfoDataUser";
-import Edit from "../Edit";
+import Edit from "../Edit"; 
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import {

@@ -44,7 +44,7 @@ const initialStore = {
   nameOfShop: "",
   isLoading: true,
   loadingPanel: true,
-  allProductsShop: []
+  allProductsShop: [],
 };
 
 export default function reducer(state = initialStore, { type, payload }) {
@@ -76,7 +76,7 @@ export default function reducer(state = initialStore, { type, payload }) {
       return {
         ...state,
         productsloaded: payload,
-      }
+      };
     case FILTER_BY_CATEGORIES:
       return {
         ...state,
@@ -112,8 +112,8 @@ export default function reducer(state = initialStore, { type, payload }) {
       return {
         ...state,
         allcategories: payload,
-        loadingPanel: false
-      }
+        loadingPanel: false,
+      };
     case GET_CATEGORIES:
       if (Array.isArray(payload)) {
         payload = payload.map((e) => ({ name: e }));
@@ -137,8 +137,8 @@ export default function reducer(state = initialStore, { type, payload }) {
     case RESET_PRODUCTS_SHOP:
       return {
         ...state,
-        productsloaded: state.allProductsShop
-      }
+        productsloaded: state.allProductsShop,
+      };
     case GET_PRODUCTS_NAMES:
       return {
         ...state,
@@ -191,6 +191,7 @@ export default function reducer(state = initialStore, { type, payload }) {
         isLoading: false,
         orders: payload,
       };
+
     default:
       return state;
   }

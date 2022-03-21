@@ -81,7 +81,7 @@ function Carousell() {
           </button>
         </div>
       </div>
-      <div className="inline-block md:hidden">
+      <div className="inline-block sm:hidden">
         <img src={bannerMobile} alt="banner" className="w-full" />
       </div>
     </div>
