@@ -9,7 +9,7 @@ import Cart from "../cart/Cart";
 import SearchBar from "../serchbar/SearchBar";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useDispatch, useSelector } from "react-redux";
-import { Disclosure, Menu, Transition } from "@headlessui/react";
+import { Menu, Transition } from "@headlessui/react";
 import userRojo from "../../img/userRojo.png";
 import {
   filterProductsByCategories,
@@ -72,6 +72,7 @@ const Nav = ({
       setCategory("");
       dispatch(filterProductsByDiscounts(shopId, discount));
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [category, discount]);
 
   function handleFilterCategories(e) {
@@ -154,11 +155,11 @@ const Nav = ({
       <div
         className={
           isAuthenticated
-            ? "w-1/4 flex justify-center items-center mr-5"
-            : "w-1/6 flex justify-beetwen items-center mr-8"
+            ? "w-1/4 flex justify-center items-center mr-6"
+            : "w-1/6 flex justify-beetwen items-center mr-16"
         }
       >
-        <Menu as="div" className="mt-1 mx-4 relative">
+        <Menu as="div" className="mt-1 mr-4 relative">
           <div className="flex justify-center items-center">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -190,7 +191,7 @@ const Nav = ({
             ) : (
               <Menu.Button className="bg-gray-800 flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
                 <img
-                  className="h-10 w-10 rounded-full"
+                  className="h-12 w-12 rounded-full"
                   src={userRojo}
                   alt="img not found"
                 />
