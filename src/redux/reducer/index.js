@@ -191,7 +191,6 @@ export default function reducer(state = initialStore, { type, payload }) {
         isLoading: false,
         orders: payload,
       };
-
     default:
       return state;
   }
