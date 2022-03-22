@@ -25,6 +25,7 @@ import {
   ALL_FAVORITES,
   RESET_PRODUCTS_SHOP,
   DIRECTION_SHOP,
+  GET_SHOP_REQUEST,
 } from "../actions/index";
 import { GET_ORDER_BY_SHOP } from "../actions/actionsOrders";
 
@@ -47,6 +48,7 @@ const initialStore = {
   loadingPanel: true,
   allProductsShop: [],
   directionShop: "",
+  allShops: [],
 };
 
 export default function reducer(state = initialStore, { type, payload }) {
@@ -135,6 +137,7 @@ export default function reducer(state = initialStore, { type, payload }) {
         productsloaded: payload,
         allProductsShop: payload,
         isLoading: false,
+        loadingPanel: false,
       };
     case RESET_PRODUCTS_SHOP:
       return {
@@ -197,6 +200,12 @@ export default function reducer(state = initialStore, { type, payload }) {
         ...state,
         directionShop: payload,
       };
+      case GET_SHOP_REQUEST: 
+      return {
+        ...state,
+        allShops: payload,
+        loadingPanel: false,
+      }
     default:
       return state;
   }

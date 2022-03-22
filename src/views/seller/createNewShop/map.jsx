@@ -1,5 +1,5 @@
 // import React from "react";
-// import { GoogleMap, withScriptjs, withGoogleMap } from "react-google-maps";
+// import { GoogleMap, withScriptjs, withGoogleMap } from "react-google-maps/api";
 
 // //-34.603661, -58.381495
 // const Map = (props) => {
