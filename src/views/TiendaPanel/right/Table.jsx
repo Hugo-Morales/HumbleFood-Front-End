@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import PaginationControlled from "./pagination";
 import InfoDataUser from "./InfoDataUser";
-import Edit from "../Edit"; 
+import Edit from "../Edit";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import {
@@ -89,7 +89,7 @@ export default function Table({
 			{currentPage === 0 ? <InfoDataUser dataUser={dataUser} /> : null}
 			<div className="flex flex-col overflow-y-auto">
 				<div className="overflow-x-auto lg:overflow-x-clip -my-2">
-					<div className="py-2 align-middle inline-block min-w-full sm:px-6">
+					<div className="py-2 align-middle inline-block min-w-full">
 						<div className="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
 							<table className="w-full divide-y divide-gray-200">
 								<thead className="bg-gray-50">
