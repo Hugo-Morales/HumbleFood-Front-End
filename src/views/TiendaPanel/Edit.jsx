@@ -19,7 +19,7 @@ export default function Edit({ setShowEdit, info }) {
 	useEffect(() => {
 		dispatch(getallCategories());
 		console.log(info);
-	},[])
+	},[dispatch, info])
 	
 	const c = (e) => {
 		setInput({
@@ -45,6 +45,16 @@ export default function Edit({ setShowEdit, info }) {
 		//console.log(obj);
 		dispatch(editProduct(obj));
 		setShowEdit(false);
+		Swal.fire({
+			title: "Se han realizado los cambios",
+			icon: "success",
+			confirmButtonText: "OK",
+			backdrop: `
+			rgba(0,0,123,0.4)
+			left top
+			no-repeat
+		  `,
+		  });
 	};
 
 	const handleSelect = (e) => {
