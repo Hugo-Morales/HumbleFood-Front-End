@@ -41,8 +41,6 @@ const NavAbout = () => {
                 timer: 3000,
             });
         } else if (isAuthenticated && mailState) {
-            Setmailstate(false);
-            dispatch(suscribeNewsletter(dataUser.id, false));
 
             Swal.fire({
                 title: "¿Estás seguro?",
@@ -62,6 +60,8 @@ const NavAbout = () => {
                         "success"
                     )
 
+                    Setmailstate(false);
+                    dispatch(suscribeNewsletter(dataUser.id, false));
                 }
             });
         } else {
@@ -120,14 +120,8 @@ const NavAbout = () => {
                                 </div>
                             </div>
                             <div className="mt-5 absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-                                <button
-                                    onClick={(e) => handleclick(e)}
-                                    type="button"
-                                    className="hidden md:inline-block  mt-4 mr-3 bg-gray-900 hover:bg-gray-600 p-1 rounded-full text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
-                                >
-                                    <span className="sr-only">View notifications</span>
-                                    <BellIcon className="h-6 w-6" aria-hidden="true" />
-                                </button>
+
+
                                 {isAuthenticated ? (
                                     <div className="flex mt-3">
                                         <h3 className="hidden md:inline-block mr-3 mt-1">
