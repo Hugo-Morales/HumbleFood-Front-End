@@ -185,7 +185,7 @@ const NavShops2 = () => {
                         <img
                           src={userRojo}
                           alt="img not found"
-                          className="h-10 w-10 rounded-full"
+                          className="h-16 w-16 rounded-full"
                         />
                       </Menu.Button>
                     )}

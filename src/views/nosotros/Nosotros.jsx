@@ -487,7 +487,7 @@ const Nosotros = () => {
                         </svg>
                       </div>
                     </a>
-                    <a href="javascript:void(0)" className="mx-5">
+                    <a className="mx-5">
                       <div>
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
@@ -704,7 +704,7 @@ const Nosotros = () => {
                         </svg>
                       </div>
                     </a>
-                    <a href="javascript:void(0)" className="mx-5">
+                    <a className="mx-5">
                       <div>
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
@@ -812,7 +812,7 @@ const Nosotros = () => {
                         </svg>
                       </div>
                     </a>
-                    <a href="javascript:void(0)" className="mx-5">
+                    <a className="mx-5">
                       <div>
                         <svg
                           xmlns="http://www.w3.org/2000/svg"

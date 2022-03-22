@@ -9,7 +9,7 @@ import Cart from "../cart/Cart";
 import SearchBar from "../serchbar/SearchBar";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useDispatch, useSelector } from "react-redux";
-import { Disclosure, Menu, Transition } from "@headlessui/react";
+import { Menu, Transition } from "@headlessui/react";
 import userRojo from "../../img/userRojo.png";
 import {
   filterProductsByCategories,
@@ -72,7 +72,7 @@ const Nav = ({
       setCategory("");
       dispatch(filterProductsByDiscounts(shopId, discount));
     }
-  }, [category, discount]);
+  }, [category, discount, shopId, dispatch]);
 
   function handleFilterCategories(e) {
     if (e.target.value === "category" && !discount) {
