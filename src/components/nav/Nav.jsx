@@ -72,7 +72,7 @@ const Nav = ({
       setCategory("");
       dispatch(filterProductsByDiscounts(shopId, discount));
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [category, discount]);
 
   function handleFilterCategories(e) {
