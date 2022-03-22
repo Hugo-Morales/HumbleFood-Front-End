@@ -41,7 +41,7 @@ export default function ShowsItems() {
 					<h1 className="font-bold text-center border-b-indigo-500 border-b-4">
 						Items Guardados en el Carrito
 					</h1>
-					{items.length ? (
+					{items?.length ? (
 						<ItemsTable datos={items} borrar={borrar} />
 					) : (
 						<div className="text-center font-bold p-4 text-red-400">

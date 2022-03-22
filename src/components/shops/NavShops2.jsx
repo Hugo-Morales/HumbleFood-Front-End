@@ -41,12 +41,28 @@ const NavShops2 = () => {
         timer: 3000,
       });
     } else if (isAuthenticated && mailState) {
-      Setmailstate(false);
-      dispatch(suscribeNewsletter(dataUser.id, false));
 
-      MySwal.fire({
-        icon: "info",
-        title: "¡Cancelaste la suscripción al boletin informativo!",
+      Swal.fire({
+        title: "¿Estás seguro?",
+        text: "Esta acción no se puede revertir.",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        cancelButtonText: "Cancelar",
+        confirmButtonText: "¡Sí, quiero!",
+        reverseButtons: true,
+      }).then((result) => {
+        if (result.isConfirmed) {
+          Swal.fire(
+            "Listo",
+            "Cancelacion de la suscripcion completa!",
+            "success"
+          )
+
+          Setmailstate(false);
+          dispatch(suscribeNewsletter(dataUser.id, false));
+        }
       });
     } else {
       MySwal.fire({
@@ -84,7 +100,7 @@ const NavShops2 = () => {
                   </Link>
 
                   <Link to="/home">
-                    <h1 className=" block sm:ml-3  text-isabelline text-3xl font-extrabold">
+                    <h1 className="inline-block mr-4 sm:ml-3 text-isabelline text-3xl font-extrabold">
                       Humblefood
                     </h1>
                   </Link>
@@ -111,14 +127,25 @@ const NavShops2 = () => {
                 </div>
               </div>
               <div className="mt-5 absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-                <button
-                  onClick={(e) => handleclick(e)}
-                  type="button"
-                  className="hidden md:inline-block  mt-4 mr-3 bg-gray-900 hover:bg-gray-600 p-1 rounded-full text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
-                >
-                  <span className="sr-only">View notifications</span>
-                  <BellIcon className="h-6 w-6" aria-hidden="true" />
-                </button>
+                {mailState ? (
+
+                  <button
+                    onClick={handleclick}
+                    type='button'
+                    className="hidden md:inline-block  mt-4 mr-3 bg-red-600 hover:bg-gray-600 p-1 rounded-full text-white-600 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
+                    <BellIcon className="h-6 w-6" aria-hidden="true" />
+                  </button>
+                ) : (
+                  <button
+
+                    onClick={(e) => handleclick(e)}
+                    type="button"
+                    className="hidden md:inline-block  mt-4 mr-3 bg-gray-900 hover:bg-gray-600 p-1 rounded-full text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
+                  >
+                    <span className="sr-only">View notifications</span>
+                    <BellIcon className="h-6 w-6" aria-hidden="true" />
+                  </button>
+                )}
                 {isAuthenticated ? (
                   <div className="flex mt-3">
                     <h3 className="hidden md:inline-block mr-3 mt-1">

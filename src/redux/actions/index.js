@@ -45,7 +45,9 @@ export const getShopsId = (id) => async (dispatch) => {
 
 export const getShops = (page) => async (dispatch) => {
   try {
+
     const allShops = await axios.get(`${URL}shops?page=${page}`);
+
     dispatch({
       type: GET_SHOPS,
       payload: allShops.data,
@@ -355,7 +357,7 @@ export const admin = (type, id) => async () => {
 
 export const editProduct = (obj) => async () => {
   try {
-    axios.put(`${URL}product/update`, obj);
+    await axios.put(`${URL}product/update`, obj);
   } catch (error) {
     console.error(error);
   }
