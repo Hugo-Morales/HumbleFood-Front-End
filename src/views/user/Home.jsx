@@ -10,7 +10,7 @@ import {
 import Nav from "../../components/nav/Nav";
 import Cards from "../../components/cards/Cards";
 import Loading from "../../components/loading/Loading";
-import Paginado from "../../components/paginado/Paginado";
+import PaginationControlled from "../TiendaPanel/right/pagination";
 import ButtonExit from "../../../src/components/buttonExit/buttonexit";
 
 const Home = ({
@@ -25,9 +25,7 @@ const Home = ({
 }) => {
 	const { shopId } = useParams();
 	const dispatch = useDispatch();
-	const { products, next, prev, pagesTotal } = useSelector(
-		(state) => state.productsloaded
-	);
+	const { products, pagesTotal } = useSelector((state) => state.productsloaded);
 	const shop = useSelector((state) => state.shop);
 	const [currentPage, setCurrentPage] = useState(0);
 	const cargando = useSelector((state) => state.isLoading);
@@ -95,12 +93,10 @@ const Home = ({
 						handleAddToCart={handleAddToCart}
 						shop={shop.name}
 					/>
-					<Paginado
+					<PaginationControlled
 						paging={paging}
 						currentPage={currentPage}
 						pagesTotal={pagesTotal}
-						prev={prev}
-						next={next}
 					/>
 				</div>
 			)}
