@@ -55,8 +55,6 @@ export default function Cart({
     date: new Date().toLocaleString(),
   };
 
-  console.log("order", order);
-
   useEffect(() => {
     dispatch(getdataUser(userId));
   }, [dispatch, userId]);
