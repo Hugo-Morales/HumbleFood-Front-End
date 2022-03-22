@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Loading from "../../../../components/loading/Loading";
-import Paginado from "../../../../components/paginado/Paginado";
+import PaginationControlled from "../pagination";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import {
@@ -255,9 +255,7 @@ export default function HacerAdmin() {
 							</div>
 						</div>
 					</div>
-					<Paginado
-						next={users.next}
-						prev={users.prev}
+					<PaginationControlled
 						pagesTotal={users.pagesTotal}
 						paging={paging}
 						currentPage={currentPage}
