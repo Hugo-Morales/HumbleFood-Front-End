@@ -27,6 +27,7 @@ export const FILTER_BY_CAT_DISC = "FILTER_BY_CAT_DISC";
 export const ALL_FAVORITES = "ALL_FAVORITES";
 export const SUSCRIBE_NEWSLETTER = "SUSCRIBE_NEWSLETTER";
 export const RESET_PRODUCTS_SHOP = "RESET_PRODUCTS_SHOP";
+export const GET_SHOP_DIRECTION = "GET_SHOP_DIRECTION";
 
 export const STOP = "STOP";
 const URL = process.env.REACT_APP_URL;
@@ -45,7 +46,6 @@ export const getShopsId = (id) => async (dispatch) => {
 
 export const getShops = (page) => async (dispatch) => {
   try {
-
     const allShops = await axios.get(`${URL}shops?page=${page}`);
 
     dispatch({
@@ -426,6 +426,21 @@ export const suscribeNewsletter = (userId, bool) => async () => {
     await axios
       .put(`${URL}user/${userId}/mailingList/${bool}`)
       .then((response) => console.log(response, "CAMPANITA"));
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getShopDirection = (lat, lng) => async (dispatch) => {
+  try {
+    const direction = await axios.get(
+      `http://api.positionstack.com/v1/reverse?access_key=87508c31ff90beec780b7f4866b1b54b&query=${lat},${lng}`
+    );
+    console.log(direction.data.data[1].label);
+    dispatch({
+      type: GET_SHOP_DIRECTION,
+      payload: direction.data.data[1].label,
+    });
   } catch (error) {
     console.log(error);
   }
