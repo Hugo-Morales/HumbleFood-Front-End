@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { editProduct, getallCategories } from "../../redux/actions";
+import { editProduct, getallCategories, getallproducts, loading_panel } from "../../redux/actions";
 import { MdDelete } from "react-icons/md";
 import Swal from "sweetalert2";
 
@@ -16,6 +16,8 @@ export default function Edit({ setShowEdit, info }) {
 	});
 	const [listCategories, setListCategories] = useState([])
 	const categories = useSelector(state => state.allcategories);
+	const dataUser = useSelector((state) => state.dataUser);
+
 	useEffect(() => {
 		dispatch(getallCategories());
 		console.log(info);
@@ -54,6 +56,10 @@ export default function Edit({ setShowEdit, info }) {
 			left top
 			no-repeat
 		  `,
+		  }).then((r) => {
+			  if(r.isConfirmed) {
+				  window.location.reload(false);
+			  }
 		  });
 	};
 
