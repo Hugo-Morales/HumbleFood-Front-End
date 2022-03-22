@@ -18,8 +18,7 @@ const Nosotros = () => {
             Nuestro equipo de desarrollo.
           </p>
           <h1 className="xl:text-4xl text-3xl text-center text-white font-extrabold pb-6 sm:w-4/6 w-5/6 mx-auto">
-            Conoce a las personas talentosas detrás de la construcción de Humble
-            food.
+            Conoce a las personas talentosas detrás de la construcción de Humblefood.
           </h1>
         </div>
       </div>
@@ -68,7 +67,7 @@ const Nosotros = () => {
                   </div>
 
                   <div className="w-full flex justify-center pt-5 pb-5">
-                    <a href="https://github.com/Danieljra" className="mx-5">
+                    <a href="https://github.com/Danieljra" target="_blank" rel="noreferrer" className="mx-5">
                       <div>
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
@@ -86,7 +85,7 @@ const Nosotros = () => {
                         </svg>
                       </div>
                     </a>
-                    <a href="https://twitter.com/Daniel_RA0" className="mx-5">
+                    <a href="https://twitter.com/Daniel_RA0" target="_blank" rel="noreferrer" className="mx-5">
                       <div>
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
@@ -106,6 +105,7 @@ const Nosotros = () => {
                     </a>
                     <a
                       href="https://www.linkedin.com/in/developer-danielramirez/"
+                      target="_blank" rel="noreferrer"
                       className="mx-5"
                     >
                       <div>
@@ -175,7 +175,7 @@ const Nosotros = () => {
                     </p>
                   </div>
                   <div className="w-full flex justify-center pt-5 pb-5">
-                    <a href="https://github.com/diemora473" className="mx-5">
+                    <a href="https://github.com/diemora473" target="_blank" rel="noreferrer" className="mx-5">
                       <div>
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
@@ -195,6 +195,7 @@ const Nosotros = () => {
                     </a>
                     <a
                       href="https://twitter.com/thepianist473"
+                      target="_blank" rel="noreferrer"
                       className="mx-5"
                     >
                       <div>
@@ -216,6 +217,7 @@ const Nosotros = () => {
                     </a>
                     <a
                       href="https://www.linkedin.com/in/diego-morales-666573194/"
+                      target="_blank" rel="noreferrer"
                       className="mx-5"
                     >
                       <div>
@@ -286,7 +288,7 @@ const Nosotros = () => {
                     </p>
                   </div>
                   <div className="w-full flex justify-center pt-5 pb-5">
-                    <a href="https://github.com/Peccosbill" className="mx-5">
+                    <a href="https://github.com/Peccosbill" target="_blank" rel="noreferrer" className="mx-5">
                       <div>
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
@@ -307,6 +309,7 @@ const Nosotros = () => {
 
                     <a
                       href="https://www.linkedin.com/in/jonathan-montini/"
+                      target="_blank" rel="noreferrer"
                       className="mx-5"
                     >
                       <div>
@@ -377,7 +380,7 @@ const Nosotros = () => {
                     </p>
                   </div>
                   <div className="w-full flex justify-center pt-5 pb-5">
-                    <a href="https://github.com/LuchoFS96" className="mx-5">
+                    <a href="https://github.com/LuchoFS96" target="_blank" rel="noreferrer" className="mx-5">
                       <div>
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
@@ -398,6 +401,7 @@ const Nosotros = () => {
 
                     <a
                       href="https://www.linkedin.com/in/luciano-benavides/"
+                      target="_blank" rel="noreferrer"
                       className="mx-5"
                     >
                       <div>
@@ -469,7 +473,7 @@ const Nosotros = () => {
                   </div>
 
                   <div className="w-full flex justify-center pt-5 pb-5">
-                    <a href="https://github.com/DemIGoD45" className="mx-5">
+                    <a href="https://github.com/DemIGoD45" target="_blank" rel="noreferrer" className="mx-5">
                       <div>
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
@@ -507,6 +511,7 @@ const Nosotros = () => {
                     {/* </a> */}
                     <a
                       href="https://www.linkedin.com/in/demian-de-la-vega/"
+                      target="_blank" rel="noreferrer"
                       className="mx-5"
                     >
                       <div>
@@ -577,7 +582,7 @@ const Nosotros = () => {
                     </p>
                   </div>
                   <div className="w-full flex justify-center pt-5 pb-5">
-                    <a href="https://github.com/Tatino12" className="mx-5">
+                    <a href="https://github.com/Tatino12" target="_blank" rel="noreferrer" className="mx-5">
                       <div>
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
@@ -595,7 +600,7 @@ const Nosotros = () => {
                         </svg>
                       </div>
                     </a>
-                    <a href="https://twitter.com/CryptoTuru" className="mx-5">
+                    <a href="https://twitter.com/CryptoTuru" target="_blank" rel="noreferrer" className="mx-5">
                       <div>
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
@@ -615,6 +620,7 @@ const Nosotros = () => {
                     </a>
                     <a
                       href="https://www.linkedin.com/in/marianohuecke/"
+                      target="_blank" rel="noreferrer"
                       className="mx-5"
                     >
                       <div>
@@ -686,7 +692,7 @@ const Nosotros = () => {
                     </p>
                   </div>
                   <div className="w-full flex justify-center pt-5 pb-5">
-                    <a href="https://github.com/Hugo-Morales" className="mx-5">
+                    <a href="https://github.com/Hugo-Morales" target="_blank" rel="noreferrer" className="mx-5">
                       <div>
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
@@ -724,6 +730,7 @@ const Nosotros = () => {
                     </a>
                     <a
                       href="https://www.linkedin.com/in/hugo-mauricio-morales/"
+                      target="_blank" rel="noreferrer"
                       className="mx-5"
                     >
                       <div>
@@ -794,7 +801,7 @@ const Nosotros = () => {
                     </p>
                   </div>
                   <div className="w-full flex justify-center pt-5 pb-5">
-                    <a href="https://github.com/ethanial1" className="mx-5">
+                    <a href="https://github.com/ethanial1" target="_blank" rel="noreferrer" className="mx-5">
                       <div>
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
@@ -832,6 +839,7 @@ const Nosotros = () => {
                     </a>
                     <a
                       href="https://www.linkedin.com/in/fernandotolentinosa/"
+                      target="_blank" rel="noreferrer"
                       className="mx-5"
                     >
                       <div>

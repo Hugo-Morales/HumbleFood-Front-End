@@ -88,7 +88,7 @@ export default function Table({
 		<>
 			{currentPage === 0 ? <InfoDataUser dataUser={dataUser} /> : null}
 			<div className="flex flex-col overflow-y-auto">
-				<div className="overflow-x-auto-my-2 sm:-mx-6">
+				<div className="overflow-x-auto lg:overflow-x-clip -my-2">
 					<div className="py-2 align-middle inline-block min-w-full sm:px-6">
 						<div className="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
 							<table className="w-full divide-y divide-gray-200">

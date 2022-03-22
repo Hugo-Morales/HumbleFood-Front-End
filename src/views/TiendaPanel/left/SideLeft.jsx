@@ -9,8 +9,7 @@ import Admin from "../rol/admin/Admin";
 import ButtonExit from "../../../components/buttonExit/buttonexit";
 
 export default function SideLeft({ name, setId, rol, shopsId }) {
-	const { logout } = useAuth0();
-	console.log(shopsId[0]);
+  const { logout } = useAuth0();
 
 	return (
 		<div className="bg-gray-700 sticky top-0 sm-h-30 h-screen p-6">
