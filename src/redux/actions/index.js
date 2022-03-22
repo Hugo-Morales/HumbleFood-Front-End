@@ -27,6 +27,7 @@ export const FILTER_BY_CAT_DISC = "FILTER_BY_CAT_DISC";
 export const ALL_FAVORITES = "ALL_FAVORITES";
 export const SUSCRIBE_NEWSLETTER = "SUSCRIBE_NEWSLETTER";
 export const RESET_PRODUCTS_SHOP = "RESET_PRODUCTS_SHOP";
+export const GET_SHOP_REQUEST = 'GET_SHOP_REQUEST';
 
 export const STOP = "STOP";
 const URL = process.env.REACT_APP_URL;
@@ -154,6 +155,26 @@ export const postNewShop = (newShop) => async (dispatch) => {
       type: POST_NEW_SHOP,
       payload: response.data,
     });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getShopRequest = () => async (dispatch) => {
+  try {
+    const response = await axios.get(`${URL}authorization`);
+    dispatch({
+      type: GET_SHOP_REQUEST,
+      payload: response.data,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const authorize = (id, authorize) => async () => {
+  try {
+    await axios.put(`${URL}authorize/${id}?authorize=${authorize}`);
   } catch (error) {
     console.log(error);
   }
