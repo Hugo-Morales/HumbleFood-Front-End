@@ -1,6 +1,6 @@
 import { Fragment, useEffect, useState } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
-import { BellIcon, MenuIcon, XIcon } from "@heroicons/react/outline";
+import { MenuIcon, XIcon } from "@heroicons/react/outline";
 import logo from "../../img/logo.png";
 import { Link } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";

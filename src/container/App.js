@@ -17,6 +17,7 @@ import DirectionMap from "../views/seller/createNewShop/directionMap";
 import Loading from "../components/loading/Loading";
 import { getdataUser } from "../redux/actions/index";
 import Nosotros from "../views/nosotros/Nosotros";
+import Prueba from "../views/user/prueba";
 
 function App() {
   const dispatch = useDispatch();
@@ -133,6 +134,7 @@ function App() {
             <Route exact path="/settings/:userId" element={<PrivateRoute />} />
             <Route exact path="/category" element={<NewCategory />} />
             <Route exact path="/createShop" element={<PrivateShop />} />
+            <Route exact path='/prueba' element={<Prueba />} />
             <Route
               exact
               path="/send-review/:productId"
