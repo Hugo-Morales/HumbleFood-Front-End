@@ -42,36 +42,38 @@ export default function Edit({ setShowEdit, info }) {
     });
   };
 
-  const obj = {
-    idProduct: info.id,
-    name: !!input.nombre ? input.nombre : info.name,
-    image: info.image,
-    description: !!input.description ? input.description : info.description,
-    price: !!input.price ? Number(input.price).toFixed(2) : info.price,
-    discount: !!input.discount ? Number(input.discount) : info.discount,
-    stock: !!input.stock ? Number(input.stock) : info.stock,
-    categoriesId: input.categoriesId.length
-      ? input.categoriesId.toString()
-      : info.categoriesId.toString(),
-  };
-  //console.log(obj);
-  dispatch(editProduct(obj));
-  setShowEdit(false);
-  Swal.fire({
-    title: "Se han realizado los cambios",
-    icon: "success",
-    confirmButtonText: "OK",
-    backdrop: `
+  const submit = (e) => {
+    e.preventDefault();
+    const obj = {
+      idProduct: info.id,
+      name: !!input.nombre ? input.nombre : info.name,
+      image: info.image,
+      description: !!input.description ? input.description : info.description,
+      price: !!input.price ? Number(input.price).toFixed(2) : info.price,
+      discount: !!input.discount ? Number(input.discount) : info.discount,
+      stock: !!input.stock ? Number(input.stock) : info.stock,
+      categoriesId: input.categoriesId.length
+        ? input.categoriesId.toString()
+        : info.categoriesId.toString(),
+    };
+    //console.log(obj);
+    dispatch(editProduct(obj));
+    setShowEdit(false);
+    Swal.fire({
+      title: "Se han realizado los cambios",
+      icon: "success",
+      confirmButtonText: "OK",
+      backdrop: `
 			rgba(0,0,123,0.4)
 			left top
 			no-repeat
 		  `,
-  }).then((r) => {
-    if (r.isConfirmed) {
-      window.location.reload(false);
-    }
-  });
-
+    }).then((r) => {
+      if (r.isConfirmed) {
+        window.location.reload(false);
+      }
+    });
+  };
   // const handleSelect = (e) => {
   // 	e.preventDefault();
   // 	const {value, name} = e.target;

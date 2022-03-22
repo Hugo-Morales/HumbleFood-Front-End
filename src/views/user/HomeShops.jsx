@@ -37,11 +37,11 @@ export default function HomeShops() {
   };
 
   useEffect(() => {
-    if (isAuthenticated && user) dispatch(postnewUser(newUser));
     if (isAuthenticated) dispatch(getAllFavorites(id));
   });
 
   useEffect(() => {
+    if (isAuthenticated && user) dispatch(postnewUser(newUser));
     dispatch(loading());
     dispatch(getShops(currentPage));
 
