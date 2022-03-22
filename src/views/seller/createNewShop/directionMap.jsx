@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Loading from "../../../components/loading/Loading";
-import { stop } from "../../../redux/actions";
+import { getDirection, stop } from "../../../redux/actions";
 import { Link, useNavigate } from "react-router-dom";
 import Map from "./map";
 import credentials from "./credentials";
@@ -12,6 +12,9 @@ const DirectionMap = () => {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 	const cargando = useSelector((state) => state.isLoading);
+
+	const [directionShop, setDirectionShop] = useState("");
+
 	const MySwal = withReactContent(Swal);
 	const URL = "https://maps.googleapis.com/maps/api/js?v=3.exp&key=";
 
@@ -30,6 +33,7 @@ const DirectionMap = () => {
 			timer: 2000,
 		}).then((r) => {
 			if (r.isDismissed) {
+				dispatch(getDirection(directionShop))
 				navigate(`/createShop`);
 			}
 		});
@@ -89,7 +93,7 @@ const DirectionMap = () => {
 
 									<div className="w-full flex flex-col">
 										<label className="font-bold">Ingrese Dirección: </label>
-										<input className="border-black border-2 p-2" />
+										<input className="border-black border-2 p-2" onChange={(e) => setDirectionShop(e.target.value)} value={directionShop} />
 									</div>
 									<div className="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start">
 										<div className="rounded-md shadow">
