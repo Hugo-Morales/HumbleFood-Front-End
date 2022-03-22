@@ -62,7 +62,6 @@ function PaypalCheckoutButton({
       no-repeat
       `,
     });
-   
   }
 
   if (error) {
@@ -110,6 +109,30 @@ function PaypalCheckoutButton({
               },
               payee: {
                 email_address: shopEmail,
+              },
+              shipping: {
+                options: [
+                  {
+                    id: "SHIP_123",
+                    label: "Envío a domicilio",
+                    type: "SHIPPING",
+                    selected: true,
+                    amount: {
+                      value: "3.00",
+                      currency_code: "USD",
+                    },
+                  },
+                  {
+                    id: "SHIP_456",
+                    label: "Retiro en Tienda",
+                    type: "PICKUP",
+                    selected: false,
+                    amount: {
+                      value: "0.00",
+                      currency_code: "USD",
+                    },
+                  },
+                ],
               },
             },
           ],

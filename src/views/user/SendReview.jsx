@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Rating from "@mui/material/Rating";
 import { useDispatch } from "react-redux";
 import { postReview } from "../../redux/actions";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 import Stack from "@mui/material/Stack";
 import Swal from "sweetalert2";
@@ -15,6 +15,7 @@ function SendReview() {
   const [productId, setProductId] = useState("");
   const [value, setValue] = useState(0);
   const [review, setReview] = useState("");
+  const navigate = useNavigate();
 
   // console.log("review", id);
 
@@ -52,6 +53,10 @@ function SendReview() {
       left top
       no-repeat
     `,
+    }).then((r) => {
+      if (r.isConfirmed) {
+        navigate(`/settings/${user?.sub.split("|")[1]}`);
+      }
     });
   };
 

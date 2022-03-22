@@ -166,7 +166,7 @@ export default function Cart({
                         onClick={() => setCheckout(false)}
                         className={
                           checkout
-                            ? "w-full mb-4 p-2 font-medium text-indigo-600 border-solid border-2 border-indigo-600 rounded hover:text-isabelline hover:bg-indigo-500"
+                            ? "w-full mb-4 p-2 font-medium text-indigo-600 border-solid border-2 border-indigo-600 rounded hover:text-isabelline hover:bg-indigo-600"
                             : "hidden"
                         }
                       >
