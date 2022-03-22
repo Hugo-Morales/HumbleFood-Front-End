@@ -1,4 +1,3 @@
-import { async } from "@firebase/util";
 import axios from "axios";
 export const GET_SHOPS = "GET_SHOPS";
 export const GET_DETAIL_PRODUCT = "GET_DETAIL_PRODUCT";
@@ -27,6 +26,7 @@ export const FILTER_BY_CAT_DISC = "FILTER_BY_CAT_DISC";
 export const ALL_FAVORITES = "ALL_FAVORITES";
 export const SUSCRIBE_NEWSLETTER = "SUSCRIBE_NEWSLETTER";
 export const RESET_PRODUCTS_SHOP = "RESET_PRODUCTS_SHOP";
+export const DIRECTION_SHOP = "DIRECTION_SHOP";
 export const GET_SHOP_REQUEST = 'GET_SHOP_REQUEST';
 
 export const STOP = "STOP";
@@ -46,7 +46,6 @@ export const getShopsId = (id) => async (dispatch) => {
 
 export const getShops = (page) => async (dispatch) => {
   try {
-
     const allShops = await axios.get(`${URL}shops?page=${page}`);
 
     dispatch({
@@ -275,6 +274,7 @@ export const loading = () => (dispatch) => {
     type: LOADING,
   });
 };
+
 export const loading_panel = () => (dispatch) => {
   dispatch({
     type: LOADING_PANEL,
@@ -450,4 +450,11 @@ export const suscribeNewsletter = (userId, bool) => async () => {
   } catch (error) {
     console.log(error);
   }
+};
+
+export const getDirection = (direction) => (dispatch) => {
+  dispatch({
+    type: DIRECTION_SHOP,
+    payload: direction,
+  });
 };
