@@ -15,20 +15,24 @@ export default function PaginationControlled({
 	};
 
 	return (
-		<Stack spacing={2}>
-			<div className="w-full my-4 flex justify-center bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-l">
-				<Pagination
-					count={pagesTotal}
-					page={page}
-					color="primary"
-					variant="outlined"
-					shape="rounded"
-					showFirstButton
-					showLastButton
-					boundaryCount={2}
-					onChange={handleChange}
-				/>
-			</div>
-		</Stack>
+		<>
+			{pagesTotal === 1 ? null : (
+				<Stack spacing={2}>
+					<div className="w-full my-4 flex justify-center bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-l">
+						<Pagination
+							count={pagesTotal}
+							page={page}
+							color="primary"
+							variant="outlined"
+							shape="rounded"
+							showFirstButton
+							showLastButton
+							boundaryCount={2}
+							onChange={handleChange}
+						/>
+					</div>
+				</Stack>
+			)}
+		</>
 	);
 }
