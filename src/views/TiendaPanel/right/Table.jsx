@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import Paginado from "../../../components/paginado/Paginado";
+import PaginationControlled from "./pagination";
 import InfoDataUser from "./InfoDataUser";
 import Edit from "../Edit";
 import Swal from "sweetalert2";
@@ -87,8 +87,8 @@ export default function Table({
   return (
     <>
       {currentPage === 0 ? <InfoDataUser dataUser={dataUser} /> : null}
-      <div className="flex flex-col">
-        <div className="overflow-x-auto -my-2 sm:-mx-6">
+      <div className="flex flex-col overflow-y-auto">
+        <div className="overflow-x-auto lg:overflow-x-clip -my-2">
           <div className="py-2 align-middle inline-block min-w-full sm:px-6">
             <div className="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
               <table className="w-full divide-y divide-gray-200">
@@ -238,9 +238,7 @@ export default function Table({
           </div>
         </div>
       </div>
-      <Paginado
-        next={next}
-        prev={prev}
+      <PaginationControlled
         pagesTotal={pagesTotal}
         paging={paging}
         currentPage={currentPage}

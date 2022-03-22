@@ -5,6 +5,7 @@ import Styles from "./SideRight.module.css";
 import Orders from "./Orders/Orders";
 import ShoppingHistory from "./ShoppingHistory/ShoppingHistory";
 import ShowsItems from "./SaveItems/ShowsItems";
+import AddCategory from "./add/AddCategory";
 
 export default function SideRight({
 	product,
@@ -15,7 +16,7 @@ export default function SideRight({
 	paging,
 	currentPage,
 }) {
-	const { products, next, prev, pagesTotal } = product;
+	const { products, pagesTotal } = product;
 	// console.log(products);
 
 	const renderSwitch = (x) => {
@@ -28,8 +29,6 @@ export default function SideRight({
 						<Table
 							p={products}
 							d={false}
-							next={next}
-							prev={prev}
 							pagesTotal={pagesTotal}
 							paging={paging}
 							currentPage={currentPage}
@@ -42,6 +41,8 @@ export default function SideRight({
 				return <Orders shopId={shopsId} />;
 			case "makeAdmin":
 				return <HacerAdmin />;
+			case "addCategory":
+				return <AddCategory />;
 			case "historial":
 				return <ShoppingHistory userId={userId} />;
 			default:
@@ -52,8 +53,6 @@ export default function SideRight({
 						<Table
 							p={products}
 							d={false}
-							next={next}
-							prev={prev}
 							pagesTotal={pagesTotal}
 							paging={paging}
 							currentPage={currentPage}

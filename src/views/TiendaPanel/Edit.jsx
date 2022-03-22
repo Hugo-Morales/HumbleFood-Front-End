@@ -1,6 +1,11 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { editProduct, getallCategories } from "../../redux/actions";
+import {
+  editProduct,
+  getallCategories,
+  getallproducts,
+  loading_panel,
+} from "../../redux/actions";
 import { MdDelete } from "react-icons/md";
 import Swal from "sweetalert2";
 
@@ -16,10 +21,19 @@ export default function Edit({ setShowEdit, info }) {
   });
   const [listCategories, setListCategories] = useState([]);
   const categories = useSelector((state) => state.allcategories);
+  const dataUser = useSelector((state) => state.dataUser);
+
   useEffect(() => {
     dispatch(getallCategories());
     console.log(info);
-  }, []);
+  }, [dispatch, info]);
+
+  // const c = (e) => {
+  // 	setInput({
+  // 		...input,
+  // 		[e.target.name]: e.target.value,
+  // 	});
+  // };
 
   const c = (e) => {
     setInput({
@@ -28,25 +42,55 @@ export default function Edit({ setShowEdit, info }) {
     });
   };
 
-  const submit = (e) => {
-    e.preventDefault();
-
-    const obj = {
-      idProduct: info.id,
-      name: !!input.nombre ? input.nombre : info.name,
-      image: info.image,
-      description: !!input.description ? input.description : info.description,
-      price: !!input.price ? Number(input.price).toFixed(2) : info.price,
-      discount: !!input.discount ? Number(input.discount) : info.discount,
-      stock: !!input.stock ? Number(input.stock) : info.stock,
-      categoriesId: input.categoriesId.length
-        ? input.categoriesId.toString()
-        : info.categoriesId.toString(),
-    };
-    //console.log(obj);
-    dispatch(editProduct(obj));
-    setShowEdit(false);
+  const obj = {
+    idProduct: info.id,
+    name: !!input.nombre ? input.nombre : info.name,
+    image: info.image,
+    description: !!input.description ? input.description : info.description,
+    price: !!input.price ? Number(input.price).toFixed(2) : info.price,
+    discount: !!input.discount ? Number(input.discount) : info.discount,
+    stock: !!input.stock ? Number(input.stock) : info.stock,
+    categoriesId: input.categoriesId.length
+      ? input.categoriesId.toString()
+      : info.categoriesId.toString(),
   };
+  //console.log(obj);
+  dispatch(editProduct(obj));
+  setShowEdit(false);
+  Swal.fire({
+    title: "Se han realizado los cambios",
+    icon: "success",
+    confirmButtonText: "OK",
+    backdrop: `
+			rgba(0,0,123,0.4)
+			left top
+			no-repeat
+		  `,
+  }).then((r) => {
+    if (r.isConfirmed) {
+      window.location.reload(false);
+    }
+  });
+
+  // const handleSelect = (e) => {
+  // 	e.preventDefault();
+  // 	const {value, name} = e.target;
+  // 	if(name !== "default"){
+  // 		if(!input.categoriesId.find(n => n === value)){
+  // 			categories.forEach(e => {
+  // 				if(e.id === value){
+  // 					setListCategories([...listCategories, e.name])
+  // 				}
+  // 			});
+  // 			setInput({
+  // 				...input,
+  // 				categoriesId: [...input.categoriesId, value],
+  // 			});
+  // 		}
+  // 	}
+  // 	console.log(listCategories);
+  // 	e.target.value = "default";
+  // }
 
   const handleSelect = (e) => {
     e.preventDefault();
@@ -215,7 +259,7 @@ export default function Edit({ setShowEdit, info }) {
               type="button"
               onClick={(e) => submit(e)}
             >
-              Confirmar Cambios
+              Confirmar cambios
             </button>
           </div>
         </div>
