@@ -108,7 +108,7 @@ export default function CreateProducts({ shopId }) {
                         it="number"
                         iname="stock"
                         iId="stock"
-                        iclassName="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-3 py-1 sm:text-sm border-gray-300 border-2 rounded-md"
+                        iclass="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-3 py-1 sm:text-sm border-gray-300 border-2 rounded-md"
                         valor={input.stock}
                         c={handleChange}
                         ediv="text-rose-800"
