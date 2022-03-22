@@ -18,8 +18,7 @@ const Nosotros = () => {
             Nuestro equipo de desarrollo.
           </p>
           <h1 className="xl:text-4xl text-3xl text-center text-white font-extrabold pb-6 sm:w-4/6 w-5/6 mx-auto">
-            Conoce a las personas talentosas detrás de la construcción de Humble
-            food.
+            Conoce a las personas talentosas detrás de la construcción de Humblefood.
           </h1>
         </div>
       </div>

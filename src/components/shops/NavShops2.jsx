@@ -100,7 +100,7 @@ const NavShops2 = () => {
                   </Link>
 
                   <Link to="/home">
-                    <h1 className=" block sm:ml-3  text-isabelline text-3xl font-extrabold">
+                    <h1 className="inline-block mr-4 sm:ml-3 text-isabelline text-3xl font-extrabold">
                       Humblefood
                     </h1>
                   </Link>

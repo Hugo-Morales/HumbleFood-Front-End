@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Rating from "@mui/material/Rating";
 import { useDispatch } from "react-redux";
-import { getdataUser, postReview } from "../../redux/actions";
+import { postReview } from "../../redux/actions";
 import { Link, useParams } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 import Stack from "@mui/material/Stack";
@@ -16,7 +16,7 @@ function SendReview() {
   const [value, setValue] = useState(0);
   const [review, setReview] = useState("");
 
-  console.log("review", id);
+  // console.log("review", id);
 
   const MySwal = withReactContent(Swal);
 
@@ -41,6 +41,8 @@ function SendReview() {
       pointProduct: value,
     };
     dispatch(postReview(userReview));
+    setReview("");
+    setValue(0);
     MySwal.fire({
       title: "Gracias por dejarnos tu opinión",
       icon: "success",

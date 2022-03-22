@@ -1,25 +1,33 @@
-import { useState } from "react";
-import { useDispatch } from "react-redux";
-import { editProduct } from "../../redux/actions";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { editProduct, getallCategories } from "../../redux/actions";
+import { MdDelete } from "react-icons/md";
+import Swal from "sweetalert2";
 
 export default function Edit({ setShowEdit, info }) {
 	const dispatch = useDispatch();
-
 	const [input, setInput] = useState({
 		nombre: "",
 		description: "",
 		discount: "",
 		price: "",
 		stock: "",
-		categories: info.categories,
+		categoriesId: [],
 	});
-
+	const [listCategories, setListCategories] = useState([])
+	const categories = useSelector(state => state.allcategories);
+	useEffect(() => {
+		dispatch(getallCategories());
+		console.log(info);
+	},[])
+	
 	const c = (e) => {
 		setInput({
 			...input,
 			[e.target.name]: e.target.value,
 		});
 	};
+ 
 
 	const submit = (e) => {
 		e.preventDefault();
@@ -32,13 +40,60 @@ export default function Edit({ setShowEdit, info }) {
 			price: !!input.price ? Number(input.price).toFixed(2) : info.price,
 			discount: !!input.discount ? Number(input.discount) : info.discount,
 			stock: !!input.stock ? Number(input.stock) : info.stock,
-			categories: input.categories.toString(),
+			categoriesId: input.categoriesId.length? input.categoriesId.toString(): info.categoriesId.toString(),
 		};
-		console.log(obj);
+		//console.log(obj);
 		dispatch(editProduct(obj));
 		setShowEdit(false);
 	};
 
+	const handleSelect = (e) => {
+		e.preventDefault();
+		const {value, name} = e.target;
+		if(name !== "default"){
+			if(!input.categoriesId.find(n => n === value)){
+				categories.forEach(e => {
+					if(e.id === value){
+						setListCategories([...listCategories, e.name])
+					}
+				});
+				setInput({
+					...input,
+					categoriesId: [...input.categoriesId, value],
+				});
+			}
+		}
+		console.log(listCategories);
+		e.target.value = "default";
+	}
+
+	const eliminar = (e,name) =>{
+		e.preventDefault();
+		Swal.fire({
+			title: "¿Estás seguro?",
+			text: "Esta acción no se puede revertir.",
+			icon: "warning",
+			showCancelButton: true,
+			confirmButtonColor: "#3085d6",
+			cancelButtonColor: "#d33",
+			cancelButtonText: "Cancelar",
+			confirmButtonText: "¡Sí, quiero!",
+			reverseButtons: true,
+		}).then((result) => {
+			if (result.isConfirmed) {
+				Swal.fire(
+					"¡Categoría Borrada!",
+					"La categoría fue removida de la lista.",
+					"success"
+				);
+				if(listCategories.find(c => c === name)){
+					let categori = listCategories.filter((c) => c !== name);
+					setListCategories(categori);	
+				}
+
+			}
+		});
+	}
 	return (
 		<div className="flex justify-center items-center overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
 			<div className="relative w-auto my-6 mx-auto max-w-3xl">
@@ -109,13 +164,34 @@ export default function Edit({ setShowEdit, info }) {
 							<label className="block text-black text-sm font-bold mb-1">
 								Categorías (usa ',' por categoría)
 							</label>
-							<input
+							{/* <input
 								className="shadow appearance-none border rounded w-full py-2 px-1 text-black"
 								placeholder={info.categories}
 								name="categories"
 								value={input.categories}
 								onChange={c}
-							/>
+							/> */}
+							<select className="shadow appearance-none border rounded w-full py-2 px-1 text-black" onChange={(e) => handleSelect(e)}>
+								<option value="default" selected disabled>Seleccione una categoría para el producto.</option>
+								{
+									categories?.map((c, index )=> {
+										return <option key={index} value={c.id}>{c.name}</option>
+									})
+								}
+							</select>
+							{
+											listCategories?.map((c, index) => {
+															return (
+																<div key={index} className="flex justify-between">
+																	<label className="">{c}</label>
+																	<button className="" name="eliminar" onClick={(e) => eliminar(e,c)}>
+																		<MdDelete className="text-red-600" />
+																	</button>
+																</div>
+															);
+														})
+
+										}
 						</form>
 					</div>
 					<div className="flex items-center justify-end p-6 border-t border-solid border-blueGray-200 rounded-b">
@@ -129,9 +205,9 @@ export default function Edit({ setShowEdit, info }) {
 						<button
 							className="text-white bg-yellow-500 active:bg-yellow-700 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1"
 							type="button"
-							onClick={submit}
+							onClick={(e) => submit(e)}
 						>
-							Editar
+							Confirmar cambios
 						</button>
 					</div>
 				</div>
