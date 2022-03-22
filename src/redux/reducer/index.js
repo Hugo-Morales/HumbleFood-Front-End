@@ -135,6 +135,7 @@ export default function reducer(state = initialStore, { type, payload }) {
         productsloaded: payload,
         allProductsShop: payload,
         isLoading: false,
+        loadingPanel: false,
       };
     case RESET_PRODUCTS_SHOP:
       return {
