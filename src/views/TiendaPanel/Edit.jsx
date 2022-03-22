@@ -51,7 +51,7 @@ export default function Edit({ setShowEdit, info }) {
 	const handleSelect = (e) => {
 		e.preventDefault();
 		const {value, name} = e.target;
-		if(name != "default"){
+		if(name !== "default"){
 			if(!input.categoriesId.find(n => n === value)){
 				categories.forEach(e => {
 					if(e.id === value){
@@ -208,7 +208,7 @@ export default function Edit({ setShowEdit, info }) {
 							type="button"
 							onClick={(e) => submit(e)}
 						>
-							Editar
+							Confirmar cambios
 						</button>
 					</div>
 				</div>

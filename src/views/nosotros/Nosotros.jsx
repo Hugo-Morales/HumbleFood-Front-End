@@ -1,5 +1,5 @@
 import React from "react";
-import NavShops2 from "../../components/shops/NavShops2";
+import NavAbout from "./NavAbout";
 import imgDani from "../../img/Danielimg.jpg";
 import imgDiego from "../../img/Diegoimg.jpeg";
 import imgJony from "../../img/Jonyimg.jpg";
@@ -11,15 +11,14 @@ import imgEthan from "../../img/Ethanimg.jpg";
 const Nosotros = () => {
   return (
     <div className="pb-24 bg-scroll w-full bg-gradient-to-r from-green-400 to-blue-500">
-      <NavShops2 />
+      <NavAbout />
       <div className="bg-gradient-to-r from-green-400 to-blue-500   flex justify-center mx-auto pt-12">
         <div>
           <p className="text-white text-lg text-center font-normal pb-3">
             Nuestro equipo de desarrollo.
           </p>
           <h1 className="xl:text-4xl text-3xl text-center text-white font-extrabold pb-6 sm:w-4/6 w-5/6 mx-auto">
-            Conoce a las personas talentosas detrás de la construcción de Humble
-            food.
+            Conoce a las personas talentosas detrás de la construcción de Humblefood.
           </h1>
         </div>
       </div>
@@ -63,7 +62,7 @@ const Nosotros = () => {
                       <path d="M17.657 16.657l-4.243 4.243a2 2 0 0 1 -2.827 0l-4.244 -4.243a8 8 0 1 1 11.314 0z" />
                     </svg>
                     <p className="text-center text-gray-600 text-base pt-3 font-normal">
-                      Caracas Venezuela
+                      Caracas, Venezuela
                     </p>
                   </div>
 
@@ -112,8 +111,8 @@ const Nosotros = () => {
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           className="icon icon-tabler icon-tabler-brand-linkedin"
-                          width="32"
-                          height="32"
+                          width="33"
+                          height="33"
                           viewBox="0 0 24 24"
                           strokeWidth="1"
                           stroke="#597e8d"
@@ -122,11 +121,11 @@ const Nosotros = () => {
                           strokeLinejoin="round"
                         >
                           <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                          <rect x="4" y="4" width="16" height="16" rx="2" />
-                          <line x1="8" y1="11" x2="8" y2="16" />
-                          <line x1="8" y1="8" x2="8" y2="8.01" />
-                          <line x1="12" y1="16" x2="12" y2="11" />
-                          <path d="M16 16v-3a2 2 0 0 0 -4 0" />
+                          <rect x="4" y="1" width="16" height="16" rx="2" />
+                          <line x1="8" y1="8" x2="8" y2="14" />
+                          <line x1="8" y1="5" x2="8" y2="5.01" />
+                          <line x1="12" y1="8" x2="12" y2="14" />
+                          <path d="M16 14v-4a1 1 0 0 0 -4 0" />
                         </svg>
                       </div>
                     </a>
@@ -171,7 +170,7 @@ const Nosotros = () => {
                       <path d="M17.657 16.657l-4.243 4.243a2 2 0 0 1 -2.827 0l-4.244 -4.243a8 8 0 1 1 11.314 0z" />
                     </svg>
                     <p className="text-center text-gray-600 text-base pt-3 font-normal">
-                      Buenos Aires Argentina
+                      Buenos Aires, Argentina
                     </p>
                   </div>
                   <div className="w-full flex justify-center pt-5 pb-5">
@@ -222,8 +221,8 @@ const Nosotros = () => {
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           className="icon icon-tabler icon-tabler-brand-linkedin"
-                          width="32"
-                          height="32"
+                          width="33"
+                          height="33"
                           viewBox="0 0 24 24"
                           strokeWidth="1"
                           stroke="#597e8d"
@@ -232,11 +231,11 @@ const Nosotros = () => {
                           strokeLinejoin="round"
                         >
                           <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                          <rect x="4" y="4" width="16" height="16" rx="2" />
-                          <line x1="8" y1="11" x2="8" y2="16" />
-                          <line x1="8" y1="8" x2="8" y2="8.01" />
-                          <line x1="12" y1="16" x2="12" y2="11" />
-                          <path d="M16 16v-3a2 2 0 0 0 -4 0" />
+                          <rect x="4" y="1" width="16" height="16" rx="2" />
+                          <line x1="8" y1="8" x2="8" y2="14" />
+                          <line x1="8" y1="5" x2="8" y2="5.01" />
+                          <line x1="12" y1="8" x2="12" y2="14" />
+                          <path d="M16 14v-4a1 1 0 0 0 -4 0" />
                         </svg>
                       </div>
                     </a>
@@ -282,7 +281,7 @@ const Nosotros = () => {
                       <path d="M17.657 16.657l-4.243 4.243a2 2 0 0 1 -2.827 0l-4.244 -4.243a8 8 0 1 1 11.314 0z" />
                     </svg>
                     <p className="text-center text-gray-600 text-base pt-3 font-normal">
-                      La Rioja Argentina
+                      La Rioja, Argentina
                     </p>
                   </div>
                   <div className="w-full flex justify-center pt-5 pb-5">
@@ -313,8 +312,8 @@ const Nosotros = () => {
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           className="icon icon-tabler icon-tabler-brand-linkedin"
-                          width="32"
-                          height="32"
+                          width="33"
+                          height="33"
                           viewBox="0 0 24 24"
                           strokeWidth="1"
                           stroke="#597e8d"
@@ -323,11 +322,11 @@ const Nosotros = () => {
                           strokeLinejoin="round"
                         >
                           <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                          <rect x="4" y="4" width="16" height="16" rx="2" />
-                          <line x1="8" y1="11" x2="8" y2="16" />
-                          <line x1="8" y1="8" x2="8" y2="8.01" />
-                          <line x1="12" y1="16" x2="12" y2="11" />
-                          <path d="M16 16v-3a2 2 0 0 0 -4 0" />
+                          <rect x="4" y="1" width="16" height="16" rx="2" />
+                          <line x1="8" y1="8" x2="8" y2="14" />
+                          <line x1="8" y1="5" x2="8" y2="5.01" />
+                          <line x1="12" y1="8" x2="12" y2="14" />
+                          <path d="M16 14v-4a1 1 0 0 0 -4 0" />
                         </svg>
                       </div>
                     </a>
@@ -373,7 +372,7 @@ const Nosotros = () => {
                       <path d="M17.657 16.657l-4.243 4.243a2 2 0 0 1 -2.827 0l-4.244 -4.243a8 8 0 1 1 11.314 0z" />
                     </svg>
                     <p className="text-center text-gray-600 text-base pt-3 font-normal">
-                      Salta Argentina
+                      Salta, Argentina
                     </p>
                   </div>
                   <div className="w-full flex justify-center pt-5 pb-5">
@@ -404,8 +403,8 @@ const Nosotros = () => {
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           className="icon icon-tabler icon-tabler-brand-linkedin"
-                          width="32"
-                          height="32"
+                          width="33"
+                          height="33"
                           viewBox="0 0 24 24"
                           strokeWidth="1"
                           stroke="#597e8d"
@@ -414,11 +413,11 @@ const Nosotros = () => {
                           strokeLinejoin="round"
                         >
                           <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                          <rect x="4" y="4" width="16" height="16" rx="2" />
-                          <line x1="8" y1="11" x2="8" y2="16" />
-                          <line x1="8" y1="8" x2="8" y2="8.01" />
-                          <line x1="12" y1="16" x2="12" y2="11" />
-                          <path d="M16 16v-3a2 2 0 0 0 -4 0" />
+                          <rect x="4" y="1" width="16" height="16" rx="2" />
+                          <line x1="8" y1="8" x2="8" y2="14" />
+                          <line x1="8" y1="5" x2="8" y2="5.01" />
+                          <line x1="12" y1="8" x2="12" y2="14" />
+                          <path d="M16 14v-4a1 1 0 0 0 -4 0" />
                         </svg>
                       </div>
                     </a>
@@ -464,7 +463,7 @@ const Nosotros = () => {
                       <path d="M17.657 16.657l-4.243 4.243a2 2 0 0 1 -2.827 0l-4.244 -4.243a8 8 0 1 1 11.314 0z" />
                     </svg>
                     <p className="text-center text-gray-600 text-base pt-3 font-normal">
-                      San Luis Argentina
+                      San Luis, Argentina
                     </p>
                   </div>
 
@@ -487,24 +486,24 @@ const Nosotros = () => {
                         </svg>
                       </div>
                     </a>
-                    <a href="javascript:void(0)" className="mx-5">
-                      <div>
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          width={24}
-                          height={24}
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          stroke="#718096"
-                          strokeWidth="1.5"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          className="feather feather-twitter"
-                        >
-                          <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z" />
-                        </svg>
-                      </div>
-                    </a>
+                    {/* <a href="javascript:void(0)" className="mx-5"> */}
+                    <div>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width={24}
+                        height={24}
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="#718096"
+                        strokeWidth="1.5"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        className="feather feather-twitter"
+                      >
+                        <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z" />
+                      </svg>
+                    </div>
+                    {/* </a> */}
                     <a
                       href="https://www.linkedin.com/in/demian-de-la-vega/"
                       className="mx-5"
@@ -513,8 +512,8 @@ const Nosotros = () => {
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           className="icon icon-tabler icon-tabler-brand-linkedin"
-                          width="32"
-                          height="32"
+                          width="33"
+                          height="33"
                           viewBox="0 0 24 24"
                           strokeWidth="1"
                           stroke="#597e8d"
@@ -523,11 +522,11 @@ const Nosotros = () => {
                           strokeLinejoin="round"
                         >
                           <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                          <rect x="4" y="4" width="16" height="16" rx="2" />
-                          <line x1="8" y1="11" x2="8" y2="16" />
-                          <line x1="8" y1="8" x2="8" y2="8.01" />
-                          <line x1="12" y1="16" x2="12" y2="11" />
-                          <path d="M16 16v-3a2 2 0 0 0 -4 0" />
+                          <rect x="4" y="1" width="16" height="16" rx="2" />
+                          <line x1="8" y1="8" x2="8" y2="14" />
+                          <line x1="8" y1="5" x2="8" y2="5.01" />
+                          <line x1="12" y1="8" x2="12" y2="14" />
+                          <path d="M16 14v-4a1 1 0 0 0 -4 0" />
                         </svg>
                       </div>
                     </a>
@@ -573,7 +572,7 @@ const Nosotros = () => {
                       <path d="M17.657 16.657l-4.243 4.243a2 2 0 0 1 -2.827 0l-4.244 -4.243a8 8 0 1 1 11.314 0z" />
                     </svg>
                     <p className="text-center text-gray-600 text-base pt-3 font-normal">
-                      Santa Cruz Argentina
+                      Santa Cruz, Argentina
                     </p>
                   </div>
                   <div className="w-full flex justify-center pt-5 pb-5">
@@ -621,8 +620,8 @@ const Nosotros = () => {
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           className="icon icon-tabler icon-tabler-brand-linkedin"
-                          width="32"
-                          height="32"
+                          width="33"
+                          height="33"
                           viewBox="0 0 24 24"
                           strokeWidth="1"
                           stroke="#597e8d"
@@ -631,11 +630,11 @@ const Nosotros = () => {
                           strokeLinejoin="round"
                         >
                           <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                          <rect x="4" y="4" width="16" height="16" rx="2" />
-                          <line x1="8" y1="11" x2="8" y2="16" />
-                          <line x1="8" y1="8" x2="8" y2="8.01" />
-                          <line x1="12" y1="16" x2="12" y2="11" />
-                          <path d="M16 16v-3a2 2 0 0 0 -4 0" />
+                          <rect x="4" y="1" width="16" height="16" rx="2" />
+                          <line x1="8" y1="8" x2="8" y2="14" />
+                          <line x1="8" y1="5" x2="8" y2="5.01" />
+                          <line x1="12" y1="8" x2="12" y2="14" />
+                          <path d="M16 14v-4a1 1 0 0 0 -4 0" />
                         </svg>
                       </div>
                     </a>
@@ -682,7 +681,7 @@ const Nosotros = () => {
                       <path d="M17.657 16.657l-4.243 4.243a2 2 0 0 1 -2.827 0l-4.244 -4.243a8 8 0 1 1 11.314 0z" />
                     </svg>
                     <p className="text-center text-gray-600 text-base pt-3 font-normal">
-                      Buenos Aires Argentina
+                      Buenos Aires, Argentina
                     </p>
                   </div>
                   <div className="w-full flex justify-center pt-5 pb-5">
@@ -730,8 +729,8 @@ const Nosotros = () => {
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           className="icon icon-tabler icon-tabler-brand-linkedin"
-                          width="32"
-                          height="32"
+                          width="33"
+                          height="33"
                           viewBox="0 0 24 24"
                           strokeWidth="1"
                           stroke="#597e8d"
@@ -740,11 +739,11 @@ const Nosotros = () => {
                           strokeLinejoin="round"
                         >
                           <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                          <rect x="4" y="4" width="16" height="16" rx="2" />
-                          <line x1="8" y1="11" x2="8" y2="16" />
-                          <line x1="8" y1="8" x2="8" y2="8.01" />
-                          <line x1="12" y1="16" x2="12" y2="11" />
-                          <path d="M16 16v-3a2 2 0 0 0 -4 0" />
+                          <rect x="4" y="1" width="16" height="16" rx="2" />
+                          <line x1="8" y1="8" x2="8" y2="14" />
+                          <line x1="8" y1="5" x2="8" y2="5.01" />
+                          <line x1="12" y1="8" x2="12" y2="14" />
+                          <path d="M16 14v-4a1 1 0 0 0 -4 0" />
                         </svg>
                       </div>
                     </a>
@@ -790,7 +789,7 @@ const Nosotros = () => {
                       <path d="M17.657 16.657l-4.243 4.243a2 2 0 0 1 -2.827 0l-4.244 -4.243a8 8 0 1 1 11.314 0z" />
                     </svg>
                     <p className="text-center text-gray-600 text-base pt-3 font-normal">
-                      Hidaldo Mexico
+                      Hidaldo, Mexico
                     </p>
                   </div>
                   <div className="w-full flex justify-center pt-5 pb-5">
@@ -838,8 +837,8 @@ const Nosotros = () => {
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           className="icon icon-tabler icon-tabler-brand-linkedin"
-                          width="32"
-                          height="32"
+                          width="33"
+                          height="33"
                           viewBox="0 0 24 24"
                           strokeWidth="1"
                           stroke="#597e8d"
@@ -848,11 +847,11 @@ const Nosotros = () => {
                           strokeLinejoin="round"
                         >
                           <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                          <rect x="4" y="4" width="16" height="16" rx="2" />
-                          <line x1="8" y1="11" x2="8" y2="16" />
-                          <line x1="8" y1="8" x2="8" y2="8.01" />
-                          <line x1="12" y1="16" x2="12" y2="11" />
-                          <path d="M16 16v-3a2 2 0 0 0 -4 0" />
+                          <rect x="4" y="1" width="16" height="16" rx="2" />
+                          <line x1="8" y1="8" x2="8" y2="14" />
+                          <line x1="8" y1="5" x2="8" y2="5.01" />
+                          <line x1="12" y1="8" x2="12" y2="14" />
+                          <path d="M16 14v-4a1 1 0 0 0 -4 0" />
                         </svg>
                       </div>
                     </a>

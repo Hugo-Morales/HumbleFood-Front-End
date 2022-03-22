@@ -51,14 +51,14 @@ const LandingPage = () => {
 							<h1 className="text-4xl tracking-tight font-extrabold text-gray-900 sm:text-5xl md:text-6xl text-center">
 								<span className="block xl:inline">Bienvenido a</span>{" "}
 								<span className="block text-indigo-600 xl:inline">
-									Humble Food!
+									Humblefood!
 								</span>
 							</h1>
 							<p className="mt-3 text-base text-gray-500 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-10 md:mb-20 md:text-xl lg:mx-0">
 								<span className="text-lime-600 bg-lime-200 rounded">
 									¡Es igual de bueno pero más barato!.
 								</span>{" "}
-								Anímate a pertenecer a la comunidad de Humble food: el mejor
+								Anímate a pertenecer a la comunidad de Humblefood: el mejor
 								e-commerce de venta de comida y con la mejor visión. Puedes ser
 								comprador o registrar tu tienda y empezar a vender.
 							</p>

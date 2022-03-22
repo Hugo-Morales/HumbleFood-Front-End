@@ -88,8 +88,8 @@ export default function Table({
 	}
 	return (
 		<>
-			{/* {currentPage === 0 ? <InfoDataUser dataUser={dataUser} /> : null} */}
-			<div className="flex flex-col">
+			{currentPage === 0 ? <InfoDataUser dataUser={dataUser} /> : null}
+			<div className="flex flex-col overflow-y-auto">
 				<div className="overflow-x-auto -my-2 sm:-mx-6">
 					<div className="py-2 align-middle inline-block min-w-full sm:px-6">
 						<div className="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
