@@ -41,8 +41,6 @@ const NavShops2 = () => {
         timer: 3000,
       });
     } else if (isAuthenticated && mailState) {
-      Setmailstate(false);
-      dispatch(suscribeNewsletter(dataUser.id, false));
 
       Swal.fire({
         title: "¿Estás seguro?",
@@ -62,6 +60,8 @@ const NavShops2 = () => {
             "success"
           )
 
+          Setmailstate(false);
+          dispatch(suscribeNewsletter(dataUser.id, false));
         }
       });
     } else {
