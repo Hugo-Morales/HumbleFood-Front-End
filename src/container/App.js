@@ -103,7 +103,7 @@ function App() {
     
     const Toast = Swal.mixin({
       toast: true,
-      position: 'top-start',
+      position: 'top-end',
       showConfirmButton: false,
       timer: 2000,
       timerProgressBar: true,
