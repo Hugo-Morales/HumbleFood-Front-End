@@ -32,6 +32,7 @@ export const GET_SHOP_REQUEST = "GET_SHOP_REQUEST";
 
 export const STOP = "STOP";
 const URL = process.env.REACT_APP_URL;
+const positionStackKey = process.env.REACT_APP_POSITION_STACK_KEY;
 
 export const getShopsId = (id) => async (dispatch) => {
   try {
@@ -456,7 +457,7 @@ export const suscribeNewsletter = (userId, bool) => async () => {
 export const getShopDirection = (lat, lng) => async (dispatch) => {
   try {
     const direction = await axios.get(
-      `http://api.positionstack.com/v1/reverse?access_key=87508c31ff90beec780b7f4866b1b54b&query=${lat},${lng}`
+      `http://api.positionstack.com/v1/reverse?access_key=${positionStackKey}&query=${lat},${lng}`
     );
     dispatch({
       type: GET_SHOP_DIRECTION,
