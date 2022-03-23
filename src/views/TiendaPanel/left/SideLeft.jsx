@@ -7,9 +7,12 @@ import Shop from "../rol/shop/Shop";
 import Button from "./Button";
 import Admin from "../rol/admin/Admin";
 import ButtonExit from "../../../components/buttonExit/buttonexit";
+import { ImBlocked } from "react-icons/im";
+import { useSelector } from "react-redux";
 
 export default function SideLeft({ name, setId, rol, shopsId }) {
-  const { logout } = useAuth0();
+	const shop = useSelector((state) => state.shop);
+	const { logout } = useAuth0();
 
 	return (
 		<div className="bg-gray-700 sticky top-0 sm-h-30 h-screen p-6">
@@ -65,8 +68,18 @@ export default function SideLeft({ name, setId, rol, shopsId }) {
 
 				{rol === 2 ? (
 					<Admin setId={setId} />
-				) : rol === 1 ? (
+				) : rol === 1 && shop?.authorization === true ? (
 					<Shop setId={setId} shopsId={shopsId[0]} />
+				) : rol === 1 && shop?.authorization === false ? (
+					<>
+						{/* En espera */}
+						<Button
+							div="flex bg-red-300 justify-center p-2 mt-3 rounded-lg items-center cursor-pointer"
+							text="Esperando Autorización..."
+							buttonclass="flex items-center font-bold"
+							icon={<ImBlocked className="mr-2" />}
+						/>
+					</>
 				) : rol === 0 ? (
 					<User setId={setId} />
 				) : null}

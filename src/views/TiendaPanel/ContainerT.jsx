@@ -5,6 +5,7 @@ import SideLeft from "./left/SideLeft";
 import SideRight from "./right/SideRight";
 import Loading from "../../components/loading/Loading";
 import {
+	getShopsId,
 	getProductShop,
 	loading,
 	getdataUser,
@@ -38,6 +39,7 @@ export default function ContainerT({ user }) {
 		if (usuario?.rol === 2) {
 			dispatch(getallproducts(currentPage));
 		} else if (usuario?.rol === 1) {
+			dispatch(getShopsId(usuario?.shopsId));
 			dispatch(getProductShop(usuario?.shopsId, currentPage));
 		} else if (usuario?.rol === 0) {
 			dispatch(stop());
