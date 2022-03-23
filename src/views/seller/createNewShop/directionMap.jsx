@@ -93,9 +93,10 @@ const DirectionMap = () => {
                   </h1>
 
                   <div className="w-full flex flex-col">
-                    <label className="font-bold">Ingrese Dirección: </label>
+                    <label className="font-bold">Esta es su dirección: </label>
                     <input
                       className="border-black border-2 p-2"
+                      disabled
                       value={direction}
                     />
                   </div>

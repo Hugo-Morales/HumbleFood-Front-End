@@ -436,7 +436,6 @@ export const getShopDirection = (lat, lng) => async (dispatch) => {
     const direction = await axios.get(
       `http://api.positionstack.com/v1/reverse?access_key=87508c31ff90beec780b7f4866b1b54b&query=${lat},${lng}`
     );
-    console.log(direction.data.data[1].label);
     dispatch({
       type: GET_SHOP_DIRECTION,
       payload: direction.data.data[1].label,
