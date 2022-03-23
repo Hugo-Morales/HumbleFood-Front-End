@@ -3,10 +3,17 @@ import ButtonExit from "../../../components/buttonExit/buttonexit";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
+<<<<<<< HEAD
 	postNewShop,
 	getdataUser,
 	loading,
 	stop,
+=======
+  postNewShop,
+  getdataUser,
+  loading,
+  stop,
+>>>>>>> 4d9c20bdcabfc14d24b5d95abdc1e88814d5b0db
 } from "../../../redux/actions";
 import { Link, useNavigate } from "react-router-dom";
 import Loading from "../../../components/loading/Loading";
@@ -125,12 +132,28 @@ const CreateShop = ({ user }) => {
 		uploadFiles(file);
 	};
 
+<<<<<<< HEAD
 	const uploadFiles = (file) => {
 		//
 		if (!file) return;
 		const sotrageRef = ref(storage, `shops/${file.name}`);
 		setNameI(file.name);
 		const uploadTask = uploadBytesResumable(sotrageRef, file);
+=======
+  const handleformSubmit = (e) => {
+    e.preventDefault();
+    dispatch(postNewShop(newShop));
+    MySwal.fire({
+      position: "center",
+      icon: "success",
+      title: "Tu tienda ha sido registrada con exito",
+      text: "Revisa tu email, donde te llegará la aprobación",
+      showConfirmButton: false,
+      timer: 2000,
+    });
+    navigate(`/settings/${user?.sub.split("|")[1]}`);
+  };
+>>>>>>> 4d9c20bdcabfc14d24b5d95abdc1e88814d5b0db
 
 		uploadTask.on(
 			"state_changed",

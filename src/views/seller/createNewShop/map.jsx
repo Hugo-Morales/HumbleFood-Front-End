@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { GoogleMap, useJsApiLoader, Marker } from "@react-google-maps/api";
-import api_key from "./credentials";
 import { useDispatch } from "react-redux";
 import { getShopDirection } from "../../../redux/actions";
+
+const api_key = process.env.REACT_APP_API_KEY;
 
 // //-34.603661, -58.381495
 // const Map = (props) => {
@@ -37,7 +38,7 @@ function MyComponent() {
 
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
-    googleMapsApiKey: api_key.mapsKey,
+    googleMapsApiKey: api_key,
   });
 
   const [map, setMap] = React.useState(null);
