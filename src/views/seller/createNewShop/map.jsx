@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { GoogleMap, useJsApiLoader, Marker } from "@react-google-maps/api";
-
 import { useDispatch } from "react-redux";
 import { getShopDirection } from "../../../redux/actions";
 

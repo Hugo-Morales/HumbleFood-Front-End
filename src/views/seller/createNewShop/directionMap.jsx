@@ -4,9 +4,10 @@ import Loading from "../../../components/loading/Loading";
 import { stop } from "../../../redux/actions";
 import { Link, useNavigate } from "react-router-dom";
 import Map from "./map";
-import credentials from "./credentials";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
+
+const api_key = process.env.REACT_APP_API_KEY;
 
 const DirectionMap = () => {
   const dispatch = useDispatch();
@@ -18,7 +19,7 @@ const DirectionMap = () => {
     (state) => state?.shopDirection
   );
 
-  if (direction) console.log(direction);
+  // if (direction) console.log(direction);
 
   useEffect(() => {
     setTimeout(() => {
@@ -126,7 +127,7 @@ const DirectionMap = () => {
           </div>
           <div className="lg:absolute lg:inset-y-0 lg:right-0 lg:w-2/5 lg:mt-12">
             <Map
-              googleMapURL={`${URL}${credentials.mapsKey}&libraries=places`}
+              googleMapURL={`${URL}${api_key}&libraries=places`}
               containerElement={
                 <div className="h-56 w-full object-cover sm:h-72 md:h-96 lg:w-full lg:h-full" />
               }
