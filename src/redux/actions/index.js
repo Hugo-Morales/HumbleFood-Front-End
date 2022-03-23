@@ -457,10 +457,12 @@ export const getShopDirection = (lat, lng) => async (dispatch) => {
   try {
     const direction = await axios.get(
       `http://api.positionstack.com/v1/reverse?access_key=87508c31ff90beec780b7f4866b1b54b&query=${lat},${lng}`
+      // `https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lng}&format=json`
     );
+    console.log(direction);
     dispatch({
       type: GET_SHOP_DIRECTION,
-      payload: direction.data.data[1].label,
+      payload: direction.display_name,
     });
   } catch (error) {
     console.log(error);
