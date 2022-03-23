@@ -22,6 +22,42 @@ import { storage } from "../../TiendaPanel/right/Create/firebase";
 import withReactContent from "sweetalert2-react-content";
 import { MdDelete } from "react-icons/md";
 
+const validate = (input) => {
+	let err = {};
+	let regex = /[\W]/y;
+	let notnumber = /[\d]/g;
+
+
+	if (!input.name?.trim()) {
+		err.name = "Este campo es obligatorio";
+	}
+	if (notnumber.test(input.name)) {
+		err.name = "No se permiten números.";
+	}
+	if (regex.test(input.name)) {
+		err.name = "No se permiten caractéres especiales.";
+	}
+
+	if (!input.description?.trim()) {
+		err.description = "Este campo es obligatorio";
+
+	}
+	if (notnumber.test(input.description)) {
+		err.description = "No se permiten números.";
+
+	}
+	if (regex.test(input.description)) {
+		err.description = "No se permiten caractéres especiales.";
+
+	}
+	if (!input.email?.trim()) {
+		err.email = "Este campo es obligatorio";
+	}
+
+	console.log(err)
+	return err
+}
+
 const CreateShop = ({ user }) => {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
@@ -36,6 +72,7 @@ const CreateShop = ({ user }) => {
 
 	// console.log(dataUser);
 	const [nameI, setNameI] = useState("");
+	const [err, Seterr] = useState({});
 	const [progress, setProgress] = useState(0);
 	const [newShop, setNewShop] = useState({
 		name: "",
@@ -45,26 +82,42 @@ const CreateShop = ({ user }) => {
 		userId: user?.sub.split("|")[1],
 		email: "",
 	});
+	const activado = !err.name && !err.description && !err.email;
 
 	const handleInputChange = (e) => {
 		setNewShop({
 			...newShop,
 			[e.target.name]: e.target.value,
 		});
+		Seterr(
+			validate({
+				...newShop,
+				[e.target.name]: e.target.value,
+			})
+		);
 	};
 
 	const handleformSubmit = (e) => {
 		e.preventDefault();
 		// dispatch(postNewShop(newShop));
 		// alert("Tienda registrada con exito!");
-		MySwal.fire({
-			position: "center",
-			icon: "success",
-			title: "Tu tienda ha sido registrada con exito",
-			showConfirmButton: false,
-			timer: 2000,
-		});
-		navigate(`/settings/${user?.sub.split("|")[1]}`);
+		if (!activado) {
+			MySwal.fire({
+				icon: "error",
+				title: "No se pudo registrar tu tienda",
+				text: "Completa todos los campos requeridos",
+
+			});
+		} else {
+			MySwal.fire({
+				position: "center",
+				icon: "success",
+				title: "Tu tienda ha sido registrada con exito",
+				showConfirmButton: false,
+				timer: 2000,
+			});
+		}
+		// navigate(`/settings/${user?.sub.split("|")[1]}`);
 	};
 
 	const handleImagen = (e) => {
@@ -174,8 +227,13 @@ const CreateShop = ({ user }) => {
 														name="name"
 														className="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300"
 														placeholder="Ej: Panaderia Rosalba"
+														required
 													/>
 												</div>
+												<div className="text-rose-800 font-bold">
+													{err.name && <p>{err.name}</p>}
+												</div>
+
 											</div>
 										</div>
 										{/* Direccion */}
@@ -224,7 +282,11 @@ const CreateShop = ({ user }) => {
 													rows="3"
 													className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md resize-none"
 													placeholder="Ej: Panadaria y pasteleria con mas de 20 años de experiencia en el mercado..."
+													required
 												></textarea>
+											</div>
+											<div className="text-rose-800 font-bold">
+												{err.description && <p>{err.description}</p>}
 											</div>
 										</div>
 
@@ -241,7 +303,11 @@ const CreateShop = ({ user }) => {
 													name="email"
 													className="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300"
 													placeholder="Ej: tienda123@gmail.com"
+													required
 												/>
+											</div>
+											<div className="text-rose-800 font-bold">
+												{err.email && <p>{err.email}</p>}
 											</div>
 										</div>
 										{/* Imagen */}
@@ -289,6 +355,9 @@ const CreateShop = ({ user }) => {
 										/>
 										<button
 											type="submit"
+											disabled={
+												!activado
+											}
 											className="mt-4 bg-red-500 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded-full"
 										>
 											Registrar
