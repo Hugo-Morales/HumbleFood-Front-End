@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Loading from "../../../components/loading/Loading";
 import { stop } from "../../../redux/actions";
@@ -14,7 +14,7 @@ const DirectionMap = () => {
   const cargando = useSelector((state) => state.isLoading);
   const MySwal = withReactContent(Swal);
   const URL = "https://maps.googleapis.com/maps/api/js?v=3.exp&key=";
-  const [direction, setDirection] = useSelector(
+  const direction = useSelector(
     (state) => state?.shopDirection
   );
 
@@ -85,7 +85,7 @@ const DirectionMap = () => {
                 <div className="sm:text-center lg:text-left">
                   <h1 className="text-4xl tracking-tight font-extrabold text-black-600 sm:text-5xl md:text-6xl text-center">
                     <span className="block xl:inline">
-                      ¡Verifica si la direccion
+                      ¡Verifica si la dirección
                     </span>{" "}
                     <span className="block text-green-600 xl:inline">
                       de la tienda a registrar existe!
@@ -124,7 +124,7 @@ const DirectionMap = () => {
               </div>
             </div>
           </div>
-          <div className="lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2">
+          <div className="lg:absolute lg:inset-y-0 lg:right-0 lg:w-2/5 lg:mt-12">
             <Map
               googleMapURL={`${URL}${credentials.mapsKey}&libraries=places`}
               containerElement={

@@ -25,11 +25,11 @@ import { Link } from "react-router-dom";
 const CreateShop = ({ user }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const directionShop = useSelector((state) => state.directionShop);
+  const directionShop = useSelector((state) => state?.shopDirection[0]);
   const cargando = useSelector((state) => state.isLoading);
   const MySwal = withReactContent(Swal);
 
-  console.log(directionShop);
+  // console.log("dirección", directionShop);
 
   useEffect(() => {
     dispatch(loading());
@@ -38,12 +38,11 @@ const CreateShop = ({ user }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // console.log(dataUser);
   const [nameI, setNameI] = useState("");
   const [progress, setProgress] = useState(0);
   const [newShop, setNewShop] = useState({
     name: "",
-    direction: "",
+    direction: directionShop,
     description: "",
     image: "",
     userId: user?.sub.split("|")[1],
@@ -142,6 +141,7 @@ const CreateShop = ({ user }) => {
         });
       });
   };
+  console.log(newShop)
 
   return (
     <>
