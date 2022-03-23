@@ -1,4 +1,3 @@
-import React, { useRef } from "react";
 import ButtonExit from "../../../components/buttonExit/buttonexit";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -21,136 +20,22 @@ import {
 import { storage } from "../../TiendaPanel/right/Create/firebase";
 import withReactContent from "sweetalert2-react-content";
 import { MdDelete } from "react-icons/md";
-// import { Link } from "react-router-dom";
-import { Search, GpsFixed } from "@mui/icons-material";
-
-const apiKey = "AIzaSyDSEWJ3J6RSg_i-Jw3iK2F_ccAeypIJBd8";
-const mapApiJs = "https://maps.googleapis.com/maps/api/js";
-const geocodeJson = "https://maps.googleapis.com/maps/api/geocode/json";
-
-function loadAsyncScript(src) {
-  return new Promise((resolve) => {
-    const script = document.createElement("script");
-    Object.assign(script, {
-      type: "text/javascript",
-      async: true,
-      src,
-    });
-    script.addEventListener("load", () => resolve(script));
-    document.head.appendChild(script);
-  });
-}
-
-const extractAddress = (place) => {
-  const address = {
-    city: "",
-    state: "",
-    zip: "",
-    country: "",
-    plain() {
-      const city = this.city ? this.city + ", " : "";
-      const zip = this.zip ? this.zip + ", " : "";
-      const state = this.state ? this.state + ", " : "";
-      return city + zip + state + this.country;
-    },
-  };
-
-  if (!Array.isArray(place?.address_components)) {
-    return address;
-  }
-
-  place.address_components.forEach((component) => {
-    const types = component.types;
-    const value = component.long_name;
-
-    if (types.includes("locality")) {
-      address.city = value;
-    }
-
-    if (types.includes("administrative_area_level_2")) {
-      address.state = value;
-    }
-
-    if (types.includes("postal_code")) {
-      address.zip = value;
-    }
-
-    if (types.includes("country")) {
-      address.country = value;
-    }
-  });
-
-  return address;
-};
+import { Link } from "react-router-dom";
 
 const CreateShop = ({ user }) => {
-  const searchInput = useRef(null);
-  const [address, setAddress] = useState({});
-
   const dispatch = useDispatch();
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
+  const directionShop = useSelector((state) => state.directionShop);
   const cargando = useSelector((state) => state.isLoading);
-  // const MySwal = withReactContent(Swal);
+  const MySwal = withReactContent(Swal);
 
-  const initMapScript = () => {
-    // if script already loaded
-    if (window.google) {
-      return Promise.resolve();
-    }
-    const src = `${mapApiJs}?key=${apiKey}&libraries=places&v=weekly`;
-    return loadAsyncScript(src);
-  };
-
-  const onChangeAddress = (autocomplete) => {
-    const place = autocomplete.getPlace();
-    console.log(extractAddress(place));
-    setAddress(extractAddress(place));
-  };
-
-  const initAutocomplete = () => {
-    if (!searchInput.current) return;
-
-    const autocomplete = new window.google.maps.places.Autocomplete(
-      searchInput.current
-    );
-    autocomplete.setFields(["address_component", "geometry"]);
-    autocomplete.addListener("place_changed", () =>
-      onChangeAddress(autocomplete)
-    );
-  };
-
-  const reverseGeocode = ({ latitude: lat, longitude: lng}) => {
-    const url = `${geocodeJson}?key=${apiKey}&latlng=${lat},${lng}`;
-    searchInput.current.value = "Buscando su dirección";
-    fetch(url)
-        .then(response => response.json())
-        .then(location => {
-          const place = location.results[0];
-          console.log("place", place);
-          const _address = extractAddress(place);
-          setAddress(_address);
-          searchInput.current.value = _address.plain();
-        })
-  }
-
-  const findMyLocation = () => {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition((position) => {
-        reverseGeocode(position.coords);
-      });
-    }
-  };
-
-  useEffect(() => {
-    initMapScript().then(() => initAutocomplete());
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  console.log(directionShop);
 
   useEffect(() => {
     dispatch(loading());
     dispatch(getdataUser(user?.sub.split("|")[1]));
     dispatch(stop());
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // console.log(dataUser);
@@ -173,19 +58,19 @@ const CreateShop = ({ user }) => {
     });
   };
 
-  // const handleformSubmit = (e) => {
-  //   e.preventDefault();
-  //   // dispatch(postNewShop(newShop));
-  //   // alert("Tienda registrada con exito!");
-  //   MySwal.fire({
-  //     position: "center",
-  //     icon: "success",
-  //     title: "Tu tienda ha sido registrada con exito",
-  //     showConfirmButton: false,
-  //     timer: 2000,
-  //   });
-  //   navigate(`/settings/${user?.sub.split("|")[1]}`);
-  // };
+  const handleformSubmit = (e) => {
+    e.preventDefault();
+    // dispatch(postNewShop(newShop));
+    // alert("Tienda registrada con exito!");
+    MySwal.fire({
+      position: "center",
+      icon: "success",
+      title: "Tu tienda ha sido registrada con exito",
+      showConfirmButton: false,
+      timer: 2000,
+    });
+    navigate(`/settings/${user?.sub.split("|")[1]}`);
+  };
 
   const handleImagen = (e) => {
     e.preventDefault();
@@ -277,9 +162,7 @@ const CreateShop = ({ user }) => {
               </div>
             </div>
             <div className="my-5 md:mt-4 md:col-span2">
-              {/* <form
-              onSubmit={(e) => handleformSubmit(e)}
-              > */}
+              <form onSubmit={(e) => handleformSubmit(e)}>
                 <div className="shadow sm:rounded-md sm:overflow-hidden">
                   <div className="px-4 py-5 bg-gray-200 space-y-6 sm:p-6">
                     {/* Nombre de la tienda */}
@@ -304,7 +187,7 @@ const CreateShop = ({ user }) => {
 
                     <div className="mt-5 flex flex-col justify-around font-bold">
                       <p> Verificar direccion con google maps: </p>
-                      {/* <Link to="/createShop/map">
+                      <Link to="/createShop/map">
                         <button className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-indigo-700 bg-indigo-100 hover:bg-indigo-200 md:py-4 md:text-lg md:px-10">
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -326,37 +209,7 @@ const CreateShop = ({ user }) => {
                             <line x1="15" y1="15" x2="15" y2="20" />
                           </svg>
                         </button>
-                      </Link> */}
-                      <div>
-                        <div className={Styles.search}>
-                          <span>
-                            <Search />
-                          </span>
-                          <input
-                            ref={searchInput}
-                            type="text"
-                            placeholder="Buscar dirección de la tienda...."
-                          />
-                          <button onClick={findMyLocation}>
-                            <GpsFixed />
-                          </button>
-                        </div>
-
-                        <div className="address">
-                          {address.city && <p>
-                            Cuidad: <span>{address.city}</span>
-                          </p>}
-                          {address.state && <p>
-                            Departamento: <span>{address.state}</span>
-                          </p>}
-                          {address.zip && <p>
-                            C.P.: <span>{address.zip}</span>
-                          </p>}
-                          {address.country && <p>
-                            País: <span>{address.country}</span>
-                          </p>}
-                        </div>
-                      </div>
+                      </Link>
                     </div>
                     {/* Descripcion */}
                     <div>
@@ -441,12 +294,12 @@ const CreateShop = ({ user }) => {
                     </button>
                   </div>
                 </div>
-              {/* </form> */}
+              </form>
             </div>
           </div>
         </div>
-       )}
-     </>
+      )}
+    </>
   );
 };
 
