@@ -4,6 +4,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import { useDispatch, useSelector } from "react-redux";
 import CardDetail from "../views/user/CardDetails";
 import Error404 from "../views/Error 404/error";
+import Banned from "../views/Error 404/Banned";
 import Home from "../views/user/Home";
 import LandingPage from "../views/landingpage/landing";
 import SendReview from "../views/user/SendReview";
@@ -143,7 +144,7 @@ function App() {
             <Route path="*" element={<Error404 />} />
           </Routes>
         ) : (
-          <Error404 />
+          <Banned />
         )}
       </div>
     </BrowserRouter>

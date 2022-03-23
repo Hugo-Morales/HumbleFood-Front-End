@@ -1,4 +1,3 @@
-// import { async } from "@firebase/util";
 import axios from "axios";
 export const GET_SHOPS = "GET_SHOPS";
 export const GET_DETAIL_PRODUCT = "GET_DETAIL_PRODUCT";
@@ -27,9 +26,13 @@ export const FILTER_BY_CAT_DISC = "FILTER_BY_CAT_DISC";
 export const ALL_FAVORITES = "ALL_FAVORITES";
 export const SUSCRIBE_NEWSLETTER = "SUSCRIBE_NEWSLETTER";
 export const RESET_PRODUCTS_SHOP = "RESET_PRODUCTS_SHOP";
+export const GET_SHOP_DIRECTION = "GET_SHOP_DIRECTION";
+export const DIRECTION_SHOP = "DIRECTION_SHOP";
+export const GET_SHOP_REQUEST = "GET_SHOP_REQUEST";
 
 export const STOP = "STOP";
 const URL = process.env.REACT_APP_URL;
+const positionStackKey = process.env.REACT_APP_POSITION_STACK_KEY;
 
 export const getShopsId = (id) => async (dispatch) => {
   try {
@@ -45,7 +48,6 @@ export const getShopsId = (id) => async (dispatch) => {
 
 export const getShops = (page) => async (dispatch) => {
   try {
-
     const allShops = await axios.get(`${URL}shops?page=${page}`);
 
     dispatch({
@@ -159,6 +161,26 @@ export const postNewShop = (newShop) => async (dispatch) => {
   }
 };
 
+export const getShopRequest = () => async (dispatch) => {
+  try {
+    const response = await axios.get(`${URL}authorization`);
+    dispatch({
+      type: GET_SHOP_REQUEST,
+      payload: response.data,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const authorize = (id, authorize) => async () => {
+  try {
+    await axios.put(`${URL}authorize/${id}?authorize=${authorize}`);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 export const getCategories = (shopId) => async (dispatch) => {
   try {
     const categories = await axios.get(`${URL}categories/?shopId=${shopId}`);
@@ -254,6 +276,7 @@ export const loading = () => (dispatch) => {
     type: LOADING,
   });
 };
+
 export const loading_panel = () => (dispatch) => {
   dispatch({
     type: LOADING_PANEL,
@@ -429,4 +452,25 @@ export const suscribeNewsletter = (userId, bool) => async () => {
   } catch (error) {
     console.log(error);
   }
+};
+
+export const getShopDirection = (lat, lng) => async (dispatch) => {
+  try {
+    const direction = await axios.get(
+      `http://api.positionstack.com/v1/reverse?access_key=${positionStackKey}&query=${lat},${lng}`
+    );
+    dispatch({
+      type: GET_SHOP_DIRECTION,
+      payload: direction.data.data[1].label,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getDirection = (direction) => (dispatch) => {
+  dispatch({
+    type: DIRECTION_SHOP,
+    payload: direction,
+  });
 };

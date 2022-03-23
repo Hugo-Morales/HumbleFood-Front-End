@@ -6,6 +6,7 @@ import Orders from "./Orders/Orders";
 import ShoppingHistory from "./ShoppingHistory/ShoppingHistory";
 import ShowsItems from "./SaveItems/ShowsItems";
 import AddCategory from "./add/AddCategory";
+import Request from "./request/Request";
 
 export default function SideRight({
 	product,
@@ -43,6 +44,8 @@ export default function SideRight({
 				return <HacerAdmin />;
 			case "addCategory":
 				return <AddCategory />;
+			case "approve":
+				return <Request />;
 			case "historial":
 				return <ShoppingHistory userId={userId} />;
 			default:

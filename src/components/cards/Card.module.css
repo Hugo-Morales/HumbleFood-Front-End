@@ -1,0 +1,22 @@
+.box{
+    align-items: center;
+}
+
+.Card{
+    position: absolute;
+    top:0;
+    left: 0;
+    width: 50%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color:#fff;
+    transform: scale(0);
+    transition: .3s ease;
+}
+.box:hover .Card{
+    transform: scale(1);
+
+}

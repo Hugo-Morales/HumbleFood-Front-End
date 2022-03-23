@@ -1,4 +1,5 @@
 import { Link, useParams } from "react-router-dom";
+import s from './Card.module.css'
 
 const Card = ({ product, handleAddToCart, shop }) => {
 	product.shop = shop;
@@ -12,10 +13,17 @@ const Card = ({ product, handleAddToCart, shop }) => {
 		<>
 			<div className="flex justify-center items-center mobile:w-11/12 w-full drop-shadow-lg">
 				<div className="relative w-full bg-white shadow-md h-96 rounded-xl  flex flex-col justify-around items-center overflow-hidden sm:flex-row sm:h-52 sm:w-11/12 md:w-96">
+
 					<div className="md:h-full md:w-1/2">
-						<Link to={`/products/${shopId}/${id}`}>
-							<img className="w-full md:h-full" src={image} alt="comida" />
-						</Link>
+						<div className={s.box}>
+							<Link to={`/products/${shopId}/${id}`}>
+								<img className="w-full md:h-full" src={image} alt="comida" />
+								<div className={s.Card}>
+									<h3>Mira su detalle!</h3>
+
+								</div>
+							</Link>
+						</div>
 					</div>
 					<div className=" flex-1 w-full flex flex-col items-baseline justify-around md:h-1/2 pl-6 sm:h-full sm:items-baseline sm:w-1/2">
 						<div className="flex flex-col justify-start items-baseline">

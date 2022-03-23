@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { editProduct, getallCategories, getallproducts, loading_panel } from "../../redux/actions";
+import { editProduct, getallCategories } from "../../redux/actions";
 import { MdDelete } from "react-icons/md";
 import Swal from "sweetalert2";
 
@@ -16,12 +16,10 @@ export default function Edit({ setShowEdit, info }) {
 	});
 	const [listCategories, setListCategories] = useState([])
 	const categories = useSelector(state => state.allcategories);
-	const dataUser = useSelector((state) => state.dataUser);
-
 	useEffect(() => {
 		dispatch(getallCategories());
 		console.log(info);
-	},[dispatch, info])
+	},[])
 	
 	const c = (e) => {
 		setInput({
@@ -47,20 +45,20 @@ export default function Edit({ setShowEdit, info }) {
 		//console.log(obj);
 		dispatch(editProduct(obj));
 		setShowEdit(false);
-		Swal.fire({
-			title: "Se han realizado los cambios",
-			icon: "success",
-			confirmButtonText: "OK",
-			backdrop: `
+    Swal.fire({
+      title: "Se han actualizado los cambios",
+      icon: "success",
+      confirmButtonText: "OK",
+      backdrop: `
 			rgba(0,0,123,0.4)
 			left top
 			no-repeat
 		  `,
-		  }).then((r) => {
-			  if(r.isConfirmed) {
-				  window.location.reload(false);
-			  }
-		  });
+    }).then((r) => {
+      if (r.isConfirmed) {
+        window.location.reload(false);
+      }
+    });
 	};
 
 	const handleSelect = (e) => {
@@ -79,9 +77,9 @@ export default function Edit({ setShowEdit, info }) {
 				});
 			}
 		}
-		console.log(listCategories);
 		e.target.value = "default";
 	}
+  console.log("listCategories", listCategories);
 
 	const eliminar = (e,name) =>{
 		e.preventDefault();
@@ -103,15 +101,20 @@ export default function Edit({ setShowEdit, info }) {
 					"success"
 				);
 				if(listCategories.find(c => c === name)){
+          let pos = listCategories.findIndex((e) => e === name);
+          let cat = input.categoriesId.filter((e, index) => index !== pos)
+          setInput({
+            ...input,
+            categoriesId: cat,
+          });
 					let categori = listCategories.filter((c) => c !== name);
-					setListCategories(categori);	
+					setListCategories(categori);
 				}
-
 			}
 		});
 	}
 	return (
-		<div className="flex justify-center items-center overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
+		<div className="">
 			<div className="relative w-auto my-6 mx-auto max-w-3xl">
 				<div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
 					<div className="flex items-start justify-between p-5 border-b border-solid border-gray-300 rounded-t ">

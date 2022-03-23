@@ -72,7 +72,8 @@ const Nav = ({
       setCategory("");
       dispatch(filterProductsByDiscounts(shopId, discount));
     }
-  }, [category, discount, shopId, dispatch]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [category, discount]);
 
   function handleFilterCategories(e) {
     if (e.target.value === "category" && !discount) {
