@@ -92,28 +92,28 @@ export default function Table({ p, pagesTotal, paging, currentPage }) {
 			) : (
 				<>
 					{currentPage === 0 ? <InfoDataUser dataUser={dataUser} /> : null}
-					<div className="flex flex-col overflow-y-auto">
-						<div className="overflow-x-auto lg:overflow-x-clip -my-2">
-							<div className="py-2 align-middle inline-block min-w-full sm:px-6">
+					<div className="flex flex-col">
+						<div className="overflow-x-auto">
+							<div className="py-2 align-middle inline-block min-w-full">
 								<div className="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
 									<table className="w-full divide-y divide-gray-200">
 										<thead className="bg-gray-50">
 											<tr>
 												<th
 													scope="col"
-													className="px-6 py-3  text-xs font-medium text-gray-500 uppercase tracking-wider text-center"
+													className="px-6 py-3 font-bold text-xs uppercase tracking-wider text-center"
 												>
 													Nombre del Producto
 												</th>
 												<th
 													scope="col"
-													className="px-6 py-3  text-xs font-medium text-gray-500 uppercase tracking-wider text-center"
+													className="px-6 py-3 font-bold text-xs uppercase tracking-wider text-center"
 												>
 													Stock
 												</th>
 												<th
 													scope="col"
-													className="px-6 py-3  text-xs font-medium text-gray-500 uppercase tracking-wider text-center"
+													className="px-6 py-3 font-bold text-xs uppercase tracking-wider text-center"
 												>
 													{dataUser.rol === 2
 														? "Nombre de la Tienda"
@@ -121,7 +121,7 @@ export default function Table({ p, pagesTotal, paging, currentPage }) {
 												</th>
 												<th
 													scope="col"
-													className="px-6 py-3  text-xs font-medium text-gray-500 uppercase tracking-wider text-center"
+													className="px-6 py-3 font-bold text-xs uppercase tracking-wider text-center"
 												>
 													Precio Total
 												</th>
