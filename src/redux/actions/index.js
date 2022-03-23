@@ -161,9 +161,9 @@ export const postNewShop = (newShop) => async (dispatch) => {
   }
 };
 
-export const getShopRequest = () => async (dispatch) => {
+export const getShopRequest = (page) => async (dispatch) => {
   try {
-    const response = await axios.get(`${URL}authorization`);
+    const response = await axios.get(`${URL}authorization?page=${page}`);
     dispatch({
       type: GET_SHOP_REQUEST,
       payload: response.data,
@@ -457,11 +457,13 @@ export const suscribeNewsletter = (userId, bool) => async () => {
 export const getShopDirection = (lat, lng) => async (dispatch) => {
   try {
     const direction = await axios.get(
-      `http://api.positionstack.com/v1/reverse?access_key=${positionStackKey}&query=${lat},${lng}`
+      `https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lng}&format=json`
+      // `http://api.positionstack.com/v1/reverse?access_key=${positionStackKey}&query=${lat},${lng}`
     );
+    console.log(direction);
     dispatch({
       type: GET_SHOP_DIRECTION,
-      payload: direction.data.data[1].label,
+      payload: direction.data.display_name,
     });
   } catch (error) {
     console.log(error);

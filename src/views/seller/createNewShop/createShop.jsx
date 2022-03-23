@@ -49,6 +49,9 @@ const validate = (input) => {
   if (!input.email?.trim()) {
     err.email = "Este campo es obligatorio.";
   }
+  // if (!input.directionShop?.trim()) {
+  // 	err.direction = 'Rellene este campo'
+  // }
 
   console.log(err);
   return err;
@@ -68,18 +71,11 @@ const CreateShop = ({ user }) => {
     dispatch(stop());
   }, [dispatch, user]);
 
+  useEffect(() => {
+    Seterr(validate(newShop));
+  }, [newShop]);
+
   // console.log(dataUser);
-  const [nameI, setNameI] = useState("");
-  const [err, Seterr] = useState({});
-  const [progress, setProgress] = useState(0);
-  const [newShop, setNewShop] = useState({
-    name: "",
-    direction: directionShop,
-    description: "",
-    image: "",
-    email: "",
-  });
-  const activado = !err.name && !err.description && !err.email;
 
   const handleInputChange = (e) => {
     setNewShop({
@@ -101,20 +97,44 @@ const CreateShop = ({ user }) => {
       description: newShop.description,
       image: newShop.image
         ? newShop.image
-        : "https://www.sinrumbofijo.com/wp-content/uploads/2016/05/default-placeholder.png",
+        : "https://img.freepik.com/vector-gratis/carro-tienda-edificio-tienda-dibujos-animados_138676-2085.jpg",
       userId: dataUser?.id,
       email: newShop.email,
     };
-    dispatch(postNewShop(shop));
+    if (!directionShop) {
+      MySwal.fire({
+        position: "center",
+        icon: "error",
+        title: "Ha ocurrido un error",
+        text: "Revisa tu direccion por favor.",
+        showConfirmButton: true,
+        timer: 6000,
+      });
+      return;
+    } else if (err.name || err.description || err.email) {
+      MySwal.fire({
+        position: "center",
+        icon: "error",
+        title: "Ha ocurrido un error",
+        text: "Verifica que los campos tengan informacion correcta.",
+        showConfirmButton: true,
+        timer: 6000,
+      });
+      return;
+    }
     MySwal.fire({
       position: "center",
       icon: "success",
       title: "Tu tienda ha sido registrada con exito",
-      text: "Revisa tu email, donde te llegará la aprobación",
-      showConfirmButton: false,
-      timer: 2000,
+      text: "Revisa tu email, donde te llegará la aprobación de la tienda.",
+      showConfirmButton: true,
+      timer: 6000,
+    }).then((r) => {
+      if (r.isConfirmed) {
+        navigate(`/settings/${user?.sub.split("|")[1]}`);
+      }
     });
-    navigate(`/settings/${user?.sub.split("|")[1]}`);
+    dispatch(postNewShop(shop));
   };
 
   const handleImagen = (e) => {
@@ -122,13 +142,25 @@ const CreateShop = ({ user }) => {
     uploadFiles(file);
   };
 
+  // console.log(dataUser);
+  const [nameI, setNameI] = useState("");
+  const [err, Seterr] = useState({});
+  const [progress, setProgress] = useState(0);
+  const [newShop, setNewShop] = useState({
+    name: "",
+    direction: directionShop,
+    description: "",
+    image: "",
+    email: "",
+  });
+  const activado = !err.name && !err.description && !err.email;
+
   const uploadFiles = (file) => {
     //
     if (!file) return;
     const sotrageRef = ref(storage, `shops/${file.name}`);
     setNameI(file.name);
     const uploadTask = uploadBytesResumable(sotrageRef, file);
-
     uploadTask.on(
       "state_changed",
       (snapshot) => {
@@ -252,7 +284,7 @@ const CreateShop = ({ user }) => {
                             name="name"
                             className="h-10 text-xl pl-4 focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-md sm:text-sm border-solid border-indigo-200 border-2"
                             placeholder="Ej: Panaderia Rosalba"
-                            required
+                            // required
                           />
                         </div>
                         <div className="text-rose-800 font-bold">
@@ -272,7 +304,6 @@ const CreateShop = ({ user }) => {
                           rows="3"
                           className="shadow-sm p-4 focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border-solid border-indigo-200 border-2 rounded-md resize-none"
                           placeholder="Ej: Panadaria y pasteleria con mas de 20 años de experiencia en el mercado..."
-                          required
                         ></textarea>
                         <div className="text-rose-800 font-bold">
                           {err.description && <p>{err.description}</p>}
@@ -293,7 +324,6 @@ const CreateShop = ({ user }) => {
                           name="email"
                           className="h-10 pl-4 focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-md sm:text-sm border-solid border-indigo-200 border-2"
                           placeholder="Ej: tienda123@gmail.com"
-                          required
                         />
                       </div>
                       <div className="text-rose-800 font-bold">
@@ -345,7 +375,6 @@ const CreateShop = ({ user }) => {
                     />
                     <button
                       type="submit"
-                      disabled={!activado}
                       className="my-4 bg-indigo-500 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded-md"
                     >
                       Registrar
