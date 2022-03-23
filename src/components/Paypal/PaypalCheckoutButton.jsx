@@ -29,7 +29,7 @@ function PaypalCheckoutButton({
     dispatch(postOrder(order));
     setOpen(false);
     setPaidFor(true);
-    console.log("orderId", orderId);
+    // console.log("orderId", orderId);
     // Refresh user's account or subscription status
 
     // if the response is error
@@ -140,7 +140,7 @@ function PaypalCheckoutButton({
       }}
       onApprove={async (data, actions) => {
         await actions.order.capture().then((details) => {
-          console.log(details);
+          // console.log(details);
         });
 
         handleAprove(data.orderID);

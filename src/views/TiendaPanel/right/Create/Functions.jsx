@@ -13,14 +13,14 @@ import Swal from "sweetalert2";
 
 export default function Functions(Validate, shopId, shop) {
 	const dispatch = useDispatch();
-	const navigate = useNavigate()
+	const navigate = useNavigate();
 	const [err, setErr] = useState({});
 	const [nameI, setNameI] = useState("");
 	const [progress, setProgress] = useState(0);
 	const [listcategories, setlistcategories] = useState({
 		add: [],
 	});
-	
+
 	const categories = useSelector((state) => state.allcategories);
 	const [input, setInput] = useState({
 		name: "",
@@ -28,19 +28,17 @@ export default function Functions(Validate, shopId, shop) {
 		price: 0,
 		discount: 0,
 		stock: 0,
-		categories:"",
+		categories: "",
 		image: "",
 	});
-	
-	useEffect(()=> {
-		setErr(Validate(input,listcategories))
-		
-	},[input])
 
-	useEffect(()=>{
-		setErr(Validate(input,listcategories))
-		
-	},[listcategories])
+	useEffect(() => {
+		setErr(Validate(input, listcategories));
+	}, [input]);
+
+	useEffect(() => {
+		setErr(Validate(input, listcategories));
+	}, [listcategories]);
 
 	const handleChange = (e) => {
 		e.preventDefault();
@@ -50,25 +48,23 @@ export default function Functions(Validate, shopId, shop) {
 			[name]: value,
 		});
 	};
-	
+
 	const handleSelect = (e) => {
 		e.preventDefault();
 		const { value } = e.target;
-		if(value !== "default"){
-			if(!listcategories.add.find(e => e === value)){
+		if (value !== "default") {
+			if (!listcategories.add.find((e) => e === value)) {
 				setInput({
 					...input,
-					categories: value
+					categories: value,
 				});
 				setlistcategories({
-					add:[...listcategories.add, value]
-				})
-				e.target.value = "default"; 
-			}
-			else	e.target.value = "default";
+					add: [...listcategories.add, value],
+				});
+				e.target.value = "default";
+			} else e.target.value = "default";
 		}
-	}
-
+	};
 
 	const handleImagen = (e) => {
 		const file = e.target.files[0];
@@ -104,7 +100,7 @@ export default function Functions(Validate, shopId, shop) {
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		console.log(e.target.name);
+		// console.log(e.target.name);
 		setErr(Validate(input, listcategories));
 		let produc = {
 			shopId: shopId[0],
@@ -113,10 +109,12 @@ export default function Functions(Validate, shopId, shop) {
 			price: Number(input.price),
 			discount: Number(input.discount),
 			stock: Number(input.stock),
-			image: input.image? input.image: "https://www.sinrumbofijo.com/wp-content/uploads/2016/05/default-placeholder.png",
+			image: input.image
+				? input.image
+				: "https://www.sinrumbofijo.com/wp-content/uploads/2016/05/default-placeholder.png",
 			categories: listcategories?.add,
 		};
-		console.log("Errores",err);
+		// console.log("Errores",err);
 		if (
 			Object.keys(err).length === 0 &&
 			listcategories.add.length &&
@@ -124,9 +122,9 @@ export default function Functions(Validate, shopId, shop) {
 			input.price &&
 			input.discount &&
 			input.stock
-			) {
+		) {
 			dispatch(postproducts(produc));
-			navigate(`/home`)
+			navigate(`/home`);
 			Swal.fire({
 				icon: "success",
 				title: "Éxito",
@@ -148,7 +146,6 @@ export default function Functions(Validate, shopId, shop) {
 			});
 
 			setlistcategories({ add: [] });
-			
 		}
 	};
 
@@ -161,8 +158,7 @@ export default function Functions(Validate, shopId, shop) {
 				title: "Error",
 				text: "Debe agregar al menos una categoria.",
 			});
-		} else 
-		if (listcategories.add.some((c) => c === input.categories)) {
+		} else if (listcategories.add.some((c) => c === input.categories)) {
 			Swal.fire({
 				icon: "error",
 				title: "Error",
@@ -176,9 +172,8 @@ export default function Functions(Validate, shopId, shop) {
 
 			if (input.categories !== "") {
 				setlistcategories({
-					add:[...add, input.categories]
-				})
-
+					add: [...add, input.categories],
+				});
 			}
 
 			setInput({
@@ -207,14 +202,12 @@ export default function Functions(Validate, shopId, shop) {
 					"La categoría fue removida de la lista.",
 					"success"
 				);
-				if(listcategories.add.find(c => c === name)){
+				if (listcategories.add.find((c) => c === name)) {
 					let categori = listcategories.add.filter((c) => c !== name);
 					setlistcategories({
 						add: categori,
 					});
-					
 				}
-
 			}
 		});
 	};
@@ -250,7 +243,7 @@ export default function Functions(Validate, shopId, shop) {
 				});
 			})
 			.catch((error) => {
-				console.log(error);
+				// console.log(error);
 				Swal.fire({
 					icon: "warning",
 					title: "Error",
