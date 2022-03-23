@@ -1,12 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
-import {
-	getProductShop,
-	getShopsId,
-	loading,
-	reset,
-} from "../../redux/actions";
+import { getShopsId, loading, reset } from "../../redux/actions";
 import Nav from "../../components/nav/Nav";
 import Cards from "../../components/cards/Cards";
 import Loading from "../../components/loading/Loading";

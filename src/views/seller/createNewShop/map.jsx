@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { GoogleMap, useJsApiLoader, Marker } from "@react-google-maps/api";
-import api_key from "./credentials";
 import { useDispatch } from "react-redux";
 import { getShopDirection } from "../../../redux/actions";
+
+const api_key = process.env.REACT_APP_API_KEY;
 
 // //-34.603661, -58.381495
 // const Map = (props) => {
@@ -15,8 +16,8 @@ import { getShopDirection } from "../../../redux/actions";
 // };
 
 const containerStyle = {
-  width: "1000px",
-  height: "1000px",
+  width: "600px",
+  height: "600px",
 };
 
 function MyComponent() {
@@ -37,7 +38,7 @@ function MyComponent() {
 
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
-    googleMapsApiKey: api_key.mapsKey,
+    googleMapsApiKey: api_key,
   });
 
   const [map, setMap] = React.useState(null);
@@ -46,6 +47,7 @@ function MyComponent() {
     const bounds = new window.google.maps.LatLngBounds(center);
     map.fitBounds(bounds);
     setMap(map);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const onUnmount = React.useCallback(function callback(map) {
