@@ -74,6 +74,9 @@ const CreateShop = ({ user }) => {
 		dispatch(getdataUser(user?.sub.split("|")[1]));
 		dispatch(stop());
 	}, [dispatch, user]);
+	useEffect(() => {
+		Seterr(validate(newShop))
+	}, [newShop]);
 
 	// console.log(dataUser);
 	const [nameI, setNameI] = useState("");
