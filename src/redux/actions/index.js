@@ -457,13 +457,13 @@ export const suscribeNewsletter = (userId, bool) => async () => {
 export const getShopDirection = (lat, lng) => async (dispatch) => {
   try {
     const direction = await axios.get(
-      // `https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lng}&format=json`
-      `http://api.positionstack.com/v1/reverse?access_key=${positionStackKey}&query=${lat},${lng}`
+      `https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lng}&format=json`
+      // `http://api.positionstack.com/v1/reverse?access_key=${positionStackKey}&query=${lat},${lng}`
     );
     console.log(direction);
     dispatch({
       type: GET_SHOP_DIRECTION,
-      payload: direction.display_name,
+      payload: direction.data.display_name,
     });
   } catch (error) {
     console.log(error);
