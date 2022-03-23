@@ -161,9 +161,9 @@ export const postNewShop = (newShop) => async (dispatch) => {
   }
 };
 
-export const getShopRequest = () => async (dispatch) => {
+export const getShopRequest = (page) => async (dispatch) => {
   try {
-    const response = await axios.get(`${URL}authorization`);
+    const response = await axios.get(`${URL}authorization?page=${page}`);
     dispatch({
       type: GET_SHOP_REQUEST,
       payload: response.data,
