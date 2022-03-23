@@ -48,7 +48,7 @@ function App() {
       toast: true,
       position: 'top-end',
       showConfirmButton: false,
-      timer: 1000,
+      timer: 2000,
       timerProgressBar: true,
       didOpen: (toast) => {
         toast.addEventListener('mouseenter', Swal.stopTimer)
@@ -100,6 +100,23 @@ function App() {
     if (cartItems.length === 1) localStorage.removeItem("carrito");
 
     setCartItems((prev) => prev.filter((item) => item.id !== id));
+    
+    const Toast = Swal.mixin({
+      toast: true,
+      position: 'top-start',
+      showConfirmButton: false,
+      timer: 2000,
+      timerProgressBar: true,
+      didOpen: (toast) => {
+        toast.addEventListener('mouseenter', Swal.stopTimer)
+        toast.addEventListener('mouseleave', Swal.resumeTimer)
+      }
+    })
+    
+    Toast.fire({
+      icon: 'success',
+      title: 'Se borro del carrito.'
+    })
   };
 
   if (isLoading) return <Loading />;
