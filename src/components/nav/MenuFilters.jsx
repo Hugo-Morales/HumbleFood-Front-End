@@ -37,19 +37,26 @@ export default function MenuFilters({
       // onClick={toggleDrawer(anchor, false)}
       onKeyDown={toggleDrawer(anchor, false)}
     >
+      <h2 className="flex items-center justify-center h-24 text-white text-3xl bg-ochre">
+        Humblefood
+      </h2>
       <List>
         <p className="pl-4 font-semibold">Categorías</p>
         {categories?.map((c, index) => {
           return (
-            <div key={index} className="m-1 pl-4">
-              <input
-                className="mr-2"
+            <div
+              key={index}
+              className="m-1 pl-4 hover:bg-indigo-600 hover:text-white active:bg-indigo-700"
+            >
+              <button
+                className="ml-2"
                 id={index}
-                onChange={(e) => handleFilterCategories(e)}
+                onClick={(e) => handleFilterCategories(e)}
                 value={c.name}
-                type="checkbox"
-              ></input>
-              <label for={index}>{c.name}</label>
+                name="categorys"
+              >
+                {c.name}
+              </button>
             </div>
           );
         })}
@@ -59,15 +66,19 @@ export default function MenuFilters({
         <p className="pl-4 font-semibold">Descuentos</p>
         {discounts?.map((d, index) => {
           return (
-            <div key={index} className="m-1 pl-4">
-              <input
-                className="mr-2"
+            <div
+              key={index}
+              className="m-1 pl-4 hover:bg-indigo-600 hover:text-white active:bg-indigo-700"
+            >
+              <button
+                className="ml-2"
                 id={index}
-                onChange={(e) => handleFilterOffers(e)}
+                onClick={(e) => handleFilterOffers(e)}
                 value={d}
-                type="checkbox"
-              ></input>
-              <label for={index}>{d}%</label>
+                name="offers"
+              >
+                {d}%
+              </button>
             </div>
           );
         })}

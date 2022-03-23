@@ -44,7 +44,6 @@ const NavShops2 = () => {
 
       Swal.fire({
         title: "¿Estás seguro?",
-        text: "Esta acción no se puede revertir.",
         icon: "warning",
         showCancelButton: true,
         confirmButtonColor: "#3085d6",
@@ -132,7 +131,7 @@ const NavShops2 = () => {
                   <button
                     onClick={handleclick}
                     type='button'
-                    className="hidden md:inline-block  mt-4 mr-3 bg-red-600 hover:bg-gray-600 p-1 rounded-full text-white-600 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
+                    className="hidden md:inline-block  mt-4 mr-3 bg-green-600 hover:bg-red-600 p-1 rounded-full text-white-600 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
                     <BellIcon className="h-6 w-6" aria-hidden="true" />
                   </button>
                 ) : (
@@ -140,7 +139,7 @@ const NavShops2 = () => {
 
                     onClick={(e) => handleclick(e)}
                     type="button"
-                    className="hidden md:inline-block  mt-4 mr-3 bg-gray-900 hover:bg-gray-600 p-1 rounded-full text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
+                    className="hidden md:inline-block  mt-4 mr-3 bg-gray-900 hover:bg-green-600 p-1 rounded-full text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
                   >
                     <span className="sr-only">View notifications</span>
                     <BellIcon className="h-6 w-6" aria-hidden="true" />

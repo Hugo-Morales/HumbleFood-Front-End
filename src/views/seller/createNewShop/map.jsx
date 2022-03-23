@@ -1,19 +1,40 @@
-import React from "react";
-import { GoogleMap, useJsApiLoader } from "@react-google-maps/api";
+import React, { useState } from "react";
+import { GoogleMap, useJsApiLoader, Marker } from "@react-google-maps/api";
 import api_key from "./credentials";
+import { useDispatch } from "react-redux";
+import { getShopDirection } from "../../../redux/actions";
+
+// //-34.603661, -58.381495
+// const Map = (props) => {
+//   return (
+//     <GoogleMap
+//       defaultZoom={10}
+//       defaultCenter={{ lat: -34.603661, lng: -58.381495 }}
+//     />
+//   );
+// };
 
 const containerStyle = {
   width: "1000px",
   height: "1000px",
 };
 
-const center = {
-  lat: -34.603661,
-  lng: -58.381495,
-};
-
 function MyComponent() {
-  console.log(api_key);
+  const dispatch = useDispatch();
+
+  const [center, setCenter] = useState({
+    lat: -34.603661,
+    lng: -58.381495,
+  });
+
+  let lat, lng;
+
+  const handleFetchAddress = async () => {
+    lat = center.lat;
+    lng = center.lng;
+    dispatch(getShopDirection(lat, lng));
+  };
+
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
     googleMapsApiKey: api_key.mapsKey,
@@ -35,11 +56,27 @@ function MyComponent() {
     <GoogleMap
       mapContainerStyle={containerStyle}
       center={center}
-      zoom={10}
+      zoom={6}
       onLoad={onLoad}
       onUnmount={onUnmount}
+      onClick={(e) => {
+        setCenter({
+          lat: e.latLng.lat(),
+          lng: e.latLng.lng(),
+        });
+      }}
     >
       {/* Child components, such as markers, info windows, etc. */}
+      <Marker
+        icon={
+          "https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png"
+        }
+        position={center}
+        draggable={false}
+        onPositionChanged={() => {
+          handleFetchAddress();
+        }}
+      />
       <></>
     </GoogleMap>
   ) : (
@@ -48,5 +85,3 @@ function MyComponent() {
 }
 
 export default React.memo(MyComponent);
-
-//defaultCenter={{ lat: -34.603661, lng: -58.381495 }}
