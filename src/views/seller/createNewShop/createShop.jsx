@@ -27,7 +27,6 @@ const validate = (input) => {
 	let regex = /[\W]/y;
 	let notnumber = /[\d]/g;
 
-
 	if (!input.name?.trim()) {
 		err.name = "Este campo es obligatorio.";
 	}
@@ -40,15 +39,12 @@ const validate = (input) => {
 
 	if (!input.description?.trim()) {
 		err.description = "Este campo es obligatorio.";
-
 	}
 	if (notnumber.test(input.description)) {
 		err.description = "No se permiten números.";
-
 	}
 	if (regex.test(input.description)) {
 		err.description = "No se permiten caractéres especiales.";
-
 	}
 	if (!input.email?.trim()) {
 		err.email = "Este campo es obligatorio.";
@@ -57,28 +53,17 @@ const validate = (input) => {
 	// 	err.direction = 'Rellene este campo'
 	// }
 
-	console.log(err)
-	return err
-}
+	console.log(err);
+	return err;
+};
 
 const CreateShop = ({ user }) => {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
-	const dataUser = useSelector((state) => state.dataUser)
+	const dataUser = useSelector((state) => state.dataUser);
 	const directionShop = useSelector((state) => state?.shopDirection[0]);
 	const cargando = useSelector((state) => state.isLoading);
 	const MySwal = withReactContent(Swal);
-
-	useEffect(() => {
-		dispatch(loading());
-		dispatch(getdataUser(user?.sub.split("|")[1]));
-		dispatch(stop());
-	}, [dispatch, user]);
-	useEffect(() => {
-		Seterr(validate(newShop))
-	}, [newShop]);
-
-	// console.log(dataUser);
 	const [nameI, setNameI] = useState("");
 	const [err, Seterr] = useState({});
 	const [progress, setProgress] = useState(0);
@@ -89,6 +74,18 @@ const CreateShop = ({ user }) => {
 		image: "",
 		email: "",
 	});
+
+	useEffect(() => {
+		dispatch(loading());
+		dispatch(getdataUser(user?.sub.split("|")[1]));
+		dispatch(stop());
+	}, [dispatch, user]);
+
+	useEffect(() => {
+		Seterr(validate(newShop));
+	}, [newShop]);
+
+	// console.log(dataUser);
 
 	const handleInputChange = (e) => {
 		setNewShop({
@@ -108,44 +105,47 @@ const CreateShop = ({ user }) => {
 			name: newShop.name,
 			direction: directionShop,
 			description: newShop.description,
-			image: newShop.image ? newShop.image : "https://img.freepik.com/vector-gratis/carro-tienda-edificio-tienda-dibujos-animados_138676-2085.jpg",
+			image: newShop.image
+				? newShop.image
+				: "https://img.freepik.com/vector-gratis/carro-tienda-edificio-tienda-dibujos-animados_138676-2085.jpg",
 			userId: dataUser?.id,
 			email: newShop.email,
-		}
+		};
 		if (!directionShop) {
 			MySwal.fire({
 				position: "center",
 				icon: "error",
 				title: "Ha ocurrido un error",
-				text: "Revisa tu direccion por favor",
+				text: "Revisa tu direccion por favor.",
 				showConfirmButton: true,
 				timer: 6000,
 			});
-			return
+			return;
 		} else if (err.name || err.description || err.email) {
 			MySwal.fire({
 				position: "center",
 				icon: "error",
 				title: "Ha ocurrido un error",
-				text: "Verifica que los campos tengan informacion correcta",
+				text: "Verifica que los campos tengan informacion correcta.",
 				showConfirmButton: true,
 				timer: 6000,
 			});
-			return
+			return;
 		}
 		MySwal.fire({
 			position: "center",
 			icon: "success",
 			title: "Tu tienda ha sido registrada con exito",
-			text: "Revisa tu email, donde te llegará la aprobación",
+			text: "Revisa tu email, donde te llegará la aprobación de la tienda.",
 			showConfirmButton: true,
 			timer: 6000,
+		}).then((r) => {
+			if (r.isConfirmed) {
+				navigate(`/settings/${user?.sub.split("|")[1]}`);
+			}
 		});
 		dispatch(postNewShop(shop));
-		// navigate(`/settings/${user?.sub.split("|")[1]}`);
 	};
-
-
 
 	const handleImagen = (e) => {
 		const file = e.target.files[0];
@@ -158,8 +158,6 @@ const CreateShop = ({ user }) => {
 		const sotrageRef = ref(storage, `shops/${file.name}`);
 		setNameI(file.name);
 		const uploadTask = uploadBytesResumable(sotrageRef, file);
-
-
 
 		uploadTask.on(
 			"state_changed",
@@ -269,7 +267,6 @@ const CreateShop = ({ user }) => {
 													</svg>
 												</button>
 											</Link>
-
 										</div>
 										{/* Nombre de la tienda */}
 										<div className="">
@@ -285,7 +282,7 @@ const CreateShop = ({ user }) => {
 														name="name"
 														className="h-10 text-xl pl-4 focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-md sm:text-sm border-solid border-indigo-200 border-2"
 														placeholder="Ej: Panaderia Rosalba"
-													// required
+														// required
 													/>
 												</div>
 												<div className="text-rose-800 font-bold">
@@ -326,7 +323,6 @@ const CreateShop = ({ user }) => {
 													className="h-10 pl-4 focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-md sm:text-sm border-solid border-indigo-200 border-2"
 													placeholder="Ej: tienda123@gmail.com"
 												/>
-
 											</div>
 											<div className="text-rose-800 font-bold">
 												{err.email && <p>{err.email}</p>}

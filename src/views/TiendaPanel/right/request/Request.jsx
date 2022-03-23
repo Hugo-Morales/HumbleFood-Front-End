@@ -1,7 +1,8 @@
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Swal from "sweetalert2";
 import Loading from "../../../../components/loading/Loading";
+import PaginationControlled from "../pagination";
 import List from "./List";
 import {
 	loading_panel,
@@ -11,13 +12,21 @@ import {
 
 export default function Request() {
 	const dispatch = useDispatch();
+	const [currentPage, setCurrentPage] = useState(0);
 	const cargando = useSelector((state) => state.loadingPanel);
 	const list = useSelector((state) => state.allShops);
 
+	console.log(currentPage);
+	const paging = (num) => {
+		if (num >= 0 && num <= list.pagesTotal) {
+			setCurrentPage(num);
+		}
+	};
+
 	useEffect(() => {
 		dispatch(loading_panel());
-		dispatch(getShopRequest());
-	}, [dispatch]);
+		dispatch(getShopRequest(currentPage));
+	}, [dispatch, currentPage]);
 
 	const submit = (e, s) => {
 		e.preventDefault();
@@ -46,7 +55,7 @@ export default function Request() {
 					dispatch(authorize(s.id, 1));
 					if (r.isDismissed) {
 						dispatch(loading_panel());
-						dispatch(getShopRequest());
+						dispatch(getShopRequest(currentPage));
 					}
 				});
 			}
@@ -61,7 +70,14 @@ export default function Request() {
 			) : (
 				<div className="bg-white rounded-lg">
 					{list?.shops?.length ? (
-						<List shops={list?.shops} submit={submit} />
+						<>
+							<List shops={list?.shops} submit={submit} />
+							<PaginationControlled
+								pagesTotal={list?.pagesTotal}
+								paging={paging}
+								currentPage={currentPage}
+							/>
+						</>
 					) : (
 						<div className="text-center font-bold p-4 text-red-400">
 							<h1>No hay ninguna solicitud para aprobar.</h1>
