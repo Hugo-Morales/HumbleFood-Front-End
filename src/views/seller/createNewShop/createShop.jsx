@@ -8,6 +8,11 @@ import Styles from "./createShop.module.css";
 import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
+import Map from "./map";
+import credentials from "./credentials";
+
+
+const URL = "https://maps.googleapis.com/maps/api/js?v=3.exp&key=";
 
 const CreateShop = ({ user }) => {
   const dispatch = useDispatch();
@@ -81,7 +86,7 @@ const CreateShop = ({ user }) => {
         <Loading />
       ) : (
         <div className={`${"h-screen"} ${Styles.bg}`}>
-          <div className={` ${"md:grid md:grid-cols-3 md:gap-6"}`}>
+          <div className={"md:grid md:grid-cols-3 md:gap-6"}>
             <div className="h-fit  pt-3 pr-1 rounded-md pb-3 pl-3 mt-4 bg-orange-300 md:col-span-1">
               <div className="px-4 sm:px-0">
                 <h3 className="text-lg  leading-6 text-gray-900 font-bold">
@@ -93,26 +98,39 @@ const CreateShop = ({ user }) => {
                 </p>
               </div>
             </div>
+
             <div className="my-5 md:mt-4 md:col-span2">
-              <form onSubmit={(e) => handleformSubmit(e)}>
-                <div className="shadow sm:rounded-md sm:overflow-hidden">
-                  <div className="px-4 py-5 bg-gray-200 space-y-6 sm:p-6">
+              <form className="h-full " onSubmit={(e) => handleformSubmit(e)}>
+                <div className="">
+                  <div className="bg-gray-200 shadow-md rounded px-8 pt-6 pb-8 w-full">
                     {/* Nombre de la tienda */}
-                    <div className="grid grid-cols-3 gap-6">
+                    <div >
                       <div className="col-span-3 sm:col-span-2">
                         <label className="font-bold block text-sm  text-gray-700">
-                          {" "}
-                          Nombre de la tienda:{" "}
+                          Nombre de la tienda:
                         </label>
-                        <div className="mt-1 flex rounded-md shadow-sm">
                           <input
                             onChange={(e) => handleInputChange(e)}
                             type="text"
                             name="name"
-                            className="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300"
+                            className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-3 py-1 sm:text-sm border-gray-300 border-2 rounded-md"
                             placeholder="Ej: Panaderia Rosalba"
-                          />
-                        </div>
+                            />
+                      </div>
+                    </div>
+                     {/* Correo asociado al paypal*/}
+                     <div className="col-span-3 sm:col-span-2">
+                      <label className="font-bold block text-sm  text-gray-700">
+                        Correo de la tienda Asociado a Paypal:
+                      </label>
+                      <div className="mt-1 flex rounded-md shadow-sm">
+                        <input
+                          onChange={(e) => handleInputChange(e)}
+                          type="email"
+                          name="email"
+                          className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-3 py-1 sm:text-sm border-gray-300 border-2 rounded-md"
+                          placeholder="Ej: tienda123@gmail.com"
+                        />
                       </div>
                     </div>
                     {/* Direccion */}
@@ -121,15 +139,25 @@ const CreateShop = ({ user }) => {
                         Direccion de la tienda:{" "}
                       </label>
                       <div className="mt-1">
-                        <textarea
+                        <input
+                            onChange={(e) => handleInputChange(e)}
+                            type="text"
+                            name="direction"
+                            className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-3 py-1 sm:text-sm border-gray-300 border-2 rounded-md"
+                            placeholder="Ej: La Urbina calle 3A"
+                          />
+                        {/* <textarea
                           onChange={(e) => handleInputChange(e)}
                           name="direction"
                           rows="3"
                           className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md"
                           placeholder="Ej: La Urbina calle 3A"
-                        ></textarea>
+                        ></textarea> */}
                       </div>
-                      <div className="mt-5 flex justify-around font-bold">
+
+                   
+
+                      {/* <div className="mt-5 flex justify-around font-bold">
                         <p> Verificar direccion con google maps: </p>
                         <Link to="/createShop/map">
                           <button className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-indigo-700 bg-indigo-100 hover:bg-indigo-200 md:py-4 md:text-lg md:px-10">
@@ -158,42 +186,26 @@ const CreateShop = ({ user }) => {
                             </svg>
                           </button>
                         </Link>
-                      </div>
+                      </div> */}
                     </div>
 
                     {/* Descripcion */}
                     <div>
                       <label className="font-bold block text-sm  text-gray-700">
-                        Descripcion de la tienda:{" "}
+                        Descripcion de la tienda:
                       </label>
-                      <div className="mt-1">
+                      <div className="mt-1 ">
                         <textarea
                           onChange={(e) => handleInputChange(e)}
                           name="description"
                           rows="2"
-                          className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md"
+                          className=" resize-none h-36 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md"
                           placeholder="Ej: Panadaria y pasteleria con mas de 20 años de experiencia en el mercado..."
                         ></textarea>
                       </div>
                     </div>
 
-                    {/* Correo asociado al paypal*/}
-
-                    <div className="col-span-3 sm:col-span-2">
-                      <label className="font-bold block text-sm  text-gray-700">
-                        {" "}
-                        Correo de la tienda Asociado a Paypal:{" "}
-                      </label>
-                      <div className="mt-1 flex rounded-md shadow-sm">
-                        <input
-                          onChange={(e) => handleInputChange(e)}
-                          type="email"
-                          name="email"
-                          className="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300"
-                          placeholder="Ej: tienda123@gmail.com"
-                        />
-                      </div>
-                    </div>
+                    
                     {/* Foto */}
                     <div>
                       <label className="font-bold block text-sm  text-gray-700">
@@ -255,6 +267,16 @@ const CreateShop = ({ user }) => {
                 </div>
               </form>
             </div>
+            
+              <Map
+                googleMapURL={`${URL}${credentials.mapsKey}`}
+                containerElement={
+                  <div className=" object-cover sm:h-72 md:h-56 lg:w-full lg:h-full" />
+                }
+                mapElement={<div className="mr-5 h-80 max-h-96 rounded-xl mt-4" />}
+                loadingElement={<p>Cargando</p>}
+              >
+              </Map>
           </div>
         </div>
       )}
