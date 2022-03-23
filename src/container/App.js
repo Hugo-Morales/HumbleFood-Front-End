@@ -16,8 +16,9 @@ import Favorites from "../components/shops/Favorites";
 import HomeShops from "../views/user/HomeShops";
 import DirectionMap from "../views/seller/createNewShop/directionMap";
 import Loading from "../components/loading/Loading";
-import { getdataUser } from "../redux/actions/index";
 import Nosotros from "../views/nosotros/Nosotros";
+import Swal from "sweetalert2";
+import { getdataUser } from "../redux/actions/index";
 
 function App() {
   const dispatch = useDispatch();
@@ -43,6 +44,23 @@ function App() {
   };
 
   const handleAddToCart = (clickedItem) => {
+    const Toast = Swal.mixin({
+      toast: true,
+      position: 'bottom-end',
+      showConfirmButton: false,
+      timer: 1000,
+      timerProgressBar: true,
+      didOpen: (toast) => {
+        toast.addEventListener('mouseenter', Swal.stopTimer)
+        toast.addEventListener('mouseleave', Swal.resumeTimer)
+      }
+    })
+    
+    Toast.fire({
+      icon: 'success',
+      title: 'Se añadio al carrito.'
+    })
+  
     setCartItems((prev) => {
       const isItemInCart = prev.find((item) => item.id === clickedItem.id);
 

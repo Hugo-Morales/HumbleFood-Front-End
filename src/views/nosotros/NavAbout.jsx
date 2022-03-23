@@ -23,10 +23,11 @@ const NavAbout = () => {
     const user_id = user?.sub.split("|")[1];
 
     // console.log(dataUser);
-    console.log(mailState, "mailstate");
+    // console.log(mailState, "mailstate");
     useEffect(() => {
         Setmailstate(dataUser?.mailingList);
     }, [dataUser]);
+
     const handleclick = (e) => {
         e.preventDefault();
         if (isAuthenticated && mailState === false) {

@@ -53,7 +53,7 @@ const validate = (input) => {
 	// 	err.direction = 'Rellene este campo'
 	// }
 
-	console.log(err);
+	// console.log(err);
 	return err;
 };
 
