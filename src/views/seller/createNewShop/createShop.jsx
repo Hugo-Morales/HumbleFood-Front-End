@@ -29,7 +29,7 @@ const validate = (input) => {
 
 
 	if (!input.name?.trim()) {
-		err.name = "Este campo es obligatorio";
+		err.name = "Este campo es obligatorio.";
 	}
 	if (notnumber.test(input.name)) {
 		err.name = "No se permiten números.";
@@ -39,7 +39,7 @@ const validate = (input) => {
 	}
 
 	if (!input.description?.trim()) {
-		err.description = "Este campo es obligatorio";
+		err.description = "Este campo es obligatorio.";
 
 	}
 	if (notnumber.test(input.description)) {
@@ -51,7 +51,7 @@ const validate = (input) => {
 
 	}
 	if (!input.email?.trim()) {
-		err.email = "Este campo es obligatorio";
+		err.email = "Este campo es obligatorio.";
 	}
 
 	console.log(err)
@@ -213,33 +213,14 @@ const CreateShop = ({ user }) => {
 							<form onSubmit={(e) => handleformSubmit(e)}>
 								<div className="shadow sm:rounded-md sm:overflow-hidden">
 									<div className="px-4 py-5 bg-gray-200 space-y-6 sm:p-6">
-										{/* Nombre de la tienda */}
-										<div className="grid grid-cols-3 gap-6">
-											<div className="col-span-3 sm:col-span-2">
-												<label className="font-bold block text-sm  text-gray-700">
-													{" "}
-													Nombre de la tienda:{" "}
-												</label>
-												<div className="mt-1 flex rounded-md shadow-sm">
-													<input
-														onChange={(e) => handleInputChange(e)}
-														type="text"
-														name="name"
-														className="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300"
-														placeholder="Ej: Panaderia Rosalba"
-														required
-													/>
-												</div>
-												<div className="text-rose-800 font-bold">
-													{err.name && <p>{err.name}</p>}
-												</div>
-
-											</div>
-										</div>
 										{/* Direccion */}
 										<div>
 											<div className="mt-5 flex flex-col justify-around font-bold">
+												<div className="text-rose-800 font-bold">
+													<p>Rellene este campo primero.</p>
+												</div>
 												<p> Verificar direccion con google maps: </p>
+
 												<Link to="/createShop/map">
 													<button className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-indigo-700 bg-indigo-100 hover:bg-indigo-200 md:py-4 md:text-lg md:px-10">
 														<svg
@@ -270,6 +251,29 @@ const CreateShop = ({ user }) => {
 											</div>
 										</div>
 
+										{/* Nombre de la tienda */}
+										<div className="grid grid-cols-3 gap-6">
+											<div className="col-span-3 sm:col-span-2">
+												<label className="font-bold block text-sm  text-gray-700">
+													{" "}
+													Nombre de la tienda:{" "}
+												</label>
+												<div className="mt-1 flex rounded-md shadow-sm">
+													<input
+														onChange={(e) => handleInputChange(e)}
+														type="text"
+														name="name"
+														className="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300"
+														placeholder="Ej: Panaderia Rosalba"
+														required
+													/>
+												</div>
+												<div className="text-rose-800 font-bold">
+													{err.name && <p>{err.name}</p>}
+												</div>
+
+											</div>
+										</div>
 										{/* Descripcion */}
 										<div>
 											<label className="font-bold block text-sm  text-gray-700">
