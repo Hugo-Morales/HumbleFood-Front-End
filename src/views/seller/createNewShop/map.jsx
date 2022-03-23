@@ -14,6 +14,11 @@ import { getShopDirection } from "../../../redux/actions";
 //   );
 // };
 
+const containerStyle = {
+  width: "1000px",
+  height: "1000px",
+};
+
 function MyComponent() {
   const dispatch = useDispatch();
 
