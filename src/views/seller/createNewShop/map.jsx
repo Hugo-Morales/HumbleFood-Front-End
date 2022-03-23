@@ -4,10 +4,15 @@ import api_key from "./credentials";
 import { useDispatch } from "react-redux";
 import { getShopDirection } from "../../../redux/actions";
 
-const containerStyle = {
-  width: "1000px",
-  height: "1000px",
-};
+// //-34.603661, -58.381495
+// const Map = (props) => {
+//   return (
+//     <GoogleMap
+//       defaultZoom={10}
+//       defaultCenter={{ lat: -34.603661, lng: -58.381495 }}
+//     />
+//   );
+// };
 
 function MyComponent() {
   const dispatch = useDispatch();
