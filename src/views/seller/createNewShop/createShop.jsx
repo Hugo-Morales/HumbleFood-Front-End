@@ -2,7 +2,7 @@ import ButtonExit from "../../../components/buttonExit/buttonexit";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  // postNewShop,
+  postNewShop,
   getdataUser,
   loading,
   stop,
@@ -59,12 +59,12 @@ const CreateShop = ({ user }) => {
 
   const handleformSubmit = (e) => {
     e.preventDefault();
-    // dispatch(postNewShop(newShop));
-    // alert("Tienda registrada con exito!");
+    dispatch(postNewShop(newShop));
     MySwal.fire({
       position: "center",
       icon: "success",
       title: "Tu tienda ha sido registrada con exito",
+      text: "Revisa tu email, donde te llegará la aprobación",
       showConfirmButton: false,
       timer: 2000,
     });
