@@ -15,8 +15,8 @@ import { getShopDirection } from "../../../redux/actions";
 // };
 
 const containerStyle = {
-  width: "1000px",
-  height: "1000px",
+  width: "600px",
+  height: "600px",
 };
 
 function MyComponent() {
@@ -46,6 +46,7 @@ function MyComponent() {
     const bounds = new window.google.maps.LatLngBounds(center);
     map.fitBounds(bounds);
     setMap(map);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const onUnmount = React.useCallback(function callback(map) {
