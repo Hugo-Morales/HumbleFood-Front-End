@@ -70,9 +70,9 @@ const InfoDataUser = ({ dataUser }) => {
         </p> */}
 			</div>
 			<div className="flex justify-end mt-4">
-				<a href="!#" className="text-xl font-medium text-indigo-500">
+				<div className="text-xl font-medium text-indigo-500">
 					Que gusto verte de nuevo {dataUser?.name_user}!
-				</a>
+				</div>
 			</div>
 		</div>
 	);

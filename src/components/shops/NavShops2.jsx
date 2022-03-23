@@ -44,6 +44,7 @@ const NavShops2 = () => {
 
       Swal.fire({
         title: "¿Estás seguro?",
+        text: 'Estas por cancelar la suscripción al boletin informativo.',
         icon: "warning",
         showCancelButton: true,
         confirmButtonColor: "#3085d6",
