@@ -16,7 +16,7 @@ const DirectionMap = () => {
   const MySwal = withReactContent(Swal);
   const URL = "https://maps.googleapis.com/maps/api/js?v=3.exp&key=";
   const direction = useSelector(
-    (state) => state?.shopDirection
+    (state) => state?.shopDirection[0]
   );
 
   // if (direction) console.log(direction);
