@@ -223,9 +223,9 @@ const CreateShop = ({ user }) => {
 			{cargando ? (
 				<Loading />
 			) : (
-				<div className={`${"h-screen"} ${Styles.bg}`}>
+				<div className={`${"h-full"} ${Styles.bg}`}>
 					<div className={` ${"md:grid md:grid-cols-3 md:gap-6"}`}>
-						<div className="h-fit  pt-3 pr-1 rounded-md pb-3 pl-3 md:mt-4 bg-orange-300 md:col-span-1">
+						<div className="h-fit pt-3 pr-1 rounded-md pb-3 pl-3 md:mt-4 bg-orange-300 md:col-span-1">
 							<div className="px-4 sm:px-0">
 								<h3 className="text-lg  leading-6 text-gray-900 font-bold">
 									Conviertete en Vendedor!
