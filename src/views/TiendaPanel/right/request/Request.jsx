@@ -9,6 +9,7 @@ import {
   getShopRequest,
   authorize,
   deleteShop,
+  reset,
 } from "../../../../redux/actions";
 
 export default function Request() {
@@ -44,6 +45,7 @@ export default function Request() {
       reverseButtons: true,
       showCloseButton: true,
     }).then((result) => {
+      console.log(result);
       if (result.isConfirmed) {
         Swal.fire({
           title: `"${s.name}" ya puede vender sus productos."`,
@@ -56,12 +58,13 @@ export default function Request() {
           dispatch(authorize(s.id, 1));
           if (r.isDismissed) {
             dispatch(loading_panel());
-            dispatch(getShopRequest(currentPage));
+            setTimeout(() => {
+              dispatch(reset());
+              dispatch(getShopRequest(currentPage));
+            }, 3000);
           }
         });
-      }
-      if (result.isDenied) {
-        dispatch(deleteShop(s.id));
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
         Swal.fire({
           title: `Fue rechazada la solicitud de registrar a "${s.name}".`,
           text: "",
@@ -70,9 +73,13 @@ export default function Request() {
           timerProgressBar: true,
           showConfirmButton: false,
         }).then((r) => {
+          dispatch(deleteShop(s.id));
           if (r.isDismissed) {
             dispatch(loading_panel());
-            dispatch(getShopRequest(currentPage));
+            setTimeout(() => {
+              dispatch(reset());
+              dispatch(getShopRequest(currentPage));
+            }, 3000);
           }
         });
       }

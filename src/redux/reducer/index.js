@@ -172,6 +172,7 @@ export default function reducer(state = initialStore, { type, payload }) {
         productsloaded: [],
         shops: [],
         allFavorites: [],
+        allShops: [],
         isLoading: true,
       };
     case LOADING:

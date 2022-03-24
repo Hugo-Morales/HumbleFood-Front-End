@@ -477,10 +477,9 @@ export const getDirection = (direction) => (dispatch) => {
   });
 };
 
-export const deleteShop = async (shopId) => {
+export const deleteShop = (shopId) => async() => {
   try {
     await axios.delete(`${URL}shop/${shopId}`);
-    
   } catch (error) {
     console.log(error);
   }
