@@ -22,7 +22,7 @@ export default function ContainerT({ user }) {
 	const usuario = useSelector((state) => state.dataUser);
 	const dispatch = useDispatch();
 	const { userId } = useParams();
-	const pages = productos?.pagesTotal + 1;
+	const pages = productos?.pagesTotal;
 	// console.log(user, 'user');
 	// console.log(currentPage);
 
@@ -76,9 +76,6 @@ export default function ContainerT({ user }) {
 							shopsId={usuario?.shopsId}
 							paging={paging}
 							currentPage={currentPage}
-							next={productos?.next}
-							prev={productos?.prev}
-							pagesTotal={productos?.pagesTotal}
 						/>
 					</div>
 				</div>
