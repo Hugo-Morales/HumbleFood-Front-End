@@ -22,7 +22,7 @@ export default function ContainerT({ user }) {
 	const usuario = useSelector((state) => state.dataUser);
 	const dispatch = useDispatch();
 	const { userId } = useParams();
-	const pages = productos?.pagesTotal;
+	const pages = productos?.pagesTotal + 1;
 	// console.log(user, 'user');
 	// console.log(currentPage);
 
