@@ -476,3 +476,12 @@ export const getDirection = (direction) => (dispatch) => {
     payload: direction,
   });
 };
+
+export const deleteShop = async (shopId) => {
+  try {
+    await axios.delete(`${URL}shop/${shopId}`);
+    
+  } catch (error) {
+    console.log(error);
+  }
+};
