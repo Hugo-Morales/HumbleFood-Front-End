@@ -19,6 +19,7 @@ export default function SideRight({
 }) {
 	const { products, pagesTotal } = product;
 	// console.log(products);
+	// console.log(currentPage);
 
 	const renderSwitch = (x) => {
 		switch (x) {

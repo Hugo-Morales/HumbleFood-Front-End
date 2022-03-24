@@ -5,7 +5,7 @@
   /* background-attachment: fixed;
   background-position: center center; */
   max-width: 100%;
-  height: auto;
+  height: 100vh;
 }
 
 .search {

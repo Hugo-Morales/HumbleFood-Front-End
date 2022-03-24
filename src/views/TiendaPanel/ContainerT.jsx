@@ -76,9 +76,6 @@ export default function ContainerT({ user }) {
 							shopsId={usuario?.shopsId}
 							paging={paging}
 							currentPage={currentPage}
-							next={productos?.next}
-							prev={productos?.prev}
-							pagesTotal={productos?.pagesTotal}
 						/>
 					</div>
 				</div>
